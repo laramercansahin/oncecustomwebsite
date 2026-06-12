@@ -617,7 +617,7 @@ var sliderAnimating = false;
 var lang = 'tr';
 
 document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
-document.getElementById('cTot').textContent = String(N).padStart(2,'0');
+/* cTot removed from HTML */
 
 /* ── BUILD ORBITAL RING ITEMS ── */
 var cfRing = document.getElementById('cfRing');
@@ -794,7 +794,7 @@ function sliderRender(){
     s.className = 'slide ' + (i < sliderCurrent ? 'prev' : i === sliderCurrent ? 'active' : 'next');
   });
   document.querySelectorAll('.dot').forEach(function(d, i){ d.classList.toggle('active', i === sliderCurrent); });
-  document.getElementById('cCur').textContent = String(sliderCurrent + 1).padStart(2,'0');
+  /* cCur removed from HTML */
   document.getElementById('progFill').style.width = ((sliderCurrent + 1) / N * 100) + '%';
   document.getElementById('btnUp').disabled = sliderCurrent === 0;
   document.getElementById('btnDown').disabled = sliderCurrent === N - 1;
