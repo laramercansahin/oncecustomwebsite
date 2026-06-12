@@ -49,22 +49,14 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   justify-content:center;
 }
 
-/* spotlight cone from top */
+/* spotlight — smooth radial, no hard triangle */
 .cf-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 36% 80% at 50% -8%, rgba(255,245,220,.11) 0%, rgba(200,165,100,.05) 40%, transparent 68%),
-    radial-gradient(ellipse 60% 50% at 50% 42%, rgba(176,136,88,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 14% at 50% 104%, rgba(176,136,88,.06) 0%, transparent 60%);
+    radial-gradient(ellipse 55% 90% at 50% -20%, rgba(255,248,228,.10) 0%, rgba(220,180,110,.05) 45%, transparent 72%),
+    radial-gradient(ellipse 80% 60% at 50% 38%, rgba(176,136,88,.04) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 12% at 50% 106%, rgba(176,136,88,.05) 0%, transparent 60%);
   pointer-events:none;
-}
-.cf-bg::before{
-  content:'';position:absolute;top:0;left:50%;
-  width:0;height:0;
-  border-left:340px solid transparent;
-  border-right:340px solid transparent;
-  border-top:580px solid rgba(255,242,210,.016);
-  transform:translateX(-50%);pointer-events:none;
 }
 
 /* header */
