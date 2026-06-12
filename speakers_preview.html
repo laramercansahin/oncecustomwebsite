@@ -310,7 +310,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   position:absolute;
   inset:0;
   display:flex;align-items:center;justify-content:flex-end;
-  padding-right:6vw;
+  padding-right:3vw;
   overflow:hidden;
   z-index:1;
 }
@@ -348,13 +348,11 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   display:flex;align-items:center;justify-content:center;
 }
 .gallery-main-img{
-  height:78vh;width:auto;max-width:none;
+  height:88vh;width:auto;max-width:none;
   object-fit:contain;
   display:block;
-  mix-blend-mode:multiply;
-  filter:brightness(1.6) contrast(1.1)
-         drop-shadow(0 30px 80px rgba(0,0,0,.9))
-         drop-shadow(0 0 40px rgba(176,136,88,.1));
+  filter:drop-shadow(0 30px 80px rgba(0,0,0,.85))
+         drop-shadow(0 0 50px rgba(176,136,88,.08));
   transform:translateX(30px);opacity:0;
   transition:transform 1.3s cubic-bezier(.22,1,.36,1) .08s,
              opacity 1.3s ease .08s;
@@ -500,7 +498,6 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     <button class="arr-btn" id="btnDown" onclick="go(1)">↓</button>
   </div>
   <div class="dots" id="dotsWrap"></div>
-  <div class="counter"><em id="cCur">01</em> / <span id="cTot">11</span></div>
   <div class="progress"><div class="progress-fill" id="progFill"></div></div>
 </section>
 
