@@ -288,10 +288,14 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .slide-right::before{
   content:'';
-  position:absolute;left:0;top:0;bottom:0;
-  width:52%;
+  position:absolute;left:0;top:0;bottom:0;width:100%;
   background:linear-gradient(to right,
-    var(--black) 0%, rgba(7,6,4,.88) 45%, transparent 100%);
+    var(--black) 0%,
+    rgba(7,6,4,.96) 18%,
+    rgba(7,6,4,.75) 36%,
+    rgba(7,6,4,.4) 54%,
+    rgba(7,6,4,.12) 72%,
+    transparent 100%);
   z-index:4;pointer-events:none;
 }
 .gallery-main{
