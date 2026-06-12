@@ -50,12 +50,28 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   justify-content:center;
 }
 
-/* ambient bg glow */
+/* spotlight cone from top-center */
 .orb-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 55%, rgba(176,136,88,.06) 0%, transparent 70%),
-    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(176,136,88,.04) 0%, transparent 60%);
+    /* main spot cone */
+    radial-gradient(ellipse 38% 75% at 50% -5%, rgba(255,245,225,.13) 0%, rgba(200,170,110,.06) 35%, transparent 70%),
+    /* wide soft fill */
+    radial-gradient(ellipse 70% 55% at 50% 40%, rgba(176,136,88,.05) 0%, transparent 65%),
+    /* floor bounce */
+    radial-gradient(ellipse 50% 18% at 50% 102%, rgba(176,136,88,.07) 0%, transparent 60%);
+  pointer-events:none;
+}
+/* spotlight beam edges — two angled lines */
+.orb-bg::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  width:0;height:0;
+  border-left:380px solid transparent;
+  border-right:380px solid transparent;
+  border-top:600px solid rgba(255,245,220,.018);
+  transform:translateX(-50%);
   pointer-events:none;
 }
 
@@ -73,6 +89,18 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .orb-sub{
   font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);margin-top:6px;
+}
+
+/* floor shadow under active product */
+.orb-floor-shadow{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,80px);
+  width:140px;height:24px;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.7) 0%, transparent 70%);
+  filter:blur(6px);
+  pointer-events:none;
+  z-index:5;
 }
 
 /* active product name + tagline center display */
@@ -189,7 +217,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   animation:orbit-float 5s ease-in-out infinite;
 }
 .orbit-item.active .orbit-img{
-  filter:drop-shadow(0 12px 36px rgba(0,0,0,1)) drop-shadow(0 0 28px rgba(176,136,88,.25));
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,1)) drop-shadow(0 4px 12px rgba(0,0,0,.9)) drop-shadow(0 0 30px rgba(200,160,80,.15));
 }
 .orbit-item.active{
   transform-origin:center;
@@ -425,6 +453,7 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   <div class="carousel-scene">
     <div class="orbit-ring"></div>
     <div class="carousel-ring" id="carouselRing"></div>
+    <div class="orb-floor-shadow"></div>
   </div>
 
   <div class="orb-active-info">
