@@ -782,11 +782,12 @@ window.addEventListener('wheel', function(e){
   var rect = hero.getBoundingClientRect();
   if(rect.top > -10 && rect.bottom >= window.innerHeight * .8){
     if(wheelLock) return;
+    if(Math.abs(e.deltaY) < 40) return;
     if(e.deltaY > 0 && sliderCurrent === N-1) return;
     if(e.deltaY < 0 && sliderCurrent === 0) return;
     e.preventDefault();
     wheelLock = true; go(e.deltaY > 0 ? 1 : -1);
-    setTimeout(function(){ wheelLock = false; }, 1100);
+    setTimeout(function(){ wheelLock = false; }, 1600);
   }
 }, {passive:false});
 
