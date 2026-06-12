@@ -216,12 +216,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .slide-left{ width:100%; }
 
-.slide-index{
-  font-size:11px;letter-spacing:.28em;color:var(--bronze);
-  margin-bottom:20px;
-  display:flex;align-items:center;gap:14px;
-}
-.slide-index::before{content:'';display:block;width:28px;height:1px;background:var(--bronze);}
+.slide-index{ display:none; }
 
 .slide-name{
   font-family:'Bebas Neue',sans-serif;
@@ -279,45 +274,36 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .cta-btn:hover{background:var(--bronze);color:var(--black);gap:20px;border-color:var(--bronze);}
 .cta-btn::after{content:'→';}
 
-/* ── RIGHT: product as atmospheric bg ── */
+/* ── RIGHT: warm dark panel + multiply blend ── */
 .slide-right{
   position:absolute;
   right:0;top:0;bottom:0;
-  width:65%;
+  width:58%;
   display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
   overflow:hidden;
   z-index:1;
+  /* warm dark bg — white pixels from JPG will multiply into this */
+  background:radial-gradient(ellipse 80% 90% at 65% 50%,
+    #2A1A0A 0%, #180F06 40%, #0C0804 75%, var(--black) 100%);
+  isolation:isolate;
 }
-/* strong left fade — text always readable */
+/* left fade into page bg */
 .slide-right::before{
   content:'';
   position:absolute;left:0;top:0;bottom:0;
-  width:55%;
+  width:50%;
   background:linear-gradient(to right,
-    var(--black) 0%,
-    rgba(7,6,4,.92) 30%,
-    rgba(7,6,4,.5) 65%,
-    transparent 100%);
-  z-index:2;pointer-events:none;
-}
-/* top + bottom fades for atmospheric feel */
-.slide-right::after{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    linear-gradient(to bottom, rgba(7,6,4,.5) 0%, transparent 20%),
-    linear-gradient(to top,    rgba(7,6,4,.5) 0%, transparent 20%);
-  z-index:2;pointer-events:none;
+    var(--black) 0%, rgba(7,6,4,.85) 40%, transparent 100%);
+  z-index:3;pointer-events:none;
 }
 .slide-stage{
   position:relative;
-  height:96vh;
-  width:auto;
+  height:92vh;width:auto;
   display:flex;align-items:center;justify-content:center;
   transform:translateX(30px);opacity:0;
   transition:transform 1.2s cubic-bezier(.22,1,.36,1) .08s,
              opacity 1.2s ease .08s;
+  z-index:2;
 }
 .slide.active .slide-stage{transform:translateX(0);opacity:1;}
 .slide.active .slide-stage-img{animation:float-stage 9s ease-in-out infinite .5s;}
@@ -326,12 +312,11 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   50%{transform:translateY(-16px);}
 }
 .slide-stage-img{
-  height:96vh;
-  width:auto;
-  max-width:none;
+  height:92vh;width:auto;max-width:none;
   object-fit:contain;
-  opacity:.88;
-  filter:drop-shadow(0 0 80px rgba(7,6,4,.7));
+  /* multiply: white pixels disappear into warm dark bg */
+  mix-blend-mode:multiply;
+  filter:brightness(1.5) contrast(1.15);
 }
 .slide-stage-shadow{display:none;}
 
