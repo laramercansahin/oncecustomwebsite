@@ -256,24 +256,25 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 /* spec list — caption style */
 .slide-specs{
-  display:flex;flex-direction:column;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 24px;
   transform:translateY(12px);opacity:0;
   transition:transform .8s ease .36s,opacity .8s ease .36s;
 }
 .slide.active .slide-specs{transform:translateY(0);opacity:1;}
 .spec-row{
   display:flex;flex-direction:column;
-  padding:8px 0;
-  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
-.spec-row:first-child{border-top:1px solid rgba(255,255,255,.06);}
 .spec-label{
-  font-size:8px;letter-spacing:.32em;text-transform:uppercase;
-  color:var(--bronze);margin-bottom:3px;
+  font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:2px;
 }
 .spec-val{
-  font-size:12px;letter-spacing:.04em;font-weight:300;
-  color:rgba(237,228,213,.9);
+  font-size:11px;letter-spacing:.02em;font-weight:300;
+  color:rgba(237,228,213,.88);line-height:1.4;
 }
 
 /* enquire — discreet museum shop link */
