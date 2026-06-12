@@ -11,12 +11,10 @@
   --black:#070604;
   --border:#2A2520;
   --bronze:#B08858;
-  --bronze2:#C9A06A;
   --cream:#EDE4D5;
-  --ivory:#F2EBE0;
   --mid:#B8AFA4;
   --ghost:#1E1A15;
-  --card-stage:#EDE8DF;
+  --radius:480px;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
@@ -38,176 +36,206 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button.active{color:var(--cream);}
 
 /* ══════════════════════════════════
-   GRID — COLLECTION
+   ORBITAL SECTION
 ══════════════════════════════════ */
-#grid-section{
-  padding:120px 48px 100px;
+#orbital-section{
+  position:relative;
+  width:100%;
+  height:100vh;
   margin-top:80px;
-  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 
-/* fine grain texture overlay */
-#grid-section::before{
-  content:'';
+/* ambient bg glow */
+.orb-bg{
   position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none;opacity:.4;
-}
-
-.grid-header{
-  display:flex;align-items:baseline;justify-content:space-between;
-  margin-bottom:56px;
-  position:relative;
-}
-.grid-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(36px,5vw,64px);
-  letter-spacing:.08em;color:var(--cream);
-}
-.grid-count{
-  font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ghost);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-/* ── CARD ── */
-.grid-card{
-  position:relative;
-  aspect-ratio:3/4;
-  cursor:pointer;
-  perspective:800px;
-}
-
-/* tilt inner wrapper */
-.gc-inner{
-  position:relative;
-  width:100%;height:100%;
-  transform-style:preserve-3d;
-  transition:transform .15s ease;
-  border:1px solid #1A1610;
-  overflow:hidden;
-  background:var(--black);
-}
-
-/* product stage — ivory bg so white-bg photos look intentional */
-.gc-stage{
-  position:absolute;
-  inset:16px 16px 38% 16px;
-  background:var(--card-stage);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  transition:inset .5s cubic-bezier(.22,1,.36,1);
-}
-.grid-card:hover .gc-stage{
-  inset:12px 12px 34% 12px;
-}
-
-/* floating product image in stage */
-.gc-img{
-  width:85%;height:85%;
-  object-fit:contain;
-  animation:float 5s ease-in-out infinite;
-  transform-origin:center bottom;
-  filter:drop-shadow(0 12px 24px rgba(0,0,0,.18));
-  transition:filter .4s ease, transform .4s ease;
-}
-.grid-card:hover .gc-img{
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.28));
-}
-/* stagger float per card */
-.grid-card:nth-child(2)  .gc-img{animation-delay:-1.2s;}
-.grid-card:nth-child(3)  .gc-img{animation-delay:-2.5s;}
-.grid-card:nth-child(4)  .gc-img{animation-delay:-0.7s;}
-.grid-card:nth-child(5)  .gc-img{animation-delay:-3.1s;}
-.grid-card:nth-child(6)  .gc-img{animation-delay:-1.8s;}
-.grid-card:nth-child(7)  .gc-img{animation-delay:-0.4s;}
-.grid-card:nth-child(8)  .gc-img{animation-delay:-2.9s;}
-.grid-card:nth-child(9)  .gc-img{animation-delay:-1.5s;}
-.grid-card:nth-child(10) .gc-img{animation-delay:-3.8s;}
-.grid-card:nth-child(11) .gc-img{animation-delay:-2.1s;}
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-9px);}
-}
-
-/* ground shadow under stage */
-.gc-shadow{
-  position:absolute;
-  left:16px;right:16px;
-  bottom:38%;
-  height:18px;
-  background:radial-gradient(ellipse at center, rgba(0,0,0,.5) 0%, transparent 70%);
-  filter:blur(4px);
-  animation:shadow-pulse 5s ease-in-out infinite;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 55%, rgba(176,136,88,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(176,136,88,.04) 0%, transparent 60%);
   pointer-events:none;
 }
-.grid-card:nth-child(2)  .gc-shadow{animation-delay:-1.2s;}
-.grid-card:nth-child(3)  .gc-shadow{animation-delay:-2.5s;}
-.grid-card:nth-child(4)  .gc-shadow{animation-delay:-0.7s;}
-.grid-card:nth-child(5)  .gc-shadow{animation-delay:-3.1s;}
-.grid-card:nth-child(6)  .gc-shadow{animation-delay:-1.8s;}
-.grid-card:nth-child(7)  .gc-shadow{animation-delay:-0.4s;}
-.grid-card:nth-child(8)  .gc-shadow{animation-delay:-2.9s;}
-.grid-card:nth-child(9)  .gc-shadow{animation-delay:-1.5s;}
-.grid-card:nth-child(10) .gc-shadow{animation-delay:-3.8s;}
-.grid-card:nth-child(11) .gc-shadow{animation-delay:-2.1s;}
 
-@keyframes shadow-pulse{
-  0%,100%{transform:scaleX(1);opacity:.7;}
-  50%{transform:scaleX(.6);opacity:.3;}
-}
-
-/* bottom info area */
-.gc-info{
+/* section heading */
+.orb-header{
   position:absolute;
-  bottom:0;left:0;right:0;
-  height:38%;
-  padding:14px 18px 16px;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  border-top:1px solid #181410;
+  top:48px;left:60px;
+  z-index:10;
 }
-.gc-num{
-  font-size:10px;letter-spacing:.26em;color:var(--bronze);margin-bottom:6px;
-  opacity:.5;
-}
-.gc-name{
+.orb-title{
   font-family:'Bebas Neue',sans-serif;
-  font-size:28px;letter-spacing:.12em;
-  color:var(--cream);line-height:1;
+  font-size:clamp(28px,4vw,52px);
+  letter-spacing:.1em;color:var(--cream);
+  line-height:1;
 }
-.gc-tag{
-  font-size:10px;font-weight:200;font-style:italic;
-  letter-spacing:.07em;color:var(--mid);line-height:1.6;
-  margin-top:4px;
-  opacity:0;transform:translateY(6px);
-  transition:opacity .35s ease, transform .35s ease;
+.orb-sub{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);margin-top:6px;
 }
-.grid-card:hover .gc-tag{opacity:1;transform:translateY(0);}
 
-/* bronze line accent on hover */
-.gc-inner::after{
-  content:'';
-  position:absolute;bottom:0;left:0;right:0;
-  height:2px;background:var(--bronze);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .5s cubic-bezier(.22,1,.36,1);
+/* active product name + tagline center display */
+.orb-active-info{
+  position:absolute;
+  bottom:100px;left:0;right:0;
+  text-align:center;
+  z-index:10;
+  pointer-events:none;
 }
-.grid-card:hover .gc-inner::after{transform:scaleX(1);}
+.orb-active-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,8vw,100px);
+  letter-spacing:.08em;color:var(--cream);
+  line-height:1;
+  transition:opacity .3s ease;
+}
+.orb-active-tag{
+  font-size:12px;font-weight:200;font-style:italic;
+  letter-spacing:.14em;color:var(--bronze);
+  margin-top:8px;
+  transition:opacity .3s ease;
+}
+.orb-active-hint{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ghost);margin-top:14px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.orb-active-hint::before,.orb-active-hint::after{content:'';display:block;width:20px;height:1px;background:var(--ghost);}
 
-/* corner index on stage */
-.gc-stage-num{
-  position:absolute;top:8px;right:10px;
-  font-size:9px;letter-spacing:.22em;color:rgba(0,0,0,.2);
-  font-family:'Jost',sans-serif;font-weight:400;
+/* navigation arrows */
+.orb-nav{
+  position:absolute;
+  bottom:44px;left:50%;transform:translateX(-50%);
+  z-index:10;
+  display:flex;align-items:center;gap:32px;
+}
+.orb-btn{
+  width:48px;height:48px;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--mid);
+  font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.orb-btn:hover{border-color:var(--bronze);color:var(--cream);}
+.orb-counter{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:.2em;color:var(--ghost);
+  min-width:60px;text-align:center;
+}
+.orb-counter em{color:var(--bronze);font-style:normal;}
+
+/* ── 3D CAROUSEL ── */
+.carousel-scene{
+  position:relative;
+  width:100%;
+  height:70vh;
+  perspective:1100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.carousel-ring{
+  position:relative;
+  width:1px;height:1px;
+  transform-style:preserve-3d;
+  transition:transform .9s cubic-bezier(.77,0,.175,1);
+}
+
+/* subtle orbit ellipse ring */
+.orbit-ring{
+  position:absolute;
+  width:calc(var(--radius)*2 + 200px);
+  height:calc(var(--radius)*2 + 200px);
+  left:calc(-1*(var(--radius) + 100px));
+  top:calc(-1*(var(--radius) + 100px));
+  border-radius:50%;
+  border:1px solid rgba(176,136,88,.08);
+  pointer-events:none;
+  transform:rotateX(80deg);
+}
+
+/* individual orbit item */
+.orbit-item{
+  position:absolute;
+  width:160px;
+  height:160px;
+  left:-80px;top:-80px;
+  transform-style:preserve-3d;
+  cursor:pointer;
+  transition:opacity .4s ease;
+}
+
+/* circle frame */
+.orbit-circle{
+  width:100%;height:100%;
+  border-radius:50%;
+  border:1px solid rgba(176,136,88,.2);
+  background:#0E0B07;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+  /* ivory inner so white-bg products blend naturally */
+  background:radial-gradient(circle at 50% 40%, #E8E0D4 0%, #D8D0C4 100%);
+}
+.orbit-item.active .orbit-circle{
+  border-color:var(--bronze);
+  box-shadow:0 0 40px rgba(176,136,88,.35), 0 0 80px rgba(176,136,88,.12);
+  transform:scale(1.18);
+}
+.orbit-item:not(.active):hover .orbit-circle{
+  border-color:rgba(176,136,88,.5);
+  box-shadow:0 0 20px rgba(176,136,88,.15);
+}
+
+/* product image inside circle */
+.orbit-img{
+  width:82%;height:82%;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
+  transition:transform .4s ease;
+  animation:orbit-float 5s ease-in-out infinite;
+}
+.orbit-item.active .orbit-img{
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));
+  animation-play-state:running;
+}
+@keyframes orbit-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+
+/* item number badge */
+.orbit-num{
+  position:absolute;
+  bottom:-26px;left:50%;transform:translateX(-50%);
+  font-size:9px;letter-spacing:.22em;color:var(--ghost);
+  white-space:nowrap;
+  transition:color .3s ease;
+}
+.orbit-item.active .orbit-num{color:var(--bronze);}
+
+/* outer glow ring for active */
+.orbit-glow{
+  position:absolute;inset:-12px;
+  border-radius:50%;
+  border:1px solid rgba(176,136,88,.3);
+  opacity:0;
+  transition:opacity .4s ease;
+  animation:glow-pulse 2.5s ease-in-out infinite;
+}
+.orbit-item.active .orbit-glow{opacity:1;}
+@keyframes glow-pulse{
+  0%,100%{transform:scale(1);opacity:.6;}
+  50%{transform:scale(1.06);opacity:.2;}
 }
 
 /* ══════════════════════════════════
-   SLIDER — CINEMATIC
+   SLIDER DETAIL SECTION
 ══════════════════════════════════ */
 #hero-section{
   position:relative;
@@ -226,16 +254,13 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .slide.active{transform:translateY(0);opacity:1;}
 .slide.next{transform:translateY(100%);opacity:0;pointer-events:none;}
 
-/* gradient bg per product */
 .slide-bg{
   position:absolute;inset:0;
 }
 .slide-bg-inner{
   position:absolute;inset:0;
-  transition:opacity .9s ease;
 }
 
-/* big ghost number */
 .slide-ghost{
   position:absolute;right:-.04em;bottom:-.12em;
   font-family:'Bebas Neue',sans-serif;
@@ -243,13 +268,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   line-height:1;letter-spacing:-.02em;
   color:rgba(255,255,255,.025);
   pointer-events:none;user-select:none;
-}
-
-/* horizontal split line */
-.slide-line{
-  position:absolute;top:0;bottom:0;left:50%;
-  width:1px;background:rgba(176,136,88,.08);
-  pointer-events:none;
 }
 
 .slide-content{
@@ -281,8 +299,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .slide.active .slide-tagline{transform:translateY(0);opacity:1;}
 .slide-specs{
-  display:flex;flex-direction:column;
-  margin-top:32px;
+  display:flex;flex-direction:column;margin-top:32px;
   transform:translateY(14px);opacity:0;
   transition:transform .8s ease .38s,opacity .8s ease .38s;
 }
@@ -306,52 +323,57 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .cta-btn:hover{background:var(--bronze);color:var(--black);gap:20px;}
 .cta-btn::after{content:'→';}
 
-/* right: product on ivory stage */
-.slide-right{
-  display:flex;align-items:center;justify-content:center;
-  position:relative;
-}
+/* right side: product on stage */
+.slide-right{display:flex;align-items:center;justify-content:center;position:relative;}
 .slide-stage{
   position:relative;
-  width:min(400px,42vw);
-  aspect-ratio:1/1.15;
-  background:var(--card-stage);
+  width:min(380px,40vw);
+  aspect-ratio:1/1.1;
+  border-radius:2px;
+  background:radial-gradient(ellipse at 50% 40%, #E8E0D4 0%, #D4CCC0 100%);
   display:flex;align-items:center;justify-content:center;
   transform:translateY(20px);opacity:0;
   transition:transform 1s cubic-bezier(.22,1,.36,1) .12s,opacity 1s ease .12s;
   overflow:hidden;
 }
 .slide.active .slide-stage{transform:translateY(0);opacity:1;}
-.slide.active .slide-stage-img{
-  animation:float-stage 7s ease-in-out infinite .8s;
-}
+.slide.active .slide-stage-img{animation:float-stage 7s ease-in-out infinite .8s;}
 @keyframes float-stage{
   0%,100%{transform:translateY(0);}
   50%{transform:translateY(-14px);}
 }
 .slide-stage-img{
-  width:88%;height:88%;
+  width:85%;height:85%;
   object-fit:contain;
   filter:drop-shadow(0 16px 32px rgba(0,0,0,.22));
 }
-/* stage corner label */
-.slide-stage::before{
-  content:attr(data-name);
-  position:absolute;bottom:14px;right:16px;
-  font-family:'Bebas Neue',sans-serif;
-  font-size:11px;letter-spacing:.22em;
-  color:rgba(0,0,0,.15);
+.slide-stage::after{
+  content:'Once Custom';
+  position:absolute;bottom:12px;right:14px;
+  font-size:8px;letter-spacing:.2em;color:rgba(0,0,0,.15);
+  text-transform:uppercase;
 }
-/* shadow under stage */
 .slide-stage-shadow{
   position:absolute;
-  bottom:-18px;left:10%;right:10%;
-  height:24px;
-  background:radial-gradient(ellipse at center,rgba(0,0,0,.55) 0%,transparent 70%);
-  filter:blur(8px);
+  bottom:-16px;left:10%;right:10%;
+  height:22px;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.5) 0%,transparent 70%);
+  filter:blur(6px);
 }
 
-/* controls */
+/* back to orbit button */
+.back-to-orbit{
+  position:absolute;top:104px;left:48px;z-index:10;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--mid);cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  transition:color .2s,gap .2s;
+  text-decoration:none;
+}
+.back-to-orbit::before{content:'↑';font-size:14px;}
+.back-to-orbit:hover{color:var(--bronze);gap:14px;}
+
+/* slider controls */
 .nav-arr{
   position:absolute;right:48px;top:50%;transform:translateY(-50%);
   z-index:10;display:flex;flex-direction:column;gap:8px;
@@ -364,18 +386,12 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .arr-btn:hover{border-color:var(--bronze);color:var(--cream);}
 .arr-btn:disabled{opacity:.2;cursor:default;pointer-events:none;}
-
 .dots{
   position:absolute;left:40px;top:50%;transform:translateY(-50%);
   z-index:10;display:flex;flex-direction:column;gap:16px;
 }
-.dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--border);cursor:pointer;
-  transition:background .3s,transform .3s,height .3s;
-}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .3s,transform .3s;}
 .dot.active{background:var(--bronze);transform:scale(1.6);}
-
 .counter{
   position:absolute;bottom:24px;left:48px;z-index:10;
   font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--ghost);
@@ -387,14 +403,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 /* lang */
 [data-lang]{display:none;}
 body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
-
-/* responsive */
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr);}
-  .slide-content{grid-template-columns:1fr;padding:0 32px;}
-  .slide-right{display:none;}
-  #grid-section{padding:100px 24px 80px;}
-}
 </style>
 </head>
 <body class="tr">
@@ -416,18 +424,41 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   </div>
 </header>
 
-<div id="grid-section">
-  <div class="grid-header">
-    <div class="grid-title">
-      <span data-lang="en">The Collection</span>
-      <span data-lang="tr">Koleksiyon</span>
-    </div>
-    <div class="grid-count" id="gcCount"></div>
+<!-- ORBITAL CATALOG -->
+<section id="orbital-section">
+  <div class="orb-bg"></div>
+  <div class="orb-header">
+    <div class="orb-title"><span data-lang="en">The Collection</span><span data-lang="tr">Koleksiyon</span></div>
+    <div class="orb-sub"><span data-lang="en">Rotate to explore · Click to discover</span><span data-lang="tr">Döndür · Tıkla keşfet</span></div>
   </div>
-  <div class="grid" id="gridWrap"></div>
-</div>
 
-<div id="hero-section">
+  <div class="carousel-scene">
+    <div class="orbit-ring"></div>
+    <div class="carousel-ring" id="carouselRing"></div>
+  </div>
+
+  <div class="orb-active-info">
+    <div class="orb-active-name" id="orbName"></div>
+    <div class="orb-active-tag" id="orbTag"></div>
+    <div class="orb-active-hint">
+      <span data-lang="en">click to explore</span>
+      <span data-lang="tr">keşfetmek için tıkla</span>
+    </div>
+  </div>
+
+  <div class="orb-nav">
+    <button class="orb-btn" id="orbPrev" onclick="orbGo(-1)">←</button>
+    <div class="orb-counter"><em id="orbCur">01</em> / <span id="orbTot"></span></div>
+    <button class="orb-btn" id="orbNext" onclick="orbGo(1)">→</button>
+  </div>
+</section>
+
+<!-- DETAIL SLIDER -->
+<section id="hero-section">
+  <a href="#orbital-section" class="back-to-orbit">
+    <span data-lang="en">Back to collection</span>
+    <span data-lang="tr">Koleksiyona dön</span>
+  </a>
   <div id="slides"></div>
   <div class="nav-arr">
     <button class="arr-btn" id="btnUp" onclick="go(-1)">↑</button>
@@ -436,21 +467,21 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   <div class="dots" id="dotsWrap"></div>
   <div class="counter"><em id="cCur">01</em> / <span id="cTot">11</span></div>
   <div class="progress"><div class="progress-fill" id="progFill"></div></div>
-</div>
+</section>
 
 <script>
 var bgGradients = [
-  'radial-gradient(ellipse at 60% 40%,#1C1208 0%,#0D0A05 50%,#070604 100%)',  /* HAR    */
-  'radial-gradient(ellipse at 65% 45%,#180E09 0%,#0C0705 50%,#070604 100%)',  /* NAR    */
-  'radial-gradient(ellipse at 55% 50%,#080F0E 0%,#060808 50%,#070604 100%)',  /* SU     */
-  'radial-gradient(ellipse at 68% 38%,#1A1207 0%,#0E0A04 50%,#070604 100%)',  /* ALMULA */
-  'radial-gradient(ellipse at 62% 42%,#170D0B 0%,#0C0706 50%,#070604 100%)',  /* RAN    */
-  'radial-gradient(ellipse at 70% 50%,#10100C 0%,#090906 50%,#070604 100%)',  /* DAL    */
-  'radial-gradient(ellipse at 60% 44%,#12110D 0%,#0A0906 50%,#070604 100%)',  /* ALİ    */
-  'radial-gradient(ellipse at 65% 40%,#1A1309 0%,#0E0A05 50%,#070604 100%)',  /* LARA   */
-  'radial-gradient(ellipse at 63% 42%,#1E1008 0%,#0E0704 50%,#070604 100%)',  /* NAR A+ */
-  'radial-gradient(ellipse at 68% 45%,#150D14 0%,#0A0609 50%,#070604 100%)',  /* DAL A+ */
-  'radial-gradient(ellipse at 58% 48%,#090F0D 0%,#060807 50%,#070604 100%)',  /* SU 2   */
+  'radial-gradient(ellipse at 60% 40%,#1C1208 0%,#0D0A05 50%,#070604 100%)',
+  'radial-gradient(ellipse at 65% 45%,#180E09 0%,#0C0705 50%,#070604 100%)',
+  'radial-gradient(ellipse at 55% 50%,#080F0E 0%,#060808 50%,#070604 100%)',
+  'radial-gradient(ellipse at 68% 38%,#1A1207 0%,#0E0A04 50%,#070604 100%)',
+  'radial-gradient(ellipse at 62% 42%,#170D0B 0%,#0C0706 50%,#070604 100%)',
+  'radial-gradient(ellipse at 70% 50%,#10100C 0%,#090906 50%,#070604 100%)',
+  'radial-gradient(ellipse at 60% 44%,#12110D 0%,#0A0906 50%,#070604 100%)',
+  'radial-gradient(ellipse at 65% 40%,#1A1309 0%,#0E0A05 50%,#070604 100%)',
+  'radial-gradient(ellipse at 63% 42%,#1E1008 0%,#0E0704 50%,#070604 100%)',
+  'radial-gradient(ellipse at 68% 45%,#150D14 0%,#0A0609 50%,#070604 100%)',
+  'radial-gradient(ellipse at 58% 48%,#090F0D 0%,#060807 50%,#070604 100%)',
 ];
 
 var products = [
@@ -489,23 +520,113 @@ var products = [
    img:'https://www.oncecustom.com/images/urun/kare/Su_2-v3.png'},
 ];
 
-var current=0, isAnimating=false, lang='tr';
-var slidesWrap=document.getElementById('slides');
-var dotsWrap=document.getElementById('dotsWrap');
-var gridWrap=document.getElementById('gridWrap');
+var N = products.length;
+var orbCurrent = 0;
+var orbAnimating = false;
+var sliderCurrent = 0;
+var sliderAnimating = false;
+var lang = 'tr';
 
-document.getElementById('gcCount').textContent=products.length+' models';
+document.getElementById('orbTot').textContent = String(N).padStart(2,'0');
+document.getElementById('cTot').textContent = String(N).padStart(2,'0');
+
+/* ── BUILD ORBITAL ITEMS ── */
+var ring = document.getElementById('carouselRing');
+var orbItems = [];
+var angleStep = 360 / N;
+var R = 480; /* match --radius */
 
 products.forEach(function(p,i){
-  /* ── SLIDE ── */
-  var s=document.createElement('div');
-  s.className='slide '+(i===0?'active':'next');
-  s.innerHTML=`
+  var item = document.createElement('div');
+  item.className = 'orbit-item' + (i===0?' active':'');
+  item.dataset.index = i;
+
+  var angle = i * angleStep; /* in degrees, laid flat */
+  item.style.transform = 'rotateY('+angle+'deg) translateZ('+R+'px)';
+
+  item.innerHTML = `
+    <div class="orbit-glow"></div>
+    <div class="orbit-circle">
+      <img class="orbit-img" src="${p.img}" alt="${p.name}" loading="${i<4?'eager':'lazy'}">
+    </div>
+    <div class="orbit-num">${String(i+1).padStart(2,'0')}</div>`;
+
+  item.addEventListener('click', function(){
+    var idx = parseInt(this.dataset.index);
+    if(idx === orbCurrent){
+      /* already active — go to detail */
+      goToDetail(idx);
+    } else {
+      orbGoTo(idx);
+    }
+  });
+
+  ring.appendChild(item);
+  orbItems.push(item);
+});
+
+function orbRender(){
+  /* rotate ring so current item faces front (rotateY = 0) */
+  var rotation = -orbCurrent * angleStep;
+  ring.style.transform = 'rotateY('+rotation+'deg)';
+
+  orbItems.forEach(function(item,i){
+    item.classList.toggle('active', i===orbCurrent);
+  });
+
+  var p = products[orbCurrent];
+  document.getElementById('orbName').textContent = p.name;
+  document.getElementById('orbTag').innerHTML =
+    '<span data-lang="en">'+p.tagline.en+'</span><span data-lang="tr">'+p.tagline.tr+'</span>';
+  document.getElementById('orbCur').textContent = String(orbCurrent+1).padStart(2,'0');
+  applyLang();
+}
+
+function orbGo(dir){
+  if(orbAnimating)return;
+  orbCurrent = (orbCurrent + dir + N) % N;
+  orbAnimating = true;
+  orbRender();
+  setTimeout(function(){orbAnimating=false;},950);
+}
+function orbGoTo(idx){
+  if(orbAnimating)return;
+  orbCurrent = idx;
+  orbAnimating = true;
+  orbRender();
+  setTimeout(function(){orbAnimating=false;},950);
+}
+
+/* drag / swipe on carousel */
+var dragStartX = null;
+var carouselScene = document.querySelector('.carousel-scene');
+carouselScene.addEventListener('mousedown',function(e){dragStartX=e.clientX;});
+carouselScene.addEventListener('mouseup',function(e){
+  if(dragStartX===null)return;
+  var dx=e.clientX-dragStartX;
+  if(Math.abs(dx)>40){orbGo(dx<0?1:-1);}
+  dragStartX=null;
+});
+carouselScene.addEventListener('touchstart',function(e){dragStartX=e.touches[0].clientX;},{passive:true});
+carouselScene.addEventListener('touchend',function(e){
+  if(dragStartX===null)return;
+  var dx=e.changedTouches[0].clientX-dragStartX;
+  if(Math.abs(dx)>40){orbGo(dx<0?1:-1);}
+  dragStartX=null;
+},{passive:true});
+
+/* ── BUILD SLIDES ── */
+var slidesWrap = document.getElementById('slides');
+var dotsWrap = document.getElementById('dotsWrap');
+
+products.forEach(function(p,i){
+  var s = document.createElement('div');
+  s.className = 'slide '+(i===0?'active':'next');
+  s.innerHTML = `
     <div class="slide-bg">
-      <div class="slide-bg-inner" style="background:${bgGradients[i]};"></div>
+      <div class="slide-bg-inner" style="background:${bgGradients[i]};position:absolute;inset:0;"></div>
     </div>
     <div class="slide-ghost">${String(i+1).padStart(2,'0')}</div>
-    <div class="slide-line"></div>
     <div class="slide-content">
       <div>
         <div class="slide-index">${String(i+1).padStart(2,'0')} &nbsp;·&nbsp; Once Custom Sound</div>
@@ -524,7 +645,7 @@ products.forEach(function(p,i){
         </div>
       </div>
       <div class="slide-right">
-        <div class="slide-stage" data-name="${p.name}">
+        <div class="slide-stage">
           <img class="slide-stage-img" src="${p.img}" alt="${p.name}" loading="${i<2?'eager':'lazy'}">
         </div>
         <div class="slide-stage-shadow"></div>
@@ -532,95 +653,72 @@ products.forEach(function(p,i){
     </div>`;
   slidesWrap.appendChild(s);
 
-  /* dot */
-  var d=document.createElement('div');
-  d.className='dot'+(i===0?' active':'');
-  d.onclick=(function(idx){return function(){goTo(idx);};})(i);
+  var d = document.createElement('div');
+  d.className = 'dot'+(i===0?' active':'');
+  d.onclick = (function(idx){return function(){goTo(idx);};})(i);
   dotsWrap.appendChild(d);
-
-  /* grid card */
-  var c=document.createElement('div');
-  c.className='grid-card';
-  c.onclick=(function(idx){return function(){
-    document.getElementById('hero-section').scrollIntoView({behavior:'smooth'});
-    setTimeout(function(){goTo(idx);},420);
-  };})(i);
-  c.innerHTML=`
-    <div class="gc-inner">
-      <div class="gc-stage">
-        <span class="gc-stage-num">${String(i+1).padStart(2,'0')}</span>
-        <img class="gc-img" src="${p.img}" alt="${p.name}" loading="lazy">
-      </div>
-      <div class="gc-shadow"></div>
-      <div class="gc-info">
-        <div class="gc-num">${String(i+1).padStart(2,'0')}</div>
-        <div class="gc-name">${p.name}</div>
-        <div class="gc-tag">
-          <span data-lang="en">${p.tagline.en}</span>
-          <span data-lang="tr">${p.tagline.tr}</span>
-        </div>
-      </div>
-    </div>`;
-  gridWrap.appendChild(c);
 });
 
-document.getElementById('cTot').textContent=String(products.length).padStart(2,'0');
+function goToDetail(idx){
+  sliderCurrent = idx;
+  sliderRender();
+  document.getElementById('hero-section').scrollIntoView({behavior:'smooth'});
+}
 
-/* ── 3D TILT on grid cards ── */
-document.querySelectorAll('.grid-card').forEach(function(card){
-  var inner=card.querySelector('.gc-inner');
-  card.addEventListener('mousemove',function(e){
-    var r=card.getBoundingClientRect();
-    var x=(e.clientX-r.left)/r.width-.5;   /* -0.5 .. 0.5 */
-    var y=(e.clientY-r.top)/r.height-.5;
-    inner.style.transform='rotateY('+(x*16)+'deg) rotateX('+(-y*12)+'deg) translateZ(8px)';
-  });
-  card.addEventListener('mouseleave',function(){
-    inner.style.transform='rotateY(0) rotateX(0) translateZ(0)';
-  });
-});
-
-/* ── SLIDER LOGIC ── */
-function render(){
+function sliderRender(){
   document.querySelectorAll('.slide').forEach(function(s,i){
-    s.className='slide '+(i<current?'prev':i===current?'active':'next');
+    s.className='slide '+(i<sliderCurrent?'prev':i===sliderCurrent?'active':'next');
   });
-  document.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===current);});
-  document.getElementById('cCur').textContent=String(current+1).padStart(2,'0');
-  document.getElementById('progFill').style.width=((current+1)/products.length*100)+'%';
-  document.getElementById('btnUp').disabled=current===0;
-  document.getElementById('btnDown').disabled=current===products.length-1;
+  document.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===sliderCurrent);});
+  document.getElementById('cCur').textContent=String(sliderCurrent+1).padStart(2,'0');
+  document.getElementById('progFill').style.width=((sliderCurrent+1)/N*100)+'%';
+  document.getElementById('btnUp').disabled=sliderCurrent===0;
+  document.getElementById('btnDown').disabled=sliderCurrent===N-1;
   applyLang();
 }
+
 function go(dir){
-  if(isAnimating)return;
-  var n=current+dir;
-  if(n<0||n>=products.length)return;
-  isAnimating=true;current=n;render();
-  setTimeout(function(){isAnimating=false;},960);
+  if(sliderAnimating)return;
+  var n=sliderCurrent+dir;
+  if(n<0||n>=N)return;
+  sliderAnimating=true;sliderCurrent=n;sliderRender();
+  setTimeout(function(){sliderAnimating=false;},960);
 }
 function goTo(idx){
-  if(isAnimating||idx===current)return;
-  isAnimating=true;current=idx;render();
-  setTimeout(function(){isAnimating=false;},960);
+  if(sliderAnimating||idx===sliderCurrent)return;
+  sliderAnimating=true;sliderCurrent=idx;sliderRender();
+  setTimeout(function(){sliderAnimating=false;},960);
 }
 
-/* wheel */
+/* wheel in hero */
 var wheelLock=false;
 window.addEventListener('wheel',function(e){
   var hero=document.getElementById('hero-section');
   var rect=hero.getBoundingClientRect();
   if(rect.top>-10&&rect.bottom>=window.innerHeight*.8){
     if(wheelLock)return;
-    if(e.deltaY>0&&current===products.length-1)return;
-    if(e.deltaY<0&&current===0)return;
+    if(e.deltaY>0&&sliderCurrent===N-1)return;
+    if(e.deltaY<0&&sliderCurrent===0)return;
     e.preventDefault();
     wheelLock=true;go(e.deltaY>0?1:-1);
     setTimeout(function(){wheelLock=false;},1100);
   }
 },{passive:false});
 
-/* touch */
+/* wheel on orbital — rotate carousel */
+var orbWheelLock=false;
+window.addEventListener('wheel',function(e){
+  var orb=document.getElementById('orbital-section');
+  var rect=orb.getBoundingClientRect();
+  if(rect.top>-10&&rect.bottom>=window.innerHeight*.9){
+    if(orbWheelLock)return;
+    orbWheelLock=true;
+    orbGo(e.deltaY>0?1:-1);
+    setTimeout(function(){orbWheelLock=false;},1100);
+  }
+},{passive:true});
+
+/* touch slide in hero */
 var touchY=null;
 window.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY;},{passive:true});
 window.addEventListener('touchend',function(e){
@@ -634,8 +732,18 @@ window.addEventListener('touchend',function(e){
 
 /* keyboard */
 window.addEventListener('keydown',function(e){
-  if(e.key==='ArrowDown')go(1);
-  if(e.key==='ArrowUp')go(-1);
+  var orb=document.getElementById('orbital-section');
+  var hero=document.getElementById('hero-section');
+  var orbRect=orb.getBoundingClientRect();
+  var heroRect=hero.getBoundingClientRect();
+  if(orbRect.top>-200&&orbRect.bottom>200){
+    if(e.key==='ArrowRight')orbGo(1);
+    if(e.key==='ArrowLeft')orbGo(-1);
+    if(e.key==='Enter')goToDetail(orbCurrent);
+  } else if(heroRect.top>-200){
+    if(e.key==='ArrowDown')go(1);
+    if(e.key==='ArrowUp')go(-1);
+  }
 });
 
 /* lang */
@@ -660,7 +768,8 @@ window.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){bar.style.width='100%';},200);
   setTimeout(function(){
     document.getElementById('loader').classList.add('out');
-    render();
+    orbRender();
+    sliderRender();
   },1700);
 });
 </script>
