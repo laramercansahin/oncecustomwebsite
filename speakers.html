@@ -214,6 +214,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   width:46%;
   height:100%;
   display:flex;align-items:center;
+  background:linear-gradient(to right, var(--black) 70%, transparent 100%);
 }
 .slide-left{
   width:100%;
@@ -327,8 +328,12 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 /* left fade — seamless blend into dark left panel */
 .slide-right::before{
   content:'';
-  position:absolute;left:0;top:0;bottom:0;width:40%;
-  background:linear-gradient(to right, var(--black) 0%, transparent 100%);
+  position:absolute;left:0;top:0;bottom:0;width:55%;
+  background:linear-gradient(to right,
+    var(--black) 0%,
+    rgba(7,6,4,.9) 30%,
+    rgba(7,6,4,.5) 60%,
+    transparent 100%);
   z-index:4;pointer-events:none;
 }
 
@@ -426,10 +431,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .dot{width:5px;height:5px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .3s,transform .3s;}
 .dot.active{background:var(--bronze);transform:scale(1.6);}
-.counter{
-  position:absolute;bottom:24px;left:48px;z-index:10;
-  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--ghost);
-}
+.counter{display:none;}
 .counter em{color:var(--bronze);font-style:normal;}
 .progress{position:absolute;left:0;bottom:0;right:0;z-index:10;height:2px;background:var(--border);}
 .progress-fill{height:100%;background:var(--bronze);transition:width .6s cubic-bezier(.4,0,.2,1);}
