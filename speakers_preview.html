@@ -169,23 +169,44 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   transition:opacity .4s ease;
 }
 
-/* circle frame */
+/* circle frame — white core so JPG white-bg blends, dark vignette hides edges */
 .orbit-circle{
   width:100%;height:100%;
   border-radius:50%;
   border:1px solid rgba(176,136,88,.2);
-  background:#0E0B07;
+  background:#ffffff;
   display:flex;align-items:center;justify-content:center;
   position:relative;
   overflow:hidden;
   transition:border-color .3s ease, box-shadow .3s ease, transform .3s ease;
-  /* ivory inner so white-bg products blend naturally */
-  background:radial-gradient(circle at 50% 40%, #E8E0D4 0%, #D8D0C4 100%);
+}
+/* dark vignette overlay: transparent center → opaque black edges */
+.orbit-circle::after{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 48%,
+    transparent 30%,
+    rgba(7,6,4,.55) 58%,
+    rgba(7,6,4,.92) 75%,
+    rgba(7,6,4,1) 90%
+  );
+  pointer-events:none;
+  z-index:2;
 }
 .orbit-item.active .orbit-circle{
   border-color:var(--bronze);
-  box-shadow:0 0 40px rgba(176,136,88,.35), 0 0 80px rgba(176,136,88,.12);
+  box-shadow:0 0 50px rgba(176,136,88,.4), 0 0 100px rgba(176,136,88,.14), inset 0 0 30px rgba(255,255,255,.06);
   transform:scale(1.18);
+}
+/* active item: slightly wider transparent center = brighter spotlight */
+.orbit-item.active .orbit-circle::after{
+  background:radial-gradient(circle at 50% 48%,
+    transparent 38%,
+    rgba(7,6,4,.5) 60%,
+    rgba(7,6,4,.9) 76%,
+    rgba(7,6,4,1) 90%
+  );
 }
 .orbit-item:not(.active):hover .orbit-circle{
   border-color:rgba(176,136,88,.5);
