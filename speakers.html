@@ -294,20 +294,25 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .cta-btn:hover{color:var(--bronze);gap:18px;border-color:var(--bronze);}
 .cta-btn::after{content:'→';}
 
-/* ── RIGHT: cinematic product ── */
+/* ── RIGHT: cinematic product — full slide, image on right half ── */
 .slide-right{
   position:absolute;
-  right:0;top:0;bottom:0;
-  width:64%;
+  inset:0;
   overflow:hidden;
   z-index:1;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:4vw;
 }
-/* seamless fade into left dark area */
+/* gradient covers left half completely — no seam */
 .slide-right::before{
   content:'';
-  position:absolute;left:0;top:0;bottom:0;width:45%;
-  background:linear-gradient(to right, var(--black) 0%, transparent 100%);
+  position:absolute;inset:0;
+  background:linear-gradient(to right,
+    var(--black) 0%,
+    var(--black) 36%,
+    rgba(7,6,4,.85) 50%,
+    rgba(7,6,4,.3) 65%,
+    transparent 80%);
   z-index:4;pointer-events:none;
 }
 .slide-right::after{
@@ -323,7 +328,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .gallery-main{
   position:relative;z-index:2;
   display:flex;align-items:center;justify-content:center;
-  width:100%;height:100%;
+  flex-shrink:0;
 }
 .gallery-main-img{
   height:86vh;width:auto;max-width:90%;
