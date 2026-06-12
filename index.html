@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Once Custom Sound</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black:  #070604;
+  --card:   #0D0B09;
+  --border: #2A2520;
+  --bronze: #B08858;
+  --cream:  #EDE4D5;
+  --mid:    #B8AFA4;
+  --ghost:  #504840;
+}
+body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+/* ─── TOP BAR ─── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(7,6,4,0.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 88px;
+}
+.topbar-ham { display: flex; flex-direction: column; gap: 6px; cursor: pointer; padding: 6px; z-index: 600; position: relative; }
+.topbar-ham span { display: block; width: 26px; height: 1.5px; background: var(--cream); transition: transform 0.4s ease, opacity 0.3s ease; transform-origin: left center; }
+.topbar-ham.open span:nth-child(1) { transform: rotate(38deg); }
+.topbar-ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.topbar-ham.open span:nth-child(3) { transform: rotate(-38deg); }
+.topbar-logo { position: absolute; left: 50%; transform: translateX(-50%); }
+.topbar-logo img { height: 68px; filter: brightness(0) invert(1); display: block; }
+.topbar-right { display: flex; align-items: center; gap: 20px; }
+.lang-switch { display: flex; border: 1px solid var(--border); }
+.lang-btn { font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); cursor: pointer; padding: 7px 13px; background: none; border: none; font-family: 'Jost', sans-serif; transition: color 0.2s, background 0.2s; }
+.lang-btn.active { color: var(--cream); background: var(--ghost); }
+.topbar-enquire { font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronze); cursor: pointer; border: 1px solid var(--border); padding: 9px 22px; transition: border-color 0.25s; }
+.topbar-enquire:hover { border-color: var(--bronze); }
+
+/* ─── MENU OVERLAY ─── */
+.menu-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(7,6,4,0.97); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-nav { text-align: center; }
+.menu-nav ul { list-style: none; }
+.menu-nav ul li { overflow: hidden; }
+.menu-nav ul li a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 9vw, 100px); letter-spacing: 0.1em; color: var(--ghost); text-decoration: none; display: block; transform: translateY(110%); transition: transform 0.65s cubic-bezier(0.22,1,0.36,1), color 0.25s; line-height: 1.2; }
+.menu-overlay.open .menu-nav ul li:nth-child(1) a { transform: translateY(0); transition-delay: 0.04s; }
+.menu-overlay.open .menu-nav ul li:nth-child(2) a { transform: translateY(0); transition-delay: 0.09s; }
+.menu-overlay.open .menu-nav ul li:nth-child(3) a { transform: translateY(0); transition-delay: 0.14s; }
+.menu-overlay.open .menu-nav ul li:nth-child(4) a { transform: translateY(0); transition-delay: 0.19s; }
+.menu-overlay.open .menu-nav ul li:nth-child(5) a { transform: translateY(0); transition-delay: 0.24s; }
+.menu-overlay.open .menu-nav ul li:nth-child(6) a { transform: translateY(0); transition-delay: 0.29s; }
+.menu-nav ul li a:hover { color: var(--cream); }
+
+/* ─── HERO ─── */
+.hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 72px; }
+
+/* slideshow */
+.hero-slides { position: absolute; inset: 0; z-index: 1; }
+.hero-slide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 1.4s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(40%); }
+.hero-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to bottom, rgba(7,6,4,0.72) 0%, rgba(7,6,4,0.55) 50%, rgba(7,6,4,0.82) 100%); }
+
+.hero-content { position: relative; z-index: 3; text-align: center; padding: 0 56px; display: flex; flex-direction: column; align-items: center; }
+.hero-eyebrow { font-size: 12px; font-weight: 400; letter-spacing: 0.32em; text-transform: uppercase; color: var(--bronze); margin-bottom: 32px; display: block; }
+.hero-h1 { font-family: 'Jost', sans-serif; font-size: clamp(32px, 5vw, 64px); font-weight: 300; letter-spacing: 0.04em; line-height: 1.15; color: var(--cream); text-align: center; text-transform: none; }
+.hero-h1 .acc { color: var(--bronze); display: block; font-weight: 400; }
+.hero-divider { width: 1px; height: 52px; background: linear-gradient(to bottom, var(--bronze), transparent); margin: 32px auto; }
+.hero-sub { font-size: 16px; font-weight: 300; font-style: italic; letter-spacing: 0.12em; line-height: 2.2; color: var(--mid); max-width: 420px; }
+.hero-actions { margin-top: 44px; display: flex; align-items: center; gap: 24px; }
+.btn-outline { font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 14px 36px; transition: border-color 0.2s; display: inline-block; }
+.btn-outline:hover { border-color: var(--cream); }
+
+/* slide dots */
+.hero-dots { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 4; display: flex; gap: 10px; }
+.hero-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ghost); cursor: pointer; transition: background 0.3s, transform 0.3s; border: none; padding: 0; }
+.hero-dot.active { background: var(--bronze); transform: scale(1.3); }
+
+/* ─── TICKER ─── */
+.ticker { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 13px 0; overflow: hidden; white-space: nowrap; }
+.ticker-inner { display: inline-block; animation: tick 32s linear infinite; }
+.ticker-inner span { font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ghost); padding: 0 24px; }
+.ticker-inner .sep { color: var(--bronze); padding: 0 8px; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── SECTION COMMON ─── */
+.sec-eyebrow { font-size: 11px; font-weight: 400; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; display: block; }
+.sec-title { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 0.14em; color: var(--cream); }
+.sec-title .acc { color: var(--bronze); }
+
+/* ─── COLLECTION ─── */
+.coll-head { padding: 56px 56px 40px; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid var(--border); }
+.view-all { font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: color 0.2s, border-color 0.2s; }
+.view-all:hover { color: var(--bronze); border-color: var(--bronze); }
+
+/* scrollable row — no arrows, drag/scroll */
+.pgrid-outer { position: relative; border-bottom: 1px solid var(--border); overflow: hidden; }
+.pgrid-wrap { overflow: hidden; }
+.pgrid { display: flex; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+.pcard { min-width: 25%; width: 25%; border-right: 1px solid var(--border); overflow: hidden; cursor: pointer; flex-shrink: 0; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 44px; height: 44px; background: rgba(7,6,4,0.85); border: 1px solid var(--border); color: var(--mid); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.slider-btn:hover { border-color: var(--cream); color: var(--cream); }
+.slider-btn:disabled { opacity: 0.15; cursor: default; }
+.slider-btn.prev { left: 16px; }
+.slider-btn.next { right: 16px; }
+.pcard-img { background: #060503; height: 240px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid var(--border); }
+.pcard-img img { height: 190px; width: auto; object-fit: contain; display: block; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.pcard:hover .pcard-img img { transform: scale(1.07) translateY(-5px); }
+.pcard-info { padding: 22px 24px 26px; }
+.pcard-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.18em; color: var(--cream); display: block; }
+.pcard-type { font-size: 12px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); display: block; margin-top: 5px; }
+.pcard-badge { display: inline-block; margin-top: 12px; font-size: 10px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bronze); border: 1px solid var(--ghost); padding: 4px 10px; }
+
+/* scroll progress bar */
+.scroll-bar-wrap { height: 2px; background: var(--border); position: relative; }
+.scroll-bar-fill { height: 100%; background: var(--bronze); width: 36%; transition: width 0.3s; }
+
+/* ─── QUOTE ─── */
+.quote { padding: 96px 56px; border-bottom: 1px solid var(--border); text-align: center; }
+.quote p { font-size: 21px; font-weight: 300; font-style: italic; letter-spacing: 0.1em; line-height: 2.4; color: var(--mid); max-width: 620px; margin: 0 auto; }
+.quote p strong { color: var(--cream); font-style: normal; font-weight: 400; }
+.quote p em { color: var(--bronze); }
+.quote-src { margin-top: 28px; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ghost); }
+
+/* ─── STORY ─── */
+.story { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); min-height: 480px; }
+.story-img { overflow: hidden; background: #060503; border-right: 1px solid var(--border); }
+.story-img img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.6; filter: grayscale(20%); transition: opacity 0.4s, transform 0.8s ease; }
+.story:hover .story-img img { opacity: 0.75; transform: scale(1.02); }
+.story-text { padding: 72px 56px; display: flex; flex-direction: column; justify-content: center; }
+.story-num { font-family: 'Bebas Neue', sans-serif; font-size: 160px; letter-spacing: 0.06em; color: #0E0C09; line-height: 1; margin-bottom: -28px; user-select: none; }
+.story-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.14em; color: var(--cream); margin-bottom: 28px; }
+.story-body { font-size: 15px; font-weight: 300; font-style: italic; letter-spacing: 0.08em; line-height: 2.5; color: var(--mid); border-left: 1px solid var(--bronze); padding-left: 22px; max-width: 380px; }
+.story-link { margin-top: 36px; font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: gap 0.2s; }
+.story-link:hover { gap: 18px; }
+.story-link::after { content: '→'; font-size: 15px; }
+
+/* ─── CRAFT ─── */
+.craft { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--border); }
+.craft-item { padding: 52px 44px; border-right: 1px solid var(--border); }
+.craft-item:last-child { border-right: none; }
+.craft-n { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.1em; color: var(--ghost); display: block; margin-bottom: 16px; }
+.craft-t { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.18em; color: var(--cream); display: block; margin-bottom: 16px; }
+.craft-b { font-size: 14px; font-weight: 300; letter-spacing: 0.04em; line-height: 2.1; color: var(--mid); }
+
+/* ─── DISTRIBUTORS ─── */
+.dist { padding: 56px; border-bottom: 1px solid var(--border); }
+.dist-world { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.18em; color: var(--mid); margin: 12px 0 36px; }
+.dist-grid { display: grid; grid-template-columns: repeat(7,1fr); border: 1px solid var(--border); }
+.dist-i { padding: 20px 18px; border-right: 1px solid var(--border); transition: background 0.2s; }
+.dist-i:last-child { border-right: none; }
+.dist-i:hover { background: var(--card); }
+.dist-c { font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ghost); margin-bottom: 8px; }
+.dist-n { font-size: 13px; font-weight: 300; letter-spacing: 0.04em; color: var(--mid); }
+
+
+/* ─── MAP ─── */
+.once-popup .leaflet-popup-content-wrapper {
+  background: #0A0806 !important;
+  border: 1px solid #B08858 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #EDE4D5 !important;
+}
+.once-popup .leaflet-popup-tip { background: #0A0806 !important; }
+.once-popup .leaflet-popup-content { margin: 10px 16px !important; }
+
+/* ─── CONTACT ─── */
+.contact-strip { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.contact-left { padding: 72px 56px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+.contact-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.12em; color: var(--cream); margin-bottom: 20px; }
+.contact-sub { font-size: 15px; font-weight: 300; font-style: italic; letter-spacing: 0.08em; line-height: 2.3; color: var(--mid); max-width: 360px; }
+.contact-btn { margin-top: 40px; font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid var(--border); padding: 14px 36px; display: inline-block; transition: border-color 0.2s; width: fit-content; }
+.contact-btn:hover { border-color: var(--cream); }
+.contact-right { padding: 72px 56px; display: flex; flex-direction: column; justify-content: center; gap: 36px; }
+.c-item-label { font-size: 11px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ghost); margin-bottom: 8px; }
+.c-item-val { font-size: 15px; font-weight: 300; letter-spacing: 0.05em; color: var(--mid); }
+.c-item-val a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+.c-item-val a:hover { color: var(--bronze); }
+
+/* ─── FOOTER ─── */
+footer { padding: 28px 56px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+footer img { height: 18px; filter: brightness(0) invert(0.25); display: block; }
+footer .copy { font-size: 11px; letter-spacing: 0.12em; color: var(--ghost); }
+footer .soc { display: flex; gap: 24px; }
+footer .soc a { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ghost); text-decoration: none; transition: color 0.2s; }
+footer .soc a:hover { color: var(--bronze); }
+
+
+
+
+
+
+
+/* lang */
+[data-inline-lang] { display: none; }
+body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inline; }
+</style>
+</head>
+<body class="tr">
+
+<!-- MENU OVERLAY -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-nav">
+    <ul>
+      <li><a href="index.html" onclick="closeMenu()"><span data-inline-lang="en">Home</span><span data-inline-lang="tr">Ana Sayfa</span></a></li>
+      <li><a href="our_story.html" onclick="closeMenu()"><span data-inline-lang="en">Our Story</span><span data-inline-lang="tr">Hikayemiz</span></a></li>
+      <li><a href="speakers.html" onclick="closeMenu()"><span data-inline-lang="en">Speakers</span><span data-inline-lang="tr">Hoparlörler</span></a></li>
+      <li><a href="#distributors" onclick="closeMenu()"><span data-inline-lang="en">Distributors</span><span data-inline-lang="tr">Distribütörler</span></a></li>
+      <li><a href="#news" onclick="closeMenu()"><span data-inline-lang="en">News</span><span data-inline-lang="tr">Haberler</span></a></li>
+      <li><a href="#contact" onclick="closeMenu()"><span data-inline-lang="en">Contact</span><span data-inline-lang="tr">İletişim</span></a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-ham" id="hamBtn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="topbar-logo">
+    <img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound">
+  </div>
+  <div class="topbar-right">
+    <div class="lang-switch">
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" id="btnTR" onclick="setLang('tr')">TR</button>
+    </div>
+    <div class="topbar-enquire">
+      <span data-inline-lang="en">Enquire</span>
+      <span data-inline-lang="tr">İletişim</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active">
+      <img src="photos/Once_06.57.25.jpg" alt="RAN speaker">
+    </div>
+    <div class="hero-slide">
+      <img src="photos/Once_07.09.40.jpg" alt="ALMULA speaker">
+    </div>
+    <div class="hero-slide">
+      <img src="photos/Once_07.08.53.jpg" alt="SU speaker">
+    </div>
+    <div class="hero-slide">
+      <img src="photos/Once_06.05.17.jpg" alt="Once Custom collection">
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+
+    <div class="hero-h1">
+      <span data-inline-lang="en">handcrafted speakers<br>that breathe life into music</span>
+      <span data-inline-lang="tr">müziğe hayat veren<br>el yapımı hoparlörler</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#" class="btn-outline">
+        <span data-inline-lang="en">Explore Collection</span>
+        <span data-inline-lang="tr">Koleksiyonu Keşfet</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots">
+    <button class="hero-dot active" onclick="goSlide(0)"></button>
+    <button class="hero-dot" onclick="goSlide(1)"></button>
+    <button class="hero-dot" onclick="goSlide(2)"></button>
+    <button class="hero-dot" onclick="goSlide(3)"></button>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span data-inline-lang="en">Handcrafted in Istanbul</span><span data-inline-lang="tr">İstanbul'da El Yapımı</span><span class="sep">✦</span>
+    <span>ScanSpeak Drivers</span><span class="sep">✦</span>
+    <span>Fashion Audio</span><span class="sep">✦</span>
+    <span>Munich High End 2025</span><span class="sep">✦</span>
+    <span data-inline-lang="en">Not to be identical · but to be personal</span><span data-inline-lang="tr">Özdeş değil · Kişisel olmak için</span><span class="sep">✦</span>
+    <span data-inline-lang="en">Handcrafted in Istanbul</span><span data-inline-lang="tr">İstanbul'da El Yapımı</span><span class="sep">✦</span>
+    <span>ScanSpeak Drivers</span><span class="sep">✦</span>
+    <span>Fashion Audio</span><span class="sep">✦</span>
+    <span>Munich High End 2025</span><span class="sep">✦</span>
+    <span data-inline-lang="en">Not to be identical · but to be personal</span><span data-inline-lang="tr">Özdeş değil · Kişisel olmak için</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<section>
+  <div class="coll-head">
+    <div>
+      <span class="sec-eyebrow"><span data-inline-lang="en">The Collection</span><span data-inline-lang="tr">Koleksiyon</span></span>
+      <div class="sec-title">
+        <span data-inline-lang="en">Different Forms · <span class="acc">One Philosophy</span></span>
+        <span data-inline-lang="tr">Farklı Formlar · <span class="acc">Tek Felsefe</span></span>
+      </div>
+    </div>
+    <a href="#" class="view-all"><span data-inline-lang="en">View All →</span><span data-inline-lang="tr">Tümünü Gör →</span></a>
+  </div>
+  <div class="pgrid-outer">
+    <button class="slider-btn prev" id="sliderPrev" onclick="slideCards(-1)" disabled>&#8592;</button>
+    <button class="slider-btn next" id="sliderNext" onclick="slideCards(1)">&#8594;</button>
+    <div class="pgrid-wrap">
+      <div class="pgrid" id="pgrid">
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/Har_2025-v2.png" alt="HAR"></div><div class="pcard-info"><span class="pcard-name">HAR</span><span class="pcard-type">Floor Standing</span><span class="pcard-badge">2025</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/ran-v2.png" alt="RAN"></div><div class="pcard-info"><span class="pcard-name">RAN</span><span class="pcard-type">Floor Standing</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v3.png" alt="NAR A+"></div><div class="pcard-info"><span class="pcard-name">NAR A+</span><span class="pcard-type">Floor Standing · Active</span><span class="pcard-badge">Coming Soon</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/nar1-v2.jpg" alt="NAR"></div><div class="pcard-info"><span class="pcard-name">NAR</span><span class="pcard-type">Floor Standing</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_1.png" alt="DAL A+"></div><div class="pcard-info"><span class="pcard-name">DAL A+</span><span class="pcard-type">Satellite · Active</span><span class="pcard-badge">Active+</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v2.png" alt="DAL"></div><div class="pcard-info"><span class="pcard-name">DAL</span><span class="pcard-type">Satellite</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/Su_2-v3.png" alt="SU 2"></div><div class="pcard-info"><span class="pcard-name">SU 2</span><span class="pcard-type">Omnidirectional</span><span class="pcard-badge">Coming Soon</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/su1-v2.jpg" alt="SU"></div><div class="pcard-info"><span class="pcard-name">SU</span><span class="pcard-type">Omnidirectional</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/almula1-v2_2.jpg" alt="ALMULA"></div><div class="pcard-info"><span class="pcard-name">ALMULA</span><span class="pcard-type">Pendant</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/ali-v2.jpg" alt="ALİ"></div><div class="pcard-info"><span class="pcard-name">ALİ</span><span class="pcard-type">Bookshelf</span></div></div>
+      <div class="pcard"><div class="pcard-img"><img src="https://www.oncecustom.com/images/urun/kare/lara_3-v2.jpg" alt="LARA"></div><div class="pcard-info"><span class="pcard-name">LARA</span><span class="pcard-type">Bookshelf</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-bar-wrap"><div class="scroll-bar-fill" id="scrollFill"></div></div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote">
+  <p>
+    <span data-inline-lang="en">only music can fill <em>the void</em> in our souls</span>
+    <span data-inline-lang="tr">ruhumuzun boşluğunu yalnızca <em>müzik</em> doldurabilir</span>
+  </p>
+  <div class="quote-src">— Once Custom Sound</div>
+</div>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-img"><img src="https://www.oncecustom.com/images/halitsaid.jpg" alt="Halit & Said"></div>
+  <div class="story-text">
+    <div class="story-num">02</div>
+    <div class="story-title"><span data-inline-lang="en">Our Story</span><span data-inline-lang="tr">Hikayemiz</span></div>
+    <div class="story-body">
+      <span data-inline-lang="en">we are two old friends brought together by a shared belief:<br><br>music has the power to shape how we experience life</span>
+      <span data-inline-lang="tr">ortak bir inançla bir araya gelen iki eski arkadaşız:<br><br>müziğin hayatı nasıl deneyimlediğimizi şekillendirme gücü vardır</span>
+    </div>
+    <a href="#" class="story-link"><span data-inline-lang="en">Read More</span><span data-inline-lang="tr">Devamını Oku</span></a>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft">
+  <div class="craft-item">
+    <span class="craft-n">01</span>
+    <span class="craft-t"><span data-inline-lang="en">Built by Hand</span><span data-inline-lang="tr">El Yapımı</span></span>
+    <p class="craft-b"><span data-inline-lang="en">Every Once Custom piece is crafted by hand — not to be identical, but to be personal.</span><span data-inline-lang="tr">Her Once Custom parçası elle üretilir — özdeş olmak için değil, kişisel olmak için.</span></p>
+  </div>
+  <div class="craft-item">
+    <span class="craft-n">02</span>
+    <span class="craft-t">ScanSpeak Drivers</span>
+    <p class="craft-b"><span data-inline-lang="en">Only the finest Danish transducers, selected and tuned for each cabinet individually.</span><span data-inline-lang="tr">Yalnızca en iyi Danimarkalı transducer'lar, her kabinet için ayrı ayrı seçilir ve ayarlanır.</span></p>
+  </div>
+  <div class="craft-item">
+    <span class="craft-n">03</span>
+    <span class="craft-t">Fashion Audio</span>
+    <p class="craft-b"><span data-inline-lang="en">Once sound becomes visible, it enters the language of art, design, architecture and fashion.</span><span data-inline-lang="tr">Ses görünür hale geldiğinde sanat, tasarım, mimari ve modanın diline girer.</span></p>
+  </div>
+</section>
+
+<!-- DISTRIBUTORS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<section class="dist">
+  <span class="sec-eyebrow"><span data-inline-lang="en">An International Presence</span><span data-inline-lang="tr">Uluslararası Bir Varlık</span></span>
+  <div class="dist-world">Türkiye · Germany · Spain · Italy · USA · South Korea · China</div>
+  <div id="distMap" style="height:420px;border:1px solid var(--border);margin-top:8px;border-radius:0;"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-strip" id="contact">
+  <div class="contact-left">
+    <span class="sec-eyebrow">06</span>
+    <div class="contact-title"><span data-inline-lang="en">Contact Us</span><span data-inline-lang="tr">İletişime Geç</span></div>
+    <div class="contact-sub">
+      <span data-inline-lang="en">We'd love to hear from you. Reach out for enquiries, press or partnerships.</span>
+      <span data-inline-lang="tr">Sizden haber almaktan mutluluk duyarız. Sorularınız, basın veya iş birlikleri için ulaşın.</span>
+    </div>
+    <a href="mailto:info@oncecustom.com" class="contact-btn">
+      <span data-inline-lang="en">Send a Message</span>
+      <span data-inline-lang="tr">Mesaj Gönder</span>
+    </a>
+  </div>
+  <div class="contact-right">
+    <div><div class="c-item-label">Email</div><div class="c-item-val"><a href="mailto:info@oncecustom.com">info@oncecustom.com</a></div></div>
+    <div><div class="c-item-label">Instagram</div><div class="c-item-val"><a href="https://www.instagram.com/oncecustom/" target="_blank">@oncecustom</a></div></div>
+    <div><div class="c-item-label"><span data-inline-lang="en">Location</span><span data-inline-lang="tr">Konum</span></div><div class="c-item-val">Istanbul, Türkiye</div></div>
+    <div><div class="c-item-label"><span data-inline-lang="en">Dealer Enquiries</span><span data-inline-lang="tr">Bayi İletişim</span></div><div class="c-item-val"><a href="mailto:dealers@oncecustom.com">dealers@oncecustom.com</a></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound">
+  <div class="copy">© Once Custom Sound · All Rights Reserved</div>
+  <div class="soc">
+    <a href="https://www.instagram.com/oncecustom/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/oncecustom/" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // ── hamburger ──
+  function toggleMenu() {
+    document.getElementById('menuOverlay').classList.toggle('open');
+    document.getElementById('hamBtn').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('menuOverlay').classList.remove('open');
+    document.getElementById('hamBtn').classList.remove('open');
+  }
+  function setLang(lang) {
+    document.body.className = lang;
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    document.getElementById('btnTR').classList.toggle('active', lang === 'tr');
+    localStorage.setItem('once_lang', lang);
+  }
+  setLang(localStorage.getItem('once_lang') || 'en');
+
+  // ── hero slideshow ──
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.hero-dot');
+  function goSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = n;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  setInterval(() => goSlide((currentSlide + 1) % slides.length), 4500);
+
+  // ── product slider ──
+  let slideIdx = 0;
+  const totalPcards = 11;
+  const visiblePcards = 4;
+  const maxSlide = totalPcards - visiblePcards;
+  function slideCards(dir) {
+    slideIdx = Math.max(0, Math.min(slideIdx + dir, maxSlide));
+    const pct = (slideIdx / totalPcards) * 100;
+    document.getElementById('pgrid').style.transform = 'translateX(-' + pct + '%)';
+    document.getElementById('sliderPrev').disabled = slideIdx === 0;
+    document.getElementById('sliderNext').disabled = slideIdx >= maxSlide;
+    document.getElementById('scrollFill').style.width = (36 + (slideIdx / maxSlide) * 64) + '%';
+  }
+  document.getElementById('sliderPrev').disabled = true;
+
+  // ── Leaflet distributor map ──
+  window.addEventListener('load', function() {
+    var map = L.map('distMap', {
+      center: [35, 20],
+      zoom: 2,
+      zoomControl: false,
+      scrollWheelZoom: false,
+      attributionControl: false
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
+
+    var pinIcon = L.divIcon({
+      className: '',
+      html: '<div style="width:12px;height:12px;background:#B08858;border-radius:50%;border:2px solid rgba(255,255,255,0.3);box-shadow:0 0 0 5px rgba(176,136,88,0.2);"></div>',
+      iconSize: [12,12], iconAnchor: [6,6], popupAnchor: [0,-10]
+    });
+
+    var distributors = [
+      { name: 'CDBANK',          country: 'Turkey',      lat: 39.9, lng: 32.8 },
+      { name: 'Audio Reference', country: 'Germany',     lat: 52.5, lng: 13.4 },
+      { name: 'SoundQuo',        country: 'Spain',       lat: 40.4, lng: -3.7 },
+      { name: 'Luxury Group',    country: 'Italy',       lat: 41.9, lng: 12.5 },
+      { name: 'JS Audio',        country: 'USA',         lat: 40.7, lng: -74.0 },
+      { name: 'Heis',            country: 'South Korea', lat: 37.5, lng: 127.0 },
+      { name: 'Rich Theatre',    country: 'China',       lat: 31.2, lng: 121.5 }
+    ];
+
+    distributors.forEach(function(d) {
+      L.marker([d.lat, d.lng], { icon: pinIcon })
+        .addTo(map)
+        .bindPopup(
+          '<div style="font-family:Bebas Neue,sans-serif;font-size:15px;letter-spacing:.15em;color:#EDE4D5;">' + d.name + '</div>' +
+          '<div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#B08858;margin-top:2px;">' + d.country + '</div>',
+          { className: 'once-popup' }
+        );
+    });
+  });
+</script>
