@@ -35,212 +35,143 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button.active{color:var(--cream);}
 
 /* ══════════════════════════════════
-   COVERFLOW SECTION
+   ORBITAL-COVERFLOW SECTION
 ══════════════════════════════════ */
 #coverflow-section{
   position:relative;
   width:100%;
-  min-height:100vh;
+  height:100vh;
   margin-top:80px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding-bottom:80px;
 }
 
-/* spotlight cone from top-center */
+/* spotlight cone from top */
 .cf-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 38% 75% at 50% -5%, rgba(255,245,225,.13) 0%, rgba(200,170,110,.06) 35%, transparent 70%),
-    radial-gradient(ellipse 70% 55% at 50% 40%, rgba(176,136,88,.05) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 18% at 50% 102%, rgba(176,136,88,.07) 0%, transparent 60%);
+    radial-gradient(ellipse 36% 80% at 50% -8%, rgba(255,245,220,.11) 0%, rgba(200,165,100,.05) 40%, transparent 68%),
+    radial-gradient(ellipse 60% 50% at 50% 42%, rgba(176,136,88,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 14% at 50% 104%, rgba(176,136,88,.06) 0%, transparent 60%);
   pointer-events:none;
 }
 .cf-bg::before{
-  content:'';
-  position:absolute;
-  top:0;left:50%;
+  content:'';position:absolute;top:0;left:50%;
   width:0;height:0;
-  border-left:380px solid transparent;
-  border-right:380px solid transparent;
-  border-top:600px solid rgba(255,245,220,.018);
-  transform:translateX(-50%);
-  pointer-events:none;
+  border-left:340px solid transparent;
+  border-right:340px solid transparent;
+  border-top:580px solid rgba(255,242,210,.016);
+  transform:translateX(-50%);pointer-events:none;
 }
 
-/* section heading */
+/* header */
 .cf-header{
-  position:relative;
+  position:absolute;top:48px;left:60px;
   z-index:10;
-  text-align:left;
-  width:100%;
-  padding:48px 60px 0;
-  margin-bottom:32px;
 }
 .cf-title{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(28px,4vw,52px);
-  letter-spacing:.1em;color:var(--cream);
-  line-height:1;
+  letter-spacing:.1em;color:var(--cream);line-height:1;
 }
-.cf-sub{
-  font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);margin-top:6px;
-}
+.cf-sub{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);margin-top:6px;}
 
-/* ── COVERFLOW STAGE ── */
-.cf-stage{
+/* ── 3D SCENE ── */
+.cf-scene{
   position:relative;
   width:100%;
-  height:420px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  perspective:900px;
-  z-index:5;
+  height:56vh;
+  perspective:1100px;
+  display:flex;align-items:center;justify-content:center;
 }
 
-/* floor reflection/shadow under center */
-.cf-floor-shadow{
-  position:absolute;
-  bottom:0;left:50%;
-  transform:translateX(-50%);
-  width:220px;height:30px;
-  background:radial-gradient(ellipse at center, rgba(176,136,88,.18) 0%, transparent 70%);
-  filter:blur(8px);
-  pointer-events:none;
-  z-index:1;
-}
-
-/* all coverflow items wrapper */
-.cf-track{
+/* the ring that rotates */
+.cf-ring{
   position:relative;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width:1px;height:1px;
   transform-style:preserve-3d;
+  transition:transform 1s cubic-bezier(.4,0,.2,1);
 }
 
-/* individual coverflow card */
+/* each item sits on the ring via rotateY + translateZ */
 .cf-item{
   position:absolute;
-  width:200px;
-  height:360px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width:240px;height:360px;
+  left:-120px;top:-180px;
+  display:flex;align-items:center;justify-content:center;
   cursor:pointer;
-  transition:transform 1s cubic-bezier(.4,0,.2,1),
-             opacity 1s cubic-bezier(.4,0,.2,1),
-             width 1s cubic-bezier(.4,0,.2,1),
-             height 1s cubic-bezier(.4,0,.2,1),
-             filter 1s ease;
   transform-style:preserve-3d;
-  user-select:none;
-  will-change:transform,opacity;
+  /* opacity & filter controlled by JS based on angle */
+  transition:opacity .9s ease, filter .9s ease;
 }
-
-/* hidden items */
-.cf-item.cf-hidden{
-  opacity:0;
-  pointer-events:none;
-  display:none;
-}
-
-/* left item */
-.cf-item.cf-left{
-  opacity:.4;
-  transform:translateX(-320px) rotateY(-40deg) translateZ(-60px);
-  filter:brightness(0.6);
-}
-
-/* right item */
-.cf-item.cf-right{
-  opacity:.4;
-  transform:translateX(320px) rotateY(40deg) translateZ(-60px);
-  filter:brightness(0.6);
-}
-
-/* active/center item */
-.cf-item.cf-active{
-  opacity:1;
-  transform:translateX(0) rotateY(0deg) translateZ(0px);
-  width:360px;
-  height:380px;
-  filter:none;
-  z-index:10;
-  animation:cf-float 5s ease-in-out infinite;
-  filter:drop-shadow(0 0 40px rgba(176,136,88,.22)) drop-shadow(0 8px 32px rgba(0,0,0,.8));
-}
-
-@keyframes cf-float{
-  0%,100%{transform:translateX(0) rotateY(0deg) translateZ(0) translateY(0);}
-  50%{transform:translateX(0) rotateY(0deg) translateZ(0) translateY(-10px);}
-}
-
 .cf-item img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:contain;
   pointer-events:none;
   display:block;
+  filter:drop-shadow(0 10px 30px rgba(0,0,0,.9));
+  transition:filter .9s ease;
+}
+.cf-item.cf-active img{
+  filter:drop-shadow(0 14px 40px rgba(0,0,0,1)) drop-shadow(0 0 30px rgba(176,136,88,.18));
+  animation:cf-float 6s ease-in-out infinite;
+}
+@keyframes cf-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
 }
 
-/* ── CENTER INFO ── */
+/* floor glow */
+.cf-floor{
+  position:absolute;bottom:2%;left:50%;
+  transform:translateX(-50%);
+  width:180px;height:22px;
+  background:radial-gradient(ellipse at center, rgba(176,136,88,.16) 0%, transparent 70%);
+  filter:blur(7px);pointer-events:none;
+}
+
+/* ── INFO ── */
 .cf-info{
-  position:relative;
-  z-index:10;
-  text-align:center;
-  margin-top:28px;
-  pointer-events:none;
+  position:relative;z-index:10;
+  text-align:center;margin-top:20px;
+  pointer-events:none;min-height:100px;
 }
 .cf-info-name{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(52px,8vw,96px);
-  letter-spacing:.08em;
-  color:var(--cream);
-  line-height:1;
-  transition:opacity .3s ease;
+  letter-spacing:.08em;color:var(--cream);line-height:1;
 }
 .cf-info-tag{
   font-size:12px;font-weight:200;font-style:italic;
-  letter-spacing:.14em;color:var(--bronze);
-  margin-top:8px;
-  transition:opacity .3s ease;
+  letter-spacing:.14em;color:var(--bronze);margin-top:6px;
 }
 .cf-info-hint{
   font-size:10px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--ghost);margin-top:14px;
+  color:var(--ghost);margin-top:12px;
   display:flex;align-items:center;justify-content:center;gap:8px;
-  pointer-events:none;
 }
 .cf-info-hint::before,.cf-info-hint::after{content:'';display:block;width:20px;height:1px;background:var(--ghost);}
 
-/* ── NAVIGATION ── */
+/* ── NAV ── */
 .cf-nav{
-  position:relative;
-  z-index:10;
+  position:relative;z-index:10;
   display:flex;align-items:center;gap:32px;
-  margin-top:28px;
+  margin-top:20px;
 }
 .cf-btn{
-  width:48px;height:48px;
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--mid);
+  width:48px;height:48px;background:transparent;
+  border:1px solid var(--border);color:var(--mid);
   font-size:18px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:border-color .2s,color .2s,background .2s;
+  transition:border-color .2s,color .2s;
 }
 .cf-btn:hover{border-color:var(--bronze);color:var(--cream);}
 .cf-counter{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;letter-spacing:.2em;color:var(--ghost);
-  min-width:60px;text-align:center;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;
+  letter-spacing:.2em;color:var(--ghost);min-width:60px;text-align:center;
 }
 .cf-counter em{color:var(--bronze);font-style:normal;}
 
@@ -434,18 +365,17 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   </div>
 </header>
 
-<!-- COVERFLOW CATALOG -->
+<!-- ORBITAL-COVERFLOW CATALOG -->
 <section id="coverflow-section">
   <div class="cf-bg"></div>
-
   <div class="cf-header">
     <div class="cf-title"><span data-lang="en">The Collection</span><span data-lang="tr">Koleksiyon</span></div>
-    <div class="cf-sub"><span data-lang="en">Browse · Click to discover</span><span data-lang="tr">Gözat · Tıkla keşfet</span></div>
+    <div class="cf-sub"><span data-lang="en">Rotate · Click to discover</span><span data-lang="tr">Döndür · Tıkla keşfet</span></div>
   </div>
 
-  <div class="cf-stage" id="cfStage">
-    <div class="cf-floor-shadow"></div>
-    <div class="cf-track" id="cfTrack"></div>
+  <div class="cf-scene" id="cfScene">
+    <div class="cf-ring" id="cfRing"></div>
+    <div class="cf-floor"></div>
   </div>
 
   <div class="cf-info">
@@ -541,44 +471,57 @@ var lang = 'tr';
 document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
 document.getElementById('cTot').textContent = String(N).padStart(2,'0');
 
-/* ── BUILD COVERFLOW ITEMS ── */
-var cfTrack = document.getElementById('cfTrack');
+/* ── BUILD ORBITAL RING ITEMS ── */
+var cfRing = document.getElementById('cfRing');
 var cfItems = [];
+var RING_R = 520;          /* translateZ radius */
+var ANGLE_STEP = 360 / N;
+var FADE_DEG = 65;         /* degrees from front before fading out */
 
 products.forEach(function(p, i){
   var item = document.createElement('div');
-  item.className = 'cf-item cf-hidden';
+  item.className = 'cf-item';
   item.dataset.index = i;
+  /* fixed position on the ring */
+  item.style.transform = 'rotateY(' + (i * ANGLE_STEP) + 'deg) translateZ(' + RING_R + 'px)';
   item.innerHTML = '<img src="' + p.img + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">';
 
   item.addEventListener('click', function(){
     var idx = parseInt(this.dataset.index);
-    if(idx === cfCurrent){
-      goToDetail(idx);
-    } else {
-      cfGoTo(idx);
-    }
+    if(idx === cfCurrent){ goToDetail(idx); }
+    else { cfGoTo(idx); }
   });
 
-  cfTrack.appendChild(item);
+  cfRing.appendChild(item);
   cfItems.push(item);
 });
 
 function cfRender(){
-  var prev = (cfCurrent - 1 + N) % N;
-  var next = (cfCurrent + 1) % N;
+  /* rotate ring so current item faces front */
+  cfRing.style.transform = 'rotateY(' + (-cfCurrent * ANGLE_STEP) + 'deg)';
 
   cfItems.forEach(function(item, i){
-    item.className = 'cf-item';
-    if(i === cfCurrent){
-      item.classList.add('cf-active');
-    } else if(i === prev){
-      item.classList.add('cf-left');
-    } else if(i === next){
-      item.classList.add('cf-right');
+    /* compute angle difference from front, wrap to -180..180 */
+    var diff = ((i - cfCurrent) * ANGLE_STEP % 360 + 540) % 360 - 180;
+    var absDiff = Math.abs(diff);
+
+    if(absDiff > FADE_DEG + 20){
+      /* behind — invisible */
+      item.style.opacity = '0';
+      item.style.pointerEvents = 'none';
+    } else if(absDiff > FADE_DEG){
+      /* soft fade zone */
+      var t = 1 - (absDiff - FADE_DEG) / 20;
+      item.style.opacity = String(t * 0.15);
+      item.style.pointerEvents = 'none';
     } else {
-      item.classList.add('cf-hidden');
+      /* visible — opacity and brightness fall off with angle */
+      var t = 1 - absDiff / FADE_DEG;
+      item.style.opacity = String(0.18 + t * 0.82);
+      item.style.pointerEvents = 'auto';
     }
+
+    item.classList.toggle('cf-active', i === cfCurrent);
   });
 
   var p = products[cfCurrent];
@@ -592,31 +535,28 @@ function cfRender(){
 function cfGo(dir){
   if(cfAnimating) return;
   cfCurrent = (cfCurrent + dir + N) % N;
-  cfAnimating = true;
-  cfRender();
-  setTimeout(function(){ cfAnimating = false; }, 750);
+  cfAnimating = true; cfRender();
+  setTimeout(function(){ cfAnimating = false; }, 1050);
 }
-
 function cfGoTo(idx){
-  if(cfAnimating) return;
+  if(cfAnimating || idx === cfCurrent) return;
   cfCurrent = idx;
-  cfAnimating = true;
-  cfRender();
-  setTimeout(function(){ cfAnimating = false; }, 750);
+  cfAnimating = true; cfRender();
+  setTimeout(function(){ cfAnimating = false; }, 1050);
 }
 
-/* swipe / drag on coverflow */
+/* drag / swipe */
 var cfDragStartX = null;
-var cfStage = document.getElementById('cfStage');
-cfStage.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; });
-cfStage.addEventListener('mouseup', function(e){
+var cfScene = document.getElementById('cfScene');
+cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; });
+cfScene.addEventListener('mouseup', function(e){
   if(cfDragStartX === null) return;
   var dx = e.clientX - cfDragStartX;
   if(Math.abs(dx) > 40){ cfGo(dx < 0 ? 1 : -1); }
   cfDragStartX = null;
 });
-cfStage.addEventListener('touchstart', function(e){ cfDragStartX = e.touches[0].clientX; }, {passive:true});
-cfStage.addEventListener('touchend', function(e){
+cfScene.addEventListener('touchstart', function(e){ cfDragStartX = e.touches[0].clientX; }, {passive:true});
+cfScene.addEventListener('touchend', function(e){
   if(cfDragStartX === null) return;
   var dx = e.changedTouches[0].clientX - cfDragStartX;
   if(Math.abs(dx) > 40){ cfGo(dx < 0 ? 1 : -1); }
