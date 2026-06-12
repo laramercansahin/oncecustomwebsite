@@ -209,13 +209,14 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 .slide-content{
   position:relative;z-index:2;
-  padding:0 0 0 80px;width:100%;
-  display:flex;align-items:center;
+  padding:0 0 0 72px;
+  width:46%;
   height:100%;
+  display:flex;align-items:center;
+  /* never overlap the image */
 }
 .slide-left{
-  width:48%;min-width:300px;
-  flex-shrink:0;
+  width:100%;
   position:relative;z-index:3;
 }
 .slide-index{
@@ -241,15 +242,15 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .slide.active .slide-tagline{transform:translateY(0);opacity:1;}
 .slide-specs{
-  display:flex;flex-direction:column;margin-top:32px;
+  display:flex;flex-direction:column;margin-top:24px;
   transform:translateY(14px);opacity:0;
   transition:transform .8s ease .38s,opacity .8s ease .38s;
 }
 .slide.active .slide-specs{transform:translateY(0);opacity:1;}
-.spec-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);}
+.spec-row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);}
 .spec-row:first-child{border-top:1px solid var(--border);}
-.spec-label{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ghost);}
-.spec-val{font-size:11px;letter-spacing:.08em;color:var(--mid);}
+.spec-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);white-space:nowrap;padding-top:1px;}
+.spec-val{font-size:11px;letter-spacing:.06em;color:var(--mid);}
 .slide-cta{
   margin-top:30px;
   transform:translateY(10px);opacity:0;
@@ -278,8 +279,8 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .slide-right::before{
   content:'';
   position:absolute;left:0;top:0;bottom:0;
-  width:220px;
-  background:linear-gradient(to right, var(--black) 0%, transparent 100%);
+  width:340px;
+  background:linear-gradient(to right, var(--black) 0%, rgba(7,6,4,.6) 50%, transparent 100%);
   z-index:2;pointer-events:none;
 }
 .slide-stage{
@@ -429,39 +430,96 @@ var bgGradients = [
 ];
 
 var products = [
-  {name:'HAR',    tagline:{en:'a sculpture in sound',tr:'seste bir heykel'},
-   specs:[{l:'Type',v:'Full-range horn'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'98 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/Har_2025-v2.png'},
-  {name:'NAR',    tagline:{en:'pomegranate — abundant sound',tr:'nar — bereketli ses'},
-   specs:[{l:'Type',v:'Stand-mount, full-range'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'90 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/nar1-v2.jpg'},
-  {name:'SU',     tagline:{en:'water — source of all things',tr:'su — her şeyin kaynağı'},
-   specs:[{l:'Type',v:'Desktop, full-range'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'88 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/su1-v2.jpg'},
+  {name:'HAR', tagline:{en:'a sculpture in sound',tr:'seste bir heykel'},
+   specs:[
+     {l:'Driver',v:'Full-range horn, ScanSpeak'},
+     {l:'Sensitivity',v:'98 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/Har_2025-v2.png'},
+
+  {name:'NAR', tagline:{en:'pomegranate — abundant sound',tr:'nar — bereketli ses'},
+   specs:[
+     {l:'Driver',v:'Stand-mount, full-range, ScanSpeak'},
+     {l:'Sensitivity',v:'90 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/nar1-v2.jpg'},
+
+  {name:'SU', tagline:{en:'water — source of all things',tr:'su — her şeyin kaynağı'},
+   specs:[
+     {l:'Driver',v:'Desktop, full-range, ScanSpeak'},
+     {l:'Sensitivity',v:'88 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/su1-v2.jpg'},
+
   {name:'ALMULA', tagline:{en:'apple — tradition & memory',tr:'elma — gelenek & bellek'},
-   specs:[{l:'Type',v:'Pendant / ceiling'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'88 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/almula1-v2_2.jpg'},
-  {name:'RAN',    tagline:{en:'illuminated — born from light',tr:'aydınlanmış — ışıktan doğan'},
-   specs:[{l:'Type',v:'Stand-mount, 2-way'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'87 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/ran-v2.png'},
-  {name:'DAL',    tagline:{en:'branch — defying gravity',tr:'dal — yerçekimine meydan okuyan'},
-   specs:[{l:'Type',v:'Pendant / ceiling'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'89 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v2.png'},
-  {name:'ALİ',    tagline:{en:'compact and resolute',tr:'kompakt ve kararlı'},
-   specs:[{l:'Type',v:'Desktop, 2-way'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'86 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/ali-v2.jpg'},
-  {name:'LARA',   tagline:{en:'form as presence',tr:'form bir varlık olarak'},
-   specs:[{l:'Type',v:'Desktop, full-range'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'87 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/lara_3-v2.jpg'},
+   specs:[
+     {l:'Driver',v:'Pendant / ceiling, ScanSpeak'},
+     {l:'Sensitivity',v:'88 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/almula1-v2_2.jpg'},
+
+  {name:'RAN', tagline:{en:'illuminated — born from light',tr:'aydınlanmış — ışıktan doğan'},
+   specs:[
+     {l:'Driver',v:'4.5" Paper Coaxial Full Range'},
+     {l:'Sensitivity',v:'88 dB (2.83V / 1m)'},
+     {l:'Frequency',v:'65 – 30,000 Hz'},
+     {l:'Impedance',v:'4 Ω'},
+     {l:'Amp. Power',v:'50 W'},
+     {l:'Dimensions',v:'535 × 220 × 160 mm'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/ran-v2.png'},
+
+  {name:'DAL', tagline:{en:'branch — defying gravity',tr:'dal — yerçekimine meydan okuyan'},
+   specs:[
+     {l:'Driver',v:'Pendant / ceiling, ScanSpeak'},
+     {l:'Sensitivity',v:'89 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v2.png'},
+
+  {name:'ALİ', tagline:{en:'compact and resolute',tr:'kompakt ve kararlı'},
+   specs:[
+     {l:'Driver',v:'Desktop, 2-way, ScanSpeak'},
+     {l:'Sensitivity',v:'86 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/ali-v2.jpg'},
+
+  {name:'LARA', tagline:{en:'form as presence',tr:'form bir varlık olarak'},
+   specs:[
+     {l:'Driver',v:'Desktop, full-range, ScanSpeak'},
+     {l:'Sensitivity',v:'87 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/lara_3-v2.jpg'},
+
   {name:'NAR A+', tagline:{en:'the signature edition',tr:'imza edisyonu'},
-   specs:[{l:'Type',v:'Stand-mount, full-range'},{l:'Driver',v:'ScanSpeak Reference'},{l:'Sensitivity',v:'91 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v3.png'},
+   specs:[
+     {l:'Driver',v:'Stand-mount, ScanSpeak Reference'},
+     {l:'Sensitivity',v:'91 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v3.png'},
+
   {name:'DAL A+', tagline:{en:'premium pendant edition',tr:'premium sarkıt edisyonu'},
-   specs:[{l:'Type',v:'Pendant / ceiling, upgraded'},{l:'Driver',v:'ScanSpeak Reference'},{l:'Sensitivity',v:'90 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_1.png'},
-  {name:'SU 2',   tagline:{en:'the evolution of the original',tr:'orijinalin evrimi'},
-   specs:[{l:'Type',v:'Desktop, 2-way evolved'},{l:'Driver',v:'ScanSpeak'},{l:'Sensitivity',v:'89 dB'},{l:'Origin',v:'Istanbul, handmade'}],
-   img:'https://www.oncecustom.com/images/urun/kare/Su_2-v3.png'},
+   specs:[
+     {l:'Driver',v:'Pendant / ceiling, ScanSpeak Reference'},
+     {l:'Sensitivity',v:'90 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_1.png'},
+
+  {name:'SU 2', tagline:{en:'the evolution of the original',tr:'orijinalin evrimi'},
+   specs:[
+     {l:'Driver',v:'Desktop, 2-way evolved, ScanSpeak'},
+     {l:'Sensitivity',v:'89 dB (2.83V / 1m)'},
+     {l:'Impedance',v:'8 Ω'},
+     {l:'Origin',v:'Istanbul, handmade'},
+   ], img:'https://www.oncecustom.com/images/urun/kare/Su_2-v3.png'},
 ];
 
 var N = products.length;
