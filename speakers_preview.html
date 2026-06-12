@@ -14,7 +14,6 @@
   --cream:#EDE4D5;
   --mid:#B8AFA4;
   --ghost:#1E1A15;
-  --radius:480px;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
@@ -36,34 +35,31 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button.active{color:var(--cream);}
 
 /* ══════════════════════════════════
-   ORBITAL SECTION
+   COVERFLOW SECTION
 ══════════════════════════════════ */
-#orbital-section{
+#coverflow-section{
   position:relative;
   width:100%;
-  height:100vh;
+  min-height:100vh;
   margin-top:80px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  padding-bottom:80px;
 }
 
 /* spotlight cone from top-center */
-.orb-bg{
+.cf-bg{
   position:absolute;inset:0;
   background:
-    /* main spot cone */
     radial-gradient(ellipse 38% 75% at 50% -5%, rgba(255,245,225,.13) 0%, rgba(200,170,110,.06) 35%, transparent 70%),
-    /* wide soft fill */
     radial-gradient(ellipse 70% 55% at 50% 40%, rgba(176,136,88,.05) 0%, transparent 65%),
-    /* floor bounce */
     radial-gradient(ellipse 50% 18% at 50% 102%, rgba(176,136,88,.07) 0%, transparent 60%);
   pointer-events:none;
 }
-/* spotlight beam edges — two angled lines */
-.orb-bg::before{
+.cf-bg::before{
   content:'';
   position:absolute;
   top:0;left:50%;
@@ -76,69 +72,162 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 
 /* section heading */
-.orb-header{
-  position:absolute;
-  top:48px;left:60px;
+.cf-header{
+  position:relative;
   z-index:10;
+  text-align:left;
+  width:100%;
+  padding:48px 60px 0;
+  margin-bottom:32px;
 }
-.orb-title{
+.cf-title{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(28px,4vw,52px);
   letter-spacing:.1em;color:var(--cream);
   line-height:1;
 }
-.orb-sub{
+.cf-sub{
   font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);margin-top:6px;
 }
 
-/* floor shadow under active product */
-.orb-floor-shadow{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,80px);
-  width:140px;height:24px;
-  background:radial-gradient(ellipse at center, rgba(0,0,0,.7) 0%, transparent 70%);
-  filter:blur(6px);
-  pointer-events:none;
+/* ── COVERFLOW STAGE ── */
+.cf-stage{
+  position:relative;
+  width:100%;
+  height:420px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:900px;
   z-index:5;
 }
 
-/* active product name + tagline center display */
-.orb-active-info{
+/* floor reflection/shadow under center */
+.cf-floor-shadow{
   position:absolute;
-  bottom:100px;left:0;right:0;
-  text-align:center;
+  bottom:0;left:50%;
+  transform:translateX(-50%);
+  width:220px;height:30px;
+  background:radial-gradient(ellipse at center, rgba(176,136,88,.18) 0%, transparent 70%);
+  filter:blur(8px);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* all coverflow items wrapper */
+.cf-track{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-style:preserve-3d;
+}
+
+/* individual coverflow card */
+.cf-item{
+  position:absolute;
+  width:200px;
+  height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .7s cubic-bezier(.77,0,.175,1),
+             opacity .7s cubic-bezier(.77,0,.175,1),
+             width .7s cubic-bezier(.77,0,.175,1),
+             height .7s cubic-bezier(.77,0,.175,1),
+             filter .7s ease;
+  transform-style:preserve-3d;
+  user-select:none;
+  will-change:transform,opacity;
+}
+
+/* hidden items */
+.cf-item.cf-hidden{
+  opacity:0;
+  pointer-events:none;
+  display:none;
+}
+
+/* left item */
+.cf-item.cf-left{
+  opacity:.4;
+  transform:translateX(-320px) rotateY(-40deg) translateZ(-60px);
+  filter:brightness(0.6);
+}
+
+/* right item */
+.cf-item.cf-right{
+  opacity:.4;
+  transform:translateX(320px) rotateY(40deg) translateZ(-60px);
+  filter:brightness(0.6);
+}
+
+/* active/center item */
+.cf-item.cf-active{
+  opacity:1;
+  transform:translateX(0) rotateY(0deg) translateZ(0px);
+  width:360px;
+  height:380px;
+  filter:none;
   z-index:10;
+  animation:cf-float 5s ease-in-out infinite;
+  filter:drop-shadow(0 0 40px rgba(176,136,88,.22)) drop-shadow(0 8px 32px rgba(0,0,0,.8));
+}
+
+@keyframes cf-float{
+  0%,100%{transform:translateX(0) rotateY(0deg) translateZ(0) translateY(0);}
+  50%{transform:translateX(0) rotateY(0deg) translateZ(0) translateY(-10px);}
+}
+
+.cf-item img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+  display:block;
+}
+
+/* ── CENTER INFO ── */
+.cf-info{
+  position:relative;
+  z-index:10;
+  text-align:center;
+  margin-top:28px;
   pointer-events:none;
 }
-.orb-active-name{
+.cf-info-name{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px,8vw,100px);
-  letter-spacing:.08em;color:var(--cream);
+  font-size:clamp(52px,8vw,96px);
+  letter-spacing:.08em;
+  color:var(--cream);
   line-height:1;
   transition:opacity .3s ease;
 }
-.orb-active-tag{
+.cf-info-tag{
   font-size:12px;font-weight:200;font-style:italic;
   letter-spacing:.14em;color:var(--bronze);
   margin-top:8px;
   transition:opacity .3s ease;
 }
-.orb-active-hint{
+.cf-info-hint{
   font-size:10px;letter-spacing:.28em;text-transform:uppercase;
   color:var(--ghost);margin-top:14px;
   display:flex;align-items:center;justify-content:center;gap:8px;
+  pointer-events:none;
 }
-.orb-active-hint::before,.orb-active-hint::after{content:'';display:block;width:20px;height:1px;background:var(--ghost);}
+.cf-info-hint::before,.cf-info-hint::after{content:'';display:block;width:20px;height:1px;background:var(--ghost);}
 
-/* navigation arrows */
-.orb-nav{
-  position:absolute;
-  bottom:44px;left:50%;transform:translateX(-50%);
+/* ── NAVIGATION ── */
+.cf-nav{
+  position:relative;
   z-index:10;
   display:flex;align-items:center;gap:32px;
+  margin-top:28px;
 }
-.orb-btn{
+.cf-btn{
   width:48px;height:48px;
   background:transparent;
   border:1px solid var(--border);
@@ -147,110 +236,13 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   display:flex;align-items:center;justify-content:center;
   transition:border-color .2s,color .2s,background .2s;
 }
-.orb-btn:hover{border-color:var(--bronze);color:var(--cream);}
-.orb-counter{
+.cf-btn:hover{border-color:var(--bronze);color:var(--cream);}
+.cf-counter{
   font-family:'Bebas Neue',sans-serif;
   font-size:13px;letter-spacing:.2em;color:var(--ghost);
   min-width:60px;text-align:center;
 }
-.orb-counter em{color:var(--bronze);font-style:normal;}
-
-/* ── 3D CAROUSEL ── */
-.carousel-scene{
-  position:relative;
-  width:100%;
-  height:70vh;
-  perspective:1100px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.carousel-ring{
-  position:relative;
-  width:1px;height:1px;
-  transform-style:preserve-3d;
-  transition:transform .9s cubic-bezier(.77,0,.175,1);
-}
-
-/* subtle orbit ellipse ring */
-.orbit-ring{
-  position:absolute;
-  width:calc(var(--radius)*2 + 200px);
-  height:calc(var(--radius)*2 + 200px);
-  left:calc(-1*(var(--radius) + 100px));
-  top:calc(-1*(var(--radius) + 100px));
-  border-radius:50%;
-  border:1px solid rgba(176,136,88,.08);
-  pointer-events:none;
-  transform:rotateX(80deg);
-}
-
-/* individual orbit item */
-.orbit-item{
-  position:absolute;
-  width:160px;
-  height:160px;
-  left:-80px;top:-80px;
-  transform-style:preserve-3d;
-  cursor:pointer;
-  opacity:.45;
-  transition:opacity .4s ease;
-}
-.orbit-item.active{
-  opacity:1;
-}
-
-/* no circle frame — product images float directly in 3D space */
-.orbit-circle{
-  width:100%;height:100%;
-  background:transparent;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;
-}
-
-.orbit-img{
-  width:100%;height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 8px 24px rgba(0,0,0,1)) drop-shadow(0 2px 6px rgba(0,0,0,.8));
-  transition:filter .4s ease, transform .4s ease;
-  animation:orbit-float 5s ease-in-out infinite;
-}
-.orbit-item.active .orbit-img{
-  filter:drop-shadow(0 18px 40px rgba(0,0,0,1)) drop-shadow(0 4px 12px rgba(0,0,0,.9)) drop-shadow(0 0 30px rgba(200,160,80,.15));
-}
-.orbit-item.active{
-  transform-origin:center;
-}
-@keyframes orbit-float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
-}
-
-/* item number badge */
-.orbit-num{
-  position:absolute;
-  bottom:-26px;left:50%;transform:translateX(-50%);
-  font-size:9px;letter-spacing:.22em;color:var(--ghost);
-  white-space:nowrap;
-  transition:color .3s ease;
-}
-.orbit-item.active .orbit-num{color:var(--bronze);}
-
-/* outer glow ring for active */
-.orbit-glow{
-  position:absolute;inset:-12px;
-  border-radius:50%;
-  border:1px solid rgba(176,136,88,.3);
-  opacity:0;
-  transition:opacity .4s ease;
-  animation:glow-pulse 2.5s ease-in-out infinite;
-}
-.orbit-item.active .orbit-glow{opacity:1;}
-@keyframes glow-pulse{
-  0%,100%{transform:scale(1);opacity:.6;}
-  50%{transform:scale(1.06);opacity:.2;}
-}
+.cf-counter em{color:var(--bronze);font-style:normal;}
 
 /* ══════════════════════════════════
    SLIDER DETAIL SECTION
@@ -379,7 +371,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   filter:blur(6px);
 }
 
-/* back to orbit button */
+/* back to coverflow button */
 .back-to-orbit{
   position:absolute;top:104px;left:48px;z-index:10;
   font-size:10px;letter-spacing:.22em;text-transform:uppercase;
@@ -442,39 +434,39 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   </div>
 </header>
 
-<!-- ORBITAL CATALOG -->
-<section id="orbital-section">
-  <div class="orb-bg"></div>
-  <div class="orb-header">
-    <div class="orb-title"><span data-lang="en">The Collection</span><span data-lang="tr">Koleksiyon</span></div>
-    <div class="orb-sub"><span data-lang="en">Rotate to explore · Click to discover</span><span data-lang="tr">Döndür · Tıkla keşfet</span></div>
+<!-- COVERFLOW CATALOG -->
+<section id="coverflow-section">
+  <div class="cf-bg"></div>
+
+  <div class="cf-header">
+    <div class="cf-title"><span data-lang="en">The Collection</span><span data-lang="tr">Koleksiyon</span></div>
+    <div class="cf-sub"><span data-lang="en">Browse · Click to discover</span><span data-lang="tr">Gözat · Tıkla keşfet</span></div>
   </div>
 
-  <div class="carousel-scene">
-    <div class="orbit-ring"></div>
-    <div class="carousel-ring" id="carouselRing"></div>
-    <div class="orb-floor-shadow"></div>
+  <div class="cf-stage" id="cfStage">
+    <div class="cf-floor-shadow"></div>
+    <div class="cf-track" id="cfTrack"></div>
   </div>
 
-  <div class="orb-active-info">
-    <div class="orb-active-name" id="orbName"></div>
-    <div class="orb-active-tag" id="orbTag"></div>
-    <div class="orb-active-hint">
+  <div class="cf-info">
+    <div class="cf-info-name" id="cfName"></div>
+    <div class="cf-info-tag" id="cfTag"></div>
+    <div class="cf-info-hint">
       <span data-lang="en">click to explore</span>
       <span data-lang="tr">keşfetmek için tıkla</span>
     </div>
   </div>
 
-  <div class="orb-nav">
-    <button class="orb-btn" id="orbPrev" onclick="orbGo(-1)">←</button>
-    <div class="orb-counter"><em id="orbCur">01</em> / <span id="orbTot"></span></div>
-    <button class="orb-btn" id="orbNext" onclick="orbGo(1)">→</button>
+  <div class="cf-nav">
+    <button class="cf-btn" id="cfPrev" onclick="cfGo(-1)">←</button>
+    <div class="cf-counter"><em id="cfCur">01</em> / <span id="cfTot"></span></div>
+    <button class="cf-btn" id="cfNext" onclick="cfGo(1)">→</button>
   </div>
 </section>
 
 <!-- DETAIL SLIDER -->
 <section id="hero-section">
-  <a href="#orbital-section" class="back-to-orbit">
+  <a href="#coverflow-section" class="back-to-orbit">
     <span data-lang="en">Back to collection</span>
     <span data-lang="tr">Koleksiyona dön</span>
   </a>
@@ -540,140 +532,136 @@ var products = [
 ];
 
 var N = products.length;
-var orbCurrent = 0;
-var orbAnimating = false;
+var cfCurrent = 0;
+var cfAnimating = false;
 var sliderCurrent = 0;
 var sliderAnimating = false;
 var lang = 'tr';
 
-document.getElementById('orbTot').textContent = String(N).padStart(2,'0');
+document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
 document.getElementById('cTot').textContent = String(N).padStart(2,'0');
 
-/* ── BUILD ORBITAL ITEMS ── */
-var ring = document.getElementById('carouselRing');
-var orbItems = [];
-var angleStep = 360 / N;
-var R = 480; /* match --radius */
+/* ── BUILD COVERFLOW ITEMS ── */
+var cfTrack = document.getElementById('cfTrack');
+var cfItems = [];
 
-products.forEach(function(p,i){
+products.forEach(function(p, i){
   var item = document.createElement('div');
-  item.className = 'orbit-item' + (i===0?' active':'');
+  item.className = 'cf-item cf-hidden';
   item.dataset.index = i;
-
-  var angle = i * angleStep; /* in degrees, laid flat */
-  item.style.transform = 'rotateY('+angle+'deg) translateZ('+R+'px)';
-
-  item.innerHTML = `
-    <div class="orbit-circle">
-      <img class="orbit-img" src="${p.img}" alt="${p.name}" loading="${i<4?'eager':'lazy'}">
-    </div>
-    <div class="orbit-num">${String(i+1).padStart(2,'0')}</div>`;
+  item.innerHTML = '<img src="' + p.img + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">';
 
   item.addEventListener('click', function(){
     var idx = parseInt(this.dataset.index);
-    if(idx === orbCurrent){
-      /* already active — go to detail */
+    if(idx === cfCurrent){
       goToDetail(idx);
     } else {
-      orbGoTo(idx);
+      cfGoTo(idx);
     }
   });
 
-  ring.appendChild(item);
-  orbItems.push(item);
+  cfTrack.appendChild(item);
+  cfItems.push(item);
 });
 
-function orbRender(){
-  /* rotate ring so current item faces front (rotateY = 0) */
-  var rotation = -orbCurrent * angleStep;
-  ring.style.transform = 'rotateY('+rotation+'deg)';
+function cfRender(){
+  var prev = (cfCurrent - 1 + N) % N;
+  var next = (cfCurrent + 1) % N;
 
-  orbItems.forEach(function(item,i){
-    item.classList.toggle('active', i===orbCurrent);
+  cfItems.forEach(function(item, i){
+    item.className = 'cf-item';
+    if(i === cfCurrent){
+      item.classList.add('cf-active');
+    } else if(i === prev){
+      item.classList.add('cf-left');
+    } else if(i === next){
+      item.classList.add('cf-right');
+    } else {
+      item.classList.add('cf-hidden');
+    }
   });
 
-  var p = products[orbCurrent];
-  document.getElementById('orbName').textContent = p.name;
-  document.getElementById('orbTag').innerHTML =
-    '<span data-lang="en">'+p.tagline.en+'</span><span data-lang="tr">'+p.tagline.tr+'</span>';
-  document.getElementById('orbCur').textContent = String(orbCurrent+1).padStart(2,'0');
+  var p = products[cfCurrent];
+  document.getElementById('cfName').textContent = p.name;
+  document.getElementById('cfTag').innerHTML =
+    '<span data-lang="en">' + p.tagline.en + '</span><span data-lang="tr">' + p.tagline.tr + '</span>';
+  document.getElementById('cfCur').textContent = String(cfCurrent + 1).padStart(2,'0');
   applyLang();
 }
 
-function orbGo(dir){
-  if(orbAnimating)return;
-  orbCurrent = (orbCurrent + dir + N) % N;
-  orbAnimating = true;
-  orbRender();
-  setTimeout(function(){orbAnimating=false;},950);
-}
-function orbGoTo(idx){
-  if(orbAnimating)return;
-  orbCurrent = idx;
-  orbAnimating = true;
-  orbRender();
-  setTimeout(function(){orbAnimating=false;},950);
+function cfGo(dir){
+  if(cfAnimating) return;
+  cfCurrent = (cfCurrent + dir + N) % N;
+  cfAnimating = true;
+  cfRender();
+  setTimeout(function(){ cfAnimating = false; }, 750);
 }
 
-/* drag / swipe on carousel */
-var dragStartX = null;
-var carouselScene = document.querySelector('.carousel-scene');
-carouselScene.addEventListener('mousedown',function(e){dragStartX=e.clientX;});
-carouselScene.addEventListener('mouseup',function(e){
-  if(dragStartX===null)return;
-  var dx=e.clientX-dragStartX;
-  if(Math.abs(dx)>40){orbGo(dx<0?1:-1);}
-  dragStartX=null;
+function cfGoTo(idx){
+  if(cfAnimating) return;
+  cfCurrent = idx;
+  cfAnimating = true;
+  cfRender();
+  setTimeout(function(){ cfAnimating = false; }, 750);
+}
+
+/* swipe / drag on coverflow */
+var cfDragStartX = null;
+var cfStage = document.getElementById('cfStage');
+cfStage.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; });
+cfStage.addEventListener('mouseup', function(e){
+  if(cfDragStartX === null) return;
+  var dx = e.clientX - cfDragStartX;
+  if(Math.abs(dx) > 40){ cfGo(dx < 0 ? 1 : -1); }
+  cfDragStartX = null;
 });
-carouselScene.addEventListener('touchstart',function(e){dragStartX=e.touches[0].clientX;},{passive:true});
-carouselScene.addEventListener('touchend',function(e){
-  if(dragStartX===null)return;
-  var dx=e.changedTouches[0].clientX-dragStartX;
-  if(Math.abs(dx)>40){orbGo(dx<0?1:-1);}
-  dragStartX=null;
-},{passive:true});
+cfStage.addEventListener('touchstart', function(e){ cfDragStartX = e.touches[0].clientX; }, {passive:true});
+cfStage.addEventListener('touchend', function(e){
+  if(cfDragStartX === null) return;
+  var dx = e.changedTouches[0].clientX - cfDragStartX;
+  if(Math.abs(dx) > 40){ cfGo(dx < 0 ? 1 : -1); }
+  cfDragStartX = null;
+}, {passive:true});
 
 /* ── BUILD SLIDES ── */
 var slidesWrap = document.getElementById('slides');
 var dotsWrap = document.getElementById('dotsWrap');
 
-products.forEach(function(p,i){
+products.forEach(function(p, i){
   var s = document.createElement('div');
-  s.className = 'slide '+(i===0?'active':'next');
-  s.innerHTML = `
-    <div class="slide-bg">
-      <div class="slide-bg-inner" style="background:${bgGradients[i]};position:absolute;inset:0;"></div>
-    </div>
-    <div class="slide-ghost">${String(i+1).padStart(2,'0')}</div>
-    <div class="slide-content">
-      <div>
-        <div class="slide-index">${String(i+1).padStart(2,'0')} &nbsp;·&nbsp; Once Custom Sound</div>
-        <div class="slide-name">${p.name}</div>
-        <div class="slide-tagline">
-          <span data-lang="en">${p.tagline.en}</span>
-          <span data-lang="tr">${p.tagline.tr}</span>
-        </div>
-        <div class="slide-specs">
-          ${p.specs.map(sp=>`<div class="spec-row"><span class="spec-label">${sp.l}</span><span class="spec-val">${sp.v}</span></div>`).join('')}
-        </div>
-        <div class="slide-cta">
-          <a href="mailto:info@oncecustom.com?subject=Enquiry: ${p.name}" class="cta-btn">
-            <span data-lang="en">Enquire</span><span data-lang="tr">Bilgi Al</span>
-          </a>
-        </div>
-      </div>
-      <div class="slide-right">
-        <div class="slide-stage">
-          <img class="slide-stage-img" src="${p.img}" alt="${p.name}" loading="${i<2?'eager':'lazy'}">
-        </div>
-        <div class="slide-stage-shadow"></div>
-      </div>
-    </div>`;
+  s.className = 'slide ' + (i === 0 ? 'active' : 'next');
+  s.innerHTML =
+    '<div class="slide-bg"><div class="slide-bg-inner" style="background:' + bgGradients[i] + ';position:absolute;inset:0;"></div></div>' +
+    '<div class="slide-ghost">' + String(i+1).padStart(2,'0') + '</div>' +
+    '<div class="slide-content">' +
+      '<div>' +
+        '<div class="slide-index">' + String(i+1).padStart(2,'0') + ' &nbsp;·&nbsp; Once Custom Sound</div>' +
+        '<div class="slide-name">' + p.name + '</div>' +
+        '<div class="slide-tagline">' +
+          '<span data-lang="en">' + p.tagline.en + '</span>' +
+          '<span data-lang="tr">' + p.tagline.tr + '</span>' +
+        '</div>' +
+        '<div class="slide-specs">' +
+          p.specs.map(function(sp){ return '<div class="spec-row"><span class="spec-label">' + sp.l + '</span><span class="spec-val">' + sp.v + '</span></div>'; }).join('') +
+        '</div>' +
+        '<div class="slide-cta">' +
+          '<a href="mailto:info@oncecustom.com?subject=Enquiry: ' + p.name + '" class="cta-btn">' +
+            '<span data-lang="en">Enquire</span><span data-lang="tr">Bilgi Al</span>' +
+          '</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="slide-right">' +
+        '<div class="slide-stage">' +
+          '<img class="slide-stage-img" src="' + p.img + '" alt="' + p.name + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '">' +
+        '</div>' +
+        '<div class="slide-stage-shadow"></div>' +
+      '</div>' +
+    '</div>';
   slidesWrap.appendChild(s);
 
   var d = document.createElement('div');
-  d.className = 'dot'+(i===0?' active':'');
-  d.onclick = (function(idx){return function(){goTo(idx);};})(i);
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = (function(idx){ return function(){ goTo(idx); }; })(i);
   dotsWrap.appendChild(d);
 });
 
@@ -684,111 +672,111 @@ function goToDetail(idx){
 }
 
 function sliderRender(){
-  document.querySelectorAll('.slide').forEach(function(s,i){
-    s.className='slide '+(i<sliderCurrent?'prev':i===sliderCurrent?'active':'next');
+  document.querySelectorAll('.slide').forEach(function(s, i){
+    s.className = 'slide ' + (i < sliderCurrent ? 'prev' : i === sliderCurrent ? 'active' : 'next');
   });
-  document.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===sliderCurrent);});
-  document.getElementById('cCur').textContent=String(sliderCurrent+1).padStart(2,'0');
-  document.getElementById('progFill').style.width=((sliderCurrent+1)/N*100)+'%';
-  document.getElementById('btnUp').disabled=sliderCurrent===0;
-  document.getElementById('btnDown').disabled=sliderCurrent===N-1;
+  document.querySelectorAll('.dot').forEach(function(d, i){ d.classList.toggle('active', i === sliderCurrent); });
+  document.getElementById('cCur').textContent = String(sliderCurrent + 1).padStart(2,'0');
+  document.getElementById('progFill').style.width = ((sliderCurrent + 1) / N * 100) + '%';
+  document.getElementById('btnUp').disabled = sliderCurrent === 0;
+  document.getElementById('btnDown').disabled = sliderCurrent === N - 1;
   applyLang();
 }
 
 function go(dir){
-  if(sliderAnimating)return;
-  var n=sliderCurrent+dir;
-  if(n<0||n>=N)return;
-  sliderAnimating=true;sliderCurrent=n;sliderRender();
-  setTimeout(function(){sliderAnimating=false;},960);
+  if(sliderAnimating) return;
+  var n = sliderCurrent + dir;
+  if(n < 0 || n >= N) return;
+  sliderAnimating = true; sliderCurrent = n; sliderRender();
+  setTimeout(function(){ sliderAnimating = false; }, 960);
 }
 function goTo(idx){
-  if(sliderAnimating||idx===sliderCurrent)return;
-  sliderAnimating=true;sliderCurrent=idx;sliderRender();
-  setTimeout(function(){sliderAnimating=false;},960);
+  if(sliderAnimating || idx === sliderCurrent) return;
+  sliderAnimating = true; sliderCurrent = idx; sliderRender();
+  setTimeout(function(){ sliderAnimating = false; }, 960);
 }
 
 /* wheel in hero */
-var wheelLock=false;
-window.addEventListener('wheel',function(e){
-  var hero=document.getElementById('hero-section');
-  var rect=hero.getBoundingClientRect();
-  if(rect.top>-10&&rect.bottom>=window.innerHeight*.8){
-    if(wheelLock)return;
-    if(e.deltaY>0&&sliderCurrent===N-1)return;
-    if(e.deltaY<0&&sliderCurrent===0)return;
+var wheelLock = false;
+window.addEventListener('wheel', function(e){
+  var hero = document.getElementById('hero-section');
+  var rect = hero.getBoundingClientRect();
+  if(rect.top > -10 && rect.bottom >= window.innerHeight * .8){
+    if(wheelLock) return;
+    if(e.deltaY > 0 && sliderCurrent === N-1) return;
+    if(e.deltaY < 0 && sliderCurrent === 0) return;
     e.preventDefault();
-    wheelLock=true;go(e.deltaY>0?1:-1);
-    setTimeout(function(){wheelLock=false;},1100);
+    wheelLock = true; go(e.deltaY > 0 ? 1 : -1);
+    setTimeout(function(){ wheelLock = false; }, 1100);
   }
-},{passive:false});
+}, {passive:false});
 
-/* wheel on orbital — rotate carousel */
-var orbWheelLock=false;
-window.addEventListener('wheel',function(e){
-  var orb=document.getElementById('orbital-section');
-  var rect=orb.getBoundingClientRect();
-  if(rect.top>-10&&rect.bottom>=window.innerHeight*.9){
-    if(orbWheelLock)return;
-    orbWheelLock=true;
-    orbGo(e.deltaY>0?1:-1);
-    setTimeout(function(){orbWheelLock=false;},1100);
+/* wheel on coverflow — advance carousel */
+var cfWheelLock = false;
+window.addEventListener('wheel', function(e){
+  var cf = document.getElementById('coverflow-section');
+  var rect = cf.getBoundingClientRect();
+  if(rect.top > -10 && rect.bottom >= window.innerHeight * .9){
+    if(cfWheelLock) return;
+    cfWheelLock = true;
+    cfGo(e.deltaY > 0 ? 1 : -1);
+    setTimeout(function(){ cfWheelLock = false; }, 900);
   }
-},{passive:true});
+}, {passive:true});
 
 /* touch slide in hero */
-var touchY=null;
-window.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY;},{passive:true});
-window.addEventListener('touchend',function(e){
-  if(touchY===null)return;
-  var dy=touchY-e.changedTouches[0].clientY;
-  var hero=document.getElementById('hero-section');
-  var rect=hero.getBoundingClientRect();
-  if(rect.top>-10&&Math.abs(dy)>40){go(dy>0?1:-1);}
-  touchY=null;
-},{passive:true});
+var touchY = null;
+window.addEventListener('touchstart', function(e){ touchY = e.touches[0].clientY; }, {passive:true});
+window.addEventListener('touchend', function(e){
+  if(touchY === null) return;
+  var dy = touchY - e.changedTouches[0].clientY;
+  var hero = document.getElementById('hero-section');
+  var rect = hero.getBoundingClientRect();
+  if(rect.top > -10 && Math.abs(dy) > 40){ go(dy > 0 ? 1 : -1); }
+  touchY = null;
+}, {passive:true});
 
 /* keyboard */
-window.addEventListener('keydown',function(e){
-  var orb=document.getElementById('orbital-section');
-  var hero=document.getElementById('hero-section');
-  var orbRect=orb.getBoundingClientRect();
-  var heroRect=hero.getBoundingClientRect();
-  if(orbRect.top>-200&&orbRect.bottom>200){
-    if(e.key==='ArrowRight')orbGo(1);
-    if(e.key==='ArrowLeft')orbGo(-1);
-    if(e.key==='Enter')goToDetail(orbCurrent);
-  } else if(heroRect.top>-200){
-    if(e.key==='ArrowDown')go(1);
-    if(e.key==='ArrowUp')go(-1);
+window.addEventListener('keydown', function(e){
+  var cf = document.getElementById('coverflow-section');
+  var hero = document.getElementById('hero-section');
+  var cfRect = cf.getBoundingClientRect();
+  var heroRect = hero.getBoundingClientRect();
+  if(cfRect.top > -200 && cfRect.bottom > 200){
+    if(e.key === 'ArrowRight') cfGo(1);
+    if(e.key === 'ArrowLeft') cfGo(-1);
+    if(e.key === 'Enter') goToDetail(cfCurrent);
+  } else if(heroRect.top > -200){
+    if(e.key === 'ArrowDown') go(1);
+    if(e.key === 'ArrowUp') go(-1);
   }
 });
 
 /* lang */
 function applyLang(){
   document.querySelectorAll('[data-lang]').forEach(function(el){
-    el.style.display=el.dataset.lang===lang?'inline':'none';
+    el.style.display = el.dataset.lang === lang ? 'inline' : 'none';
   });
 }
 function setLang(l){
-  lang=l;document.body.className=l;
-  document.getElementById('btnEN').classList.toggle('active',l==='en');
-  document.getElementById('btnTR').classList.toggle('active',l==='tr');
-  localStorage.setItem('once_lang',l);applyLang();
+  lang = l; document.body.className = l;
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.getElementById('btnTR').classList.toggle('active', l === 'tr');
+  localStorage.setItem('once_lang', l); applyLang();
 }
-setLang(localStorage.getItem('once_lang')||'en');
+setLang(localStorage.getItem('once_lang') || 'en');
 
 /* loader */
-window.addEventListener('DOMContentLoaded',function(){
-  var logo=document.getElementById('loader-logo');
-  var bar=document.getElementById('lbar');
-  setTimeout(function(){logo.classList.add('show');},100);
-  setTimeout(function(){bar.style.width='100%';},200);
+window.addEventListener('DOMContentLoaded', function(){
+  var logo = document.getElementById('loader-logo');
+  var bar = document.getElementById('lbar');
+  setTimeout(function(){ logo.classList.add('show'); }, 100);
+  setTimeout(function(){ bar.style.width = '100%'; }, 200);
   setTimeout(function(){
     document.getElementById('loader').classList.add('out');
-    orbRender();
+    cfRender();
     sliderRender();
-  },1700);
+  }, 1700);
 });
 </script>
 </body>
