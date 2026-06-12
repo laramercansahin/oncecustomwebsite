@@ -294,8 +294,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
     var(--black) 0%, rgba(7,6,4,.88) 45%, transparent 100%);
   z-index:4;pointer-events:none;
 }
-
-/* main image area */
 .gallery-main{
   flex:1;
   position:relative;
@@ -308,7 +306,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   object-fit:contain;
   mix-blend-mode:multiply;
   filter:brightness(1.5) contrast(1.15);
-  transition:opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1);
+  transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1);
 }
 .gallery-main-img.fading{opacity:0;transform:scale(.97);}
 .slide.active .gallery-main-img{animation:float-stage 9s ease-in-out infinite .5s;}
@@ -317,40 +315,29 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   50%{transform:translateY(-16px);}
 }
 .slide.active .gallery-main-img.fading{animation:none;}
-
-/* thumbnail strip — far right */
 .gallery-thumbs{
-  width:88px;
+  width:84px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;
-  padding:24px 16px;
-  z-index:5;
-  position:relative;
-  flex-shrink:0;
+  gap:8px;padding:24px 14px;
+  z-index:5;position:relative;flex-shrink:0;
 }
 .gallery-thumb{
-  width:56px;height:56px;
+  width:54px;height:54px;
   border:1px solid rgba(176,136,88,.2);
-  cursor:pointer;overflow:hidden;
-  background:#100C07;
-  transition:border-color .2s,transform .2s;
-  flex-shrink:0;
+  cursor:pointer;overflow:hidden;background:#100C07;
+  transition:border-color .2s,transform .2s;flex-shrink:0;
 }
-.gallery-thumb:hover{border-color:rgba(176,136,88,.6);transform:scale(1.05);}
+.gallery-thumb:hover{border-color:rgba(176,136,88,.6);transform:scale(1.06);}
 .gallery-thumb.active{border-color:var(--bronze);box-shadow:0 0 12px rgba(176,136,88,.25);}
 .gallery-thumb img{
   width:100%;height:100%;object-fit:cover;
-  mix-blend-mode:multiply;
-  filter:brightness(1.4);
-  display:block;
-  pointer-events:none;
+  mix-blend-mode:multiply;filter:brightness(1.4);
+  display:block;pointer-events:none;
 }
-/* thumb count label */
 .gallery-count{
-  font-size:9px;letter-spacing:.2em;color:var(--bronze);opacity:.6;
+  font-size:9px;letter-spacing:.2em;color:var(--bronze);opacity:.55;
   margin-top:4px;font-family:'Bebas Neue',sans-serif;
 }
-
 .slide-stage-shadow{display:none;}
 
 /* back to coverflow button */
@@ -483,12 +470,7 @@ var products = [
      {l:'Sensitivity',v:'98 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/Har_2025-v2.png',
-     'https://www.oncecustom.com/images/urun/kare/Har_2025-v3.png',
-     'https://www.oncecustom.com/images/urun/kare/har-v2.png',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/Har_2025-v2.png','https://www.oncecustom.com/images/urun/kare/Har_2025-v3.png','https://www.oncecustom.com/images/urun/kare/har-v2.png']},
 
   {name:'NAR', tagline:{en:'pomegranate — abundant sound',tr:'nar — bereketli ses'},
    specs:[
@@ -496,12 +478,7 @@ var products = [
      {l:'Sensitivity',v:'90 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/nar1-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/nar2-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/nar3-v2.jpg',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/nar1-v2.jpg','https://www.oncecustom.com/images/urun/kare/nar2-v2.jpg','https://www.oncecustom.com/images/urun/kare/nar3-v2.jpg']},
 
   {name:'SU', tagline:{en:'water — source of all things',tr:'su — her şeyin kaynağı'},
    specs:[
@@ -509,12 +486,7 @@ var products = [
      {l:'Sensitivity',v:'88 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/su1-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/su2-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/su3-v2.jpg',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/su1-v2.jpg','https://www.oncecustom.com/images/urun/kare/su2-v2.jpg','https://www.oncecustom.com/images/urun/kare/su3-v2.jpg']},
 
   {name:'ALMULA', tagline:{en:'apple — tradition & memory',tr:'elma — gelenek & bellek'},
    specs:[
@@ -522,12 +494,7 @@ var products = [
      {l:'Sensitivity',v:'88 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/almula1-v2_2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/almula2-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/almula3-v2.jpg',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/almula1-v2_2.jpg','https://www.oncecustom.com/images/urun/kare/almula2-v2.jpg','https://www.oncecustom.com/images/urun/kare/almula3-v2.jpg']},
 
   {name:'RAN', tagline:{en:'illuminated — born from light',tr:'aydınlanmış — ışıktan doğan'},
    specs:[
@@ -538,12 +505,7 @@ var products = [
      {l:'Amp. Power',v:'50 W'},
      {l:'Dimensions',v:'535 × 220 × 160 mm'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/ran-v2.png',
-     'https://www.oncecustom.com/images/urun/kare/ran2-v2.png',
-     'https://www.oncecustom.com/images/urun/kare/ran3-v2.png',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/ran-v2.png','https://www.oncecustom.com/images/urun/kare/ran2-v2.png','https://www.oncecustom.com/images/urun/kare/ran3-v2.png']},
 
   {name:'DAL', tagline:{en:'branch — defying gravity',tr:'dal — yerçekimine meydan okuyan'},
    specs:[
@@ -551,12 +513,7 @@ var products = [
      {l:'Sensitivity',v:'89 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v2.png',
-     'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v3.png',
-     'https://www.oncecustom.com/images/urun/kare/Dal-v2.png',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v2.png','https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v3.png','https://www.oncecustom.com/images/urun/kare/Dal-v2.png']},
 
   {name:'ALİ', tagline:{en:'compact and resolute',tr:'kompakt ve kararlı'},
    specs:[
@@ -564,12 +521,7 @@ var products = [
      {l:'Sensitivity',v:'86 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/ali-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/ali2-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/ali3-v2.jpg',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/ali-v2.jpg','https://www.oncecustom.com/images/urun/kare/ali2-v2.jpg','https://www.oncecustom.com/images/urun/kare/ali3-v2.jpg']},
 
   {name:'LARA', tagline:{en:'form as presence',tr:'form bir varlık olarak'},
    specs:[
@@ -577,12 +529,7 @@ var products = [
      {l:'Sensitivity',v:'87 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/lara_3-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/lara_1-v2.jpg',
-     'https://www.oncecustom.com/images/urun/kare/lara_2-v2.jpg',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/lara_3-v2.jpg','https://www.oncecustom.com/images/urun/kare/lara_1-v2.jpg','https://www.oncecustom.com/images/urun/kare/lara_2-v2.jpg']},
 
   {name:'NAR A+', tagline:{en:'the signature edition',tr:'imza edisyonu'},
    specs:[
@@ -590,12 +537,7 @@ var products = [
      {l:'Sensitivity',v:'91 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v3.png',
-     'https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v2.png',
-     'https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v4.png',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v3.png','https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v2.png','https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v4.png']},
 
   {name:'DAL A+', tagline:{en:'premium pendant edition',tr:'premium sarkıt edisyonu'},
    specs:[
@@ -603,12 +545,7 @@ var products = [
      {l:'Sensitivity',v:'90 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_1.png',
-     'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_2.png',
-     'https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v3.png',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_1.png','https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_2.png','https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v3.png']},
 
   {name:'SU 2', tagline:{en:'the evolution of the original',tr:'orijinalin evrimi'},
    specs:[
@@ -616,12 +553,7 @@ var products = [
      {l:'Sensitivity',v:'89 dB (2.83V / 1m)'},
      {l:'Impedance',v:'8 Ω'},
      {l:'Origin',v:'Istanbul, handmade'},
-   ],
-   gallery:[
-     'https://www.oncecustom.com/images/urun/kare/Su_2-v3.png',
-     'https://www.oncecustom.com/images/urun/kare/Su_2-v2.png',
-     'https://www.oncecustom.com/images/urun/kare/Su_2-v4.png',
-   ]},
+   ], gallery:['https://www.oncecustom.com/images/urun/kare/Su_2-v3.png','https://www.oncecustom.com/images/urun/kare/Su_2-v2.png','https://www.oncecustom.com/images/urun/kare/Su_2-v4.png']},
 ];
 
 var N = products.length;
@@ -735,9 +667,8 @@ products.forEach(function(p, i){
   var thumbsHtml = '';
   if(gallery.length > 1){
     gallery.forEach(function(url, gi){
-      thumbsHtml += '<div class="gallery-thumb' + (gi===0?' active':'') + '" data-slide="'+i+'" data-gi="'+gi+'">' +
-        '<img src="'+url+'" alt="" loading="lazy">' +
-        '</div>';
+      thumbsHtml += '<div class="gallery-thumb'+(gi===0?' active':'')+'" data-slide="'+i+'" data-gi="'+gi+'">' +
+        '<img src="'+url+'" alt="" loading="lazy"></div>';
     });
     thumbsHtml += '<div class="gallery-count">'+gallery.length+'</div>';
   }
@@ -767,9 +698,9 @@ products.forEach(function(p, i){
     '</div>' +
     '<div class="slide-right">' +
       '<div class="gallery-main">' +
-        '<img class="gallery-main-img" src="' + gallery[0] + '" alt="' + p.name + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '">' +
+        '<img class="gallery-main-img" src="'+gallery[0]+'" alt="'+p.name+'" loading="'+(i<2?'eager':'lazy')+'">' +
       '</div>' +
-      '<div class="gallery-thumbs">' + thumbsHtml + '</div>' +
+      '<div class="gallery-thumbs">'+thumbsHtml+'</div>' +
     '</div>';
   slidesWrap.appendChild(s);
 
@@ -789,14 +720,8 @@ document.getElementById('slides').addEventListener('click', function(e){
   var slide = document.querySelectorAll('.slide')[si];
   var mainImg = slide.querySelector('.gallery-main-img');
   var thumbs = slide.querySelectorAll('.gallery-thumb');
-
-  /* fade out */
   mainImg.classList.add('fading');
-  setTimeout(function(){
-    mainImg.src = gallery[gi];
-    mainImg.classList.remove('fading');
-  }, 280);
-
+  setTimeout(function(){ mainImg.src = gallery[gi]; mainImg.classList.remove('fading'); }, 260);
   thumbs.forEach(function(t){ t.classList.remove('active'); });
   thumb.classList.add('active');
 });
