@@ -579,7 +579,7 @@ products.forEach(function(p, i){
   item.dataset.index = i;
   /* fixed position on the ring */
   item.style.transform = 'rotateY(' + (i * ANGLE_STEP) + 'deg) translateZ(' + RING_R + 'px)';
-  item.innerHTML = '<img src="' + p.img + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">';
+  item.innerHTML = '<img src="' + (p.gallery ? p.gallery[0] : p.img) + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">';
 
   item.addEventListener('click', function(){
     var idx = parseInt(this.dataset.index);
