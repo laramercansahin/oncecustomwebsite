@@ -806,7 +806,8 @@ var wheelLock = false;
 window.addEventListener('wheel', function(e){
   var hero = document.getElementById('hero-section');
   var rect = hero.getBoundingClientRect();
-  if(rect.top > -10 && rect.bottom >= window.innerHeight * .8){
+  var fullyInView = rect.top >= -20 && rect.top <= 20;
+  if(fullyInView){
     if(wheelLock) return;
     if(Math.abs(e.deltaY) < 40) return;
     if(e.deltaY > 0 && sliderCurrent === N-1) return;
