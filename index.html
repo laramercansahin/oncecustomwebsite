@@ -449,8 +449,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   const maxSlide = totalPcards - visiblePcards;
   function slideCards(dir) {
     slideIdx = Math.max(0, Math.min(slideIdx + dir, maxSlide));
-    const pct = (slideIdx / totalPcards) * 100;
-    document.getElementById('pgrid').style.transform = 'translateX(-' + pct + '%)';
+    document.getElementById('pgrid').style.transform = 'translateX(-' + (slideIdx * 25) + '%)';
     document.getElementById('sliderPrev').disabled = slideIdx === 0;
     document.getElementById('sliderNext').disabled = slideIdx >= maxSlide;
     document.getElementById('scrollFill').style.width = (36 + (slideIdx / maxSlide) * 64) + '%';
