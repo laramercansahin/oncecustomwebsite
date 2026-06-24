@@ -26,22 +26,56 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
 .bar-lang button.active{color:var(--cream);}
 
-/* HERO */
-.hero{min-height:58vh;display:grid;grid-template-columns:1fr 1fr;align-items:flex-end;gap:80px;padding:160px 80px 100px;border-bottom:1px solid var(--border);position:relative;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(176,136,88,.07) 0%,transparent 60%);}
-.hero-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;}
-.hero-label::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);letter-spacing:.06em;line-height:.9;color:var(--cream);position:relative;}
-.hero-title em{color:var(--bronze);}
-.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;border-left:1px solid var(--border);padding-left:60px;}
-.hero-count{font-size:17px;font-weight:300;letter-spacing:.04em;color:var(--cream);line-height:2.2;opacity:.82;}
+/* PAGE HEADER — slim, typographic */
+.page-header{
+  padding:140px 80px 60px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.ph-left{}
+.ph-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.ph-label::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,110px);letter-spacing:.06em;line-height:.9;color:var(--cream);}
+.ph-title em{color:var(--bronze);}
+.ph-right{max-width:340px;padding-bottom:6px;}
+.ph-desc{font-size:13px;font-weight:300;letter-spacing:.03em;line-height:1.9;color:var(--cream);opacity:.55;}
+
+/* FEATURED STORY */
+.featured{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:520px;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  overflow:hidden;
+  position:relative;
+}
+.featured:hover .feat-img img{transform:scale(1.04);filter:brightness(.75);}
+.featured:hover .feat-arrow{opacity:1;transform:translateX(6px);}
+
+.feat-img{position:relative;overflow:hidden;}
+.feat-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.7);transition:transform 7s ease,filter .5s ease;}
+
+.feat-body{
+  padding:64px 72px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  border-left:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(176,136,88,.04) 0%,transparent 60%);
+}
+.feat-tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);margin-bottom:20px;}
+.feat-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ghost);margin-bottom:12px;}
+.feat-title{font-family:'Jost',sans-serif;font-size:clamp(22px,2.4vw,34px);font-weight:300;letter-spacing:.02em;line-height:1.25;color:var(--cream);margin-bottom:20px;}
+.feat-title em{color:var(--bronze);font-style:normal;}
+.feat-excerpt{font-size:13px;font-weight:300;letter-spacing:.03em;line-height:1.85;color:var(--cream);opacity:.5;max-width:480px;margin-bottom:32px;}
+.feat-footer{display:flex;align-items:center;gap:20px;}
+.feat-date{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);}
+.feat-arrow{font-size:14px;color:var(--bronze);opacity:0;transition:opacity .3s,transform .3s;}
 
 /* NEWS LIST */
 .news-list{padding:0 80px;}
 
 .news-item{
   display:grid;
-  grid-template-columns:200px 1fr;
+  grid-template-columns:220px 1fr;
   gap:0;
   border-bottom:1px solid var(--border);
   cursor:pointer;
@@ -56,26 +90,26 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .news-item:hover::after{width:100%;}
 .news-item:hover{background:rgba(176,136,88,.025);}
-.news-item:hover .ni-img img{transform:scale(1.05);filter:brightness(.95);}
+.news-item:hover .ni-img img{transform:scale(1.06);filter:brightness(.9);}
 .news-item:hover .ni-arrow{opacity:1;transform:translateX(6px);}
 
 .ni-img{
-  position:relative;height:160px;overflow:hidden;
+  position:relative;height:180px;overflow:hidden;
   border-right:1px solid var(--border);
   flex-shrink:0;
 }
-.ni-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8);transition:transform 6s ease,filter .4s ease;}
+.ni-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.75);transition:transform 6s ease,filter .4s ease;}
 
 .ni-body{
-  padding:24px 40px;
+  padding:28px 48px;
   display:flex;flex-direction:column;justify-content:center;
   gap:8px;
 }
 .ni-tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);}
-.ni-title{font-family:'Jost',sans-serif;font-size:clamp(15px,1.5vw,20px);font-weight:300;letter-spacing:.03em;line-height:1.35;color:var(--cream);}
+.ni-title{font-family:'Jost',sans-serif;font-size:clamp(15px,1.4vw,19px);font-weight:300;letter-spacing:.03em;line-height:1.35;color:var(--cream);}
 .ni-title em{color:var(--bronze);font-style:normal;}
-.ni-excerpt{font-size:13px;font-weight:300;letter-spacing:.03em;line-height:1.8;color:var(--cream);opacity:.55;max-width:560px;}
-.ni-footer{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+.ni-excerpt{font-size:13px;font-weight:300;letter-spacing:.03em;line-height:1.8;color:var(--cream);opacity:.5;max-width:540px;}
+.ni-footer{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
 .ni-date{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);}
 .ni-arrow{font-size:14px;color:var(--bronze);opacity:0;transition:opacity .3s,transform .3s;}
 
@@ -108,29 +142,34 @@ body.tr [data-lang="tr"]{display:inline;}
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <div class="hero-label"><span data-lang="en">latest updates</span><span data-lang="tr">son haberler</span></div>
-    <div class="hero-title"><span data-lang="en">News &<br><em>Press</em></span><span data-lang="tr">Haber &<br><em>Basın</em></span></div>
+<!-- PAGE HEADER -->
+<header class="page-header reveal">
+  <div class="ph-left">
+    <div class="ph-label"><span data-lang="en">latest updates</span><span data-lang="tr">son haberler</span></div>
+    <div class="ph-title"><span data-lang="en">News &<br><em>Press</em></span><span data-lang="tr">Haber &<br><em>Basın</em></span></div>
   </div>
-  <div class="hero-right">
-    <p class="hero-count"><span data-lang="en">From international fairs to film placements and brand collaborations — the story of Once Custom Sound continues to unfold.</span><span data-lang="tr">Uluslararası fuarlardan film yerleşimlerine ve marka iş birliklerine kadar — Once Custom Sound'un hikayesi gelişmeye devam ediyor.</span></p>
+  <div class="ph-right">
+    <p class="ph-desc"><span data-lang="en">From international fairs to film placements and brand collaborations — the story of Once Custom Sound continues to unfold.</span><span data-lang="tr">Uluslararası fuarlardan film yerleşimlerine ve marka iş birliklerine kadar — Once Custom Sound'un hikayesi gelişmeye devam ediyor.</span></p>
   </div>
-</section>
+</header>
+
+<!-- FEATURED STORY -->
+<article class="featured reveal" onclick="location.href='news-munich.html'">
+  <div class="feat-img"><img src="photos/Ran_Space_2.jpg" alt="Munich High End"></div>
+  <div class="feat-body">
+    <span class="feat-label"><span data-lang="en">Featured story</span><span data-lang="tr">Öne çıkan haber</span></span>
+    <span class="feat-tag"><span data-lang="en">Fair · Munich · 2024</span><span data-lang="tr">Fuar · Münih · 2024</span></span>
+    <h2 class="feat-title"><span data-lang="en">Munich High End 2024 —<br>ten years on the <em>world stage</em></span><span data-lang="tr">Munich High End 2024 —<br>dünya sahnesinde <em>on yıl</em></span></h2>
+    <p class="feat-excerpt"><span data-lang="en">Since 2015, Once Custom Sound has been a regular presence at the world's most prestigious high-end audio fair. Each year the stand grows quieter, more deliberate — letting the objects speak for themselves.</span><span data-lang="tr">2015'ten bu yana Once Custom Sound, dünyanın en prestijli high-end audio fuarında düzenli olarak yer alıyor.</span></p>
+    <div class="feat-footer">
+      <span class="feat-date">May 2024</span>
+      <span class="feat-arrow">→</span>
+    </div>
+  </div>
+</article>
 
 <!-- NEWS LIST -->
 <div class="news-list">
-
-  <div class="news-item reveal" onclick="location.href='news-munich.html'">
-    <div class="ni-img"><img src="photos/Ran_Space_2.jpg" alt="Munich High End"></div>
-    <div class="ni-body">
-      <span class="ni-tag"><span data-lang="en">Fair · Munich · 2024</span><span data-lang="tr">Fuar · Münih · 2024</span></span>
-      <h2 class="ni-title"><span data-lang="en">Munich High End 2024 — ten years on the <em>world stage</em></span><span data-lang="tr">Munich High End 2024 — dünya sahnesinde <em>on yıl</em></span></h2>
-      <p class="ni-excerpt"><span data-lang="en">Since 2015, Once Custom Sound has been a regular presence at the world's most prestigious high-end audio fair. Each year the stand grows quieter, more deliberate — letting the objects speak for themselves.</span><span data-lang="tr">2015'ten bu yana Once Custom Sound, dünyanın en prestijli high-end audio fuarında düzenli olarak yer alıyor.</span></p>
-      <div class="ni-footer"><span class="ni-date">May 2024</span><span class="ni-arrow">→</span></div>
-    </div>
-  </div>
 
   <div class="news-item reveal" onclick="location.href='news-lamborghini.html'">
     <div class="ni-img"><img src="photos/Nar_Space.jpg" alt="Lamborghini"></div>
