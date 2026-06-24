@@ -11,7 +11,7 @@
 :root{
   --black:#070604;
   --border:#2A2520;
-  --bronze:#9B7340;
+  --bronze:#A67B3A;
   --cream:#EDE4D5;
   --mid:#C8BFB4;
   --ghost:#3A3328;
@@ -434,7 +434,7 @@ window.addEventListener('load',function(){
   ];
 
   distributors.forEach(function(d){
-    var pinHtml='<div style="width:14px;height:14px;background:#9B7340;border-radius:50%;border:2px solid rgba(237,228,213,.5);box-shadow:0 0 0 4px rgba(176,136,88,.2),0 0 20px rgba(176,136,88,.6);cursor:pointer;transition:transform .2s;"></div>';
+    var pinHtml='<div style="width:14px;height:14px;background:#A67B3A;border-radius:50%;border:2px solid rgba(237,228,213,.5);box-shadow:0 0 0 4px rgba(176,136,88,.2),0 0 20px rgba(176,136,88,.6);cursor:pointer;transition:transform .2s;"></div>';
     var icon=L.divIcon({html:pinHtml,iconSize:[14,14],iconAnchor:[7,7],className:''});
     var marker=L.marker([d.lat,d.lng],{icon:icon}).addTo(map);
 
