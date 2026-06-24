@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introducing ALMULA — Once Custom Sound</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--black:#070604;--border:#2A2520;--bronze:#B08858;--cream:#EDE4D5;--mid:#C8BFB4;--ghost:#3A3328;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;}
+#loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;transition:opacity .9s ease,visibility .9s ease;}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none;}
+#loader img{height:44px;filter:brightness(0) invert(1);opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+#loader img.show{opacity:1;transform:translateY(0);}
+#loaderBar{position:absolute;bottom:0;left:0;height:1px;background:var(--bronze);width:0%;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
+.bar{position:fixed;top:0;left:0;right:0;z-index:200;height:80px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .5s,border-color .5s;}
+.bar.scrolled{background:rgba(7,6,4,.96);border-color:var(--border);backdrop-filter:blur(16px);}
+.bar-back{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.bar-back::before{content:'←';font-size:14px;}
+.bar-back:hover{color:var(--bronze);gap:14px;}
+.bar-logo img{height:40px;filter:brightness(0) invert(1);}
+.bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
+.bar-lang button.active{color:var(--cream);}
+.story-hero{position:relative;height:70vh;overflow:hidden;}
+.story-hero img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.55);}
+.story-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,4,1) 0%,rgba(7,6,4,.1) 60%);}
+.story-content{max-width:780px;margin:0 auto;padding:80px 48px 120px;}
+.story-tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);margin-bottom:20px;}
+.story-title{font-family:'Jost',sans-serif;font-size:clamp(28px,4vw,52px);font-weight:200;letter-spacing:.04em;line-height:1.15;color:var(--cream);margin-bottom:48px;}
+.story-title em{color:var(--bronze);font-style:normal;}
+.story-body{font-size:17px;font-weight:300;letter-spacing:.04em;line-height:2.4;color:var(--cream);opacity:.82;}
+.story-body p+p{margin-top:28px;}
+.story-back{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);text-decoration:none;margin-top:72px;transition:gap .2s;}
+.story-back:hover{gap:20px;}
+[data-lang]{display:none;}
+body.en [data-lang="en"]{display:inline;}
+body.tr [data-lang="tr"]{display:inline;}
+</style>
+</head>
+<body class="en">
+<div id="loader"><img id="loaderImg" src="photos/once_logo.png" alt="Once"><div id="loaderBar"></div></div>
+<nav class="bar" id="topbar">
+  <a href="news.html" class="bar-back"><span data-lang="en">News</span><span data-lang="tr">Haberler</span></a>
+  <div class="bar-logo"><img src="photos/once_logo.png" alt="Once Custom Sound"></div>
+  <div class="bar-lang"><button id="btnEN" class="active" onclick="setLang('en')">EN</button><button id="btnTR" onclick="setLang('tr')">TR</button></div>
+</nav>
+<div class="story-hero"><img src="photos/Almula_Space.jpg" alt="Introducing ALMULA"></div>
+<div class="story-content">
+  <div class="story-tag"><span data-lang="en">New Model · 2023</span><span data-lang="tr">Yeni Model · 2023</span></div>
+  <h1 class="story-title"><span data-lang="en">Introducing ALMULA — the newest voice in the collection</span><span data-lang="tr">ALMULA tanıtımı — koleksiyonun en yeni sesi</span></h1>
+  <div class="story-body">
+    <p data-lang="en">ALMULA takes its name from the Turkish word for apple — a fruit that carries the weight of tradition, harvest, and home. It is the most domestic of our speakers; the most human.</p>
+    <p data-lang="en">Where SU flows and NAR burns, ALMULA grounds. It is the speaker for the room that is lived in.</p>
+    <p data-lang="tr">ALMULA adını Türkçe'de elma anlamına gelen sözcükten alıyor — gelenek, hasat ve ev ağırlığını taşıyan bir meyve. Hoparlörlerimizin en yerli, en insani olanı.</p>
+    <p data-lang="tr">SU akarken, NAR yanarken, ALMULA demir atar. Yaşanılan odanın hoparlörüdür.</p>
+  </div>
+  <a href="news.html" class="story-back">← <span data-lang="en">Back to News</span><span data-lang="tr">Haberlere Dön</span></a>
+</div>
+<script>
+function setLang(l){document.body.className=l;document.getElementById('btnEN').classList.toggle('active',l==='en');document.getElementById('btnTR').classList.toggle('active',l==='tr');localStorage.setItem('once_lang',l);}
+setLang(localStorage.getItem('once_lang')||'en');
+window.addEventListener('DOMContentLoaded',function(){var img=document.getElementById('loaderImg');var bar=document.getElementById('loaderBar');var loader=document.getElementById('loader');setTimeout(function(){img.classList.add('show');},120);setTimeout(function(){bar.style.width='100%';},200);setTimeout(function(){loader.classList.add('out');},1700);});
+window.addEventListener('scroll',function(){document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);});
+</script>
+</body>
+</html>
