@@ -37,13 +37,14 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button.active{color:var(--cream);}
 
 /* HERO */
-.hero{min-height:52vh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px 80px 80px;border-bottom:1px solid var(--border);position:relative;}
+.hero{min-height:60vh;display:grid;grid-template-columns:1fr 1fr;align-items:flex-end;gap:80px;padding:160px 80px 100px;border-bottom:1px solid var(--border);position:relative;}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%,rgba(176,136,88,.07) 0%,transparent 65%);}
-.hero-ch{font-size:11px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:24px;position:relative;}
+.hero-ch{font-size:11px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;}
 .hero-ch::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
 .hero-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);letter-spacing:.06em;line-height:.9;color:var(--cream);position:relative;}
 .hero-hl em{color:var(--bronze);}
-.hero-sub{font-size:15px;font-weight:300;letter-spacing:.06em;color:var(--mid);margin-top:28px;max-width:520px;line-height:2;position:relative;opacity:.8;}
+.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;border-left:1px solid var(--border);padding-left:60px;}
+.hero-sub{font-size:17px;font-weight:300;letter-spacing:.04em;color:var(--cream);line-height:2.2;position:relative;opacity:.82;}
 
 /* MAP */
 .map-section{position:relative;height:520px;border-bottom:1px solid var(--border);}
@@ -63,11 +64,11 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .dist-card::after{content:'';position:absolute;top:0;left:0;width:0;height:1px;background:var(--bronze);transition:width .4s ease;}
 .dist-card:hover::after{width:100%;}
 
-.dist-num{font-size:10px;letter-spacing:.22em;color:var(--ghost);margin-bottom:20px;}
-.dist-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,32px);letter-spacing:.15em;color:var(--cream);line-height:1.1;margin-bottom:10px;}
-.dist-country{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:16px;}
-.dist-city{font-size:13px;font-weight:300;letter-spacing:.04em;color:var(--mid);opacity:.7;}
-.dist-tag{display:inline-block;margin-top:20px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);border:1px solid var(--border);padding:5px 12px;}
+.dist-num{font-size:11px;letter-spacing:.22em;color:var(--ghost);margin-bottom:20px;}
+.dist-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,2.8vw,38px);letter-spacing:.15em;color:var(--cream);line-height:1.1;margin-bottom:12px;}
+.dist-country{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:10px;}
+.dist-city{font-size:15px;font-weight:300;letter-spacing:.04em;color:var(--mid);opacity:.85;}
+.dist-tag{display:inline-block;margin-top:22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ghost);border:1px solid var(--border);padding:6px 14px;}
 
 /* DEALER CTA */
 .cta-section{padding:100px 80px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
@@ -142,12 +143,16 @@ body.tr [data-lang="tr"]{display:inline;}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-ch reveal"><span data-lang="en">worldwide presence</span><span data-lang="tr">dünya genelinde</span></div>
-  <div class="hero-hl reveal" data-delay="1"><span data-lang="en">Our<br><em>Distributors</em></span><span data-lang="tr">Distribü<em>törlerimiz</em></span></div>
-  <p class="hero-sub reveal" data-delay="2">
-    <span data-lang="en">Once Custom Sound is available through a carefully selected network of partners who share our belief in craftsmanship, detail, and the listening experience.</span>
-    <span data-lang="tr">Once Custom Sound, zanaatkârlık, detay ve dinleme deneyimine olan inancımızı paylaşan, özenle seçilmiş bir iş ortakları ağı aracılığıyla sunulmaktadır.</span>
-  </p>
+  <div>
+    <div class="hero-ch reveal"><span data-lang="en">worldwide presence</span><span data-lang="tr">dünya genelinde</span></div>
+    <div class="hero-hl reveal" data-delay="1"><span data-lang="en">Our<br><em>Distributors</em></span><span data-lang="tr">Distribü<em>törlerimiz</em></span></div>
+  </div>
+  <div class="hero-right reveal" data-delay="2">
+    <p class="hero-sub">
+      <span data-lang="en">Once Custom Sound is available through a carefully selected network of partners who share our belief in craftsmanship, detail, and the listening experience.</span>
+      <span data-lang="tr">Once Custom Sound, zanaatkârlık, detay ve dinleme deneyimine olan inancımızı paylaşan, özenle seçilmiş bir iş ortakları ağı aracılığıyla sunulmaktadır.</span>
+    </p>
+  </div>
 </section>
 
 <!-- MAP -->
@@ -264,7 +269,6 @@ body.tr [data-lang="tr"]{display:inline;}
     <div class="dmodal-name">CDBANK</div>
     <div class="dmodal-country"><span data-lang="en">Turkey · Bursa</span><span data-lang="tr">Türkiye · Bursa</span></div>
     <div class="dmodal-info">
-      <div class="dmodal-row"><span class="dmodal-label">Website</span><span class="dmodal-val"><a href="https://www.cdbank.com.tr" target="_blank">cdbank.com.tr</a></span></div>
       <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val"><span data-lang="en">Flagship · Founder</span><span data-lang="tr">Amiral Gemisi · Kurucu</span></span></div>
       <div class="dmodal-row"><span class="dmodal-label">Speciality</span><span class="dmodal-val">Hi-Fi · Home Cinema · Multiroom</span></div>
     </div>
