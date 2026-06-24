@@ -125,11 +125,14 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .tl-text em{color:var(--bronze);font-style:italic;}
 
 /* names */
-.names-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border);}
-.name-cell{padding:28px 0 28px 24px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
-.name-cell:nth-child(3n){border-right:none;}
-.name-tr{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.18em;color:var(--bronze);display:block;}
-.name-en{font-size:13px;font-weight:300;letter-spacing:.08em;font-style:italic;color:var(--mid);margin-top:4px;}
+.names-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border);}
+.name-cell{padding:28px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;}
+.name-cell:nth-child(4n){border-right:none;}
+.name-cell.founders-child::after{content:'';position:absolute;top:12px;right:12px;width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.6;}
+.name-tr{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.18em;color:var(--bronze);display:block;}
+.name-en{font-size:12px;font-weight:300;letter-spacing:.07em;font-style:italic;color:var(--mid);margin-top:6px;line-height:1.7;}
+.names-note{font-size:11px;letter-spacing:.16em;color:var(--ghost);margin-top:20px;display:flex;align-items:center;gap:10px;}
+.names-note::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.6;flex-shrink:0;}
 
 /* fashion audio */
 .fashion-inner{position:relative;z-index:2;width:100%;max-width:700px;margin-left:auto;padding:140px 80px;text-align:right;}
@@ -415,9 +418,13 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
       <div class="name-cell"><span class="name-tr">RAN</span><span class="name-en"><span data-lang="en">illuminated · light</span><span data-lang="tr">aydınlanmış · ışık</span></span></div>
       <div class="name-cell"><span class="name-tr">HAR</span><span class="name-en"><span data-lang="en">heat · the fire within</span><span data-lang="tr">har · içteki ateş</span></span></div>
       <div class="name-cell"><span class="name-tr">ALMULA</span><span class="name-en"><span data-lang="en">apple · tradition</span><span data-lang="tr">elma · gelenek</span></span></div>
-      <div class="name-cell"><span class="name-tr">LARA</span><span class="name-en"><span data-lang="en">lara · grace & presence</span><span data-lang="tr">lara · zariflik ve varoluş</span></span></div>
-      <div class="name-cell"><span class="name-tr">ALİ</span><span class="name-en"><span data-lang="en">ali · noble, elevated</span><span data-lang="tr">ali · yüce, soylu</span></span></div>
+      <div class="name-cell founders-child"><span class="name-tr">LARA</span><span class="name-en"><span data-lang="en">water fairy · woman of the citadel</span><span data-lang="tr">su perisi · kalenin kadını</span></span></div>
+      <div class="name-cell founders-child"><span class="name-tr">ALİ</span><span class="name-en"><span data-lang="en">high · exalted · sublime</span><span data-lang="tr">yüce · ulu · soylu</span></span></div>
     </div>
+    <p class="names-note reveal" data-delay="4">
+      <span data-lang="en">LARA & ALİ are also the names of the founders' children</span>
+      <span data-lang="tr">LARA & ALİ aynı zamanda kurucuların çocuklarının isimleri</span>
+    </p>
   </div>
 </section>
 
