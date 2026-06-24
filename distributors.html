@@ -89,16 +89,33 @@ footer p{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(
 footer a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s;}
 footer a:hover{color:var(--bronze);}
 
+/* dist modal */
+.dmodal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;}
+.dmodal.open{opacity:1;pointer-events:all;}
+.dmodal-bg{position:absolute;inset:0;background:rgba(7,6,4,.88);backdrop-filter:blur(12px);}
+.dmodal-box{position:relative;z-index:2;max-width:560px;width:90%;background:#0D0B09;border:1px solid var(--border);padding:52px 48px;}
+.dmodal-close{position:absolute;top:18px;right:20px;background:none;border:none;color:var(--mid);font-size:22px;cursor:pointer;line-height:1;transition:color .2s;}
+.dmodal-close:hover{color:var(--cream);}
+.dmodal-num{font-size:10px;letter-spacing:.24em;color:var(--ghost);margin-bottom:16px;}
+.dmodal-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,48px);letter-spacing:.12em;color:var(--cream);line-height:1;margin-bottom:8px;}
+.dmodal-country{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:28px;}
+.dmodal-info{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.dmodal-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border);}
+.dmodal-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);}
+.dmodal-val{font-size:13px;font-weight:300;color:var(--cream);text-align:right;}
+.dmodal-val a{color:var(--cream);text-decoration:none;transition:color .2s;}
+.dmodal-val a:hover{color:var(--bronze);}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;}
 .reveal.done{opacity:1;transform:translateY(0);}
 
 /* leaflet overrides */
-.leaflet-container{background:#0B0907!important;}
-.leaflet-tile{filter:brightness(.55) saturate(.3) sepia(.4);}
-.once-popup .leaflet-popup-content-wrapper{background:#0D0B09;border:1px solid #2A2520;border-radius:0;box-shadow:none;padding:0;}
-.once-popup .leaflet-popup-content{margin:14px 18px;}
-.once-popup .leaflet-popup-tip{background:#0D0B09;}
+.leaflet-container{background:#080604!important;}
+.once-popup .leaflet-popup-content-wrapper{background:#0D0B09;border:1px solid rgba(176,136,88,.3);border-radius:0;box-shadow:0 8px 32px rgba(0,0,0,.8);padding:0;}
+.once-popup .leaflet-popup-content{margin:16px 20px;}
+.once-popup .leaflet-popup-tip-container{display:none;}
+.dist-card.highlight{background:rgba(176,136,88,.08);outline:1px solid rgba(176,136,88,.3);}
 
 [data-lang]{display:none;}
 body.en [data-lang="en"]{display:inline;}
@@ -147,7 +164,7 @@ body.tr [data-lang="tr"]{display:inline;}
   </div>
   <div class="dist-grid">
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-cdbank" onclick="openDist('cdbank')" style="cursor:pointer;">
       <div class="dist-num">01</div>
       <div class="dist-name">CDBANK</div>
       <div class="dist-country"><span data-lang="en">Turkey</span><span data-lang="tr">Türkiye</span></div>
@@ -155,7 +172,7 @@ body.tr [data-lang="tr"]{display:inline;}
       <div class="dist-tag"><span data-lang="en">Flagship</span><span data-lang="tr">Amiral Gemisi</span></div>
     </div>
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-audio-reference" onclick="openDist('audio-reference')" style="cursor:pointer;">
       <div class="dist-num">02</div>
       <div class="dist-name">Audio Reference</div>
       <div class="dist-country"><span data-lang="en">Germany</span><span data-lang="tr">Almanya</span></div>
@@ -163,7 +180,7 @@ body.tr [data-lang="tr"]{display:inline;}
       <div class="dist-tag"><span data-lang="en">High-End Audio</span><span data-lang="tr">High-End Audio</span></div>
     </div>
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-soundquo" onclick="openDist('soundquo')" style="cursor:pointer;">
       <div class="dist-num">03</div>
       <div class="dist-name">SoundQuo</div>
       <div class="dist-country"><span data-lang="en">Spain</span><span data-lang="tr">İspanya</span></div>
@@ -171,7 +188,7 @@ body.tr [data-lang="tr"]{display:inline;}
       <div class="dist-tag"><span data-lang="en">High-End Audio</span><span data-lang="tr">High-End Audio</span></div>
     </div>
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-luxury-group" onclick="openDist('luxury-group')" style="cursor:pointer;">
       <div class="dist-num">04</div>
       <div class="dist-name">Luxury Group</div>
       <div class="dist-country"><span data-lang="en">Italy</span><span data-lang="tr">İtalya</span></div>
@@ -179,7 +196,7 @@ body.tr [data-lang="tr"]{display:inline;}
       <div class="dist-tag"><span data-lang="en">Luxury & Design</span><span data-lang="tr">Lüks & Tasarım</span></div>
     </div>
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-js-audio" onclick="openDist('js-audio')" style="cursor:pointer;">
       <div class="dist-num">05</div>
       <div class="dist-name">JS Audio</div>
       <div class="dist-country"><span data-lang="en">United States</span><span data-lang="tr">Amerika</span></div>
@@ -187,7 +204,7 @@ body.tr [data-lang="tr"]{display:inline;}
       <div class="dist-tag"><span data-lang="en">High-End Audio</span><span data-lang="tr">High-End Audio</span></div>
     </div>
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-heis" onclick="openDist('heis')" style="cursor:pointer;">
       <div class="dist-num">06</div>
       <div class="dist-name">Heis</div>
       <div class="dist-country"><span data-lang="en">South Korea</span><span data-lang="tr">Güney Kore</span></div>
@@ -195,7 +212,7 @@ body.tr [data-lang="tr"]{display:inline;}
       <div class="dist-tag"><span data-lang="en">High-End Audio</span><span data-lang="tr">High-End Audio</span></div>
     </div>
 
-    <div class="dist-card reveal">
+    <div class="dist-card reveal" id="card-rich-theatre" onclick="openDist('rich-theatre')" style="cursor:pointer;">
       <div class="dist-num">07</div>
       <div class="dist-name">Rich Theatre</div>
       <div class="dist-country"><span data-lang="en">China</span><span data-lang="tr">Çin</span></div>
@@ -238,6 +255,106 @@ body.tr [data-lang="tr"]{display:inline;}
   </div>
 </section>
 
+<!-- DISTRIBUTOR MODALS -->
+<div class="dmodal" id="modal-cdbank" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">01</div>
+    <div class="dmodal-name">CDBANK</div>
+    <div class="dmodal-country"><span data-lang="en">Turkey · Bursa</span><span data-lang="tr">Türkiye · Bursa</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Website</span><span class="dmodal-val"><a href="https://www.cdbank.com.tr" target="_blank">cdbank.com.tr</a></span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val"><span data-lang="en">Flagship · Founder</span><span data-lang="tr">Amiral Gemisi · Kurucu</span></span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Speciality</span><span class="dmodal-val">Hi-Fi · Home Cinema · Multiroom</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dmodal" id="modal-audio-reference" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">02</div>
+    <div class="dmodal-name">Audio Reference</div>
+    <div class="dmodal-country"><span data-lang="en">Germany · Berlin</span><span data-lang="tr">Almanya · Berlin</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val">High-End Audio</span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Region</span><span class="dmodal-val">DACH</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dmodal" id="modal-soundquo" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">03</div>
+    <div class="dmodal-name">SoundQuo</div>
+    <div class="dmodal-country"><span data-lang="en">Spain · Madrid</span><span data-lang="tr">İspanya · Madrid</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val">High-End Audio</span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Region</span><span class="dmodal-val">Iberia</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dmodal" id="modal-luxury-group" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">04</div>
+    <div class="dmodal-name">Luxury Group</div>
+    <div class="dmodal-country"><span data-lang="en">Italy · Rome</span><span data-lang="tr">İtalya · Roma</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val">Luxury & Design</span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Region</span><span class="dmodal-val">Italy</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dmodal" id="modal-js-audio" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">05</div>
+    <div class="dmodal-name">JS Audio</div>
+    <div class="dmodal-country"><span data-lang="en">United States · New York</span><span data-lang="tr">Amerika · New York</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val">High-End Audio</span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Region</span><span class="dmodal-val">North America</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dmodal" id="modal-heis" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">06</div>
+    <div class="dmodal-name">Heis</div>
+    <div class="dmodal-country"><span data-lang="en">South Korea · Seoul</span><span data-lang="tr">Güney Kore · Seul</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val">High-End Audio</span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Region</span><span class="dmodal-val">East Asia</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dmodal" id="modal-rich-theatre" onclick="if(event.target===this||event.target.classList.contains('dmodal-bg'))closeDist()">
+  <div class="dmodal-bg"></div>
+  <div class="dmodal-box">
+    <button class="dmodal-close" onclick="closeDist()">✕</button>
+    <div class="dmodal-num">07</div>
+    <div class="dmodal-name">Rich Theatre</div>
+    <div class="dmodal-country"><span data-lang="en">China · Shanghai</span><span data-lang="tr">Çin · Şangay</span></div>
+    <div class="dmodal-info">
+      <div class="dmodal-row"><span class="dmodal-label">Type</span><span class="dmodal-val">Home Theatre</span></div>
+      <div class="dmodal-row"><span class="dmodal-label">Region</span><span class="dmodal-val">China</span></div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>© 2025 Once Custom Sound</p>
@@ -267,6 +384,16 @@ window.addEventListener('scroll',function(){
   document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);
 });
 
+function openDist(id){
+  document.getElementById('modal-'+id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDist(){
+  document.querySelectorAll('.dmodal').forEach(function(m){m.classList.remove('open');});
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDist();});
+
 function observe(){
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -281,34 +408,39 @@ function observe(){
 // Map
 window.addEventListener('load',function(){
   var map=L.map('distMap',{
-    center:[30,15],zoom:2,
+    center:[25,18],zoom:2,
     zoomControl:false,attributionControl:false,
-    scrollWheelZoom:false,dragging:false,doubleClickZoom:false
+    scrollWheelZoom:false,dragging:true,doubleClickZoom:false
   });
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-  var pinIcon=L.divIcon({
-    html:'<div style="width:8px;height:8px;background:#B08858;border-radius:50%;border:1px solid rgba(176,136,88,.4);box-shadow:0 0 12px rgba(176,136,88,.5);"></div>',
-    iconSize:[8,8],iconAnchor:[4,4],popupAnchor:[0,-8],className:''
-  });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
   var distributors=[
-    {name:'CDBANK',         country:'Turkey',      city:'Bursa',    lat:40.2,  lng:29.0},
-    {name:'Audio Reference',country:'Germany',     city:'Berlin',   lat:52.5,  lng:13.4},
-    {name:'SoundQuo',       country:'Spain',       city:'Madrid',   lat:40.4,  lng:-3.7},
-    {name:'Luxury Group',   country:'Italy',       city:'Rome',     lat:41.9,  lng:12.5},
-    {name:'JS Audio',       country:'USA',         city:'New York', lat:40.7,  lng:-74.0},
-    {name:'Heis',           country:'South Korea', city:'Seoul',    lat:37.5,  lng:127.0},
-    {name:'Rich Theatre',   country:'China',       city:'Shanghai', lat:31.2,  lng:121.5}
+    {name:'CDBANK',         country:'Turkey',      city:'Bursa',     lat:40.2,  lng:29.0,  id:'card-cdbank'},
+    {name:'Audio Reference',country:'Germany',     city:'Berlin',    lat:52.5,  lng:13.4,  id:'card-audio-reference'},
+    {name:'SoundQuo',       country:'Spain',       city:'Madrid',    lat:40.4,  lng:-3.7,  id:'card-soundquo'},
+    {name:'Luxury Group',   country:'Italy',       city:'Rome',      lat:41.9,  lng:12.5,  id:'card-luxury-group'},
+    {name:'JS Audio',       country:'USA',         city:'New York',  lat:40.7,  lng:-74.0, id:'card-js-audio'},
+    {name:'Heis',           country:'South Korea', city:'Seoul',     lat:37.5,  lng:127.0, id:'card-heis'},
+    {name:'Rich Theatre',   country:'China',       city:'Shanghai',  lat:31.2,  lng:121.5, id:'card-rich-theatre'}
   ];
 
   distributors.forEach(function(d){
-    L.marker([d.lat,d.lng],{icon:pinIcon}).addTo(map)
-      .bindPopup(
-        '<div style="font-family:Bebas Neue,sans-serif;font-size:15px;letter-spacing:.15em;color:#EDE4D5;">'+d.name+'</div>'+
-        '<div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#B08858;margin-top:2px;">'+d.city+', '+d.country+'</div>',
-        {className:'once-popup'}
-      );
+    var pinHtml='<div style="width:14px;height:14px;background:#B08858;border-radius:50%;border:2px solid rgba(237,228,213,.5);box-shadow:0 0 0 4px rgba(176,136,88,.2),0 0 20px rgba(176,136,88,.6);cursor:pointer;transition:transform .2s;"></div>';
+    var icon=L.divIcon({html:pinHtml,iconSize:[14,14],iconAnchor:[7,7],className:''});
+    var marker=L.marker([d.lat,d.lng],{icon:icon}).addTo(map);
+
+    marker.on('click',function(){
+      // scroll to card
+      var card=document.getElementById(d.id);
+      if(card){
+        card.scrollIntoView({behavior:'smooth',block:'center'});
+        document.querySelectorAll('.dist-card').forEach(function(c){c.classList.remove('highlight');});
+        card.classList.add('highlight');
+        setTimeout(function(){card.classList.remove('highlight');},2000);
+      }
+      // open modal
+      openDist(d.id.replace('card-',''));
+    });
   });
 });
 </script>
