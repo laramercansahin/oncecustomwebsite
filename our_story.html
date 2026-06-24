@@ -12,7 +12,7 @@
   --border:#2A2520;
   --bronze:#B08858;
   --cream:#EDE4D5;
-  --mid:#B8AFA4;
+  --mid:#C8BFB4;
   --ghost:#3A3328;
 }
 html{scroll-behavior:smooth;}
@@ -35,18 +35,21 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
 .bar-lang button.active{color:var(--cream);}
 
-/* PANEL — full-screen scroll sections */
+/* PANEL */
 .panel{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
 .panel-bg{position:absolute;inset:0;background:#060503;}
-.panel-bg img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(20%);}
-.panel-bg video{width:100%;height:100%;object-fit:cover;display:block;}
+.panel-bg img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* overlay variants */
 .ov-dark{position:absolute;inset:0;background:rgba(7,6,4,.72);}
-.ov-left{position:absolute;inset:0;background:linear-gradient(to right,rgba(7,6,4,.92) 40%,rgba(7,6,4,.2) 100%);}
-.ov-right{position:absolute;inset:0;background:linear-gradient(to left,rgba(7,6,4,.92) 40%,rgba(7,6,4,.2) 100%);}
-.ov-bottom{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,6,4,.2) 0%,rgba(7,6,4,.9) 75%,rgba(7,6,4,1) 100%);}
-.ov-center{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(7,6,4,.3) 0%,rgba(7,6,4,.88) 70%);}
+.ov-left{position:absolute;inset:0;background:linear-gradient(to right,rgba(7,6,4,.95) 40%,rgba(7,6,4,.3) 100%);}
+.ov-right{position:absolute;inset:0;background:linear-gradient(to left,rgba(7,6,4,.95) 40%,rgba(7,6,4,.3) 100%);}
+.ov-bottom{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,6,4,.5) 0%,rgba(7,6,4,.85) 60%,rgba(7,6,4,1) 100%);}
+.ov-center{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(7,6,4,.2) 0%,rgba(7,6,4,.92) 75%);}
+
+/* simple dark bg panels (no photo) */
+.panel-plain{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--black);}
+.panel-plain::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(176,136,88,.06) 0%,transparent 70%);}
 
 /* panel content */
 .pc{position:relative;z-index:2;width:100%;padding:120px 80px 80px;}
@@ -54,7 +57,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .pc-left{max-width:580px;}
 .pc-right{max-width:580px;margin-left:auto;}
 
-/* chapter label */
+/* chapter label — no numbers */
 .ch{font-size:11px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);margin-bottom:20px;display:flex;align-items:center;gap:16px;}
 .ch::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
 
@@ -64,10 +67,10 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .hl-xl{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,130px);letter-spacing:.06em;line-height:.92;color:var(--cream);margin-bottom:36px;}
 .hl-xl em{color:var(--bronze);}
 
-/* body text */
-.bt{font-size:15px;font-weight:300;letter-spacing:.06em;line-height:2.5;color:var(--mid);}
+/* body text — brighter, more readable */
+.bt{font-size:16px;font-weight:300;letter-spacing:.04em;line-height:2.4;color:var(--cream);opacity:.88;}
 .bt p+p{margin-top:20px;}
-.bt em{color:var(--cream);font-style:italic;}
+.bt em{color:var(--bronze);font-style:italic;}
 .bt strong{color:var(--cream);font-weight:400;}
 
 /* founders */
@@ -75,9 +78,9 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .founder-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;color:var(--cream);}
 .founder-role{font-size:12px;font-weight:300;letter-spacing:.14em;color:var(--bronze);text-transform:uppercase;margin-top:4px;}
 
-/* big spaced quote (sunum dili) */
-.spaced{font-family:'Jost',sans-serif;font-size:clamp(14px,1.8vw,22px);font-weight:200;letter-spacing:.22em;line-height:2.8;color:var(--mid);text-align:center;}
-.spaced strong{color:var(--cream);font-weight:300;letter-spacing:.22em;}
+/* big spaced quote */
+.spaced{font-family:'Jost',sans-serif;font-size:clamp(16px,2vw,26px);font-weight:200;letter-spacing:.18em;line-height:2.6;color:var(--cream);text-align:center;opacity:.9;}
+.spaced strong{color:var(--cream);font-weight:400;letter-spacing:.18em;}
 .spaced em{color:var(--bronze);font-style:normal;}
 
 /* divider line */
@@ -85,14 +88,14 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 /* scroll hint */
 .scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.7;}
-.scroll-hint span{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);}
+.scroll-hint span{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mid);}
 .s-line{width:1px;height:44px;background:var(--bronze);animation:pulse 2s ease-in-out infinite;}
 @keyframes pulse{0%,100%{transform:scaleY(1);opacity:.5;}50%{transform:scaleY(.6);opacity:1;}}
 
 /* split panel */
 .split{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
 .split-img{position:relative;overflow:hidden;}
-.split-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(15%);opacity:0.7;transition:transform 8s ease,opacity 1s ease;}
+.split-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7;transition:transform 8s ease,opacity 1s ease;}
 .split-text{padding:120px 72px;display:flex;flex-direction:column;justify-content:center;background:var(--black);border-left:1px solid var(--border);}
 
 /* timeline strip */
@@ -100,15 +103,20 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .tl-item{display:flex;gap:28px;padding:24px 0;border-bottom:1px solid var(--border);}
 .tl-item:first-child{border-top:1px solid var(--border);}
 .tl-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--bronze);min-width:28px;padding-top:2px;}
-.tl-text{font-size:14px;font-weight:300;letter-spacing:.06em;line-height:2;color:var(--mid);}
-.tl-text em{color:var(--cream);font-style:italic;}
+.tl-text{font-size:15px;font-weight:300;letter-spacing:.04em;line-height:2;color:var(--cream);opacity:.85;}
+.tl-text em{color:var(--bronze);font-style:italic;}
 
 /* names */
 .names-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border);}
 .name-cell{padding:28px 0 28px 24px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
 .name-cell:nth-child(3n){border-right:none;}
 .name-tr{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.18em;color:var(--bronze);display:block;}
-.name-en{font-size:12px;font-weight:300;letter-spacing:.1em;font-style:italic;color:var(--ghost);margin-top:4px;}
+.name-en{font-size:13px;font-weight:300;letter-spacing:.08em;font-style:italic;color:var(--mid);margin-top:4px;}
+
+/* fashion audio — quote style section */
+.fashion-section{position:relative;min-height:80vh;display:flex;align-items:center;background:var(--black);border-top:1px solid var(--border);overflow:hidden;}
+.fashion-section::before{content:'FASHION AUDIO';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,200px);letter-spacing:.1em;color:rgba(176,136,88,.05);pointer-events:none;white-space:nowrap;}
+.fashion-inner{position:relative;z-index:2;width:100%;max-width:800px;margin:0 auto;padding:100px 80px;text-align:center;}
 
 /* reveal states */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease;}
@@ -163,13 +171,9 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </header>
 
 <!-- ═══════════════════════════════════════
-     01 — BEFORE EVERYTHING, THERE WAS MUSIC
+     HERO — BEFORE EVERYTHING
 ════════════════════════════════════════ -->
-<section class="panel">
-  <div class="panel-bg">
-    <img src="photos/Once_index_photo.jpg" alt="Once Custom Sound">
-  </div>
-  <div class="ov-bottom"></div>
+<section class="panel-plain" style="min-height:100vh;display:flex;align-items:center;">
   <div class="pc pc-center">
     <p class="spaced reveal" id="hero-spaced">
       <span data-lang="en">
@@ -189,11 +193,6 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
         müzikle başladı
       </span>
     </p>
-    <div class="dline reveal" data-delay="2"></div>
-    <p class="spaced reveal" data-delay="3" style="font-size:clamp(11px,1.2vw,14px);color:var(--ghost);">
-      <span data-lang="en">01 &nbsp;·&nbsp; where it all began</span>
-      <span data-lang="tr">01 &nbsp;·&nbsp; her şeyin başladığı yer</span>
-    </p>
   </div>
   <div class="scroll-hint">
     <div class="s-line"></div>
@@ -202,7 +201,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </section>
 
 <!-- ═══════════════════════════════════════
-     02 — TWO OLD FRIENDS
+     TWO OLD FRIENDS
 ════════════════════════════════════════ -->
 <section class="split">
   <div class="split-img reveal-scale">
@@ -210,7 +209,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(7,6,4,0) 60%,rgba(7,6,4,.7) 100%);"></div>
   </div>
   <div class="split-text">
-    <div class="ch reveal"><span data-lang="en">02 · our story</span><span data-lang="tr">02 · hikayemiz</span></div>
+    <div class="ch reveal"><span data-lang="en">our story</span><span data-lang="tr">hikayemiz</span></div>
     <div class="hl-xl reveal" data-delay="1">
       <span data-lang="en">two old<br><em>friends</em></span>
       <span data-lang="tr">iki eski<br><em>arkadaş</em></span>
@@ -247,17 +246,13 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </section>
 
 <!-- ═══════════════════════════════════════
-     03 — A DIFFERENT QUESTION
+     A DIFFERENT QUESTION — plain bg
 ════════════════════════════════════════ -->
-<section class="panel">
-  <div class="panel-bg">
-    <img src="photos/Nar_Space.jpg" alt="Once Custom">
-  </div>
-  <div class="ov-center"></div>
-  <div class="pc pc-center" style="padding-top:160px;">
+<section class="panel-plain">
+  <div class="pc pc-center" style="padding-top:160px;padding-bottom:160px;">
     <div class="ch reveal" style="justify-content:center;">
-      <span data-lang="en">03 · a different question</span>
-      <span data-lang="tr">03 · farklı bir soru</span>
+      <span data-lang="en">a different question</span>
+      <span data-lang="tr">farklı bir soru</span>
     </div>
     <div class="hl reveal" data-delay="1" style="font-size:clamp(28px,4vw,56px);max-width:760px;margin:0 auto 40px;">
       <span data-lang="en">what if a speaker could <em>participate in music</em> rather than simply reproduce it?</span>
@@ -266,11 +261,11 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
     <div class="lx reveal" data-delay="2" style="max-width:400px;margin:0 auto 40px;">
       <div class="lx-line"></div>
     </div>
-    <div class="bt reveal" data-delay="3" style="max-width:520px;margin:0 auto;text-align:center;">
+    <div class="bt reveal" data-delay="3" style="max-width:540px;margin:0 auto;text-align:center;">
       <p data-lang="en">for almost a century, speakers have been designed around faithful reproduction. playback became the standard. accuracy became the goal. but music itself is not static — and neither are we.</p>
       <p data-lang="tr">neredeyse bir yüzyıl boyunca hoparlörler sadık yeniden üretim üzerine tasarlandı. oynatma standart hale geldi. doğruluk hedef oldu. ancak müziğin kendisi statik değildir — ve biz de öyle değiliz.</p>
     </div>
-    <p class="spaced reveal" data-delay="4" style="margin-top:64px;font-size:clamp(12px,1.4vw,16px);">
+    <p class="spaced reveal" data-delay="4" style="margin-top:64px;font-size:clamp(13px,1.4vw,17px);">
       <span data-lang="en"><em>this is where our philosophy begins</em></span>
       <span data-lang="tr"><em>felsefemiz burada başlar</em></span>
     </p>
@@ -278,7 +273,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </section>
 
 <!-- ═══════════════════════════════════════
-     04 — LEARNING FROM HUMAN NATURE
+     LEARNING FROM NATURE
 ════════════════════════════════════════ -->
 <section class="split" style="direction:rtl;">
   <div class="split-img reveal-scale" style="direction:ltr;">
@@ -286,7 +281,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
     <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(7,6,4,0) 60%,rgba(7,6,4,.7) 100%);"></div>
   </div>
   <div class="split-text" style="direction:ltr;border-left:none;border-right:1px solid var(--border);">
-    <div class="ch reveal"><span data-lang="en">04 · going beyond technology</span><span data-lang="tr">04 · teknolojinin ötesine</span></div>
+    <div class="ch reveal"><span data-lang="en">going beyond technology</span><span data-lang="tr">teknolojinin ötesine</span></div>
     <div class="hl-xl reveal" data-delay="1">
       <span data-lang="en">learning<br>from<br><em>nature</em></span>
       <span data-lang="tr">doğadan<br><em>öğrenmek</em></span>
@@ -301,7 +296,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </section>
 
 <!-- ═══════════════════════════════════════
-     05 — BUILT BY HAND
+     BUILT BY HAND
 ════════════════════════════════════════ -->
 <section class="panel">
   <div class="panel-bg">
@@ -309,7 +304,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   </div>
   <div class="ov-left"></div>
   <div class="pc pc-left" style="padding-top:140px;">
-    <div class="ch reveal"><span data-lang="en">05 · handcrafted</span><span data-lang="tr">05 · el yapımı</span></div>
+    <div class="ch reveal"><span data-lang="en">handcrafted</span><span data-lang="tr">el yapımı</span></div>
     <div class="hl-xl reveal" data-delay="1">
       <span data-lang="en">every piece<br>is built<br><em>by hand</em></span>
       <span data-lang="tr">her parça<br>elle<br><em>üretilir</em></span>
@@ -336,33 +331,32 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </section>
 
 <!-- ═══════════════════════════════════════
-     06 — FASHION AUDIO ERA
+     FASHION AUDIO — plain, typographic
 ════════════════════════════════════════ -->
-<section class="panel">
-  <div class="panel-bg">
-    <img src="photos/Ran_space.jpg" alt="RAN">
-  </div>
-  <div class="ov-right"></div>
-  <div class="pc pc-right" style="padding-top:140px;">
-    <div class="ch reveal"><span data-lang="en">06 · a new language</span><span data-lang="tr">06 · yeni bir dil</span></div>
-    <div class="hl-xl reveal" data-delay="1">
-      <span data-lang="en"><em>fashion</em><br>audio<br>era begins</span>
-      <span data-lang="tr"><em>fashion</em><br>audio<br>dönemi başlar</span>
+<section class="fashion-section">
+  <div class="fashion-inner">
+    <div class="ch reveal" style="justify-content:center;margin-bottom:32px;">
+      <span data-lang="en">a new language</span>
+      <span data-lang="tr">yeni bir dil</span>
     </div>
-    <div class="bt reveal" data-delay="2" style="max-width:440px;">
-      <p data-lang="en">as our speakers evolved, something else began to emerge. once sound becomes physical, visible, and part of how a space is experienced — it naturally enters the language of art, design, architecture and fashion.</p>
-      <p data-lang="tr">hoparlörlerimiz geliştikçe başka bir şey de ortaya çıkmaya başladı. ses fiziksel, görünür ve bir mekânın deneyimlenme biçiminin parçası haline geldiğinde — doğal olarak sanat, tasarım, mimari ve moda diline giriyor.</p>
-      <p data-lang="en">it is not a speaker that reproduces music. <em>it is an artwork that breathes life into music.</em></p>
-      <p data-lang="tr">bu müziği yeniden üreten bir hoparlör değil. <em>müziğe hayat veren bir sanat eseridir.</em></p>
+    <div class="hl-xl reveal" data-delay="1" style="text-align:center;margin-bottom:48px;">
+      <span data-lang="en"><em>fashion</em><br>audio</span>
+      <span data-lang="tr"><em>fashion</em><br>audio</span>
+    </div>
+    <div class="bt reveal" data-delay="2" style="text-align:center;">
+      <p data-lang="en">once sound becomes physical, visible, and part of how a space is experienced — it naturally enters the language of art, design, architecture and fashion.</p>
+      <p data-lang="tr">ses fiziksel, görünür ve bir mekânın deneyimlenme biçiminin parçası haline geldiğinde — doğal olarak sanat, tasarım, mimari ve moda diline giriyor.</p>
+      <p data-lang="en" style="margin-top:32px;font-style:italic;color:var(--bronze);opacity:1;">it is not a speaker that reproduces music. it is an artwork that breathes life into music.</p>
+      <p data-lang="tr" style="margin-top:32px;font-style:italic;color:var(--bronze);opacity:1;">bu müziği yeniden üreten bir hoparlör değil. müziğe hayat veren bir sanat eseridir.</p>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════
-     07 — THE NAMES
+     THE NAMES
 ════════════════════════════════════════ -->
 <section style="background:var(--black);padding:120px 80px;border-top:1px solid var(--border);">
-  <div class="ch reveal"><span data-lang="en">07 · the names</span><span data-lang="tr">07 · isimler</span></div>
+  <div class="ch reveal"><span data-lang="en">the names</span><span data-lang="tr">isimler</span></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start;">
     <div>
       <div class="hl reveal" data-delay="1">
@@ -394,12 +388,12 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   </div>
   <div class="ov-dark"></div>
   <div class="pc pc-center">
-    <p class="spaced reveal" style="font-size:clamp(16px,2.5vw,30px);">
+    <p class="spaced reveal" style="font-size:clamp(18px,2.5vw,32px);">
       <span data-lang="en"><em>only music can fill the void in our souls</em></span>
       <span data-lang="tr"><em>ruhumuzun boşluğunu yalnızca müzik doldurabilir</em></span>
     </p>
     <div class="dline reveal" data-delay="2"></div>
-    <a href="index.html" class="reveal" data-delay="3" style="font-size:12px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);text-decoration:none;display:inline-flex;align-items:center;gap:14px;transition:gap .2s;" onmouseover="this.style.gap='22px'" onmouseout="this.style.gap='14px'">
+    <a href="speakers.html" class="reveal" data-delay="3" style="font-size:12px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);text-decoration:none;display:inline-flex;align-items:center;gap:14px;transition:gap .2s;" onmouseover="this.style.gap='22px'" onmouseout="this.style.gap='14px'">
       <span data-lang="en">Explore the Collection</span>
       <span data-lang="tr">Koleksiyonu Keşfet</span>
       <span>→</span>
@@ -408,7 +402,6 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 </section>
 
 <script>
-// lang
 function setLang(l){
   document.body.className=l;
   document.getElementById('btnEN').classList.toggle('active',l==='en');
@@ -417,7 +410,6 @@ function setLang(l){
 }
 setLang(localStorage.getItem('once_lang')||'en');
 
-// loader
 window.addEventListener('DOMContentLoaded',function(){
   var img=document.getElementById('loaderImg');
   var bar=document.getElementById('loaderBar');
@@ -430,12 +422,10 @@ window.addEventListener('DOMContentLoaded',function(){
   },1700);
 });
 
-// topbar
 window.addEventListener('scroll',function(){
   document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);
 });
 
-// parallax on panel bgs
 window.addEventListener('scroll',function(){
   var panels=document.querySelectorAll('.panel');
   panels.forEach(function(p){
@@ -449,7 +439,6 @@ window.addEventListener('scroll',function(){
   });
 });
 
-// reveal on scroll
 function observe(){
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -465,7 +454,6 @@ function observe(){
   document.querySelectorAll('.lx-line').forEach(function(el){
     io.observe(el);
   });
-  // force trigger anything already in viewport
   setTimeout(function(){
     document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){
       var r=el.getBoundingClientRect();
