@@ -40,6 +40,34 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .ph-right{max-width:340px;padding-bottom:6px;}
 .ph-desc{font-size:13px;font-weight:300;letter-spacing:.03em;line-height:1.9;color:var(--cream);opacity:.55;}
 
+/* FEATURED */
+.featured{
+  position:relative;height:500px;overflow:hidden;
+  cursor:pointer;border-bottom:1px solid var(--border);
+}
+.featured img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:brightness(.55);
+  transition:transform 7s ease,filter .5s ease;
+}
+.featured:hover img{transform:scale(1.03);filter:brightness(.45);}
+.featured:hover .feat-arrow{opacity:1;transform:translateX(6px);}
+.feat-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(7,6,4,.92) 0%,rgba(7,6,4,.3) 50%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:56px 80px;
+}
+.feat-meta{display:flex;align-items:center;gap:24px;margin-bottom:16px;}
+.feat-badge{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);background:rgba(176,136,88,.12);border:1px solid rgba(176,136,88,.3);padding:4px 12px;}
+.feat-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);}
+.feat-title{font-family:'Jost',sans-serif;font-size:clamp(22px,3vw,40px);font-weight:300;letter-spacing:.02em;line-height:1.2;color:var(--cream);max-width:720px;margin-bottom:14px;}
+.feat-title em{color:var(--bronze);font-style:normal;}
+.feat-excerpt{font-size:13px;font-weight:300;letter-spacing:.03em;line-height:1.8;color:var(--cream);opacity:.55;max-width:580px;margin-bottom:20px;}
+.feat-footer{display:flex;align-items:center;gap:16px;}
+.feat-date{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);}
+.feat-arrow{font-size:13px;color:var(--bronze);opacity:0;transition:opacity .3s,transform .3s;}
+
 /* NEWS LIST */
 .news-list{padding:0 80px;}
 
@@ -123,18 +151,22 @@ body.tr [data-lang="tr"]{display:inline;}
   </div>
 </header>
 
+<!-- FEATURED -->
+<article class="featured reveal" onclick="location.href='news-munich.html'">
+  <img src="photos/Ran_Space_2.jpg" alt="Munich High End">
+  <div class="feat-overlay">
+    <div class="feat-meta">
+      <span class="feat-badge"><span data-lang="en">Featured</span><span data-lang="tr">Öne Çıkan</span></span>
+      <span class="feat-label"><span data-lang="en">Fair · Munich · 2024</span><span data-lang="tr">Fuar · Münih · 2024</span></span>
+    </div>
+    <h2 class="feat-title"><span data-lang="en">Munich High End 2024 — ten years on the <em>world stage</em></span><span data-lang="tr">Munich High End 2024 — dünya sahnesinde <em>on yıl</em></span></h2>
+    <p class="feat-excerpt"><span data-lang="en">Since 2015, Once Custom Sound has been a regular presence at the world's most prestigious high-end audio fair. Each year the stand grows quieter, more deliberate — letting the objects speak for themselves.</span><span data-lang="tr">2015'ten bu yana Once Custom Sound, dünyanın en prestijli high-end audio fuarında düzenli olarak yer alıyor.</span></p>
+    <div class="feat-footer"><span class="feat-date">May 2024</span><span class="feat-arrow">→</span></div>
+  </div>
+</article>
+
 <!-- NEWS LIST -->
 <div class="news-list">
-
-  <div class="news-item reveal" onclick="location.href='news-munich.html'">
-    <div class="ni-img"><img src="photos/Ran_Space_2.jpg" alt="Munich High End"></div>
-    <div class="ni-body">
-      <span class="ni-tag"><span data-lang="en">Fair · Munich · 2024</span><span data-lang="tr">Fuar · Münih · 2024</span></span>
-      <h2 class="ni-title"><span data-lang="en">Munich High End 2024 — ten years on the <em>world stage</em></span><span data-lang="tr">Munich High End 2024 — dünya sahnesinde <em>on yıl</em></span></h2>
-      <p class="ni-excerpt"><span data-lang="en">Since 2015, Once Custom Sound has been a regular presence at the world's most prestigious high-end audio fair. Each year the stand grows quieter, more deliberate — letting the objects speak for themselves.</span><span data-lang="tr">2015'ten bu yana Once Custom Sound, dünyanın en prestijli high-end audio fuarında düzenli olarak yer alıyor.</span></p>
-      <div class="ni-footer"><span class="ni-date">May 2024</span><span class="ni-arrow">→</span></div>
-    </div>
-  </div>
 
   <div class="news-item reveal" onclick="location.href='news-lamborghini.html'">
     <div class="ni-img"><img src="photos/Nar_Space.jpg" alt="Lamborghini"></div>
