@@ -11,7 +11,7 @@
   --black:  #070604;
   --card:   #0D0B09;
   --border: #2A2520;
-  --bronze: #C4922A;
+  --bronze: #9B7340;
   --cream:  #EDE4D5;
   --mid:    #B8AFA4;
   --ghost:  #504840;
@@ -164,7 +164,7 @@ body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-
 /* ─── MAP ─── */
 .once-popup .leaflet-popup-content-wrapper {
   background: #0A0806 !important;
-  border: 1px solid #C4922A !important;
+  border: 1px solid #9B7340 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   color: #EDE4D5 !important;
@@ -472,7 +472,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 
     var pinIcon = L.divIcon({
       className: '',
-      html: '<div style="width:12px;height:12px;background:#C4922A;border-radius:50%;border:2px solid rgba(255,255,255,0.3);box-shadow:0 0 0 5px rgba(176,136,88,0.2);"></div>',
+      html: '<div style="width:12px;height:12px;background:#9B7340;border-radius:50%;border:2px solid rgba(255,255,255,0.3);box-shadow:0 0 0 5px rgba(176,136,88,0.2);"></div>',
       iconSize: [12,12], iconAnchor: [6,6], popupAnchor: [0,-10]
     });
 
@@ -491,7 +491,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         .addTo(map)
         .bindPopup(
           '<div style="font-family:Bebas Neue,sans-serif;font-size:15px;letter-spacing:.15em;color:#EDE4D5;">' + d.name + '</div>' +
-          '<div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#C4922A;margin-top:2px;">' + d.country + '</div>',
+          '<div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#9B7340;margin-top:2px;">' + d.country + '</div>',
           { className: 'once-popup' }
         );
     });
