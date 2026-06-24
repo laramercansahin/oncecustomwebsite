@@ -18,14 +18,12 @@
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
 
-/* LOADER */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;transition:opacity 0.9s ease,visibility 0.9s ease;}
 #loader.out{opacity:0;visibility:hidden;pointer-events:none;}
 #loader img{height:44px;filter:brightness(0) invert(1);opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
 #loader img.show{opacity:1;transform:translateY(0);}
 #loaderBar{position:absolute;bottom:0;left:0;height:1px;background:var(--bronze);width:0%;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
 
-/* TOPBAR */
 .bar{position:fixed;top:0;left:0;right:0;z-index:200;height:80px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .5s,border-color .5s;}
 .bar.scrolled{background:rgba(7,6,4,.96);border-color:var(--border);backdrop-filter:blur(16px);}
 .bar-back{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
@@ -35,65 +33,77 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
 .bar-lang button.active{color:var(--cream);}
 
-/* HERO */
-.hero{min-height:56vh;display:grid;grid-template-columns:1fr 1fr;align-items:flex-end;gap:80px;padding:160px 80px 100px;border-bottom:1px solid var(--border);position:relative;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(176,136,88,.07) 0%,transparent 60%);}
-.hero-ch{font-size:11px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;}
-.hero-ch::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
-.hero-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);letter-spacing:.06em;line-height:.9;color:var(--cream);position:relative;}
-.hero-hl em{color:var(--bronze);}
-.hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;border-left:1px solid var(--border);padding-left:60px;}
-.hero-sub{font-size:17px;font-weight:300;letter-spacing:.04em;color:var(--cream);line-height:2.2;opacity:.82;}
+/* ── HEADER ── */
+.page-header{padding:160px 80px 0;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(176,136,88,.06) 0%,transparent 60%);}
+.ph-top{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:48px;}
+.ph-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);}
+.ph-count{font-size:11px;letter-spacing:.22em;color:var(--ghost);}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,200px);letter-spacing:.04em;line-height:.85;color:var(--cream);position:relative;}
+.ph-title span{display:block;}
+.ph-title span:last-child{color:var(--bronze);margin-left:clamp(40px,8vw,160px);}
 
-/* FEATURED */
-.featured{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;border-bottom:1px solid var(--border);}
-.feat-img{position:relative;overflow:hidden;}
-.feat-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease;}
-.feat-img:hover img{transform:scale(1.04);}
-.feat-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(7,6,4,.0) 60%,rgba(7,6,4,.6) 100%);}
-.feat-content{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);}
-.feat-tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);margin-bottom:20px;}
-.feat-title{font-family:'Jost',sans-serif;font-size:clamp(24px,3vw,42px);font-weight:200;letter-spacing:.04em;line-height:1.25;color:var(--cream);margin-bottom:28px;}
-.feat-title em{color:var(--bronze);font-style:normal;}
-.feat-body{font-size:15px;font-weight:300;letter-spacing:.04em;line-height:2.2;color:var(--cream);opacity:.75;margin-bottom:40px;}
-.feat-meta{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ghost);margin-bottom:32px;}
-.feat-link{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);text-decoration:none;display:inline-flex;align-items:center;gap:12px;transition:gap .2s;}
-.feat-link:hover{gap:20px;}
+/* ── FLOATING IMAGE ── */
+#floatImg{
+  position:fixed;
+  width:320px;height:420px;
+  pointer-events:none;
+  z-index:100;
+  opacity:0;
+  transition:opacity .4s ease;
+  overflow:hidden;
+  transform:translate(-50%,-50%);
+}
+#floatImg img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.9);}
 
-/* NEWS GRID */
-.news-section{padding:100px 80px;}
-.news-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:28px;}
-.news-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,3vw,40px);letter-spacing:.12em;color:var(--cream);}
+/* ── ARTICLE LIST ── */
+.list-section{position:relative;}
+.list-year{
+  padding:0 80px;
+  border-bottom:1px solid var(--border);
+}
+.year-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:.3em;
+  color:var(--ghost);
+  padding:20px 0 16px;
+  border-bottom:1px solid var(--border);
+}
+.news-row{
+  display:grid;
+  grid-template-columns:80px 140px 1fr 40px;
+  align-items:center;
+  gap:0 32px;
+  padding:28px 0;
+  border-bottom:1px solid rgba(42,37,32,.6);
+  cursor:pointer;
+  transition:background .2s;
+  position:relative;
+}
+.news-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--bronze);opacity:.15;transition:width .4s ease;}
+.news-row:hover::before{width:100%;}
+.news-row:hover .nr-title{color:var(--bronze);}
+.news-row:hover .nr-arrow{opacity:1;transform:translateX(4px);}
+.nr-num{font-size:10px;letter-spacing:.2em;color:var(--ghost);}
+.nr-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);opacity:.7;}
+.nr-title{font-family:'Jost',sans-serif;font-size:clamp(16px,1.8vw,24px);font-weight:300;letter-spacing:.04em;color:var(--cream);transition:color .3s;}
+.nr-arrow{font-size:16px;color:var(--bronze);opacity:0;transition:opacity .3s,transform .3s;justify-self:end;}
 
-.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
-.news-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .25s;position:relative;overflow:hidden;}
-.news-card:nth-child(3n){border-right:none;}
-.news-card:hover{background:rgba(176,136,88,.03);}
-.news-card-img{position:relative;height:240px;overflow:hidden;}
-.news-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease;filter:brightness(.85);}
-.news-card:hover .news-card-img img{transform:scale(1.06);}
-.news-card-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(7,6,4,.7) 100%);}
-.news-card-body{padding:32px 32px 36px;}
-.news-card-tag{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze);margin-bottom:14px;}
-.news-card-title{font-family:'Jost',sans-serif;font-size:clamp(16px,1.6vw,22px);font-weight:300;letter-spacing:.03em;line-height:1.4;color:var(--cream);margin-bottom:14px;}
-.news-card-body p{font-size:13px;font-weight:300;letter-spacing:.04em;line-height:2;color:var(--cream);opacity:.6;margin-bottom:20px;}
-.news-card-date{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ghost);}
-
-/* PRESS STRIP */
-.press-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 80px;}
+/* ── PRESS STRIP ── */
+.press{padding:80px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .press-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ghost);margin-bottom:40px;}
-.press-logos{display:flex;align-items:center;gap:60px;flex-wrap:wrap;}
-.press-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.18em;color:var(--ghost);transition:color .2s;}
-.press-name:hover{color:var(--mid);}
+.press-row{display:flex;gap:0;}
+.press-item{flex:1;padding:32px 0;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px;}
+.press-item:last-child{border-right:none;}
+.press-item-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2vw,28px);letter-spacing:.15em;color:var(--cream);}
+.press-item-type{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);opacity:.6;}
 
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-items:center;justify-content:space-between;}
 footer p{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ghost);}
 footer a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s;}
 footer a:hover{color:var(--bronze);}
 
-/* reveal */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
 .reveal.done{opacity:1;transform:translateY(0);}
 
 [data-lang]{display:none;}
@@ -103,13 +113,11 @@ body.tr [data-lang="tr"]{display:inline;}
 </head>
 <body class="en">
 
-<!-- LOADER -->
 <div id="loader">
   <img id="loaderImg" src="photos/once_logo.png" alt="Once">
   <div id="loaderBar"></div>
 </div>
 
-<!-- TOPBAR -->
 <nav class="bar" id="topbar">
   <a href="index.html" class="bar-back"><span data-lang="en">Home</span><span data-lang="tr">Ana Sayfa</span></a>
   <div class="bar-logo"><img src="photos/once_logo.png" alt="Once Custom Sound"></div>
@@ -119,152 +127,247 @@ body.tr [data-lang="tr"]{display:inline;}
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <div class="hero-ch reveal"><span data-lang="en">latest updates</span><span data-lang="tr">son haberler</span></div>
-    <div class="hero-hl reveal" data-delay="1"><span data-lang="en">News &<br><em>Press</em></span><span data-lang="tr">Haber &<br><em>Basın</em></span></div>
+<!-- FLOATING IMAGE -->
+<div id="floatImg"><img id="floatImgEl" src="" alt=""></div>
+
+<!-- HEADER -->
+<header class="page-header reveal">
+  <div class="ph-top">
+    <span class="ph-label"><span data-lang="en">News & Press</span><span data-lang="tr">Haber & Basın</span></span>
+    <span class="ph-count">06 <span data-lang="en">stories</span><span data-lang="tr">haber</span></span>
   </div>
-  <div class="hero-right reveal" data-delay="2">
-    <p class="hero-sub">
-      <span data-lang="en">From international fairs to film placements and brand collaborations — the story of Once Custom Sound continues to unfold.</span>
-      <span data-lang="tr">Uluslararası fuarlardan film yerleşimlerine ve marka iş birliklerine kadar — Once Custom Sound'un hikayesi gelişmeye devam ediyor.</span>
-    </p>
+  <div class="ph-title">
+    <span><span data-lang="en">NEWS</span><span data-lang="tr">HABERLER</span></span>
+    <span><span data-lang="en">& PRESS</span><span data-lang="tr">& BASIN</span></span>
   </div>
-</section>
+</header>
 
-<!-- FEATURED -->
-<article class="featured reveal">
-  <div class="feat-img">
-    <img src="photos/Ran_Space_2.jpg" alt="Munich High End 2024">
-    <div class="feat-img-overlay"></div>
+<!-- ARTICLE LIST -->
+<div class="list-section">
+
+  <div class="list-year reveal">
+    <div class="year-label">2024</div>
+    <div class="news-row"
+      data-img="photos/Ran_Space_2.jpg"
+      onclick="openStory('munich')">
+      <span class="nr-num">01</span>
+      <span class="nr-tag"><span data-lang="en">Fair</span><span data-lang="tr">Fuar</span></span>
+      <span class="nr-title"><span data-lang="en">Munich High End 2024 — ten years on the world stage</span><span data-lang="tr">Munich High End 2024 — dünya sahnesinde on yıl</span></span>
+      <span class="nr-arrow">→</span>
+    </div>
+    <div class="news-row"
+      data-img="photos/Almula_Space.jpg"
+      onclick="openStory('almula')">
+      <span class="nr-num">02</span>
+      <span class="nr-tag"><span data-lang="en">New Model</span><span data-lang="tr">Yeni Model</span></span>
+      <span class="nr-title"><span data-lang="en">Introducing ALMULA — the newest voice in the collection</span><span data-lang="tr">ALMULA tanıtımı — koleksiyonun en yeni sesi</span></span>
+      <span class="nr-arrow">→</span>
+    </div>
+    <div class="news-row"
+      data-img="photos/halit_said.jpg"
+      onclick="openStory('anniversary')">
+      <span class="nr-num">03</span>
+      <span class="nr-tag"><span data-lang="en">Milestone</span><span data-lang="tr">Kilometre Taşı</span></span>
+      <span class="nr-title"><span data-lang="en">Once Custom Sound turns 12 — a decade of handcrafted audio</span><span data-lang="tr">Once Custom Sound 12 yaşında — el yapımı sesin bir on yılı</span></span>
+      <span class="nr-arrow">→</span>
+    </div>
   </div>
-  <div class="feat-content">
-    <div class="feat-tag"><span data-lang="en">Fair · Munich</span><span data-lang="tr">Fuar · Münih</span></div>
-    <h2 class="feat-title">
-      <span data-lang="en">Munich High End 2024 — <em>ten years</em> on the world stage</span>
-      <span data-lang="tr">Munich High End 2024 — dünya sahnesinde <em>on yıl</em></span>
-    </h2>
-    <p class="feat-body">
-      <span data-lang="en">Since 2015, Once Custom Sound has been a regular presence at the world's most prestigious high-end audio fair. Each year the stand grows quieter, more deliberate — letting the objects speak for themselves.</span>
-      <span data-lang="tr">2015'ten bu yana Once Custom Sound, dünyanın en prestijli high-end audio fuarında düzenli olarak yer alıyor. Her yıl stand biraz daha sade, biraz daha kararlı bir hal alıyor — nesnelerin kendi adına konuşmasına izin veriyor.</span>
-    </p>
-    <div class="feat-meta"><span data-lang="en">May 2024 · Munich, Germany</span><span data-lang="tr">Mayıs 2024 · Münih, Almanya</span></div>
+
+  <div class="list-year reveal">
+    <div class="year-label">2022</div>
+    <div class="news-row"
+      data-img="photos/Nar_Space.jpg"
+      onclick="openStory('lamborghini')">
+      <span class="nr-num">04</span>
+      <span class="nr-tag"><span data-lang="en">Collaboration</span><span data-lang="tr">İş Birliği</span></span>
+      <span class="nr-title"><span data-lang="en">Lamborghini × MV Agusta × Once Custom Sound</span><span data-lang="tr">Lamborghini × MV Agusta × Once Custom Sound</span></span>
+      <span class="nr-arrow">→</span>
+    </div>
   </div>
-</article>
 
-<!-- NEWS GRID -->
-<section class="news-section">
-  <div class="news-header reveal">
-    <div class="news-title"><span data-lang="en">All Stories</span><span data-lang="tr">Tüm Haberler</span></div>
+  <div class="list-year reveal">
+    <div class="year-label">2021</div>
+    <div class="news-row"
+      data-img="photos/By_hand.jpg"
+      onclick="openStory('warnerbros')">
+      <span class="nr-num">05</span>
+      <span class="nr-tag"><span data-lang="en">Film</span><span data-lang="tr">Film</span></span>
+      <span class="nr-title"><span data-lang="en">Once Custom Sound in the Warner Bros. Tom & Jerry film</span><span data-lang="tr">Once Custom Sound, Warner Bros. Tom & Jerry filminde</span></span>
+      <span class="nr-arrow">→</span>
+    </div>
   </div>
-  <div class="news-grid">
 
-    <article class="news-card reveal">
-      <div class="news-card-img">
-        <img src="photos/By_hand.jpg" alt="Tom & Jerry">
-        <div class="news-card-img-overlay"></div>
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-tag"><span data-lang="en">Film · Warner Bros.</span><span data-lang="tr">Film · Warner Bros.</span></div>
-        <h3 class="news-card-title"><span data-lang="en">Once Custom Sound in the Warner Bros. Tom & Jerry film</span><span data-lang="tr">Once Custom Sound, Warner Bros. Tom & Jerry filminde</span></h3>
-        <p><span data-lang="en">Our speakers made their silver screen debut — placed within a key scene of the iconic Warner Bros. production.</span><span data-lang="tr">Hoparlörlerimiz beyaz perdeye çıktı — ikonik Warner Bros. yapımının önemli bir sahnesinde yer aldı.</span></p>
-        <div class="news-card-date">2021</div>
-      </div>
-    </article>
-
-    <article class="news-card reveal">
-      <div class="news-card-img">
-        <img src="photos/Nar_Space.jpg" alt="Lamborghini MV Agusta">
-        <div class="news-card-img-overlay"></div>
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-tag"><span data-lang="en">Collaboration</span><span data-lang="tr">İş Birliği</span></div>
-        <h3 class="news-card-title"><span data-lang="en">Lamborghini × MV Agusta × Once Custom Sound</span><span data-lang="tr">Lamborghini × MV Agusta × Once Custom Sound</span></h3>
-        <p><span data-lang="en">A meeting of precision engineering and sculptural sound design — Once Custom Sound as part of a select brand collaboration.</span><span data-lang="tr">Hassas mühendislik ile heykelsi ses tasarımının buluşması — seçkin bir marka iş birliğinin parçası olarak Once Custom Sound.</span></p>
-        <div class="news-card-date">2022</div>
-      </div>
-    </article>
-
-    <article class="news-card reveal">
-      <div class="news-card-img">
-        <img src="photos/halit_said.jpg" alt="Once Custom Sound Founded">
-        <div class="news-card-img-overlay"></div>
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-tag"><span data-lang="en">Milestone</span><span data-lang="tr">Kilometre Taşı</span></div>
-        <h3 class="news-card-title"><span data-lang="en">Once Custom Sound turns 12 — a decade of handcrafted audio</span><span data-lang="tr">Once Custom Sound 12 yaşında — el yapımı sesin bir on yılı</span></h3>
-        <p><span data-lang="en">Founded in Bursa in 2012 by Halit Ergenç and Mustafa Said Şahin, Once Custom Sound has grown from a shared obsession into a globally recognised name in high-end audio.</span><span data-lang="tr">2012'de Bursa'da Halit Ergenç ve Mustafa Said Şahin tarafından kurulan Once Custom Sound, ortak bir tutkudan high-end audio alanında dünya genelinde tanınan bir isme dönüştü.</span></p>
-        <div class="news-card-date">2024</div>
-      </div>
-    </article>
-
-    <article class="news-card reveal">
-      <div class="news-card-img">
-        <img src="photos/Almula_Space.jpg" alt="New Model Almula">
-        <div class="news-card-img-overlay"></div>
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-tag"><span data-lang="en">New Model</span><span data-lang="tr">Yeni Model</span></div>
-        <h3 class="news-card-title"><span data-lang="en">Introducing ALMULA — the newest voice in the collection</span><span data-lang="tr">ALMULA tanıtımı — koleksiyonun en yeni sesi</span></h3>
-        <p><span data-lang="en">ALMULA takes its name from the Turkish word for apple — a fruit that carries the weight of tradition, harvest, and home.</span><span data-lang="tr">ALMULA adını Türkçe'de elma anlamına gelen sözcükten alıyor — gelenek, hasat ve ev ağırlığını taşıyan bir meyve.</span></p>
-        <div class="news-card-date">2023</div>
-      </div>
-    </article>
-
-    <article class="news-card reveal">
-      <div class="news-card-img">
-        <img src="photos/By_hand_2.jpg" alt="Atelier">
-        <div class="news-card-img-overlay"></div>
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-tag"><span data-lang="en">Craft</span><span data-lang="tr">Zanaatkârlık</span></div>
-        <h3 class="news-card-title"><span data-lang="en">Inside the atelier — how every speaker is built by hand</span><span data-lang="tr">Atölyenin içinde — her hoparlörün elle nasıl yapıldığı</span></h3>
-        <p><span data-lang="en">No two pieces are identical. Every Once Custom Sound speaker passes through the same hands, in the same atelier, with the same obsessive attention to detail.</span><span data-lang="tr">Hiçbir iki parça birbirinin aynısı değildir. Her Once Custom Sound hoparlörü aynı atelyede, aynı ellerden, aynı titiz dikkatle geçer.</span></p>
-        <div class="news-card-date">2023</div>
-      </div>
-    </article>
-
-    <article class="news-card reveal">
-      <div class="news-card-img">
-        <img src="photos/Su_Green.jpg" alt="Su Speaker">
-        <div class="news-card-img-overlay"></div>
-      </div>
-      <div class="news-card-body">
-        <div class="news-card-tag"><span data-lang="en">Origins</span><span data-lang="tr">Kökenler</span></div>
-        <h3 class="news-card-title"><span data-lang="en">SU — the first. The one that started everything.</span><span data-lang="tr">SU — ilk. Her şeyi başlatan.</span></h3>
-        <p><span data-lang="en">Named after the Turkish word for water — the source of all things, according to Thales — SU was the speaker that proved the idea was real.</span><span data-lang="tr">Thales'e göre her şeyin kaynağı olan suyu ifade eden Türkçe kelimeden adını alan SU, fikrin gerçek olduğunu kanıtlayan hoparlördü.</span></p>
-        <div class="news-card-date">2012</div>
-      </div>
-    </article>
-
+  <div class="list-year reveal">
+    <div class="year-label">2012</div>
+    <div class="news-row"
+      data-img="photos/Su_Green.jpg"
+      onclick="openStory('su')">
+      <span class="nr-num">06</span>
+      <span class="nr-tag"><span data-lang="en">Origins</span><span data-lang="tr">Kökenler</span></span>
+      <span class="nr-title"><span data-lang="en">SU — the first. The one that started everything.</span><span data-lang="tr">SU — ilk. Her şeyi başlatan.</span></span>
+      <span class="nr-arrow">→</span>
+    </div>
   </div>
-</section>
+
+</div>
 
 <!-- PRESS STRIP -->
-<section class="press-strip reveal">
+<section class="press reveal">
   <div class="press-label"><span data-lang="en">as featured in / in collaboration with</span><span data-lang="tr">yer aldığımız / iş birliği yaptığımız</span></div>
-  <div class="press-logos">
-    <span class="press-name">WARNER BROS.</span>
-    <span class="press-name">LAMBORGHINI</span>
-    <span class="press-name">MV AGUSTA</span>
-    <span class="press-name">MUNICH HIGH END</span>
-    <span class="press-name">MERCAN DEDE</span>
+  <div class="press-row">
+    <div class="press-item">
+      <span class="press-item-name">WARNER BROS.</span>
+      <span class="press-item-type"><span data-lang="en">Film Placement</span><span data-lang="tr">Film Yerleşimi</span></span>
+    </div>
+    <div class="press-item">
+      <span class="press-item-name">LAMBORGHINI</span>
+      <span class="press-item-type"><span data-lang="en">Brand Collaboration</span><span data-lang="tr">Marka İş Birliği</span></span>
+    </div>
+    <div class="press-item">
+      <span class="press-item-name">MV AGUSTA</span>
+      <span class="press-item-type"><span data-lang="en">Brand Collaboration</span><span data-lang="tr">Marka İş Birliği</span></span>
+    </div>
+    <div class="press-item">
+      <span class="press-item-name">MUNICH HIGH END</span>
+      <span class="press-item-type"><span data-lang="en">Since 2015</span><span data-lang="tr">2015'ten beri</span></span>
+    </div>
+    <div class="press-item">
+      <span class="press-item-name">MERCAN DEDE</span>
+      <span class="press-item-type"><span data-lang="en">Artist Production</span><span data-lang="tr">Sanatçı Yapımcılığı</span></span>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- STORY MODALS -->
+<div id="storyOverlay" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(7,6,4,.96);backdrop-filter:blur(16px);overflow-y:auto;" onclick="if(event.target===this)closeStory()">
+  <button onclick="closeStory()" style="position:fixed;top:32px;right:48px;background:none;border:none;color:var(--mid);font-size:22px;cursor:pointer;z-index:10;letter-spacing:.1em;font-family:Jost,sans-serif;font-weight:300;display:flex;align-items:center;gap:10px;transition:color .2s;" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--mid)'">
+    <span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;">close</span> ✕
+  </button>
+  <div id="storyContent" style="max-width:900px;margin:0 auto;padding:120px 48px 80px;"></div>
+</div>
+
 <footer>
   <p>© 2025 Once Custom Sound</p>
   <a href="index.html"><span data-lang="en">Back to Home</span><span data-lang="tr">Ana Sayfaya Dön</span></a>
 </footer>
 
 <script>
+var stories = {
+  munich: {
+    tag: {en:'Fair · Munich',tr:'Fuar · Münih'},
+    date: 'May 2024',
+    title: {en:'Munich High End 2024 — ten years on the world stage', tr:'Munich High End 2024 — dünya sahnesinde on yıl'},
+    img: 'photos/Ran_Space_2.jpg',
+    body: {
+      en: 'Since 2015, Once Custom Sound has been a regular presence at the world\'s most prestigious high-end audio fair. Each year the stand grows quieter, more deliberate — letting the objects speak for themselves.<br><br>Munich High End is where the world\'s most discerning listeners, dealers, and press converge. To be invited back year after year is not simply a commercial achievement — it is a measure of respect within the craft.',
+      tr: '2015\'ten bu yana Once Custom Sound, dünyanın en prestijli high-end audio fuarında düzenli olarak yer alıyor. Her yıl stand biraz daha sade, biraz daha kararlı bir hal alıyor — nesnelerin kendi adına konuşmasına izin veriyor.<br><br>Munich High End, dünyanın en seçici dinleyicilerinin, bayilerinin ve basınının bir araya geldiği yerdir. Her yıl tekrar davet edilmek yalnızca ticari bir başarı değil — zanaatkârlık içindeki bir saygı ölçüsüdür.'
+    }
+  },
+  almula: {
+    tag: {en:'New Model',tr:'Yeni Model'},
+    date: '2023',
+    title: {en:'Introducing ALMULA — the newest voice in the collection', tr:'ALMULA tanıtımı — koleksiyonun en yeni sesi'},
+    img: 'photos/Almula_Space.jpg',
+    body: {
+      en: 'ALMULA takes its name from the Turkish word for apple — a fruit that carries the weight of tradition, harvest, and home. It is the most domestic of our speakers; the most human.<br><br>Where SU flows and NAR burns, ALMULA grounds. It is the speaker for the room that is lived in.',
+      tr: 'ALMULA adını Türkçe\'de elma anlamına gelen sözcükten alıyor — gelenek, hasat ve ev ağırlığını taşıyan bir meyve. Hoparlörlerimizin en yerli, en insani olanı.<br><br>SU akarken, NAR yanarken, ALMULA demir atar. Yaşanılan odanın hoparlörüdür.'
+    }
+  },
+  anniversary: {
+    tag: {en:'Milestone',tr:'Kilometre Taşı'},
+    date: '2024',
+    title: {en:'Once Custom Sound turns 12 — a decade of handcrafted audio', tr:'Once Custom Sound 12 yaşında — el yapımı sesin bir on yılı'},
+    img: 'photos/halit_said.jpg',
+    body: {
+      en: 'Founded in Bursa in 2012 by Halit Ergenç and Mustafa Said Şahin, Once Custom Sound has grown from a shared obsession into a globally recognised name in high-end audio.<br><br>What began as a question — can a speaker be both acoustically exceptional and visually extraordinary? — has become a body of work spanning eight models, twenty distributors, and four continents.',
+      tr: '2012\'de Bursa\'da Halit Ergenç ve Mustafa Said Şahin tarafından kurulan Once Custom Sound, ortak bir tutkudan high-end audio alanında dünya genelinde tanınan bir isme dönüştü.<br><br>Bir soruyla başladı — bir hoparlör hem akustik açıdan üstün hem görsel açıdan olağanüstü olabilir mi? — ve bu soru sekiz model, yirmi distribütör ve dört kıtaya yayılan bir esere dönüştü.'
+    }
+  },
+  lamborghini: {
+    tag: {en:'Collaboration',tr:'İş Birliği'},
+    date: '2022',
+    title: {en:'Lamborghini × MV Agusta × Once Custom Sound', tr:'Lamborghini × MV Agusta × Once Custom Sound'},
+    img: 'photos/Nar_Space.jpg',
+    body: {
+      en: 'A meeting of precision engineering and sculptural sound design. Once Custom Sound was selected as part of a joint brand collaboration with Lamborghini and MV Agusta — two names synonymous with performance, craft, and obsessive detail.<br><br>The alignment was natural. All three share the same belief: that the objects we surround ourselves with should demand a second look.',
+      tr: 'Hassas mühendislik ile heykelsi ses tasarımının buluşması. Once Custom Sound, Lamborghini ve MV Agusta ile ortak bir marka iş birliğinin parçası olarak seçildi — her ikisi de performans, zanaat ve titiz detayın eş anlamlısı olan iki isim.<br><br>Uyum doğaldı. Her üçü de aynı inancı paylaşıyor: etrafımızdaki nesneler ikinci bir bakış talep etmeli.'
+    }
+  },
+  warnerbros: {
+    tag: {en:'Film · Warner Bros.',tr:'Film · Warner Bros.'},
+    date: '2021',
+    title: {en:'Once Custom Sound in the Warner Bros. Tom & Jerry film', tr:'Once Custom Sound, Warner Bros. Tom & Jerry filminde'},
+    img: 'photos/By_hand.jpg',
+    body: {
+      en: 'Our speakers made their silver screen debut — placed within a key scene of the iconic Warner Bros. production of Tom & Jerry.<br><br>The placement was not incidental. The film\'s production team specifically sought objects of genuine craft and character. That Once Custom Sound was chosen speaks to what the objects communicate on their own, without a word of explanation.',
+      tr: 'Hoparlörlerimiz beyaz perdeye çıktı — ikonik Warner Bros. Tom & Jerry yapımının önemli bir sahnesinde yer aldı.<br><br>Yerleşim rastlantısal değildi. Filmin yapım ekibi özellikle gerçek zanaat ve karakter taşıyan nesneler aradı. Once Custom Sound\'un seçilmesi, nesnelerin tek başına, hiçbir açıklama olmaksızın ne ilettiğini gösteriyor.'
+    }
+  },
+  su: {
+    tag: {en:'Origins',tr:'Kökenler'},
+    date: '2012',
+    title: {en:'SU — the first. The one that started everything.', tr:'SU — ilk. Her şeyi başlatan.'},
+    img: 'photos/Su_Green.jpg',
+    body: {
+      en: 'Named after the Turkish word for water — the source of all things, according to Thales — SU was the speaker that proved the idea was real.<br><br>It began as a sketch, an argument, a late-night conversation between two friends. It ended as an object that could stand in a room and change how the room felt. Everything that followed is a continuation of that first proof.',
+      tr: 'Thales\'e göre her şeyin kaynağı olan suyu ifade eden Türkçe kelimeden adını alan SU, fikrin gerçek olduğunu kanıtlayan hoparlördü.<br><br>Bir eskizle, bir tartışmayla, iki arkadaş arasında geç saatte yapılan bir sohbetle başladı. Bir odada durabilen ve odanın nasıl hissettirdiğini değiştirebilen bir nesneyle sona erdi. Ardından gelen her şey, o ilk kanıtın devamıdır.'
+    }
+  }
+};
+
+var lang = 'en';
+
+function openStory(id){
+  var s = stories[id];
+  if(!s) return;
+  var l = document.body.classList.contains('tr') ? 'tr' : 'en';
+  document.getElementById('storyContent').innerHTML =
+    '<div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze);margin-bottom:20px;">'+s.tag[l]+' · '+s.date+'</div>'+
+    '<h2 style="font-family:Jost,sans-serif;font-size:clamp(28px,4vw,52px);font-weight:200;letter-spacing:.04em;line-height:1.2;color:var(--cream);margin-bottom:48px;">'+s.title[l]+'</h2>'+
+    '<div style="width:100%;height:480px;overflow:hidden;margin-bottom:56px;"><img src="'+s.img+'" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85);"></div>'+
+    '<p style="font-size:17px;font-weight:300;letter-spacing:.04em;line-height:2.4;color:var(--cream);opacity:.82;max-width:680px;">'+s.body[l]+'</p>';
+  var ov = document.getElementById('storyOverlay');
+  ov.style.display = 'block';
+  ov.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeStory(){
+  document.getElementById('storyOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeStory();});
+
+// floating image on hover
+var floatImg = document.getElementById('floatImg');
+var floatImgEl = document.getElementById('floatImgEl');
+var currentRow = null;
+
+document.querySelectorAll('.news-row').forEach(function(row){
+  row.addEventListener('mouseenter', function(){
+    var src = row.getAttribute('data-img');
+    floatImgEl.src = src;
+    floatImg.style.opacity = '1';
+    currentRow = row;
+  });
+  row.addEventListener('mouseleave', function(){
+    floatImg.style.opacity = '0';
+    currentRow = null;
+  });
+});
+
+document.addEventListener('mousemove', function(e){
+  if(!currentRow) return;
+  floatImg.style.left = e.clientX + 'px';
+  floatImg.style.top = e.clientY + 'px';
+});
+
 function setLang(l){
-  document.body.className=l;
-  document.getElementById('btnEN').classList.toggle('active',l==='en');
-  document.getElementById('btnTR').classList.toggle('active',l==='tr');
-  localStorage.setItem('once_lang',l);
+  document.body.className = l;
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  document.getElementById('btnTR').classList.toggle('active', l==='tr');
+  localStorage.setItem('once_lang', l);
 }
 setLang(localStorage.getItem('once_lang')||'en');
 
