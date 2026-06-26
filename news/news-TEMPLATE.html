@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introducing ALMULA — Once Custom Sound</title>
+<!-- ADIM 1: Başlığı güncelle (tab'da görünen isim) -->
+<title>HABER BAŞLIĞI — Once Custom Sound</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -40,28 +41,63 @@ body.tr [data-lang="tr"]{display:inline;}
 </style>
 </head>
 <body class="en">
-<div id="loader"><img id="loaderImg" src="https://www.oncecustom.com/images/logo.png" alt="Once"><div id="loaderBar"></div></div>
-<nav class="bar" id="topbar">
-  <a href="news.html" class="bar-back"><span data-lang="en">News</span><span data-lang="tr">Haberler</span></a>
-  <div class="bar-logo"><img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound"></div>
-  <div class="bar-lang"><button id="btnEN" class="active" onclick="setLang('en')">EN</button><button id="btnTR" onclick="setLang('tr')">TR</button></div>
-</nav>
-<div class="story-hero"><img src="photos/Almula_Space.jpg" alt="Introducing ALMULA"></div>
-<div class="story-content">
-  <div class="story-tag"><span data-lang="en">New Model · 2023</span><span data-lang="tr">Yeni Model · 2023</span></div>
-  <h1 class="story-title"><span data-lang="en">Introducing ALMULA — the newest voice in the collection</span><span data-lang="tr">ALMULA tanıtımı — koleksiyonun en yeni sesi</span></h1>
-  <div class="story-body">
-    <p data-lang="en">ALMULA takes its name from the Turkish word for apple — a fruit that carries the weight of tradition, harvest, and home. It is the most domestic of our speakers; the most human.</p>
-    <p data-lang="en">Where SU flows and NAR burns, ALMULA grounds. It is the speaker for the room that is lived in.</p>
-    <p data-lang="tr">ALMULA adını Türkçe'de elma anlamına gelen sözcükten alıyor — gelenek, hasat ve ev ağırlığını taşıyan bir meyve. Hoparlörlerimizin en yerli, en insani olanı.</p>
-    <p data-lang="tr">SU akarken, NAR yanarken, ALMULA demir atar. Yaşanılan odanın hoparlörüdür.</p>
-  </div>
-  <a href="news.html" class="story-back">← <span data-lang="en">Back to News</span><span data-lang="tr">Haberlere Dön</span></a>
+
+<div id="loader">
+  <img id="loaderImg" src="https://www.oncecustom.com/images/logo.png" alt="Once">
+  <div id="loaderBar"></div>
 </div>
+
+<nav class="bar" id="topbar">
+  <a href="../news.html" class="bar-back"><span data-lang="en">News</span><span data-lang="tr">Haberler</span></a>
+  <div class="bar-logo"><img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound"></div>
+  <div class="bar-lang">
+    <button id="btnEN" class="active" onclick="setLang('en')">EN</button>
+    <button id="btnTR" onclick="setLang('tr')">TR</button>
+  </div>
+</nav>
+
+<!-- ADIM 2: Hero fotoğrafı — photos/ klasörüne koyduğun dosya adını yaz -->
+<div class="story-hero">
+  <img src="../photos/FOTOGRAF_ADI.jpg" alt="Haber başlığı">
+</div>
+
+<div class="story-content">
+
+  <!-- ADIM 3: Kategori etiketi ve yıl -->
+  <div class="story-tag">
+    <span data-lang="en">KATEGORİ · YIL</span>
+    <span data-lang="tr">KATEGORİ · YIL</span>
+  </div>
+
+  <!-- ADIM 4: Ana başlık — <em> ile vurgulamak istediğin kelimeyi sarabilirsin -->
+  <h1 class="story-title">
+    <span data-lang="en">İngilizce <em>başlık</em> buraya</span>
+    <span data-lang="tr">Türkçe <em>başlık</em> buraya</span>
+  </h1>
+
+  <!-- ADIM 5: Haber metni — her paragraf için ayrı <p> ekle -->
+  <div class="story-body">
+    <p data-lang="en">İngilizce birinci paragraf buraya gelecek. İstediğin kadar uzun yazabilirsin.</p>
+    <p data-lang="en">İngilizce ikinci paragraf. Her <p> arasında otomatik boşluk var.</p>
+
+    <p data-lang="tr">Türkçe birinci paragraf buraya.</p>
+    <p data-lang="tr">Türkçe ikinci paragraf.</p>
+  </div>
+
+  <a href="../news.html" class="story-back">← <span data-lang="en">Back to News</span><span data-lang="tr">Haberlere Dön</span></a>
+</div>
+
 <script>
 function setLang(l){document.body.className=l;document.getElementById('btnEN').classList.toggle('active',l==='en');document.getElementById('btnTR').classList.toggle('active',l==='tr');localStorage.setItem('once_lang',l);}
 setLang(localStorage.getItem('once_lang')||'en');
-window.addEventListener('DOMContentLoaded',function(){var img=document.getElementById('loaderImg');var bar=document.getElementById('loaderBar');var loader=document.getElementById('loader');setTimeout(function(){img.classList.add('show');},120);setTimeout(function(){bar.style.width='100%';},200);setTimeout(function(){loader.classList.add('out');},1700);});
+window.addEventListener('DOMContentLoaded',function(){
+  var img=document.getElementById('loaderImg');
+  var bar=document.getElementById('loaderBar');
+  var loader=document.getElementById('loader');
+  setTimeout(function(){img.classList.add('show');},120);
+  setTimeout(function(){bar.style.width='100%';},200);
+  setTimeout(function(){loader.classList.add('out');},1700);
+});
 window.addEventListener('scroll',function(){document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);});
 </script>
 </body>
