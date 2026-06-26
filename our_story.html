@@ -28,10 +28,10 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 /* TOPBAR */
 .bar{position:fixed;top:0;left:0;right:0;z-index:200;height:80px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .5s,border-color .5s,backdrop-filter .5s;}
 .bar.scrolled{background:rgba(7,6,4,.96);border-color:var(--border);backdrop-filter:blur(16px);}
-.bar-back{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.bar-back{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
 .bar-back::before{content:'←';font-size:14px;}
 .bar-back:hover{color:var(--bronze);gap:14px;}
-.bar-logo img{height:40px;filter:brightness(0) invert(1);}
+.bar-logo img{height:68px;filter:brightness(0) invert(1);}
 .bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
 .bar-lang button.active{color:var(--cream);}
 
@@ -135,11 +135,11 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 /* names */
 .names-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
-.name-cell{padding:28px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;}
+.name-cell{padding:40px 32px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;}
 .name-cell:nth-child(4n){border-right:none;}
 .name-cell.founders-child::after{content:'';position:absolute;top:12px;right:12px;width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.6;}
-.name-tr{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.18em;color:var(--bronze);display:block;}
-.name-en{font-size:12px;font-weight:300;letter-spacing:.07em;font-style:italic;color:var(--mid);margin-top:6px;line-height:1.7;}
+.name-tr{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.18em;color:var(--bronze);display:block;}
+.name-en{font-size:14px;font-weight:300;letter-spacing:.07em;font-style:italic;color:var(--mid);margin-top:10px;line-height:1.7;}
 .names-note{font-size:13px;letter-spacing:.16em;color:var(--ghost);margin-top:20px;display:flex;align-items:center;gap:10px;}
 .names-note::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.6;flex-shrink:0;}
 
@@ -411,7 +411,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 <!-- ═══════════════════════════════════════
      THE NAMES
 ════════════════════════════════════════ -->
-<section style="background:var(--black);padding:120px 80px;">
+<section style="background:var(--black);padding:80px 80px 60px;">
   <div class="ch reveal"><span data-lang="en">the names</span><span data-lang="tr">isimler</span></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start;">
     <div>
