@@ -148,7 +148,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   font-size:12px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--mid);margin-top:14px;
   display:flex;align-items:center;justify-content:center;gap:10px;
-  pointer-events:auto;
+  pointer-events:auto;cursor:pointer;
 }
 .cf-info-hint::before,.cf-info-hint::after{content:'';display:block;width:20px;height:1px;background:var(--border);}
 
@@ -436,7 +436,7 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   <div class="cf-info">
     <div class="cf-info-name" id="cfName"></div>
     <div class="cf-info-tag" id="cfTag"></div>
-    <div class="cf-info-hint" onclick="document.getElementById('hero-section').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+    <div class="cf-info-hint" id="exploreHint">
       <span data-lang="en">click to explore</span>
       <span data-lang="tr">keşfetmek için tıkla</span>
     </div>
@@ -885,6 +885,11 @@ window.addEventListener('DOMContentLoaded', function(){
     cfRender();
     sliderRender();
   }, 1700);
+
+  document.getElementById('exploreHint').addEventListener('click', function(e){
+    e.stopPropagation();
+    document.getElementById('hero-section').scrollIntoView({behavior:'smooth'});
+  });
 });
 </script>
 </body>
