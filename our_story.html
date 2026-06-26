@@ -39,17 +39,24 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .panel{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
 .panel-bg{position:absolute;inset:0;background:#060503;}
 .panel-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+/* fade top & bottom into black */
+.panel::before{content:'';position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,rgba(7,6,4,1) 0%,transparent 100%);z-index:1;pointer-events:none;}
+.panel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to top,rgba(7,6,4,1) 0%,transparent 100%);z-index:1;pointer-events:none;}
 
 /* overlay variants */
-.ov-dark{position:absolute;inset:0;background:rgba(7,6,4,.72);}
-.ov-left{position:absolute;inset:0;background:linear-gradient(to right,rgba(7,6,4,.95) 40%,rgba(7,6,4,.3) 100%);}
-.ov-right{position:absolute;inset:0;background:linear-gradient(to left,rgba(7,6,4,.95) 40%,rgba(7,6,4,.3) 100%);}
-.ov-bottom{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,6,4,.5) 0%,rgba(7,6,4,.85) 60%,rgba(7,6,4,1) 100%);}
-.ov-center{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(7,6,4,.2) 0%,rgba(7,6,4,.92) 75%);}
+.ov-dark{position:absolute;inset:0;background:rgba(7,6,4,.72);z-index:0;}
+.ov-left{position:absolute;inset:0;background:linear-gradient(to right,rgba(7,6,4,.95) 40%,rgba(7,6,4,.3) 100%);z-index:0;}
+.ov-right{position:absolute;inset:0;background:linear-gradient(to left,rgba(7,6,4,.95) 40%,rgba(7,6,4,.3) 100%);z-index:0;}
+.ov-bottom{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,6,4,.5) 0%,rgba(7,6,4,.85) 60%,rgba(7,6,4,1) 100%);z-index:0;}
+.ov-center{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(7,6,4,.2) 0%,rgba(7,6,4,.92) 75%);z-index:0;}
 
 /* simple dark bg panels (no photo) */
 .panel-plain{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--black);}
 .panel-plain::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(176,136,88,.06) 0%,transparent 70%);}
+
+/* split sections fade */
+.split{position:relative;}
+.split::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,rgba(7,6,4,1) 0%,transparent 100%);z-index:3;pointer-events:none;}
 
 /* panel content */
 .pc{position:relative;z-index:2;width:100%;padding:120px 80px 80px;}
@@ -74,7 +81,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bt strong{color:var(--cream);font-weight:400;}
 
 /* founders */
-.founders{display:flex;gap:0;margin-top:56px;border-top:1px solid var(--border);}
+.founders{display:flex;gap:0;margin-top:56px;}
 .founder-card{flex:1;padding:28px 32px;border-right:1px solid var(--border);cursor:pointer;transition:background .2s;}
 .founder-card:last-child{border-right:none;}
 .founder-card:hover{background:rgba(176,136,88,.04);}
@@ -120,13 +127,13 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 /* timeline strip */
 .timeline{display:flex;flex-direction:column;gap:0;margin-top:48px;}
 .tl-item{display:flex;gap:28px;padding:24px 0;border-bottom:1px solid var(--border);}
-.tl-item:first-child{border-top:1px solid var(--border);}
+.tl-item:first-child{}
 .tl-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--bronze);min-width:28px;padding-top:2px;}
 .tl-text{font-size:15px;font-weight:300;letter-spacing:.04em;line-height:2;color:var(--cream);opacity:.85;}
 .tl-text em{color:var(--bronze);font-style:italic;}
 
 /* names */
-.names-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border);}
+.names-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
 .name-cell{padding:28px 20px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;}
 .name-cell:nth-child(4n){border-right:none;}
 .name-cell.founders-child::after{content:'';position:absolute;top:12px;right:12px;width:5px;height:5px;border-radius:50%;background:var(--bronze);opacity:.6;}
@@ -403,7 +410,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 <!-- ═══════════════════════════════════════
      THE NAMES
 ════════════════════════════════════════ -->
-<section style="background:var(--black);padding:120px 80px;border-top:1px solid var(--border);">
+<section style="background:var(--black);padding:120px 80px;">
   <div class="ch reveal"><span data-lang="en">the names</span><span data-lang="tr">isimler</span></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start;">
     <div>
