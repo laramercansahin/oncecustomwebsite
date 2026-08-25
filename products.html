@@ -111,6 +111,16 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   filter:drop-shadow(0 14px 40px rgba(0,0,0,1)) drop-shadow(0 0 30px rgba(176,136,88,.18));
   animation:cf-float 6s ease-in-out infinite;
 }
+.cf-soon-badge{
+  position:absolute;top:16px;left:50%;transform:translateX(-50%);
+  font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--bronze);background:rgba(15,13,10,.85);border:1px solid rgba(200,121,65,.4);
+  padding:5px 14px;white-space:nowrap;pointer-events:none;z-index:10;
+}
+.slide-soon-badge{
+  display:inline-block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--bronze);border:1px solid rgba(200,121,65,.4);padding:5px 16px;margin-bottom:16px;
+}
 @keyframes cf-float{
   0%,100%{transform:translateY(0);}
   50%{transform:translateY(-12px);}
@@ -547,7 +557,7 @@ var products = [
      {l:'Dimensions',v:'222 × 219 × 191 mm'},
    ], gallery:['https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v2.png','https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal-v3.png','https://www.oncecustom.com/images/urun/kare/Dal-v2.png']},
 
-  {name:'ALİ', tagline:{en:'compact and resolute',tr:'kompakt ve kararlı'},
+  {name:'ALİ', comingSoon:true, tagline:{en:'compact and resolute',tr:'kompakt ve kararlı'},
    specs:[
      {l:'Type',v:'Subwoofer'},
      {l:'Frequency',v:'25 – 200 Hz'},
@@ -569,7 +579,7 @@ var products = [
      {l:'Dimensions',v:'251 × 416 × 296 mm'},
    ], gallery:['https://laramercansahin.github.io/oncecustomwebsite/photos/lara.png','https://www.oncecustom.com/images/urun/kare/lara_1-v2.jpg','https://www.oncecustom.com/images/urun/kare/lara_2-v2.jpg']},
 
-  {name:'NAR A+', tagline:{en:'the signature edition',tr:'imza edisyonu'},
+  {name:'NAR A+', comingSoon:true, tagline:{en:'the signature edition',tr:'imza edisyonu'},
    specs:[
      {l:'Driver',v:'Stand-mount, ScanSpeak Reference'},
      {l:'Sensitivity',v:'91 dB (2.83V / 1m)'},
@@ -577,7 +587,7 @@ var products = [
      {l:'Origin',v:'Handmade'},
    ], gallery:['https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v3.png','https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v2.png','https://www.oncecustom.com/images/urun/kare/Nar_Act_2025-v4.png']},
 
-  {name:'DAL A+', tagline:{en:'premium pendant edition',tr:'premium sarkıt edisyonu'},
+  {name:'DAL A+', comingSoon:true, tagline:{en:'premium pendant edition',tr:'premium sarkıt edisyonu'},
    specs:[
      {l:'Type',v:'Active Satellite Speaker'},
      {l:'Frequency',v:'65 – 20,000 Hz'},
@@ -588,7 +598,7 @@ var products = [
      {l:'Dimensions',v:'222 × 219 × 191 mm'},
    ], gallery:['https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_1.png','https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v2_2.png','https://www.oncecustom.com/images/urun/kare/once-custom0009_Dal_Purple-v3.png']},
 
-  {name:'SU 2', tagline:{en:'the evolution of the original',tr:'orijinalin evrimi'},
+  {name:'SU 2', comingSoon:true, tagline:{en:'the evolution of the original',tr:'orijinalin evrimi'},
    specs:[
      {l:'Driver',v:'Desktop, 2-way evolved, ScanSpeak'},
      {l:'Sensitivity',v:'89 dB (2.83V / 1m)'},
@@ -620,7 +630,8 @@ products.forEach(function(p, i){
   item.dataset.index = i;
   /* fixed position on the ring */
   item.style.transform = 'rotateY(' + (i * ANGLE_STEP) + 'deg) translateZ(' + RING_R + 'px)';
-  item.innerHTML = '<img src="' + (p.gallery ? p.gallery[0] : p.img) + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">';
+  item.innerHTML = '<img src="' + (p.gallery ? p.gallery[0] : p.img) + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">' +
+    (p.comingSoon ? '<div class="cf-soon-badge">Coming Soon</div>' : '');
 
   item.addEventListener('click', function(){
     var idx = parseInt(this.dataset.index);
@@ -721,6 +732,7 @@ products.forEach(function(p, i){
     '<div class="slide-ghost">' + String(i+1).padStart(2,'0') + '</div>' +
     '<div class="slide-content">' +
       '<div class="slide-left">' +
+        (p.comingSoon ? '<div class="slide-soon-badge"><span data-lang="en">Coming Soon</span><span data-lang="tr">Yakında</span></div>' : '') +
         '<div class="slide-name">' + p.name + '</div>' +
         '<div class="slide-maker">Once Custom Sound</div>' +
         '<div class="slide-tagline">' +
