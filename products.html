@@ -61,8 +61,11 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 /* header */
 .cf-header{
-  position:absolute;top:48px;left:60px;
+  position:relative;
+  width:100%;
+  padding:40px 60px 0;
   z-index:10;
+  flex-shrink:0;
 }
 .cf-title{
   font-family:'Bebas Neue',sans-serif;
@@ -75,9 +78,10 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .cf-scene{
   position:relative;
   width:100%;
-  height:56vh;
+  height:50vh;
   perspective:1100px;
   display:flex;align-items:center;justify-content:center;
+  flex:1;
 }
 
 /* the ring that rotates */
