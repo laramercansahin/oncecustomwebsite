@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Story — Once Custom Sound</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/story-pages.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --black:#0F0D0A;
   --border:#2A2520;
@@ -15,25 +16,13 @@
   --mid:#C8BFB4;
   --ghost:#7A7060;
 }
-html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
 
 /* LOADER */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;transition:opacity 0.9s ease,visibility 0.9s ease;}
-#loader.out{opacity:0;visibility:hidden;pointer-events:none;}
 #loader img{height:68px;filter:brightness(0) invert(1);opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
-#loader img.show{opacity:1;transform:translateY(0);}
-#loaderBar{position:absolute;bottom:0;left:0;height:1px;background:var(--bronze);width:0%;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
 
 /* TOPBAR */
 .bar{position:fixed;top:0;left:0;right:0;z-index:200;height:80px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .5s,border-color .5s,backdrop-filter .5s;}
-.bar.scrolled{background:rgba(15,13,10,.96);border-color:var(--border);backdrop-filter:blur(16px);}
-.bar-back{font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
-.bar-back::before{content:'←';font-size:14px;}
-.bar-back:hover{color:var(--bronze);gap:14px;}
-.bar-logo img{height:68px;filter:brightness(0) invert(1);}
-.bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
-.bar-lang button.active{color:var(--cream);}
 
 /* PANEL */
 .panel{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
@@ -148,7 +137,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 /* reveal states */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease;}
-.reveal.done{opacity:1;transform:translateY(0);}
 .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .9s ease,transform .9s ease;}
 .reveal-left.done{opacity:1;transform:translateX(0);}
 .reveal-right{opacity:0;transform:translateX(40px);transition:opacity .9s ease,transform .9s ease;}
@@ -168,9 +156,6 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .lx{display:flex;align-items:center;gap:24px;margin:48px 0 0;}
 .lx-line{height:1px;background:var(--border);flex:1;transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.4,0,.2,1);}
 .lx-line.done{transform:scaleX(1);}
-
-/* lang */
-[data-lang]{display:none;}
 body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
 body.en p[data-lang="en"],body.tr p[data-lang="tr"]{display:block;}
 body.en div[data-lang="en"],body.tr div[data-lang="tr"]{display:block;}
@@ -459,6 +444,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   </div>
 </section>
 
+<script src="js/story-pages.js"></script>
 <script>
 function openFounder(who){
   var id = who==='halit' ? 'modalHalit' : 'modalSaid';
@@ -470,30 +456,6 @@ function closeFounder(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeFounder();});
-
-function setLang(l){
-  document.body.className=l;
-  document.getElementById('btnEN').classList.toggle('active',l==='en');
-  document.getElementById('btnTR').classList.toggle('active',l==='tr');
-  localStorage.setItem('once_lang',l);
-}
-setLang(localStorage.getItem('once_lang')||'en');
-
-window.addEventListener('DOMContentLoaded',function(){
-  var img=document.getElementById('loaderImg');
-  var bar=document.getElementById('loaderBar');
-  var loader=document.getElementById('loader');
-  setTimeout(function(){img.classList.add('show');},120);
-  setTimeout(function(){bar.style.width='100%';},200);
-  setTimeout(function(){
-    loader.classList.add('out');
-    observe();
-  },1700);
-});
-
-window.addEventListener('scroll',function(){
-  document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);
-});
 
 window.addEventListener('scroll',function(){
   var panels=document.querySelectorAll('.panel');

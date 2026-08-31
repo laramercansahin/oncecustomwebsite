@@ -1,0 +1,7 @@
+#loader img.show {opacity:1;transform:translateY(0);}
+#loaderBar {position:absolute;bottom:0;left:0;height:1px;background:var(--bronze);width:0%;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
+.bar-back {font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.bar-lang button {background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
+.bar-logo img {height:68px;filter:brightness(0) invert(1);}
+.bar.scrolled {background:rgba(15,13,10,.96);border-color:var(--border);backdrop-filter:blur(16px);}
+.reveal.done {opacity:1;transform:translateY(0);}
