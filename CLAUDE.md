@@ -13,13 +13,18 @@
 
 ```
 oncecustomwebsite/
-├── index.html              → Ana sayfa
+├── index.html              → Ana sayfa (kendi ayrı topbar/reveal sistemi — bkz. docs/design-system.md)
 ├── products.html           → Ürünler (3D carousel + slide detail)
 ├── our_story.html          → Hikayemiz
 ├── news.html               → Haberler listesi
 ├── distributors.html       → Distribütörler
+├── speakers.html           → Ek/önizleme sayfası, sitemap.xml'de yok
 ├── .nojekyll               → Jekyll'i devre dışı bırakır (silme!)
 ├── sitemap.xml
+│
+├── css/                    → Paylaşılan CSS (style.css, story-pages.css, carousel.css, news-story.css)
+├── js/                     → Paylaşılan JS (story-pages.js, carousel.js, news-story.js)
+├── docs/                   → Tasarım sistemi, haber ekleme, katkı rehberleri
 │
 ├── news/                   → Haber detay sayfaları
 │   ├── news-TEMPLATE.html  → Yeni haber şablonu
@@ -35,6 +40,8 @@ oncecustomwebsite/
     ├── Su_Space.jpg, Nar_Space.jpg, Almula_Space.jpg, ...
     └── halit_said.jpg, ali.png (kurucu fotoğrafları)
 ```
+
+Hangi sayfanın hangi `css/`+`js/` dosyasını kullandığı ve neden bazı token'ların (`--mid`, `--ghost` vb.) sayfaya göre değiştiği için **`docs/design-system.md`** ve **`docs/contributing.md`**'ye bakın — bu dosya sadece genel özet içerir.
 
 ---
 
@@ -71,7 +78,7 @@ oncecustomwebsite/
 
 - **Border-free design:** Bölümler arasında `1px solid` çizgi yok. Boşluk, gradient ve `gap:2px` card layout ile ayrım yapılıyor.
 - **High-end / luxury feel:** Serif italic başlıklar, transparent topbar, scroll reveal animasyonları, faint bronze gradientler.
-- **Topbar:** Daima koyu (`rgba(10,8,6,0.92)`), 64px yükseklik, logo 42px.
+- **Topbar:** İki farklı sistem var — `index.html`'in kendi `.topbar` (64px, hamburger menü) ve diğer 5 sayfanın paylaştığı `.bar` (80px, EN/TR butonları direkt görünür). Detay: `docs/design-system.md`.
 - **Logo:** `https://www.oncecustom.com/images/logo.png` — `filter: brightness(0) invert(1)` ile beyaz gösterilir.
 
 ---
@@ -105,6 +112,7 @@ IntersectionObserver ile JS'de tetiklenir.
 ## news/ Sayfaları — Göreceli Path Kuralları
 
 news/ altındaki dosyalarda:
+- CSS/JS: `href="../css/news-story.css"`, `src="../js/news-story.js"`
 - Fotoğraflar: `src="../photos/..."` (üst klasöre çık)
 - Ana sayfaya link: `href="../index.html"`
 - Haberler listesine: `href="../news.html"`
@@ -116,8 +124,10 @@ news.html'deki linkler:
 
 ## Yeni Haber Eklemek
 
+Detaylı adım adım rehber: **`docs/adding-news.md`**. Kısa özet:
+
 1. Fotoğrafı `photos/` klasörüne at
-2. `news/news-TEMPLATE.html`'i kopyala → `news/news-yeni-isim.html`
+2. `news/news-TEMPLATE.html`'i kopyala → `news/news-yeni-isim.html` (CSS/JS zaten `../css/news-story.css` + `../js/news-story.js`'e link'li, dokunmana gerek yok)
 3. Şablondaki 5 ADIM yorumunu doldur (title, fotoğraf, tag, başlık, body)
 4. `news.html`'e kart bloğu ekle (<!-- NEWS LIST --> bölümüne)
 5. `sitemap.xml`'e URL ekle
