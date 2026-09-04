@@ -790,7 +790,10 @@ document.getElementById('slides').addEventListener('click', function(e){
 function goToDetail(idx){
   sliderCurrent = idx;
   sliderRender();
-  document.getElementById('hero-section').scrollIntoView({behavior:'smooth'});
+  setTimeout(function(){
+    var el = document.getElementById('hero-section');
+    window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
+  }, 50);
 }
 
 function sliderRender(){
