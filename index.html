@@ -352,7 +352,6 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 <section class="story">
   <div class="story-img reveal-left"><img src="https://www.oncecustom.com/images/halitsaid.jpg" alt="Halit & Said"></div>
   <div class="story-text">
-    <div class="story-num reveal reveal-d1">01</div>
     <div class="story-title reveal reveal-d2"><span data-inline-lang="en">Our <em>Story</em></span><span data-inline-lang="tr">Hikaye<em>miz</em></span></div>
     <div class="story-body reveal reveal-d3">
       <span data-inline-lang="en">two old friends, a shared belief — music has the power to shape how we experience life</span>
@@ -364,7 +363,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 
 
 <!-- DISTRIBUTORS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <section class="dist">
   <span class="sec-eyebrow"><span data-inline-lang="en">An International Presence</span><span data-inline-lang="tr">Uluslararası Bir Varlık</span></span>
   <div class="dist-world">Türkiye · Germany · Spain · Italy · USA · South Korea · China</div>
@@ -401,7 +400,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   </div>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
   // ── topbar scroll ──
   window.addEventListener('scroll', function() {
@@ -475,8 +474,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 
     var pinIcon = L.divIcon({
       className: '',
-      html: '<div style="width:12px;height:12px;background:#C87941;border-radius:50%;border:2px solid rgba(255,255,255,0.3);box-shadow:0 0 0 5px rgba(176,136,88,0.2);"></div>',
-      iconSize: [12,12], iconAnchor: [6,6], popupAnchor: [0,-10]
+      html: '<div style="width:14px;height:14px;background:#C87941;border-radius:50%;border:2px solid rgba(255,255,255,0.4);box-shadow:0 0 0 8px rgba(200,121,65,0.15);cursor:pointer;"></div>',
+      iconSize: [30,30], iconAnchor: [15,15], popupAnchor: [0,-15]
     });
 
     var distributors = [
