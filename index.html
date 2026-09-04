@@ -579,8 +579,13 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     var map = L.map('distMap', {
       center: [35, 20],
       zoom: 2,
-      zoomControl: true,
-      scrollWheelZoom: true,
+      zoomControl: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      touchZoom: false,
+      dragging: false,
+      boxZoom: false,
+      keyboard: false,
       attributionControl: false
     });
 
