@@ -254,6 +254,56 @@ footer .soc a:hover { color: var(--mid); }
 /* lang */
 [data-inline-lang] { display: none; }
 body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inline; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 768px) {
+  /* topbar */
+  .topbar { padding: 0 20px; height: 56px; }
+  .topbar-logo img { height: 32px; }
+
+  /* hero */
+  .hero { height: calc(100vh - 56px); margin-top: 56px; }
+  .hero-content { padding: 0 24px; }
+  .hero-h1 { font-size: clamp(16px, 5vw, 26px); letter-spacing: 0.14em; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 0.28em; }
+  .hero-sub { font-size: 10px; letter-spacing: 0.18em; }
+  .hero-actions { flex-direction: column; gap: 12px; }
+  .btn-outline { padding: 12px 24px; font-size: 9px; }
+
+  /* collection */
+  .coll-head { padding: 60px 24px 32px; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .pcard { min-width: calc(80% - 2px); width: calc(80% - 2px); }
+  .scroll-bar-wrap { margin: 0 24px; }
+
+  /* story */
+  .story { grid-template-columns: 1fr; height: auto; }
+  .story-img { height: 50vw; min-height: 240px; }
+  .story-text { padding: 48px 24px; }
+  .story-body { max-width: 100%; font-size: 15px; }
+
+  /* craft */
+  .craft { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+
+  /* distributors */
+  .dist-eyebrow-wrap { padding: 0 24px; }
+  .dist-world { font-size: 15px; padding: 0 24px; margin: 12px 0 28px; }
+  .dist-grid { grid-template-columns: repeat(2,1fr); }
+  #distMap { height: 300px; }
+
+  /* contact */
+  .contact-strip { grid-template-columns: 1fr; }
+  .contact-left { padding: 60px 24px 32px; }
+  .contact-right { padding: 0 24px 60px; }
+  .cf-row { grid-template-columns: 1fr; }
+
+  /* footer */
+  footer { padding: 28px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  footer .soc { justify-content: center; }
+
+  /* menu */
+  .menu-close { top: 16px; left: 20px; }
+  .menu-nav ul li a { font-size: clamp(28px, 8vw, 44px); }
+}
 </style>
 </head>
 <body class="tr">
