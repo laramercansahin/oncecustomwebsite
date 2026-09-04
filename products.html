@@ -68,9 +68,9 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
 .cf-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 55% 90% at 50% -20%, rgba(255,248,228,.10) 0%, rgba(220,180,110,.05) 45%, transparent 72%),
-    radial-gradient(ellipse 80% 60% at 50% 38%, rgba(176,136,88,.04) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 12% at 50% 106%, rgba(176,136,88,.05) 0%, transparent 60%);
+    radial-gradient(ellipse 30% 70% at 50% 10%, rgba(255,248,228,.18) 0%, rgba(220,180,110,.10) 35%, transparent 65%),
+    radial-gradient(ellipse 50% 55% at 50% 42%, rgba(176,136,88,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 12% at 50% 106%, rgba(176,136,88,.06) 0%, transparent 60%);
   pointer-events:none;
 }
 
@@ -679,12 +679,15 @@ function cfRender(){
     } else if(absDiff > FADE_DEG){
       /* soft fade zone */
       var t = 1 - (absDiff - FADE_DEG) / 20;
-      item.style.opacity = String(t * 0.15);
+      item.style.opacity = String(t * 0.08);
+      item.style.filter = 'brightness(0.1)';
       item.style.pointerEvents = 'none';
     } else {
-      /* visible opacity and brightness fall off with angle */
       var t = 1 - absDiff / FADE_DEG;
-      item.style.opacity = String(0.18 + t * 0.82);
+      /* center: full brightness; sides: very dark */
+      var br = 0.1 + t * 0.9;
+      item.style.opacity = String(0.12 + t * 0.88);
+      item.style.filter = i === cfCurrent ? 'brightness(1)' : 'brightness(' + br.toFixed(2) + ')';
       item.style.pointerEvents = 'auto';
     }
 
