@@ -409,7 +409,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       </div>
       <div class="cf-row" style="display:block;">
         <div class="cf-field">
-          <label data-inline-lang="en">Message</label><label data-inline-lang="tr">Mesaj</label>
+          <label><span data-inline-lang="en">Message</span><span data-inline-lang="tr">Mesaj</span></label>
           <textarea name="message" placeholder="Your message..." required></textarea>
         </div>
       </div>
@@ -477,8 +477,11 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
           if (r.ok) {
             cfForm.reset();
             document.getElementById('cfSuccess').style.display = 'block';
+          } else {
+            r.json().then(function(d){ console.error('Formspree error:', d); });
           }
-        });
+        })
+        .catch(function(err){ console.error('Submit failed:', err); });
     });
   }
 
