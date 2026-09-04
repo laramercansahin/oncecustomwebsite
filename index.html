@@ -202,7 +202,17 @@ body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-
 .contact-sub { font-size: 15px; font-weight: 300; letter-spacing: 0.03em; line-height: 2.2; color: var(--mid); max-width: 360px; }
 .contact-btn { margin-top: 32px; font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); padding: 13px 32px; display: inline-block; transition: border-color 0.4s, background 0.4s; width: fit-content; }
 .contact-btn:hover { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.02); }
-.contact-right { padding: 100px 80px; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+.contact-right { padding: 80px 80px; display: flex; flex-direction: column; justify-content: center; }
+.cf-form { display: flex; flex-direction: column; gap: 16px; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cf-field { display: flex; flex-direction: column; gap: 6px; }
+.cf-field label { font-size: 9px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ghost); }
+.cf-field input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; }
+.cf-field input:focus { border-color: var(--bronze); }
+.cf-field input::placeholder { color: var(--ghost); opacity: 0.6; }
+.cf-submit { margin-top: 8px; font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,255,255,0.2); padding: 14px 32px; background: none; cursor: pointer; transition: border-color 0.4s, background 0.4s; font-family: 'Jost',sans-serif; }
+.cf-submit:hover { border-color: var(--bronze); background: rgba(200,121,65,0.05); }
+.cf-success { display: none; font-family: var(--serif); font-size: 17px; font-style: italic; color: var(--bronze); margin-top: 16px; }
 .c-item-label { font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ghost); margin-bottom: 8px; }
 .c-item-val { font-family: var(--serif); font-size: 16px; font-weight: 300; letter-spacing: 0.03em; color: var(--mid); }
 .c-item-val a { color: var(--mid); text-decoration: none; transition: color 0.35s; }
@@ -373,9 +383,36 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     </a>
   </div>
   <div class="contact-right">
-    <div><div class="c-item-label">Email</div><div class="c-item-val"><a href="mailto:info@oncecustom.com">info@oncecustom.com</a></div></div>
-    <div><div class="c-item-label">Instagram</div><div class="c-item-val"><a href="https://www.instagram.com/oncecustom/" target="_blank">@oncecustom</a></div></div>
-    <div><div class="c-item-label"><span data-inline-lang="en">Location</span><span data-inline-lang="tr">Konum</span></div><div class="c-item-val">Bursa, Türkiye</div></div>
+    <form class="cf-form" id="contactForm" action="YOUR_FORMSPREE_URL" method="POST">
+      <div class="cf-row">
+        <div class="cf-field">
+          <label><span data-inline-lang="en">First Name</span><span data-inline-lang="tr">Ad</span></label>
+          <input type="text" name="first_name" placeholder="John" required>
+        </div>
+        <div class="cf-field">
+          <label><span data-inline-lang="en">Last Name</span><span data-inline-lang="tr">Soyad</span></label>
+          <input type="text" name="last_name" placeholder="Doe" required>
+        </div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-field">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="john@example.com" required>
+        </div>
+        <div class="cf-field">
+          <label><span data-inline-lang="en">Phone</span><span data-inline-lang="tr">Telefon</span></label>
+          <input type="tel" name="phone" placeholder="+90 555 000 00 00">
+        </div>
+      </div>
+      <button type="submit" class="cf-submit">
+        <span data-inline-lang="en">Send Message</span>
+        <span data-inline-lang="tr">Gönder</span>
+      </button>
+      <div class="cf-success" id="cfSuccess">
+        <span data-inline-lang="en">Thank you — we'll be in touch soon.</span>
+        <span data-inline-lang="tr">Teşekkürler — en kısa sürede döneceğiz.</span>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -419,6 +456,22 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     localStorage.setItem('once_lang', lang);
   }
   setLang(localStorage.getItem('once_lang') || 'en');
+
+  // ── contact form ──
+  var cfForm = document.getElementById('contactForm');
+  if (cfForm) {
+    cfForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(cfForm);
+      fetch(cfForm.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+        .then(function(r) {
+          if (r.ok) {
+            cfForm.reset();
+            document.getElementById('cfSuccess').style.display = 'block';
+          }
+        });
+    });
+  }
 
   // ── hero slideshow ──
   let currentSlide = 0;
