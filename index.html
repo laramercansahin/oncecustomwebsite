@@ -356,7 +356,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 <section class="dist">
   <span class="sec-eyebrow"><span data-inline-lang="en">An International Presence</span><span data-inline-lang="tr">Uluslararası Bir Varlık</span></span>
   <div class="dist-world">Türkiye · Germany · Spain · Italy · USA · South Korea · China</div>
-  <div id="distMap" style="height:420px;border:1px solid var(--border);margin-top:8px;border-radius:0;filter:grayscale(1) invert(1) brightness(0.65) contrast(1.2);"></div>
+  <div id="distMap" style="height:420px;border:1px solid var(--border);margin-top:8px;border-radius:0;"></div>
 </section>
 
 <!-- CONTACT -->
@@ -457,9 +457,9 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       attributionControl: false
     });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; OpenStreetMap'
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 16,
+      attribution: '&copy; Esri'
     }).addTo(map);
 
     var pinIcon = L.divIcon({
