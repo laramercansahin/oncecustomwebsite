@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Distributors — Once Custom Sound</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
 @font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
 @font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
@@ -56,7 +56,7 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%,rgba(176,136,88,.07) 0%,transparent 65%);}
 .hero-ch{font-size:13px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;}
 .hero-ch::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
-.hero-hl{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(48px,7vw,110px);letter-spacing:.06em;line-height:.9;color:var(--cream);position:relative;}
+.hero-hl{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(28px,4vw,56px);letter-spacing:.08em;line-height:1.1;color:var(--cream);position:relative;}
 .hero-hl em{color:var(--bronze);}
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;padding-left:60px;}
 .hero-sub{font-size:17px;font-weight:300;letter-spacing:.04em;color:var(--cream);line-height:2.2;position:relative;opacity:.82;}
@@ -385,7 +385,7 @@ body.tr [data-lang="tr"]{display:inline;}
   <a href="index.html"><span data-lang="en">Back to Home</span><span data-lang="tr">Ana Sayfaya Dön</span></a>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 function setLang(l){
   document.body.className=l;
@@ -436,7 +436,7 @@ window.addEventListener('load',function(){
     zoomControl:false,attributionControl:false,
     scrollWheelZoom:false,dragging:true,doubleClickZoom:false
   });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png').addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'&copy; Esri'}).addTo(map);
 
   var distributors=[
     {name:'CDBANK',         country:'Türkiye',      city:'Bursa',     lat:40.2,  lng:29.0,  id:'card-cdbank'},
