@@ -914,10 +914,17 @@ window.addEventListener('DOMContentLoaded', function(){
   var bar = document.getElementById('lbar');
   setTimeout(function(){ logo.classList.add('show'); }, 100);
   setTimeout(function(){ bar.style.width = '100%'; }, 200);
+  var urlP = parseInt(new URLSearchParams(window.location.search).get('p'));
+  var startIdx = (!isNaN(urlP) && urlP >= 0 && urlP < N) ? urlP : 0;
+  if(startIdx !== 0){ cfCurrent = startIdx; }
+
   setTimeout(function(){
     document.getElementById('loader').classList.add('out');
     cfRender();
     sliderRender();
+    if(startIdx !== 0){
+      setTimeout(function(){ goToDetail(startIdx); }, 200);
+    }
   }, 1700);
 
   document.getElementById('cfName').addEventListener('click', function(){
