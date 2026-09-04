@@ -75,7 +75,7 @@ body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-
 .menu-nav ul li a:hover { color: var(--cream); }
 
 /* ─── HERO ─── */
-.hero { aspect-ratio: 16/9; width: 100%; margin-top: 64px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero { width: 100%; height: calc(100vh - 64px); margin-top: 64px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
 /* slideshow */
 .hero-slides { position: absolute; inset: 0; z-index: 1; }
@@ -268,7 +268,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 <section class="hero">
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide active">
-      <img src="photos/Once_web_Har_1920x1080.jpg.jpeg" alt="HAR speaker">
+      <img src="photos/Once_web_Har_1920x1080.jpg.jpeg" alt="HAR speaker" style="object-position: center top;">
     </div>
     <div class="hero-slide">
       <img src="photos/Once_web_Su_1920x1080.jpg.jpeg" alt="SU speaker">
