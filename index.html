@@ -4,7 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Once Custom Sound</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Light.woff') format('woff'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-LightItalic.woff') format('woff'); font-weight: 300; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Regular.woff') format('woff'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-RegularItalic.woff') format('woff'); font-weight: 400; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Medium.woff') format('woff'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-MediumItalic.woff') format('woff'); font-weight: 500; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-SemiBold.woff') format('woff'); font-weight: 600; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-SemiBoldItalic.woff') format('woff'); font-weight: 600; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Bold.woff') format('woff'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-BoldItalic.woff') format('woff'); font-weight: 700; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Black.woff') format('woff'); font-weight: 900; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-BlackItalic.woff') format('woff'); font-weight: 900; font-style: italic; }
+</style>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -15,9 +30,9 @@
   --cream:  #EDE4D5;
   --mid:    #A89F94;
   --ghost:  #6A6058;
-  --serif:  'Cormorant Garamond', Georgia, serif;
+  --serif:  'FH Oscar Pro', sans-serif;
 }
-body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro', sans-serif; font-weight: 300; overflow-x: hidden; }
 
 /* ─── REVEAL ANIMATIONS ─── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
@@ -49,7 +64,7 @@ body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-
 .topbar-logo img:hover { opacity: 0.7; }
 .topbar-right { display: flex; align-items: center; gap: 24px; }
 .lang-switch { display: flex; gap: 2px; }
-.lang-btn { font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ghost); cursor: pointer; padding: 6px 10px; background: none; border: none; font-family: 'Jost', sans-serif; transition: color 0.3s; }
+.lang-btn { font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ghost); cursor: pointer; padding: 6px 10px; background: none; border: none; font-family: 'FH Oscar Pro', sans-serif; transition: color 0.3s; }
 .lang-btn.active { color: var(--cream); }
 .topbar-enquire { font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze); cursor: pointer; border: 1px solid rgba(200,121,65,0.4); padding: 8px 20px; transition: border-color 0.3s, background 0.3s; background: none; }
 .topbar-enquire:hover { border-color: var(--bronze); background: rgba(200,121,65,0.05); }
@@ -208,13 +223,13 @@ body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-
 .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .cf-field { display: flex; flex-direction: column; gap: 6px; }
 .cf-field label { font-size: 9px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ghost); }
-.cf-field input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; }
+.cf-field input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; }
 .cf-field input:focus { border-color: var(--bronze); }
 .cf-field input::placeholder { color: var(--ghost); opacity: 0.6; }
-      .cf-field textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; resize: vertical; min-height: 120px; }
+      .cf-field textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; resize: vertical; min-height: 120px; }
       .cf-field textarea:focus { border-color: var(--bronze); }
       .cf-field textarea::placeholder { color: var(--ghost); opacity: 0.6; }
-.cf-submit { margin-top: 8px; font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,255,255,0.2); padding: 14px 32px; background: none; cursor: pointer; transition: border-color 0.4s, background 0.4s; font-family: 'Jost',sans-serif; }
+.cf-submit { margin-top: 8px; font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,255,255,0.2); padding: 14px 32px; background: none; cursor: pointer; transition: border-color 0.4s, background 0.4s; font-family: 'FH Oscar Pro',sans-serif; }
 .cf-submit:hover { border-color: var(--bronze); background: rgba(200,121,65,0.05); }
 .cf-success { display: none; font-family: var(--serif); font-size: 17px; font-style: italic; color: var(--bronze); margin-top: 16px; }
 .c-item-label { font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ghost); margin-bottom: 8px; }
@@ -548,7 +563,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       L.marker([d.lat, d.lng], { icon: pinIcon })
         .addTo(map)
         .bindPopup(
-          '<div style="font-family:Bebas Neue,sans-serif;font-size:15px;letter-spacing:.15em;color:#EDE4D5;">' + d.name + '</div>' +
+          '<div style="font-family:FH Oscar Pro,sans-serif;font-size:15px;letter-spacing:.15em;color:#EDE4D5;">' + d.name + '</div>' +
           '<div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#C87941;margin-top:2px;">' + d.country + '</div>',
           { className: 'once-popup' }
         );

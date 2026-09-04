@@ -4,7 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Speakers — Once Custom Sound</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Light.woff') format('woff'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-LightItalic.woff') format('woff'); font-weight: 300; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Regular.woff') format('woff'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-RegularItalic.woff') format('woff'); font-weight: 400; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Medium.woff') format('woff'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-MediumItalic.woff') format('woff'); font-weight: 500; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-SemiBold.woff') format('woff'); font-weight: 600; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-SemiBoldItalic.woff') format('woff'); font-weight: 600; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Bold.woff') format('woff'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-BoldItalic.woff') format('woff'); font-weight: 700; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Black.woff') format('woff'); font-weight: 900; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-BlackItalic.woff') format('woff'); font-weight: 900; font-style: italic; }
+</style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -16,7 +31,7 @@
   --ghost:#1E1A15;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-serif;font-weight:300;overflow-x:hidden;}
 
 /* ── LOADER ── */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease;}
@@ -31,7 +46,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-back::before{content:'←';font-size:14px;}
 .bar-back:hover{color:var(--bronze);gap:14px;}
 .bar-logo img{height:68px;filter:brightness(0) invert(1);}
-.bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
+.bar-lang button{background:none;border:none;font-family:'FH Oscar Pro',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
 .bar-lang button.active{color:var(--cream);}
 
 /* ══════════════════════════════════
@@ -68,7 +83,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   flex-shrink:0;
 }
 .cf-title{
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'FH Oscar Pro',sans-serif;
   font-size:clamp(28px,4vw,52px);
   letter-spacing:.1em;color:var(--cream);line-height:1;
 }
@@ -117,7 +132,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 }
 .cf-soon-badge{
   position:absolute;top:16px;left:50%;transform:translateX(-50%);
-  font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;
+  font-family:'FH Oscar Pro',sans-serif;font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;
   color:var(--bronze);background:rgba(15,13,10,.85);border:1px solid rgba(200,121,65,.4);
   padding:5px 14px;white-space:nowrap;pointer-events:none;z-index:10;
 }
@@ -148,7 +163,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
   background:radial-gradient(ellipse 70% 100% at 50% 50%, rgba(15,13,10,.5) 0%, transparent 100%);
 }
 .cf-info-name{
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'FH Oscar Pro',sans-serif;
   font-size:clamp(36px,5vw,68px);
   letter-spacing:.08em;color:var(--cream);line-height:1;cursor:pointer;pointer-events:auto;
   text-shadow:0 2px 20px rgba(0,0,0,.8);
@@ -230,7 +245,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 
 /* artist name — large, minimal */
 .slide-name{
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'FH Oscar Pro',sans-serif;
   font-size:clamp(40px,5vw,72px);
   letter-spacing:.12em;line-height:1;
   color:var(--cream);

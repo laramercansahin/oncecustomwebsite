@@ -4,8 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Distributors — Once Custom Sound</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Light.woff') format('woff'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-LightItalic.woff') format('woff'); font-weight: 300; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Regular.woff') format('woff'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-RegularItalic.woff') format('woff'); font-weight: 400; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Medium.woff') format('woff'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-MediumItalic.woff') format('woff'); font-weight: 500; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-SemiBold.woff') format('woff'); font-weight: 600; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-SemiBoldItalic.woff') format('woff'); font-weight: 600; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Bold.woff') format('woff'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-BoldItalic.woff') format('woff'); font-weight: 700; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Black.woff') format('woff'); font-weight: 900; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-BlackItalic.woff') format('woff'); font-weight: 900; font-style: italic; }
+</style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -17,7 +32,7 @@
   --ghost:#7A7060;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-serif;font-weight:300;overflow-x:hidden;}
 
 /* LOADER */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;transition:opacity 0.9s ease,visibility 0.9s ease;}
@@ -33,7 +48,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .bar-back::before{content:'←';font-size:14px;}
 .bar-back:hover{color:var(--bronze);gap:14px;}
 .bar-logo img{height:68px;filter:brightness(0) invert(1);}
-.bar-lang button{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
+.bar-lang button{background:none;border:none;font-family:'FH Oscar Pro',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
 .bar-lang button.active{color:var(--cream);}
 
 /* HERO */
@@ -41,7 +56,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%,rgba(176,136,88,.07) 0%,transparent 65%);}
 .hero-ch{font-size:13px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;}
 .hero-ch::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
-.hero-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,110px);letter-spacing:.06em;line-height:.9;color:var(--cream);position:relative;}
+.hero-hl{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(48px,7vw,110px);letter-spacing:.06em;line-height:.9;color:var(--cream);position:relative;}
 .hero-hl em{color:var(--bronze);}
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;padding-left:60px;}
 .hero-sub{font-size:17px;font-weight:300;letter-spacing:.04em;color:var(--cream);line-height:2.2;position:relative;opacity:.82;}
@@ -54,7 +69,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 /* GRID */
 .grid-section{padding:100px 80px;}
 .grid-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:60px;padding-bottom:28px;}
-.grid-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3vw,36px);letter-spacing:.12em;color:var(--cream);}
+.grid-title{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(22px,3vw,36px);letter-spacing:.12em;color:var(--cream);}
 .grid-count{font-size:13px;letter-spacing:.24em;color:var(--bronze);}
 
 .dist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
@@ -65,7 +80,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .dist-card:hover::after{width:100%;}
 
 .dist-num{font-size:13px;letter-spacing:.22em;color:var(--ghost);margin-bottom:20px;}
-.dist-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,2.8vw,38px);letter-spacing:.15em;color:var(--cream);line-height:1.1;margin-bottom:12px;}
+.dist-name{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(26px,2.8vw,38px);letter-spacing:.15em;color:var(--cream);line-height:1.1;margin-bottom:12px;}
 .dist-country{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:10px;}
 .dist-city{font-size:15px;font-weight:300;letter-spacing:.04em;color:var(--mid);opacity:.85;}
 .dist-tag{display:inline-block;margin-top:22px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ghost);border:1px solid var(--border);padding:6px 14px;}
@@ -74,7 +89,7 @@ body{background:var(--black);color:var(--cream);font-family:'Jost',sans-serif;fo
 .cta-section{padding:100px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
 .cta-text .ch{font-size:13px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);display:flex;align-items:center;gap:16px;margin-bottom:24px;}
 .cta-text .ch::before{content:'';display:block;width:32px;height:1px;background:var(--bronze);}
-.cta-text h2{font-family:'Jost',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:200;letter-spacing:.04em;line-height:1.2;color:var(--cream);margin-bottom:20px;}
+.cta-text h2{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:200;letter-spacing:.04em;line-height:1.2;color:var(--cream);margin-bottom:20px;}
 .cta-text h2 em{color:var(--bronze);font-style:normal;}
 .cta-text p{font-size:15px;font-weight:300;letter-spacing:.04em;line-height:2.2;color:var(--cream);opacity:.75;}
 .cta-form{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);}
@@ -98,7 +113,7 @@ footer a:hover{color:var(--bronze);}
 .dmodal-close{position:absolute;top:18px;right:20px;background:none;border:none;color:var(--mid);font-size:22px;cursor:pointer;line-height:1;transition:color .2s;}
 .dmodal-close:hover{color:var(--cream);}
 .dmodal-num{font-size:12px;letter-spacing:.24em;color:var(--ghost);margin-bottom:16px;}
-.dmodal-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3vw,36px);letter-spacing:.12em;color:var(--cream);line-height:1;margin-bottom:8px;}
+.dmodal-name{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(22px,3vw,36px);letter-spacing:.12em;color:var(--cream);line-height:1;margin-bottom:8px;}
 .dmodal-country{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:28px;}
 .dmodal-info{display:flex;flex-direction:column;gap:0;}
 .dmodal-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;}
