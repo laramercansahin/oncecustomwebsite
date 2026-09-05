@@ -551,6 +551,19 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     align-items:flex-start;
     height:auto !important;
   }
+  /* override entry animations — all content visible on mobile */
+  .slide .slide-name,
+  .slide .slide-maker,
+  .slide .slide-tagline,
+  .slide .slide-divider,
+  .slide .slide-specs,
+  .slide .slide-cta,
+  .slide .gallery-main-img{
+    opacity:1 !important;
+    transform:none !important;
+    animation:none !important;
+  }
+
   .slide-left{
     border-left:none;
     border-top:1px solid rgba(176,136,88,.22);
