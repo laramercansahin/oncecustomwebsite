@@ -487,8 +487,15 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* ── DETAIL: all products stacked, each exactly 100svh ── */
-  #hero-section{height:auto;overflow:visible;min-height:unset;}
+  /* ── DETAIL: scroll-snap, each product fills 100svh ── */
+  #hero-section{
+    height:100svh;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    scroll-snap-type:y mandatory;
+    -webkit-overflow-scrolling:touch;
+    min-height:unset;
+  }
   #slides{position:relative;inset:auto;}
   .slide,.slide.prev,.slide.next,.slide.active{
     position:relative !important;
@@ -499,6 +506,18 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     display:flex !important;
     flex-direction:column;
     overflow:hidden;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  /* entrance animation */
+  .slide-enter{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .6s cubic-bezier(0.22,1,0.36,1), transform .6s cubic-bezier(0.22,1,0.36,1);
+  }
+  .slide-enter.in-view{
+    opacity:1;
+    transform:translateY(0);
   }
 
   /* ── image: top 42svh ── */
@@ -1109,8 +1128,8 @@ function goToDetail(idx){
     if(isMobile){
       var slides = document.querySelectorAll('.slide');
       if(slides[idx]){
-        var top = slides[idx].getBoundingClientRect().top + window.scrollY - 56;
-        window.scrollTo({top: top, behavior:'smooth'});
+        var heroEl2 = document.getElementById('hero-section');
+        heroEl2.scrollTo({top: idx * heroEl2.clientHeight, behavior:'smooth'});
       }
     } else {
       var el = document.getElementById('hero-section');
@@ -1173,6 +1192,16 @@ window.addEventListener('wheel', function(e){
     setTimeout(function(){ cfWheelLock = false; }, 900);
   }
 }, {passive:true});
+
+/* mobile: entrance animations via IntersectionObserver on scroll-snap container */
+if(isMobile){
+  var heroScroll = document.getElementById('hero-section');
+  document.querySelectorAll('.slide').forEach(function(s){ s.classList.add('slide-enter'); });
+  var slideObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in-view'); });
+  }, {root: heroScroll, threshold: 0.2});
+  document.querySelectorAll('.slide').forEach(function(s){ slideObs.observe(s); });
+}
 
 /* touch slide in hero */
 var touchY = null, touchFromImg = false;
