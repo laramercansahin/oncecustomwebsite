@@ -1081,10 +1081,10 @@ function goToDetail(idx){
   sliderRender();
   setTimeout(function(){
     if(isMobile){
-      /* scroll to the specific slide element */
       var slides = document.querySelectorAll('.slide');
       if(slides[idx]){
-        slides[idx].scrollIntoView({behavior:'smooth', block:'start'});
+        var top = slides[idx].getBoundingClientRect().top + window.scrollY - 56;
+        window.scrollTo({top: top, behavior:'smooth'});
       }
     } else {
       var el = document.getElementById('hero-section');
