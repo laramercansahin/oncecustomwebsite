@@ -851,15 +851,16 @@ cfScene.addEventListener('touchmove', function(e){
 cfScene.addEventListener('touchend', function(e){
   if(cfDragStartX === null || !cfDragging) { cfDragStartX = null; return; }
   var dx = e.changedTouches[0].clientX - cfDragStartX;
-  /* how many steps did we drag? */
-  var steps = Math.round(-dx / (80));
-  cfCurrent = ((cfCurrent + steps) % N + N) % N;
-  cfSnapToNearest();
+  /* snap to nearest from actual dragged ring angle */
+  var draggedAngle = cfBaseAngle + dx * (ANGLE_STEP / 80);
+  var nearestIdx = Math.round(-draggedAngle / ANGLE_STEP);
+  cfCurrent = ((nearestIdx % N) + N) % N;
+  requestAnimationFrame(function(){ cfSnapToNearest(); });
   cfDragStartX = null; cfDragging = false;
 }, {passive:true});
 
 /* mouse drag (desktop) */
-cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; cfBaseAngle = -cfCurrent * ANGLE_STEP; });
+cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; cfBaseAngle = -cfCurrent * ANGLE_STEP; cfDragging = false; });
 window.addEventListener('mousemove', function(e){
   if(cfDragStartX === null) return;
   cfDragging = true;
@@ -869,9 +870,10 @@ window.addEventListener('mouseup', function(e){
   if(cfDragStartX === null) return;
   if(cfDragging){
     var dx = e.clientX - cfDragStartX;
-    var steps = Math.round(-dx / 120);
-    cfCurrent = ((cfCurrent + steps) % N + N) % N;
-    cfSnapToNearest();
+    var draggedAngle = cfBaseAngle + dx * (ANGLE_STEP / 120);
+    var nearestIdx = Math.round(-draggedAngle / ANGLE_STEP);
+    cfCurrent = ((nearestIdx % N) + N) % N;
+    requestAnimationFrame(function(){ cfSnapToNearest(); });
   }
   cfDragStartX = null; cfDragging = false;
 });
