@@ -858,8 +858,8 @@ cfScene.addEventListener('touchmove', function(e){
 cfScene.addEventListener('touchend', function(e){
   if(cfDragStartX === null || !cfDragging){ cfDragStartX = null; return; }
   var dx = e.changedTouches[0].clientX - cfDragStartX;
-  /* steps based purely on drag distance, 1 step per 60px */
-  var steps = Math.round(-dx / 60);
+  /* max 1 step at a time */
+  var steps = dx < -24 ? 1 : dx > 24 ? -1 : 0;
   cfSnapTo(cfStartIdx + steps);
   cfDragStartX = null; cfDragging = false;
 }, {passive:true});
