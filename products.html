@@ -817,20 +817,19 @@ function cfGoTo(idx){
   setTimeout(function(){ cfAnimating = false; }, 1050);
 }
 
-/* drag / swipe — momentum + real-time ring follow */
-var cfDragStartX = null, cfDragStartY = null, cfDragging = false, cfBaseAngle = 0;
-var cfVelX = 0, cfLastX = 0, cfLastT = 0;
+/* drag / swipe */
+var cfDragStartX = null, cfDragStartY = null, cfDragging = false;
+var cfStartIdx = 0;
 var cfScene = document.getElementById('cfScene');
 
 function cfSetRingAngle(deg){
   cfRing.style.transition = 'none';
   cfRing.style.transform = 'rotateY(' + deg + 'deg)';
 }
-function cfSnapToNearest(){
-  var nearestIdx = Math.round(-cfBaseAngle / ANGLE_STEP);
-  cfCurrent = ((nearestIdx % N) + N) % N;
+function cfSnapTo(idx){
+  cfCurrent = ((idx % N) + N) % N;
   requestAnimationFrame(function(){
-    cfRing.style.transition = 'transform 0.55s cubic-bezier(0.25,1,0.3,1)';
+    cfRing.style.transition = 'transform 0.5s cubic-bezier(0.25,1,0.3,1)';
     cfRender();
   });
 }
@@ -839,13 +838,8 @@ function cfSnapToNearest(){
 cfScene.addEventListener('touchstart', function(e){
   cfDragStartX = e.touches[0].clientX;
   cfDragStartY = e.touches[0].clientY;
-  cfLastX = cfDragStartX;
-  cfLastT = Date.now();
-  cfVelX = 0;
+  cfStartIdx = cfCurrent;
   cfDragging = false;
-  cfBaseAngle = -cfCurrent * ANGLE_STEP;
-  /* stop any ongoing transition */
-  var cur = new WebKitCSSMatrix(window.getComputedStyle(cfRing).transform);
   cfRing.style.transition = 'none';
 }, {passive:true});
 
@@ -853,43 +847,37 @@ cfScene.addEventListener('touchmove', function(e){
   if(cfDragStartX === null) return;
   var dx = e.touches[0].clientX - cfDragStartX;
   var dy = e.touches[0].clientY - cfDragStartY;
-  if(!cfDragging && Math.abs(dy) > Math.abs(dx) + 4) { cfDragStartX = null; return; }
-  if(Math.abs(dx) > 8) { e.preventDefault(); cfDragging = true; }
+  if(!cfDragging && Math.abs(dy) > Math.abs(dx) + 4){ cfDragStartX = null; return; }
+  if(Math.abs(dx) > 8){ e.preventDefault(); cfDragging = true; }
   if(!cfDragging) return;
-  /* velocity tracking */
-  var now = Date.now();
-  var dt = now - cfLastT || 1;
-  cfVelX = (e.touches[0].clientX - cfLastX) / dt; /* px/ms */
-  cfLastX = e.touches[0].clientX;
-  cfLastT = now;
-  cfSetRingAngle(cfBaseAngle + dx * (ANGLE_STEP / 80));
+  /* ring follows finger from start position */
+  var baseAngle = -cfStartIdx * ANGLE_STEP;
+  cfSetRingAngle(baseAngle + dx * (ANGLE_STEP / 80));
 }, {passive:false});
 
 cfScene.addEventListener('touchend', function(e){
-  if(cfDragStartX === null || !cfDragging) { cfDragStartX = null; return; }
+  if(cfDragStartX === null || !cfDragging){ cfDragStartX = null; return; }
   var dx = e.changedTouches[0].clientX - cfDragStartX;
-  var momentum = Math.max(-80, Math.min(80, cfVelX * 80));
-  cfBaseAngle += (dx + momentum) * (ANGLE_STEP / 80);
-  cfSnapToNearest();
+  /* steps based purely on drag distance, 1 step per 60px */
+  var steps = Math.round(-dx / 60);
+  cfSnapTo(cfStartIdx + steps);
   cfDragStartX = null; cfDragging = false;
 }, {passive:true});
 
 /* mouse drag (desktop) */
-cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; cfLastX = e.clientX; cfLastT = Date.now(); cfVelX = 0; cfBaseAngle = -cfCurrent * ANGLE_STEP; cfDragging = false; cfRing.style.transition='none'; });
+cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; cfStartIdx = cfCurrent; cfDragging = false; cfRing.style.transition='none'; });
 window.addEventListener('mousemove', function(e){
   if(cfDragStartX === null) return;
   cfDragging = true;
-  var now = Date.now(); var dt = now - cfLastT || 1;
-  cfVelX = (e.clientX - cfLastX) / dt; cfLastX = e.clientX; cfLastT = now;
-  cfSetRingAngle(cfBaseAngle + (e.clientX - cfDragStartX) * (ANGLE_STEP / 120));
+  var baseAngle = -cfStartIdx * ANGLE_STEP;
+  cfSetRingAngle(baseAngle + (e.clientX - cfDragStartX) * (ANGLE_STEP / 120));
 });
 window.addEventListener('mouseup', function(e){
   if(cfDragStartX === null) return;
   if(cfDragging){
     var dx = e.clientX - cfDragStartX;
-    var momentum = Math.max(-200, Math.min(200, cfVelX * 180));
-    cfBaseAngle += (dx + momentum) * (ANGLE_STEP / 120);
-    cfSnapToNearest();
+    var steps = Math.round(-dx / 100);
+    cfSnapTo(cfStartIdx + steps);
   }
   cfDragStartX = null; cfDragging = false;
 });
