@@ -226,8 +226,8 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   .split { display: flex; flex-direction: column; min-height: auto; }
   .split-img { position: relative; width: 100%; height: 320px; flex-shrink: 0; overflow: hidden; }
   .split-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
-  /* halit+said photo: show full — contain with dark bg */
-  .split-img img[src*="halit_said"] { object-fit: contain; background: #0a0806; }
+  /* halit+said photo: crop to fill with face centered */
+  .split-img img[src*="halit_said"] { object-fit: cover; object-position: center center; }
   .split-text { padding: 40px 24px 48px; width: 100%; }
 
   /* RTL split — photo always on top */
@@ -250,11 +250,14 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   .pc-left, .pc-right { max-width: 100%; margin: 0; }
   .fashion-inner { padding: 80px 24px 60px; margin: 0; max-width: 100%; text-align: center; }
 
-  /* names section */
-  .names-section-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .names-grid { grid-template-columns: 1fr 1fr; }
-  .name-cell { padding: 20px 12px; }
-  .name-tr { font-size: 24px; letter-spacing: .12em; }
+  /* names section — edge to edge */
+  section[style*="padding:80px 80px"] { padding: 48px 0 40px !important; }
+  section[style*="padding:80px 80px"] > .ch { padding: 0 24px; }
+  .names-section-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .names-section-grid > div:first-child { padding: 0 24px; }
+  .names-grid { grid-template-columns: 1fr 1fr; width: 100%; }
+  .name-cell { padding: 20px 16px; }
+  .name-tr { font-size: 26px; letter-spacing: .12em; }
   .name-en { font-size: 12px; }
 
   /* timeline */
@@ -484,8 +487,8 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
      FASHION AUDIO
 ════════════════════════════════════════ -->
 <section class="panel">
-  <div class="panel-bg"><img src="photos/Nar_Space.jpg" alt="Fashion Audio" style="object-position:left center;"></div>
-  <div class="ov-right"></div>
+  <div class="panel-bg"><img src="photos/Nar_Space.jpg" alt="Fashion Audio" style="object-position:center center;"></div>
+  <div style="position:absolute;inset:0;background:rgba(10,8,6,0.62);z-index:0;"></div>
   <div class="fashion-inner">
     <div class="ch reveal" style="justify-content:center;margin-bottom:32px;">
       <span data-lang="en">a new language</span>
@@ -498,8 +501,8 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
     <div class="bt reveal" data-delay="2" style="text-align:center;">
       <p data-lang="en">once sound becomes physical, visible, and part of how a space is experienced it naturally enters the language of art, design, architecture and fashion.</p>
       <p data-lang="tr">ses fiziksel, görünür ve bir mekânın deneyimlenme biçiminin parçası haline geldiğinde doğal olarak sanat, tasarım, mimari ve moda diline giriyor.</p>
-      <p data-lang="en" style="margin-top:32px;font-style:italic;color:var(--bronze);opacity:1;">it is not a speaker that reproduces music. it is an artwork that breathes life into music.</p>
-      <p data-lang="tr" style="margin-top:32px;font-style:italic;color:var(--bronze);opacity:1;">bu müziği yeniden üreten bir hoparlör değil. müziğe hayat veren bir sanat eseridir.</p>
+      <p data-lang="en" style="margin-top:32px;font-style:italic;color:var(--cream);opacity:0.9;">it is not a speaker that reproduces music. it is an artwork that breathes life into music.</p>
+      <p data-lang="tr" style="margin-top:32px;font-style:italic;color:var(--cream);opacity:0.9;">bu müziği yeniden üreten bir hoparlör değil. müziğe hayat veren bir sanat eseridir.</p>
     </div>
   </div>
 </section>
