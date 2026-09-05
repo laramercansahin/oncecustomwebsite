@@ -99,7 +99,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
   opacity: 0; transition: opacity 1.4s ease;
 }
 .hero-slide.active { opacity: 1; }
-.hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; filter: brightness(0.85); }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; filter: brightness(0.85); }
 .hero-overlay { position: absolute; inset: 0; z-index: 2; background: rgba(10,8,6,0.6); }
 
 .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 56px; display: flex; flex-direction: column; align-items: center; width: 100%; }
@@ -343,19 +343,19 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 <section class="hero">
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide active">
-      <img src="photos/Once_web_Har_1920x1080.jpg.jpeg" alt="HAR speaker" style="object-position: center top;">
+      <img src="photos/Once_web_Har_1920x1080.jpg.jpeg" alt="HAR speaker">
     </div>
     <div class="hero-slide">
-      <img src="photos/Once_web_Su_1920x1080.jpg.jpeg" alt="SU speaker" style="object-position: center center;">
+      <img src="photos/Once_web_Su_1920x1080.jpg.jpeg" alt="SU speaker">
     </div>
     <div class="hero-slide">
-      <img src="photos/Once_web_Almula_1920x1080.jpg.jpeg?v=2" alt="ALMULA speaker" style="object-position: center center;">
+      <img src="photos/Once_web_Almula_1920x1080.jpg.jpeg?v=2" alt="ALMULA speaker">
     </div>
     <div class="hero-slide">
-      <img src="photos/Once_web_Nar_1920x1080.jpg.jpeg?v=2" alt="NAR speaker" style="object-position: center center;">
+      <img src="photos/Once_web_Nar_1920x1080.jpg.jpeg?v=2" alt="NAR speaker">
     </div>
     <div class="hero-slide">
-      <img src="photos/Once_web_DAL_1920x1080.jpg.jpeg" alt="DAL speaker" style="object-position: center center;">
+      <img src="photos/Once_web_DAL_1920x1080.jpg.jpeg" alt="DAL speaker">
     </div>
   </div>
   <div class="hero-overlay"></div>
@@ -571,6 +571,17 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     document.getElementById('scrollFill').style.width = (36 + (slideIdx / maxSlide) * 64) + '%';
   }
   document.getElementById('sliderPrev').disabled = true;
+
+  // ── product cards touch swipe ──
+  var pgridWrap = document.querySelector('.pgrid-wrap');
+  var pTouchX = null;
+  pgridWrap.addEventListener('touchstart', function(e){ pTouchX = e.touches[0].clientX; }, {passive:true});
+  pgridWrap.addEventListener('touchend', function(e){
+    if(pTouchX === null) return;
+    var dx = e.changedTouches[0].clientX - pTouchX;
+    if(Math.abs(dx) > 40) slideCards(dx < 0 ? 1 : -1);
+    pTouchX = null;
+  }, {passive:true});
 
   // ── Leaflet distributor map ──
   function initMap() {
