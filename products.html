@@ -492,7 +492,7 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   #slides{position:relative;inset:auto;}
   .slide,.slide.prev,.slide.next,.slide.active{
     position:relative !important;
-    height:100svh !important;
+    height:auto !important;
     transform:none !important;
     opacity:1 !important;
     pointer-events:auto !important;
@@ -551,9 +551,8 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     align-items:flex-start;
     height:auto !important;
   }
-  /* push enquire to bottom */
   .slide-left{display:flex;flex-direction:column;}
-  .slide-cta{margin-top:auto;padding-top:10px;}
+  .slide-cta{margin-top:12px;}
   /* override entry animations — all content visible on mobile */
   .slide .slide-name,
   .slide .slide-maker,
