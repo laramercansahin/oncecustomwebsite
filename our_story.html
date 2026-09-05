@@ -41,14 +41,18 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
 #loaderBar{position:absolute;bottom:0;left:0;height:1px;background:var(--bronze);width:0%;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
 
 /* TOPBAR */
-.bar{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,8,6,0.92);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:background .6s ease,border-color .6s ease;}
-.bar.scrolled{background:rgba(10,8,6,.96);border-color:var(--border);}
-.bar-back{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,8,6,0.92);backdrop-filter:blur(20px);border-bottom:1px solid transparent;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;transition:background 0.6s ease,border-color 0.6s ease,backdrop-filter 0.6s ease;}
+.bar.scrolled{background:rgba(10,8,6,0.96);border-color:var(--border);backdrop-filter:blur(20px);}
+.bar-back{font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--ghost);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s;}
+.bar-back:hover{color:var(--cream);}
 .bar-back::before{content:'←';font-size:13px;}
-.bar-back:hover{color:var(--bronze);gap:14px;}
-.bar-logo img{height:56px;filter:brightness(0) invert(1);}
-.bar-lang button{background:none;border:none;font-family:'FH Oscar Pro',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
-.bar-lang button.active{color:var(--cream);}
+.bar-logo{position:absolute;left:50%;transform:translateX(-50%);}
+.bar-logo img{height:56px;filter:brightness(0) invert(1);display:block;transition:opacity 0.3s;}
+.bar-logo img:hover{opacity:0.7;}
+.bar-right{display:flex;align-items:center;gap:24px;}
+.lang-switch{display:flex;gap:2px;}
+.lang-btn{font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--ghost);cursor:pointer;padding:6px 10px;background:none;border:none;font-family:'FH Oscar Pro',sans-serif;transition:color 0.3s;}
+.lang-btn.active{color:var(--cream);}
 
 /* PANEL */
 .panel{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
@@ -213,7 +217,6 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   /* topbar */
   .bar { padding: 0 20px; height: 56px; }
   .bar-logo img { height: 32px; }
-  .bar-back { font-size: 10px; letter-spacing: .1em; }
 
   /* hero plain section */
   .panel-plain { min-height: auto; padding: 0; }
@@ -321,11 +324,14 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
   <a href="index.html" class="bar-back">
     <span data-lang="en">Home</span><span data-lang="tr">Ana Sayfa</span>
   </a>
-  <div class="bar-logo"><img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound"></div>
-  <div class="bar-lang">
-    <button id="btnEN" onclick="setLang('en')">EN</button>
-    <span style="color:var(--ghost);font-size:11px">|</span>
-    <button id="btnTR" onclick="setLang('tr')" class="active">TR</button>
+  <div class="bar-logo">
+    <img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound">
+  </div>
+  <div class="bar-right">
+    <div class="lang-switch">
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" id="btnTR" onclick="setLang('tr')">TR</button>
+    </div>
   </div>
 </header>
 
