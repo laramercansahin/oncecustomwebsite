@@ -487,20 +487,20 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* ── DETAIL: scroll-snap container sits exactly below topbar ── */
+  /* ── DETAIL: scroll-snap, full viewport ── */
   #hero-section{
-    height:calc(100svh - 56px);
-    margin-top:56px;
+    height:100svh;
     overflow-y:scroll;
     overflow-x:hidden;
     scroll-snap-type:y mandatory;
     -webkit-overflow-scrolling:touch;
+    scroll-margin-top:56px;
     min-height:unset;
   }
   #slides{position:relative;inset:auto;}
   .slide,.slide.prev,.slide.next,.slide.active{
     position:relative !important;
-    height:calc(100svh - 56px) !important;
+    height:100svh !important;
     transform:none !important;
     opacity:1 !important;
     pointer-events:auto !important;
@@ -1128,9 +1128,10 @@ function goToDetail(idx){
   setTimeout(function(){
     if(isMobile){
       var heroEl2 = document.getElementById('hero-section');
-      /* position correct product inside container, then bring container into view */
       heroEl2.scrollTo({top: idx * heroEl2.clientHeight, behavior:'instant'});
-      heroEl2.scrollIntoView({behavior:'smooth', block:'start'});
+      /* scroll window so hero-section top lands just below fixed topbar */
+      var heroTop = heroEl2.getBoundingClientRect().top + window.scrollY - 56;
+      window.scrollTo({top: heroTop, behavior:'smooth'});
     } else {
       var el = document.getElementById('hero-section');
       window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
