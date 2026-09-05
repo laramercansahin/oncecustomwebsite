@@ -193,57 +193,64 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
-  /* topbar */
-  .bar { padding: 0 20px; height: 60px; }
-  .bar-logo img { height: 44px; }
-  .bar-back { font-size: 12px; letter-spacing: .12em; }
+  /* prevent horizontal scroll */
+  html, body { overflow-x: hidden; max-width: 100vw; }
 
-  /* hero */
-  .pc { padding: 100px 24px 60px; }
+  /* topbar — always visible with background */
+  .bar { padding: 0 20px; height: 60px; background: rgba(15,13,10,.96); backdrop-filter: blur(16px); }
+  .bar-logo img { height: 40px; }
+  .bar-back { font-size: 11px; letter-spacing: .1em; }
+
+  /* hero plain section */
+  .panel-plain { min-height: auto; padding: 0; }
+  .pc { padding: 80px 24px 60px; }
   .pc-center { max-width: 100%; }
-  .spaced { font-size: clamp(14px, 4vw, 20px); letter-spacing: .1em; line-height: 2.2; }
+  .spaced { font-size: 16px; letter-spacing: .08em; line-height: 2; }
+  .scroll-hint { display: none; }
 
-  /* split sections → stack vertically */
-  .split { grid-template-columns: 1fr; min-height: auto; }
-  .split-img { height: 55vw; min-height: 220px; }
-  .split-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .split-text { padding: 48px 24px 56px; }
-  section.split[style*="direction:rtl"] .split-img { order: -1; }
+  /* split sections — stack vertically */
+  .split { display: flex; flex-direction: column; min-height: auto; }
+  .split-img { position: relative; width: 100%; height: 260px; flex-shrink: 0; overflow: hidden; }
+  .split-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+  .split-text { padding: 40px 24px 48px; width: 100%; }
 
-  /* headings & body */
-  .hl-xl { font-size: clamp(28px, 8vw, 48px); margin-bottom: 24px; }
-  .hl { font-size: clamp(16px, 5vw, 26px); }
-  .bt { font-size: 14px; line-height: 2; }
+  /* RTL split — photo always on top */
+  section.split[style*="direction:rtl"] { direction: ltr; }
+  section.split[style*="direction:rtl"] .split-img { order: 0; }
+  section.split[style*="direction:rtl"] .split-text { order: 1; }
+
+  /* headings */
+  .hl-xl { font-size: 32px; line-height: 1.1; margin-bottom: 20px; }
+  .hl { font-size: 18px; margin-bottom: 20px; }
+  .bt { font-size: 14px; line-height: 1.9; }
+  .ch { font-size: 11px; margin-bottom: 16px; }
 
   /* founders */
-  .founders { flex-direction: column; gap: 0; }
-  .founder-card { padding: 18px 0; border-right: none; border-bottom: 1px solid rgba(200,121,65,0.15); }
-  .founder-card:last-child { border-bottom: none; }
+  .founders { flex-direction: column; }
+  .founder-card { padding: 16px 0; }
 
-  /* panel sections */
-  .panel { min-height: 70vh; }
-  .panel-plain { min-height: auto; }
-  .pc-left,.pc-right { max-width: 100%; margin: 0; }
-  .fashion-inner { padding: 80px 24px; margin: 0; text-align: center; }
+  /* full-bg panel sections */
+  .panel { min-height: 60vh; }
+  .pc-left, .pc-right { max-width: 100%; margin: 0; }
+  .fashion-inner { padding: 80px 24px 60px; margin: 0; max-width: 100%; text-align: center; }
 
-  /* the names section */
-  section[style*="padding:80px 80px"] { padding: 60px 24px 48px !important; }
-  section[style*="padding:80px 80px"] > div[style*="grid-template-columns:1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
+  /* names section */
+  .names-section-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
   .names-grid { grid-template-columns: 1fr 1fr; }
-  .name-cell { padding: 24px 16px; }
-  .name-tr { font-size: 26px; }
+  .name-cell { padding: 20px 12px; }
+  .name-tr { font-size: 24px; letter-spacing: .12em; }
+  .name-en { font-size: 12px; }
+
+  /* timeline */
+  .timeline { margin-top: 28px; }
+  .tl-item { padding: 16px 0; }
 
   /* founder modal */
-  .fmodal-box { grid-template-columns: 1fr; width: 92%; max-width: 420px; }
-  .fmodal-img { height: 240px; }
-  .fmodal-body { padding: 32px 24px; }
-  .fmodal-name { font-size: clamp(24px, 7vw, 38px); }
-
-  /* scroll hint */
-  .scroll-hint { bottom: 24px; }
+  .fmodal-box { grid-template-columns: 1fr; width: 92%; }
+  .fmodal-img { height: 220px; position: relative; }
+  .fmodal-body { padding: 28px 20px; }
+  .fmodal-name { font-size: 28px; }
+  .fmodal-bio { font-size: 13px; line-height: 1.9; margin-top: 16px; }
 }
 </style>
 </head>
@@ -483,7 +490,7 @@ body.en .founders div[data-lang="en"],body.tr .founders div[data-lang="tr"]{disp
 ════════════════════════════════════════ -->
 <section style="background:var(--black);padding:80px 80px 60px;">
   <div class="ch reveal"><span data-lang="en">the names</span><span data-lang="tr">isimler</span></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start;">
+  <div class="names-section-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start;">
     <div>
       <div class="hl reveal" data-delay="1">
         <span data-lang="en">words that carry <em>meaning</em></span>
