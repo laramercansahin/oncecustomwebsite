@@ -743,7 +743,7 @@ document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
 /* ── BUILD ORBITAL RING ITEMS ── */
 var cfRing = document.getElementById('cfRing');
 var cfItems = [];
-var RING_R = window.innerWidth < 768 ? 200 : 520;
+var RING_R = window.innerWidth < 768 ? 280 : 520;
 var ANGLE_STEP = 360 / N;
 var FADE_DEG = 42;         /* degrees from front before fading out */
 
@@ -868,7 +868,7 @@ cfScene.addEventListener('touchmove', function(e){
 cfScene.addEventListener('touchend', function(e){
   if(cfDragStartX === null || !cfDragging) { cfDragStartX = null; return; }
   var dx = e.changedTouches[0].clientX - cfDragStartX;
-  var momentum = Math.max(-200, Math.min(200, cfVelX * 180));
+  var momentum = Math.max(-80, Math.min(80, cfVelX * 80));
   cfBaseAngle += (dx + momentum) * (ANGLE_STEP / 80);
   cfSnapToNearest();
   cfDragStartX = null; cfDragging = false;
