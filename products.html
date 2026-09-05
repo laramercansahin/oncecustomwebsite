@@ -487,12 +487,19 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* ── DETAIL: image top + specs bottom, both visible ── */
-  #hero-section{height:100svh;min-height:unset;overflow:hidden;}
-  .slide{
-    position:absolute;inset:0;
+  /* ── DETAIL: all products stacked, normal scroll ── */
+  #hero-section{height:auto;overflow:visible;min-height:unset;}
+  #slides{position:relative;inset:auto;}
+  /* override slide transitions — all visible, stacked vertically */
+  .slide,.slide.prev,.slide.next,.slide.active{
+    position:relative !important;
+    height:auto !important;
+    min-height:100svh;
+    transform:none !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
     display:flex;flex-direction:column;
-    overflow:hidden;
+    overflow:visible;
   }
 
   /* ── image: top 44% — must come first visually ── */
@@ -533,16 +540,13 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   }
   .gallery-thumb{width:28px;height:28px;}
 
-  /* ── specs: bottom 56%, scrollable ── */
+  /* ── specs: below image, full height ── */
   .slide-content{
     position:relative !important;
     width:100%;
     flex:1;
-    min-height:0;
-    overflow-y:auto;
-    overflow-x:hidden;
-    -webkit-overflow-scrolling:touch;
-    padding:14px 20px 60px;
+    overflow:visible;
+    padding:16px 20px 48px;
     display:block !important;
     height:auto !important;
   }
@@ -562,12 +566,18 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .slide-cta{margin-top:14px;}
   .cta-btn{font-size:8px;}
 
-  /* back button */
-  .back-to-orbit{top:8px;left:16px;font-size:10px;}
+  /* slide bg must not cover stacked content */
+  .slide-bg{display:none;}
 
-  /* hide nav arrows on mobile — swipe to navigate */
+  /* back button */
+  .back-to-orbit{display:none;}
+
+  /* hide nav arrows, progress */
   .nav-arr{ display:none !important; }
   .progress{display:none;}
+
+  /* separator between products */
+  .slide + .slide{ border-top:1px solid rgba(42,37,32,.8); }
 
   /* floor glow — hide on mobile */
   .cf-floor{display:none;}
