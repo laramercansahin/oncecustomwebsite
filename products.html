@@ -473,10 +473,10 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-sub{font-size:10px;}
 
   /* 3d scene */
-  .cf-scene{height:44vw;min-height:220px;max-height:320px;overflow:hidden;}
+  .cf-scene{height:60vw;min-height:280px;max-height:380px;overflow:hidden;}
 
-  /* carousel items — smaller on mobile */
-  .cf-item{width:100px;height:150px;left:-50px;top:-75px;}
+  /* carousel items */
+  .cf-item{width:150px;height:225px;left:-75px;top:-112px;}
 
   /* carousel nav arrows */
   .cf-btn{width:36px;height:36px;font-size:16px;}
@@ -741,7 +741,7 @@ document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
 /* ── BUILD ORBITAL RING ITEMS ── */
 var cfRing = document.getElementById('cfRing');
 var cfItems = [];
-var RING_R = window.innerWidth < 768 ? 130 : 520;
+var RING_R = window.innerWidth < 768 ? 160 : 520;
 var ANGLE_STEP = 360 / N;
 var FADE_DEG = 42;         /* degrees from front before fading out */
 
