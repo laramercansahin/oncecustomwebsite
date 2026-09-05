@@ -517,10 +517,15 @@ function observe(){
 
 // Map
 window.addEventListener('load',function(){
+  var isMob = window.innerWidth < 768;
   var map=L.map('distMap',{
     center:[25,18],zoom:2,
     zoomControl:false,attributionControl:false,
-    scrollWheelZoom:false,dragging:true,doubleClickZoom:false
+    scrollWheelZoom:false,
+    dragging:!isMob,
+    touchZoom:!isMob,
+    doubleClickZoom:false,
+    tap:false
   });
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'&copy; Esri'}).addTo(map);
 
