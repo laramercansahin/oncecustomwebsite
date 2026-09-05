@@ -1080,8 +1080,16 @@ function goToDetail(idx){
   sliderCurrent = idx;
   sliderRender();
   setTimeout(function(){
-    var el = document.getElementById('hero-section');
-    window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
+    if(isMobile){
+      /* scroll to the specific slide element */
+      var slides = document.querySelectorAll('.slide');
+      if(slides[idx]){
+        slides[idx].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    } else {
+      var el = document.getElementById('hero-section');
+      window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
+    }
   }, 50);
 }
 
