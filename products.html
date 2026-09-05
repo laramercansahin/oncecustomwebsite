@@ -466,15 +466,16 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .bar-logo img{height:32px;}
   .menu-close{top:16px;left:20px;}
 
-  /* coverflow section */
-  #coverflow-section{margin-top:56px;height:auto;min-height:100svh;overflow:hidden;}
-  .cf-header{padding:20px 24px 0;}
+  /* coverflow section — exact screen fill */
+  #coverflow-section{margin-top:56px;height:calc(100svh - 56px);min-height:unset;overflow:hidden;justify-content:space-between;}
+  .cf-header{padding:16px 24px 0;flex-shrink:0;}
   .cf-title{font-size:clamp(20px,6vw,28px);}
   .cf-sub{font-size:10px;}
 
-  /* 3d scene — fixed height, no flex growth */
-  .cf-scene{flex:none;height:320px;overflow:hidden;}
-  .cf-info{margin-top:0;}
+  /* 3d scene — grows to fill remaining space */
+  .cf-scene{flex:1;height:auto;min-height:0;overflow:hidden;}
+  .cf-info{margin-top:0;padding:0 20px;flex-shrink:0;}
+  .cf-nav{margin-top:12px;margin-bottom:16px;flex-shrink:0;}
 
   /* carousel items */
   .cf-item{width:200px;height:300px;left:-100px;top:-150px;}
