@@ -495,8 +495,9 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     overflow:hidden;
   }
 
-  /* ── image: top 44% ── */
+  /* ── image: top 44% — must come first visually ── */
   .slide-right{
+    order:-1; /* image before specs in flex column */
     position:relative !important;
     inset:auto !important;
     width:100%;
