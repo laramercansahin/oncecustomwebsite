@@ -547,15 +547,6 @@ window.addEventListener('load',function(){
     var marker=L.marker([d.lat,d.lng],{icon:icon}).addTo(map);
 
     marker.on('click',function(){
-      // scroll to card
-      var card=document.getElementById(d.id);
-      if(card){
-        card.scrollIntoView({behavior:'smooth',block:'center'});
-        document.querySelectorAll('.dist-card').forEach(function(c){c.classList.remove('highlight');});
-        card.classList.add('highlight');
-        setTimeout(function(){card.classList.remove('highlight');},2000);
-      }
-      // open modal
       openDist(d.id.replace('card-',''));
     });
   });
