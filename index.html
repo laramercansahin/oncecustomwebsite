@@ -277,7 +277,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 
   /* story */
   .story { grid-template-columns: 1fr; height: auto; }
-  .story-img { height: 50vw; min-height: 240px; }
+  .story-img { height: auto; min-height: unset; }
+  .story-img img { object-fit: contain; object-position: center center; height: auto; background: #060503; }
   .story-text { padding: 48px 24px; }
   .story-body { max-width: 100%; font-size: 15px; }
 
@@ -343,12 +344,12 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 <section class="hero">
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide active">
-      <img src="photos/Once_web_Har_1920x1080.jpg.jpeg" alt="HAR speaker">
+      <img src="photos/Once_web_Har_1920x1080.jpg.jpeg" alt="HAR speaker" style="object-position:65% 40%;">
     </div>
     <div class="hero-slide">
-      <img src="photos/Once_web_Su_1920x1080.jpg.jpeg" alt="SU speaker">
+      <img src="photos/Once_web_Su_1920x1080.jpg.jpeg" alt="SU speaker" style="object-position:62% 40%;">
     </div>
-    <div class="hero-slide">
+    <div class="hero-slide" data-mobile-hide="1">
       <img src="photos/Once_web_Almula_1920x1080.jpg.jpeg?v=2" alt="ALMULA speaker">
     </div>
     <div class="hero-slide">
@@ -547,16 +548,21 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 
   // ── hero slideshow ──
   let currentSlide = 0;
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots   = document.querySelectorAll('.hero-dot');
+  const allSlides = Array.from(document.querySelectorAll('.hero-slide'));
+  const allDots   = Array.from(document.querySelectorAll('.hero-dot'));
+  const isMobile  = window.innerWidth < 768;
+  const slides    = allSlides.filter(s => !(isMobile && s.dataset.mobileHide));
+  const dots      = allDots.filter((d,i) => !(isMobile && allSlides[i] && allSlides[i].dataset.mobileHide));
+  /* hide mobile-excluded slides and their dots */
+  allSlides.forEach((s,i) => { if(isMobile && s.dataset.mobileHide){ s.style.display='none'; allDots[i].style.display='none'; } });
   function goSlide(n) {
     slides[currentSlide].classList.remove('active');
     dots[currentSlide].classList.remove('active');
-    currentSlide = n;
+    currentSlide = ((n % slides.length) + slides.length) % slides.length;
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
   }
-  setInterval(() => goSlide((currentSlide + 1) % slides.length), 4500);
+  setInterval(() => goSlide(currentSlide + 1), 4500);
 
   // ── product slider ──
   let slideIdx = 0;
@@ -573,14 +579,15 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   document.getElementById('sliderPrev').disabled = true;
 
   // ── product cards touch swipe ──
-  var pgridWrap = document.querySelector('.pgrid-wrap');
-  var pTouchX = null;
-  pgridWrap.addEventListener('touchstart', function(e){ pTouchX = e.touches[0].clientX; }, {passive:true});
-  pgridWrap.addEventListener('touchend', function(e){
+  var pgridOuter = document.querySelector('.pgrid-outer');
+  var pTouchX = null, pTouchY = null;
+  pgridOuter.addEventListener('touchstart', function(e){ pTouchX = e.touches[0].clientX; pTouchY = e.touches[0].clientY; }, {passive:true});
+  pgridOuter.addEventListener('touchend', function(e){
     if(pTouchX === null) return;
     var dx = e.changedTouches[0].clientX - pTouchX;
-    if(Math.abs(dx) > 40) slideCards(dx < 0 ? 1 : -1);
-    pTouchX = null;
+    var dy = e.changedTouches[0].clientY - pTouchY;
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) slideCards(dx < 0 ? 1 : -1);
+    pTouchX = null; pTouchY = null;
   }, {passive:true});
 
   // ── Leaflet distributor map ──
