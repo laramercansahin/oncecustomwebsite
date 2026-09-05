@@ -137,6 +137,66 @@ footer a:hover{color:var(--bronze);}
 [data-lang]{display:none;}
 body.en [data-lang="en"]{display:inline;}
 body.tr [data-lang="tr"]{display:inline;}
+
+/* hamburger */
+.topbar-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+.topbar-ham span{display:block;width:22px;height:1px;background:var(--cream);transition:transform 0.4s,opacity 0.3s;transform-origin:left center;}
+.topbar-ham.open span:nth-child(1){transform:rotate(38deg);}
+.topbar-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.topbar-ham.open span:nth-child(3){transform:rotate(-38deg);}
+.menu-overlay{position:fixed;inset:0;z-index:500;background:rgba(15,13,10,.97);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s;}
+.menu-overlay.open{opacity:1;pointer-events:all;}
+.menu-nav{text-align:center;}
+.menu-nav ul{list-style:none;}
+.menu-nav ul li{overflow:hidden;}
+.menu-close{position:absolute;top:28px;left:40px;background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:6px;}
+.menu-close span{display:block;width:28px;height:1px;background:var(--mid);}
+.menu-close span:first-child{transform:rotate(45deg) translate(5px,5px);}
+.menu-close span:last-child{transform:rotate(-45deg) translate(5px,-5px);}
+.menu-nav ul li a{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(24px,4vw,52px);font-weight:300;font-style:italic;letter-spacing:.02em;color:rgba(237,228,213,.25);text-decoration:none;display:block;transform:translateY(100%);transition:transform 0.7s cubic-bezier(0.22,1,0.36,1),color 0.4s;line-height:1.2;}
+.menu-overlay.open .menu-nav ul li:nth-child(1) a{transform:translateY(0);transition-delay:0.05s;}
+.menu-overlay.open .menu-nav ul li:nth-child(2) a{transform:translateY(0);transition-delay:0.11s;}
+.menu-overlay.open .menu-nav ul li:nth-child(3) a{transform:translateY(0);transition-delay:0.17s;}
+.menu-overlay.open .menu-nav ul li:nth-child(4) a{transform:translateY(0);transition-delay:0.23s;}
+.menu-overlay.open .menu-nav ul li:nth-child(5) a{transform:translateY(0);transition-delay:0.29s;}
+.menu-nav ul li a:hover{color:var(--cream);}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  html,body{overflow-x:hidden;max-width:100vw;}
+
+  /* topbar */
+  .bar{height:56px;padding:0 20px;background:rgba(15,13,10,.92);backdrop-filter:blur(20px);}
+  .bar-back{display:none;}
+  .topbar-ham{display:flex;}
+  .bar-logo{position:absolute;left:50%;transform:translateX(-50%);}
+  .bar-logo img{height:32px;}
+  .bar-lang button{font-size:10px;padding:3px 6px;}
+
+  /* page header */
+  .page-header{padding:80px 20px 28px;flex-direction:column;gap:16px;align-items:flex-start;}
+  .ph-right{max-width:100%;padding:0;}
+  .ph-title{font-size:clamp(28px,8vw,44px);white-space:normal;}
+
+  /* featured */
+  .featured{height:320px;}
+  .feat-overlay{padding:28px 20px;}
+  .feat-title{font-size:clamp(18px,5vw,26px);}
+  .feat-excerpt{display:none;}
+
+  /* news list */
+  .news-list{padding:0 20px;}
+  .news-item{
+    grid-template-columns:1fr;
+  }
+  .ni-img{height:200px;}
+  .ni-body{padding:16px 0 24px;}
+  .ni-excerpt{display:none;}
+  .ni-title{font-size:clamp(15px,4.5vw,20px);}
+
+  /* footer */
+  footer{flex-direction:column;gap:12px;text-align:center;padding:32px 20px;}
+}
 </style>
 </head>
 <body class="en">
@@ -146,7 +206,23 @@ body.tr [data-lang="tr"]{display:inline;}
   <div id="loaderBar"></div>
 </div>
 
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" onclick="closeMenu()"><span></span><span></span></button>
+  <nav class="menu-nav">
+    <ul>
+      <li><a href="index.html" onclick="closeMenu()"><span data-lang="en">Home</span><span data-lang="tr">Ana Sayfa</span></a></li>
+      <li><a href="our_story.html" onclick="closeMenu()"><span data-lang="en">Our Story</span><span data-lang="tr">Hikayemiz</span></a></li>
+      <li><a href="products.html" onclick="closeMenu()"><span data-lang="en">The Collection</span><span data-lang="tr">Koleksiyon</span></a></li>
+      <li><a href="distributors.html" onclick="closeMenu()"><span data-lang="en">Distributors</span><span data-lang="tr">Distribütörler</span></a></li>
+      <li><a href="news.html" onclick="closeMenu()"><span data-lang="en">News</span><span data-lang="tr">Haberler</span></a></li>
+    </ul>
+  </nav>
+</div>
+
 <nav class="bar" id="topbar">
+  <div class="topbar-ham" id="hamBtn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
   <a href="index.html" class="bar-back"><span data-lang="en">Home</span><span data-lang="tr">Ana Sayfa</span></a>
   <div class="bar-logo"><img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound"></div>
   <div class="bar-lang">
@@ -238,6 +314,19 @@ body.tr [data-lang="tr"]{display:inline;}
 </footer>
 
 <script>
+function toggleMenu(){
+  var ov=document.getElementById('menuOverlay');
+  var hb=document.getElementById('hamBtn');
+  ov.classList.toggle('open');
+  hb.classList.toggle('open');
+  document.body.style.overflow=ov.classList.contains('open')?'hidden':'';
+}
+function closeMenu(){
+  document.getElementById('menuOverlay').classList.remove('open');
+  document.getElementById('hamBtn').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 function setLang(l){
   document.body.className=l;
   document.getElementById('btnEN').classList.toggle('active',l==='en');
