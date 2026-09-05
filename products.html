@@ -487,9 +487,10 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* ── DETAIL: scroll-snap, each product fills 100svh ── */
+  /* ── DETAIL: scroll-snap container sits exactly below topbar ── */
   #hero-section{
-    height:100svh;
+    height:calc(100svh - 56px);
+    margin-top:56px;
     overflow-y:scroll;
     overflow-x:hidden;
     scroll-snap-type:y mandatory;
@@ -499,7 +500,7 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   #slides{position:relative;inset:auto;}
   .slide,.slide.prev,.slide.next,.slide.active{
     position:relative !important;
-    height:100svh !important;
+    height:calc(100svh - 56px) !important;
     transform:none !important;
     opacity:1 !important;
     pointer-events:auto !important;
@@ -1127,9 +1128,9 @@ function goToDetail(idx){
   setTimeout(function(){
     if(isMobile){
       var heroEl2 = document.getElementById('hero-section');
-      /* first scroll window to hero-section, then snap to product */
+      /* position correct product inside container, then bring container into view */
       heroEl2.scrollTo({top: idx * heroEl2.clientHeight, behavior:'instant'});
-      window.scrollTo({top: heroEl2.offsetTop, behavior:'smooth'});
+      heroEl2.scrollIntoView({behavior:'smooth', block:'start'});
     } else {
       var el = document.getElementById('hero-section');
       window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
