@@ -112,6 +112,10 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
   position:absolute;
   width:240px;height:360px;
   left:-120px;top:-180px;
+}
+@media(max-width:768px){
+  .cf-item{width:140px;height:210px;left:-70px;top:-105px;}
+}
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
   transform-style:preserve-3d;
@@ -429,6 +433,55 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
 /* lang */
 [data-lang]{display:none;}
 body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  /* topbar */
+  .bar{height:56px;padding:0 20px;}
+  .bar-logo img{height:40px;}
+  .bar-back{font-size:11px;}
+
+  /* coverflow section */
+  #coverflow-section{margin-top:56px;height:auto;min-height:100vh;}
+  .cf-header{padding:28px 24px 0;}
+  .cf-title{font-size:clamp(22px,6vw,32px);}
+  .cf-scene{height:55vw;min-height:280px;}
+
+  /* carousel nav arrows */
+  .cf-btn{width:36px;height:36px;font-size:16px;}
+
+  /* product name + tag below carousel */
+  .cf-info{padding:12px 20px 0;}
+  .cf-info-name{font-size:clamp(28px,8vw,44px);}
+
+  /* detail slide - stack vertically */
+  #hero-section{height:auto;min-height:100vh;}
+  .slide{flex-direction:column;align-items:stretch;overflow-y:auto;}
+  .slide-content{
+    width:100%;
+    padding:80px 24px 32px;
+    height:auto;
+  }
+  .slide-left{border-left:none;border-top:1px solid rgba(176,136,88,.25);padding-left:0;padding-top:24px;}
+  .slide-name{font-size:clamp(32px,9vw,52px);}
+  .slide-tagline{font-size:15px;}
+  .slide-specs{grid-template-columns:1fr;}
+  .slide-bg-inner img{object-position:center top;}
+
+  /* back button */
+  .back-to-orbit{top:68px;left:20px;font-size:10px;}
+
+  /* gallery thumbs */
+  .gallery-strip{bottom:16px;}
+  .gallery-thumb{width:36px;height:36px;}
+
+  /* nav arrows on slide */
+  .nav-arr{right:16px;}
+  .arr-btn{width:36px;height:36px;font-size:15px;}
+
+  /* enquire button */
+  .slide-enquire{padding:12px 28px;font-size:10px;}
+}
 </style>
 </head>
 <body class="tr">
@@ -640,7 +693,7 @@ document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
 /* ── BUILD ORBITAL RING ITEMS ── */
 var cfRing = document.getElementById('cfRing');
 var cfItems = [];
-var RING_R = 520;          /* translateZ radius */
+var RING_R = window.innerWidth < 768 ? 240 : 520;
 var ANGLE_STEP = 360 / N;
 var FADE_DEG = 42;         /* degrees from front before fading out */
 
