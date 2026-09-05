@@ -463,51 +463,63 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
+  /* prevent horizontal scroll */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+
   /* topbar */
   .bar{padding:0 20px;height:56px;}
   .bar-logo img{height:32px;}
   .menu-close{top:16px;left:20px;}
 
   /* coverflow section */
-  #coverflow-section{margin-top:56px;height:auto;min-height:100vh;}
-  .cf-header{padding:28px 24px 0;}
-  .cf-title{font-size:clamp(22px,6vw,32px);}
-  .cf-scene{height:55vw;min-height:280px;}
+  #coverflow-section{margin-top:56px;height:auto;min-height:100svh;overflow:hidden;}
+  .cf-header{padding:20px 24px 0;}
+  .cf-title{font-size:clamp(20px,6vw,28px);}
+  .cf-sub{font-size:10px;}
+
+  /* 3d scene */
+  .cf-scene{height:44vw;min-height:220px;max-height:320px;overflow:hidden;}
+
+  /* carousel items — smaller on mobile */
+  .cf-item{width:100px;height:150px;left:-50px;top:-75px;}
 
   /* carousel nav arrows */
   .cf-btn{width:36px;height:36px;font-size:16px;}
 
   /* product name + tag below carousel */
-  .cf-info{padding:12px 20px 0;}
-  .cf-info-name{font-size:clamp(28px,8vw,44px);}
+  .cf-info{padding:10px 20px 0;}
+  .cf-info-name{font-size:clamp(24px,7vw,36px);}
 
   /* detail slide - stack vertically */
-  #hero-section{height:auto;min-height:100vh;}
+  #hero-section{height:auto;min-height:100svh;}
   .slide{flex-direction:column;align-items:stretch;overflow-y:auto;}
   .slide-content{
     width:100%;
-    padding:80px 24px 32px;
+    padding:70px 24px 32px;
     height:auto;
   }
   .slide-left{border-left:none;border-top:1px solid rgba(176,136,88,.25);padding-left:0;padding-top:24px;}
-  .slide-name{font-size:clamp(32px,9vw,52px);}
-  .slide-tagline{font-size:15px;}
+  .slide-name{font-size:clamp(28px,8vw,44px);}
+  .slide-tagline{font-size:14px;}
   .slide-specs{grid-template-columns:1fr;}
   .slide-bg-inner img{object-position:center top;}
 
   /* back button */
-  .back-to-orbit{top:68px;left:20px;font-size:10px;}
+  .back-to-orbit{top:62px;left:20px;font-size:10px;}
 
   /* gallery thumbs */
-  .gallery-strip{bottom:16px;}
-  .gallery-thumb{width:36px;height:36px;}
+  .gallery-strip{bottom:12px;}
+  .gallery-thumb{width:32px;height:32px;}
 
   /* nav arrows on slide */
-  .nav-arr{right:16px;}
+  .nav-arr{right:12px;}
   .arr-btn{width:36px;height:36px;font-size:15px;}
 
   /* enquire button */
-  .slide-enquire{padding:12px 28px;font-size:10px;}
+  .slide-enquire{padding:12px 24px;font-size:10px;}
+
+  /* floor glow — hide on mobile */
+  .cf-floor{display:none;}
 }
 </style>
 </head>
@@ -734,7 +746,7 @@ document.getElementById('cfTot').textContent = String(N).padStart(2,'0');
 /* ── BUILD ORBITAL RING ITEMS ── */
 var cfRing = document.getElementById('cfRing');
 var cfItems = [];
-var RING_R = window.innerWidth < 768 ? 240 : 520;
+var RING_R = window.innerWidth < 768 ? 130 : 520;
 var ANGLE_STEP = 360 / N;
 var FADE_DEG = 42;         /* degrees from front before fading out */
 
