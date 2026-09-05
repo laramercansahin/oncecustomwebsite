@@ -487,33 +487,75 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* detail slide - stack vertically */
-  #hero-section{height:auto;min-height:100svh;}
-  .slide{flex-direction:column;align-items:stretch;overflow-y:auto;}
-  .slide-content{
+  /* detail section — full screen, no overflow */
+  #hero-section{height:100svh;min-height:unset;overflow:hidden;}
+  .slide{position:absolute;inset:0;flex-direction:column;align-items:stretch;overflow:hidden;display:flex;}
+
+  /* top: product image */
+  .slide-right{
+    position:relative !important;
+    inset:auto !important;
     width:100%;
-    padding:70px 24px 32px;
-    height:auto;
+    height:44vh;
+    flex-shrink:0;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    background:rgba(10,8,6,.95);
   }
-  .slide-left{border-left:none;border-top:1px solid rgba(176,136,88,.25);padding-left:0;padding-top:24px;}
-  .slide-name{font-size:clamp(28px,8vw,44px);}
-  .slide-tagline{font-size:14px;}
-  .slide-specs{grid-template-columns:1fr;}
-  .slide-bg-inner img{object-position:center top;}
+  .slide-right::before{display:none !important;}
+  .slide-right::after{display:none !important;}
+  .gallery-frame{display:flex;width:100%;height:100%;align-items:center;justify-content:center;}
+  .gallery-main{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+  .gallery-main-img{width:auto;height:90%;max-width:88%;object-fit:contain;animation:none !important;}
+  .slide.active .gallery-main-img{transform:translateX(0);opacity:1;animation:float-art 10s ease-in-out infinite .6s !important;}
+  .gallery-thumbs{position:absolute;bottom:6px;left:0;right:0;}
+  .gallery-thumb{width:30px;height:30px;}
 
-  /* back button */
-  .back-to-orbit{top:62px;left:20px;font-size:10px;}
+  /* bottom: text + specs, scrollable */
+  .slide-content{
+    position:relative !important;
+    width:100%;
+    flex:1;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+    padding:20px 20px 90px;
+    height:auto;
+    display:flex;
+    align-items:flex-start;
+  }
+  .slide-left{border-left:none;border-top:1px solid rgba(176,136,88,.25);padding-left:0;padding-top:18px;width:100%;}
+  .slide-name{font-size:clamp(24px,7vw,40px);}
+  .slide-maker{font-size:11px;margin-top:6px;}
+  .slide-tagline{font-size:13px;line-height:1.6;margin-top:8px;}
+  .slide-divider{margin:16px 0;}
+  .slide-specs{grid-template-columns:1fr 1fr;gap:0 12px;}
+  .spec-label{font-size:10px;letter-spacing:.16em;}
+  .spec-val{font-size:12px;}
+  .slide-cta{margin-top:20px;}
 
-  /* gallery thumbs */
-  .gallery-strip{bottom:12px;}
-  .gallery-thumb{width:32px;height:32px;}
+  /* back button — top left of section */
+  .back-to-orbit{top:10px;left:16px;font-size:10px;}
 
-  /* nav arrows on slide */
-  .nav-arr{right:12px;}
-  .arr-btn{width:36px;height:36px;font-size:15px;}
+  /* nav arrows fixed to bottom right */
+  .nav-arr{
+    position:fixed;
+    right:16px;
+    bottom:20px;
+    top:auto;
+    transform:none;
+    flex-direction:row;
+    gap:8px;
+    z-index:20;
+  }
+  .arr-btn{width:40px;height:40px;font-size:16px;}
 
   /* enquire button */
   .slide-enquire{padding:12px 24px;font-size:10px;}
+  .progress{display:none;}
 
   /* floor glow — hide on mobile */
   .cf-floor{display:none;}
@@ -1076,11 +1118,12 @@ window.addEventListener('wheel', function(e){
   }
 }, {passive:true});
 
-/* touch slide in hero */
+/* touch slide in hero — desktop only (mobile uses nav arrows) */
 var touchY = null;
 window.addEventListener('touchstart', function(e){ touchY = e.touches[0].clientY; }, {passive:true});
 window.addEventListener('touchend', function(e){
   if(touchY === null) return;
+  if(isMobile){ touchY = null; return; } /* mobile: no swipe-to-advance in detail */
   var dy = touchY - e.changedTouches[0].clientY;
   var hero = document.getElementById('hero-section');
   var rect = hero.getBoundingClientRect();
