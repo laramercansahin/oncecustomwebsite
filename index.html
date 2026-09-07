@@ -142,7 +142,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 /* scrollable row */
 .pgrid-outer { position: relative; overflow: hidden; padding: 0 0 48px; }
 .pgrid-wrap { overflow: hidden; }
-.pgrid { display: flex; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); gap: 2px; }
+.pgrid { display: flex; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); gap: 2px; }
 @media(max-width:768px){
   .pgrid-outer { overflow: visible; }
   .pgrid-wrap { overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; touch-action: pan-x pinch-zoom; }
@@ -408,8 +408,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     <a href="products.html" class="view-all"><span data-inline-lang="en">View All →</span><span data-inline-lang="tr">Tümünü Gör →</span></a>
   </div>
   <div class="pgrid-outer">
-    <button class="slider-btn prev" id="sliderPrev" onclick="slideCards(-1)" disabled>&#8592;</button>
-    <button class="slider-btn next" id="sliderNext" onclick="slideCards(1)">&#8594;</button>
+    <button class="slider-btn prev" id="sliderPrev" onmousedown="slideCards(-1)" disabled>&#8592;</button>
+    <button class="slider-btn next" id="sliderNext" onmousedown="slideCards(1)">&#8594;</button>
     <div class="pgrid-wrap">
       <div class="pgrid" id="pgrid">
       <a class="pcard" href="products.html?p=0"><div class="pcard-img"><img src="photos/har.png" alt="HAR"></div><div class="pcard-info"><span class="pcard-name">HAR</span><span class="pcard-type">Floor Standing</span><span class="pcard-badge">2025</span></div></a>
@@ -618,6 +618,17 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     document.getElementById('scrollFill').style.width = (36 + (slideIdx / maxSlide) * 64) + '%';
   }
   document.getElementById('sliderPrev').disabled = true;
+
+  // ── product carousel wheel/trackpad on desktop ──
+  if(!isMobile){
+    var pgridWheelTimer = null;
+    document.querySelector('.pgrid-outer').addEventListener('wheel', function(e){
+      if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      clearTimeout(pgridWheelTimer);
+      pgridWheelTimer = setTimeout(function(){ slideCards(e.deltaX > 0 ? 1 : -1); }, 60);
+    }, {passive:false});
+  }
 
   // ── product cards touch swipe (desktop only — mobile uses native scroll-snap) ──
   if(!isMobile){
