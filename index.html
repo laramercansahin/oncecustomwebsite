@@ -618,11 +618,19 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   // ── product carousel click + wheel on desktop ──
   if(!isMobile){
     var pgridOuterEl = document.querySelector('.pgrid-outer');
-    pgridOuterEl.addEventListener('click', function(e){
-      var rect = pgridOuterEl.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      slideCards(x < rect.width / 2 ? -1 : 1);
+    var dragStartX = null, dragging = false;
+    pgridOuterEl.addEventListener('mousedown', function(e){ dragStartX = e.clientX; dragging = false; });
+    window.addEventListener('mousemove', function(e){
+      if(dragStartX === null) return;
+      if(Math.abs(e.clientX - dragStartX) > 6) dragging = true;
     });
+    pgridOuterEl.addEventListener('click', function(e){
+      if(dragging){ e.preventDefault(); var dx = e.clientX - dragStartX; slideCards(dx < 0 ? 1 : -1); }
+      else if(!e.target.closest('.pcard')){ var rect = pgridOuterEl.getBoundingClientRect(); slideCards((e.clientX - rect.left) < rect.width/2 ? -1 : 1); }
+      dragStartX = null; dragging = false;
+    });
+    pgridOuterEl.addEventListener('mouseleave', function(){ dragStartX = null; dragging = false; });
+    pgridOuterEl.style.cursor = 'grab';
     var pgridWheelTimer = null;
     pgridOuterEl.addEventListener('wheel', function(e){
       if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
