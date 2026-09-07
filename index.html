@@ -152,12 +152,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
   .slider-btn { display: none !important; }
 }
 .pcard { min-width: calc(25% - 2px); width: calc(25% - 2px); overflow: hidden; cursor: pointer; flex-shrink: 0; background: var(--card); text-decoration: none; color: inherit; outline: none; border: none; display: block; }
-.slider-btn { position: absolute; top: 0; bottom: 0; z-index: 10; width: 22%; background: none; border: none; cursor: pointer; display: flex; align-items: center; transition: opacity 0.2s; opacity: 1; }
-.slider-btn .btn-icon { width: 40px; height: 40px; background: rgba(10,8,6,0.7); color: var(--mid); font-size: 18px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); transition: color 0.2s; pointer-events: none; }
-.slider-btn:hover .btn-icon { color: var(--cream); }
-.slider-btn:disabled { opacity: 0.15; cursor: default; }
-.slider-btn.prev { left: 0; justify-content: flex-start; padding-left: 12px; }
-.slider-btn.next { right: 0; justify-content: flex-end; padding-right: 12px; }
+.slider-btn { display: none; }
 .pcard { position: relative; }
 .pcard::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(200,121,65,0.06), transparent); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
 .pcard:hover::after { opacity: 1; }
@@ -620,10 +615,16 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   }
   document.getElementById('sliderPrev').disabled = true;
 
-  // ── product carousel wheel/trackpad on desktop ──
+  // ── product carousel click + wheel on desktop ──
   if(!isMobile){
+    var pgridOuterEl = document.querySelector('.pgrid-outer');
+    pgridOuterEl.addEventListener('click', function(e){
+      var rect = pgridOuterEl.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      slideCards(x < rect.width / 2 ? -1 : 1);
+    });
     var pgridWheelTimer = null;
-    document.querySelector('.pgrid-outer').addEventListener('wheel', function(e){
+    pgridOuterEl.addEventListener('wheel', function(e){
       if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
       e.preventDefault();
       clearTimeout(pgridWheelTimer);
