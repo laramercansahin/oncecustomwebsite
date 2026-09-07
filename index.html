@@ -285,7 +285,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   .hero-actions { flex-direction: column; gap: 12px; }
   .btn-outline { padding: 12px 24px; font-size: 9px; }
   /* hero image positions on mobile */
-  .hero-slide:nth-child(1) img { object-position: 72% 15% !important; }
+  .hero-slide:nth-child(1) img { object-position: 38% 15% !important; }
   .hero-slide:nth-child(3) img { object-position: 75% 30% !important; }
 
   /* collection */
@@ -594,6 +594,13 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   var heroTouchX = null, heroTouchY = null;
   var heroSection = document.querySelector('.hero');
   heroSection.addEventListener('touchstart', function(e){ heroTouchX = e.touches[0].clientX; heroTouchY = e.touches[0].clientY; }, {passive:true});
+  heroSection.addEventListener('touchmove', function(e){
+    if(heroTouchX !== null){
+      var dx = Math.abs(e.touches[0].clientX - heroTouchX);
+      var dy = Math.abs(e.touches[0].clientY - heroTouchY);
+      if(dx > dy && dx > 8) e.preventDefault();
+    }
+  }, {passive:false});
   heroSection.addEventListener('touchend', function(e){
     if(heroTouchX === null) return;
     var dx = e.changedTouches[0].clientX - heroTouchX;
