@@ -145,10 +145,10 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 .pgrid { display: flex; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); gap: 2px; }
 @media(max-width:768px){
   .pgrid-outer { overflow: visible; }
-  .pgrid-wrap { overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .pgrid-wrap { overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; touch-action: pan-x pinch-zoom; }
   .pgrid-wrap::-webkit-scrollbar { display: none; }
   .pgrid { transition: none; }
-  .pcard { scroll-snap-align: start; scroll-snap-stop: always; }
+  .pcard { scroll-snap-align: start; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
   .slider-btn { display: none !important; }
 }
 .pcard { min-width: calc(25% - 2px); width: calc(25% - 2px); overflow: hidden; cursor: pointer; flex-shrink: 0; background: var(--card); text-decoration: none; color: inherit; outline: none; border: none; display: block; }
