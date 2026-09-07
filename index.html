@@ -581,15 +581,17 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   const dots      = allDots.filter((d,i) => !(isMobile && allSlides[i] && allSlides[i].dataset.mobileHide));
   /* hide mobile-excluded slides and their dots */
   allSlides.forEach((s,i) => { if(isMobile && s.dataset.mobileHide){ s.style.display='none'; allDots[i].style.display='none'; } });
+  var heroTimer = null;
+  function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(() => goSlide(currentSlide + 1), 4500); }
   function goSlide(n) {
     slides[currentSlide].classList.remove('active');
     dots[currentSlide].classList.remove('active');
     currentSlide = ((n % slides.length) + slides.length) % slides.length;
     slides[currentSlide].classList.add('active');
     dots[currentSlide].classList.add('active');
+    resetHeroTimer();
   }
-  var heroTimer = setInterval(() => goSlide(currentSlide + 1), 4500);
-  function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(() => goSlide(currentSlide + 1), 4500); }
+  resetHeroTimer();
 
   // ── hero swipe on mobile ──
   var heroTouchX = null, heroTouchY = null;
@@ -599,7 +601,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     if(heroTouchX === null) return;
     var dx = e.changedTouches[0].clientX - heroTouchX;
     var dy = e.changedTouches[0].clientY - heroTouchY;
-    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) { goSlide(currentSlide + (dx < 0 ? 1 : -1)); resetHeroTimer(); }
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) goSlide(currentSlide + (dx < 0 ? 1 : -1));
     heroTouchX = null; heroTouchY = null;
   }, {passive:true});
 
