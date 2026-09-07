@@ -148,7 +148,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
   .pgrid-wrap { overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .pgrid-wrap::-webkit-scrollbar { display: none; }
   .pgrid { transition: none; }
-  .pcard { scroll-snap-align: start; }
+  .pcard { scroll-snap-align: start; scroll-snap-stop: always; }
   .slider-btn { display: none !important; }
 }
 .pcard { min-width: calc(25% - 2px); width: calc(25% - 2px); overflow: hidden; cursor: pointer; flex-shrink: 0; background: var(--card); text-decoration: none; color: inherit; outline: none; border: none; display: block; }
@@ -284,6 +284,9 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   .hero-sub { font-size: 10px; letter-spacing: 0.18em; }
   .hero-actions { flex-direction: column; gap: 12px; }
   .btn-outline { padding: 12px 24px; font-size: 9px; }
+  /* hero image positions on mobile */
+  .hero-slide:nth-child(1) img { object-position: 18% 15% !important; }
+  .hero-slide:nth-child(3) img { object-position: 75% 30% !important; }
 
   /* collection */
   .coll-head { padding: 60px 24px 32px; flex-direction: column; gap: 16px; align-items: flex-start; }
@@ -587,6 +590,17 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   }
   setInterval(() => goSlide(currentSlide + 1), 4500);
 
+  // ── hero swipe on mobile ──
+  var heroTouchX = null;
+  var heroEl = document.getElementById('heroSlides');
+  heroEl.addEventListener('touchstart', function(e){ heroTouchX = e.touches[0].clientX; }, {passive:true});
+  heroEl.addEventListener('touchend', function(e){
+    if(heroTouchX === null) return;
+    var dx = e.changedTouches[0].clientX - heroTouchX;
+    if(Math.abs(dx) > 40) goSlide(currentSlide + (dx < 0 ? 1 : -1));
+    heroTouchX = null;
+  }, {passive:true});
+
   // ── product slider ──
   let slideIdx = 0;
   const totalPcards = 11;
@@ -601,17 +615,19 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   }
   document.getElementById('sliderPrev').disabled = true;
 
-  // ── product cards touch swipe ──
-  var pgridOuter = document.querySelector('.pgrid-outer');
-  var pTouchX = null, pTouchY = null;
-  pgridOuter.addEventListener('touchstart', function(e){ pTouchX = e.touches[0].clientX; pTouchY = e.touches[0].clientY; }, {passive:true});
-  pgridOuter.addEventListener('touchend', function(e){
-    if(pTouchX === null) return;
-    var dx = e.changedTouches[0].clientX - pTouchX;
-    var dy = e.changedTouches[0].clientY - pTouchY;
-    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) slideCards(dx < 0 ? 1 : -1);
-    pTouchX = null; pTouchY = null;
-  }, {passive:true});
+  // ── product cards touch swipe (desktop only — mobile uses native scroll-snap) ──
+  if(!isMobile){
+    var pgridOuter = document.querySelector('.pgrid-outer');
+    var pTouchX = null, pTouchY = null;
+    pgridOuter.addEventListener('touchstart', function(e){ pTouchX = e.touches[0].clientX; pTouchY = e.touches[0].clientY; }, {passive:true});
+    pgridOuter.addEventListener('touchend', function(e){
+      if(pTouchX === null) return;
+      var dx = e.changedTouches[0].clientX - pTouchX;
+      var dy = e.changedTouches[0].clientY - pTouchY;
+      if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) slideCards(dx < 0 ? 1 : -1);
+      pTouchX = null; pTouchY = null;
+    }, {passive:true});
+  }
 
   // ── Leaflet distributor map ──
   function initMap() {
