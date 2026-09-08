@@ -933,7 +933,7 @@ function cfRenderFlat(dragOffsetPx){
 }
 
 function cfRender(){
-  cfRenderFlat(0); return;
+  if(isMobile){ cfRenderFlat(0); return; }
 
   /* rotate ring so current item faces front */
   cfRing.style.transform = 'rotateY(' + (-cfCurrent * ANGLE_STEP) + 'deg)';
@@ -1049,16 +1049,16 @@ window.addEventListener('mousemove', function(e){
   if(cfDragStartX === null) return;
   var dx = e.clientX - cfDragStartX;
   if(!cfDragging && Math.abs(dx) < 6) return;
-  cfDragging = true;
-  cfRenderFlat(dx);
+  if(!cfDragging){ cfDragging = true; cfRing.style.transition='none'; }
+  var baseAngle = -cfStartIdx * ANGLE_STEP;
+  cfSetRingAngle(baseAngle + dx * (ANGLE_STEP / 120));
 });
 window.addEventListener('mouseup', function(e){
   if(cfDragStartX === null) return;
   if(cfDragging){
     var dx = e.clientX - cfDragStartX;
-    var steps = dx < -FLAT_STEP / 2 ? 1 : dx > FLAT_STEP / 2 ? -1 : 0;
-    cfCurrent = ((cfStartIdx + steps) % N + N) % N;
-    cfRender();
+    var steps = Math.round(-dx / 100);
+    cfSnapTo(cfStartIdx + steps);
   }
   cfDragStartX = null; cfDragging = false;
 });
