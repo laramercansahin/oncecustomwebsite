@@ -138,8 +138,8 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
 /* each item sits on the ring via rotateY + translateZ */
 .cf-item{
   position:absolute;
-  width:240px;height:360px;
-  left:-120px;top:-180px;
+  width:300px;height:450px;
+  left:-150px;top:-225px;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
   transform-style:preserve-3d;
@@ -1041,12 +1041,14 @@ cfScene.addEventListener('touchend', function(e){
 }, {passive:true});
 
 /* mouse drag (desktop) */
-cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; cfStartIdx = cfCurrent; cfDragging = false; cfRing.style.transition='none'; });
+cfScene.addEventListener('mousedown', function(e){ cfDragStartX = e.clientX; cfStartIdx = cfCurrent; cfDragging = false; });
 window.addEventListener('mousemove', function(e){
   if(cfDragStartX === null) return;
-  cfDragging = true;
+  var dx = e.clientX - cfDragStartX;
+  if(!cfDragging && Math.abs(dx) < 6) return;
+  if(!cfDragging){ cfDragging = true; cfRing.style.transition='none'; }
   var baseAngle = -cfStartIdx * ANGLE_STEP;
-  cfSetRingAngle(baseAngle + (e.clientX - cfDragStartX) * (ANGLE_STEP / 120));
+  cfSetRingAngle(baseAngle + dx * (ANGLE_STEP / 120));
 });
 window.addEventListener('mouseup', function(e){
   if(cfDragStartX === null) return;
