@@ -759,7 +759,6 @@ products.forEach(function(p, i){
         '</div>' +
         '<div class="gallery-floor"></div>' +
       '</div>' +
-      '<div class="gallery-thumbs">'+thumbsHtml+'</div>' +
     '</div>';
   slidesWrap.appendChild(s);
 
@@ -769,21 +768,6 @@ products.forEach(function(p, i){
   dotsWrap.appendChild(d);
 });
 
-/* ── GALLERY THUMB CLICK ── */
-document.getElementById('slides').addEventListener('click', function(e){
-  var thumb = e.target.closest('.gallery-thumb');
-  if(!thumb) return;
-  var si = parseInt(thumb.dataset.slide);
-  var gi = parseInt(thumb.dataset.gi);
-  var gallery = products[si].gallery || [products[si].img];
-  var slide = document.querySelectorAll('.slide')[si];
-  var mainImg = slide.querySelector('.gallery-main-img');
-  var thumbs = slide.querySelectorAll('.gallery-thumb');
-  mainImg.classList.add('fading');
-  setTimeout(function(){ mainImg.src = gallery[gi]; mainImg.classList.remove('fading'); }, 260);
-  thumbs.forEach(function(t){ t.classList.remove('active'); });
-  thumb.classList.add('active');
-});
 
 function goToDetail(idx){
   sliderCurrent = idx;
