@@ -864,11 +864,20 @@ function applyLang(){
     el.style.display = el.dataset.lang === lang ? 'inline' : 'none';
   });
 }
+function fixTurkishCase(){
+  document.querySelectorAll('[data-lang="tr"],[data-inline-lang="tr"]').forEach(function(el){
+    if(getComputedStyle(el).textTransform==='uppercase'){
+      el.style.textTransform='none';
+      el.innerHTML=el.innerHTML.toLocaleUpperCase('tr-TR');
+    }
+  });
+}
 function setLang(l){
   lang = l; document.body.className = l;
   document.getElementById('btnEN').classList.toggle('active', l === 'en');
   document.getElementById('btnTR').classList.toggle('active', l === 'tr');
   localStorage.setItem('once_lang', l); applyLang();
+  if(l==='tr') fixTurkishCase();
 }
 setLang(localStorage.getItem('once_lang') || 'en');
 

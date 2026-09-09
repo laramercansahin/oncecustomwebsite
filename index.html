@@ -545,11 +545,20 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     document.getElementById('menuOverlay').classList.remove('open');
     document.getElementById('hamBtn').classList.remove('open');
   }
+  function fixTurkishCase() {
+    document.querySelectorAll('[data-lang="tr"],[data-inline-lang="tr"]').forEach(function(el) {
+      if (getComputedStyle(el).textTransform === 'uppercase') {
+        el.style.textTransform = 'none';
+        el.innerHTML = el.innerHTML.toLocaleUpperCase('tr-TR');
+      }
+    });
+  }
   function setLang(lang) {
     document.body.className = lang;
     document.getElementById('btnEN').classList.toggle('active', lang === 'en');
     document.getElementById('btnTR').classList.toggle('active', lang === 'tr');
     localStorage.setItem('once_lang', lang);
+    if (lang === 'tr') fixTurkishCase();
   }
   setLang(localStorage.getItem('once_lang') || 'en');
 
