@@ -138,8 +138,8 @@ body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-
 /* each item sits on the ring via rotateY + translateZ */
 .cf-item{
   position:absolute;
-  width:300px;height:450px;
-  left:-150px;top:-225px;
+  width:300px;height:420px;
+  left:-150px;top:-210px;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
   transform-style:preserve-3d;
@@ -892,7 +892,7 @@ products.forEach(function(p, i){
   /* fixed position on the ring */
   item.style.transform = 'rotateY(' + (i * ANGLE_STEP) + 'deg) translateZ(' + RING_R + 'px)';
   var imgScale = p.imgScale || 1;
-  item.innerHTML = '<div class="cf-img-wrap"><img src="' + (p.gallery ? p.gallery[0] : p.img) + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '" style="transform:scale(' + imgScale + ');transform-origin:center bottom;"></div>';
+  item.innerHTML = '<div class="cf-img-wrap"><img src="' + (p.gallery ? p.gallery[0] : p.img) + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '" style="transform:scale(' + imgScale + ');transform-origin:center center;"></div>';
 
   item.addEventListener('click', function(){
     var idx = parseInt(this.dataset.index);
