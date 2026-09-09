@@ -516,7 +516,7 @@ window.addEventListener('load',function(){
   ];
 
   var allLatLngs = distributors.map(function(d){ return [d.lat, d.lng]; });
-  map.fitBounds(allLatLngs, {padding: isMob ? [20,20] : [40,60], maxZoom: isMob ? 2 : 3});
+  map.fitBounds(allLatLngs, {padding: isMob ? [20,20] : [80,120], maxZoom: isMob ? 2 : 2});
 
   distributors.forEach(function(d){
     var pinHtml='<div style="width:14px;height:14px;background:#C87941;border-radius:50%;border:2px solid rgba(237,228,213,.5);box-shadow:0 0 0 4px rgba(176,136,88,.2),0 0 20px rgba(176,136,88,.6);cursor:pointer;transition:transform .2s;"></div>';
