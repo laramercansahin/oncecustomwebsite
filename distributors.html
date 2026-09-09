@@ -523,9 +523,11 @@ window.addEventListener('load',function(){
     var icon=L.divIcon({html:pinHtml,iconSize:[14,14],iconAnchor:[7,7],className:''});
     var marker=L.marker([d.lat,d.lng],{icon:icon}).addTo(map);
 
-    marker.on('click',function(){
-      openDist(d.id.replace('card-',''));
-    });
+    var popupHtml = '<div style="font-family:\'FH Oscar Pro\',sans-serif;padding:2px 0;">'
+      + '<div style="font-size:13px;letter-spacing:.18em;color:#EDE4D5;margin-bottom:4px;">' + d.name + '</div>'
+      + '<div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#C87941;">' + d.city + ' · ' + d.country + '</div>'
+      + '</div>';
+    marker.bindPopup(popupHtml, {className:'once-popup', closeButton:false, offset:[0,-8]});
   });
 });
 </script>
