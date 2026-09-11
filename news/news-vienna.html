@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Munich to Vienna — Once Custom Sound</title>
+<style>
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-Light.woff') format('woff'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-LightItalic.woff') format('woff'); font-weight: 300; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-Regular.woff') format('woff'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-RegularItalic.woff') format('woff'); font-weight: 400; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-Medium.woff') format('woff'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-MediumItalic.woff') format('woff'); font-weight: 500; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-SemiBold.woff') format('woff'); font-weight: 600; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-SemiBoldItalic.woff') format('woff'); font-weight: 600; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-Bold.woff') format('woff'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-BoldItalic.woff') format('woff'); font-weight: 700; font-style: italic; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-Black.woff') format('woff'); font-weight: 900; font-style: normal; }
+@font-face { font-family: 'FH Oscar Pro'; src: url('../fonts/FHOscarPro-BlackItalic.woff') format('woff'); font-weight: 900; font-style: italic; }
+</style>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--black:#0F0D0A;--border:#2A2520;--bronze:#C87941;--cream:#EDE4D5;--mid:#C8BFB4;--ghost:#7A7060;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'FH Oscar Pro',sans-serif;font-weight:300;}
+#loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;transition:opacity .9s ease,visibility .9s ease;}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none;}
+#loader img{height:68px;filter:brightness(0) invert(1);opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+#loader img.show{opacity:1;transform:translateY(0);}
+#loaderBar{position:absolute;bottom:0;left:0;height:1px;background:var(--bronze);width:0%;transition:width 1.4s cubic-bezier(.4,0,.2,1);}
+.bar{position:fixed;top:0;left:0;right:0;z-index:200;height:80px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background .5s,border-color .5s;}
+.bar.scrolled{background:rgba(15,13,10,.96);border-color:var(--border);backdrop-filter:blur(16px);}
+.bar-back{font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.bar-back::before{content:'←';font-size:14px;}
+.bar-back:hover{color:var(--bronze);gap:14px;}
+.bar-logo img{height:68px;filter:brightness(0) invert(1);}
+.bar-lang button{background:none;border:none;font-family:'FH Oscar Pro',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--mid);cursor:pointer;padding:4px 8px;transition:color .2s;}
+.bar-lang button.active{color:var(--cream);}
+.story-hero{position:relative;height:70vh;overflow:hidden;}
+.story-hero img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.55);}
+.story-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(15,13,10,1) 0%,rgba(15,13,10,.1) 60%);}
+.story-content{max-width:780px;margin:0 auto;padding:80px 48px 120px;}
+.story-tag{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);margin-bottom:20px;}
+.story-title{font-family:'FH Oscar Pro',sans-serif;font-size:clamp(28px,4vw,52px);font-weight:200;letter-spacing:.04em;line-height:1.15;color:var(--cream);margin-bottom:48px;}
+.story-title em{color:var(--bronze);font-style:normal;}
+.story-body{font-size:17px;font-weight:300;letter-spacing:.04em;line-height:2.4;color:var(--cream);opacity:.82;}
+.story-body p+p{margin-top:28px;}
+.story-back{display:inline-flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);text-decoration:none;margin-top:72px;transition:gap .2s;}
+.story-back:hover{gap:20px;}
+[data-lang]{display:none;}
+body.en [data-lang="en"]{display:inline;}
+body.tr [data-lang="tr"]{display:inline;}
+p[data-lang]{display:none;}
+body.en p[data-lang="en"]{display:block;}
+body.tr p[data-lang="tr"]{display:block;}
+div[data-lang]{display:none;}
+body.en div[data-lang="en"]{display:block;}
+body.tr div[data-lang="tr"]{display:block;}
+</style>
+</head>
+<body class="en">
+
+<div id="loader">
+  <img id="loaderImg" src="https://www.oncecustom.com/images/logo.png" alt="Once">
+  <div id="loaderBar"></div>
+</div>
+
+<nav class="bar" id="topbar">
+  <a href="../news.html" class="bar-back"><span data-lang="en">News</span><span data-lang="tr">Haberler</span></a>
+  <div class="bar-logo"><img src="https://www.oncecustom.com/images/logo.png" alt="Once Custom Sound"></div>
+  <div class="bar-lang">
+    <button id="btnEN" class="active" onclick="setLang('en')">EN</button>
+    <button id="btnTR" onclick="setLang('tr')">TR</button>
+  </div>
+</nav>
+
+<div class="story-hero">
+  <img src="../photos/Ran_Space_2.jpg" alt="High End Vienna 2026">
+</div>
+
+<div class="story-content">
+
+  <div class="story-tag">
+    <span data-lang="en">Fair · Vienna · 2026</span>
+    <span data-lang="tr">Fuar · Viyana · 2026</span>
+  </div>
+
+  <h1 class="story-title">
+    <span data-lang="en">From Munich to Vienna — ten years on the <em>world stage</em></span>
+    <span data-lang="tr">Münih'ten Viyana'ya — dünya sahnesinde <em>on yıl</em></span>
+  </h1>
+
+  <div class="story-body">
+    <p data-lang="en">Since 2015, High End has been the fixed point on our calendar — the fair that draws the world's most serious listeners, dealers and designers into a single hall. For nine years, that hall was in Munich; the final Munich edition, in 2025, drew more than 22,800 visitors from 92 countries across 501 exhibitors.</p>
+    <p data-lang="en">In 2026, the fair made its move to Vienna, to the Austria Center, and Once Custom Sound moved with it — the only Turkish brand on the floor among roughly 500 exhibitors from 104 countries, alongside the biggest names in the industry. Vienna welcomed over 23,000 visitors in its debut edition.</p>
+    <p data-lang="en">The city was different in almost every way — a new hall, a new rhythm to the days — except for the one thing that mattered: the people who came to listen were the same people who have always come to listen. Ten years of presence at the world's most important audio fair, now carried into a new city.</p>
+
+    <p data-lang="tr">2015'ten bu yana High End, takvimimizdeki sabit nokta oldu — dünyanın en ciddi dinleyicilerini, bayilerini ve tasarımcılarını tek bir salonda buluşturan fuar. Dokuz yıl boyunca bu salon Münih'teydi; son Münih edisyonu, 2025'te, 92 ülkeden 22.800'ü aşkın ziyaretçiyi ve 501 katılımcı markayı ağırladı.</p>
+    <p data-lang="tr">2026'da fuar Viyana'ya, Austria Center'a taşındı — biz de taşındık: 104 ülkeden yaklaşık 500 markanın arasında, sektörün en büyük isimleriyle birlikte, salondaki tek Türk markası olarak. Viyana, ilk edisyonunda 23.000'i aşkın ziyaretçi ağırladı.</p>
+    <p data-lang="tr">Şehir neredeyse her açıdan farklıydı — yeni bir salon, günlerin yeni bir ritmi — tek bir şey dışında: dinlemeye gelenler, her zaman gelen insanlardı. Dünyanın en önemli ses fuarında on yıllık bir varlık, şimdi yeni bir şehre taşındı.</p>
+  </div>
+
+  <a href="../news.html" class="story-back"><span data-lang="en">← Back to News</span><span data-lang="tr">← Haberlere Dön</span></a>
+</div>
+
+<script>
+function fixTurkishCase(){
+  document.querySelectorAll('[data-lang="tr"],[data-inline-lang="tr"]').forEach(function(el){
+    if(getComputedStyle(el).textTransform==='uppercase'){
+      el.style.textTransform='none';
+      el.innerHTML=el.innerHTML.toLocaleUpperCase('tr-TR');
+    }
+  });
+}
+function setLang(l){document.body.className=l;document.getElementById('btnEN').classList.toggle('active',l==='en');document.getElementById('btnTR').classList.toggle('active',l==='tr');localStorage.setItem('once_lang',l);if(l==='tr')fixTurkishCase();}
+setLang(localStorage.getItem('once_lang')||'en');
+window.addEventListener('DOMContentLoaded',function(){
+  var img=document.getElementById('loaderImg');
+  var bar=document.getElementById('loaderBar');
+  var loader=document.getElementById('loader');
+  setTimeout(function(){img.classList.add('show');},120);
+  setTimeout(function(){bar.style.width='100%';},200);
+  setTimeout(function(){loader.classList.add('out');},1700);
+});
+window.addEventListener('scroll',function(){document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>60);});
+</script>
+</body>
+</html>
