@@ -51,7 +51,17 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.oncecustom.com/news/news-su.html</loc>
+    <loc>https://www.oncecustom.com/news/news-vienna.html</loc>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.oncecustom.com/news/news-har.html</loc>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.oncecustom.com/news/news-odyofil.html</loc>
     <changefreq>never</changefreq>
     <priority>0.6</priority>
   </url>
