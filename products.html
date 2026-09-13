@@ -1148,19 +1148,18 @@ window.addEventListener('wheel', function(e){
   }
 }, {passive:true});
 
-/* touch slide in hero */
-var touchY = null, touchFromImg = false;
+/* touch slide in hero — swipe anywhere on the detail slide (not just the image) advances products */
+var touchY = null;
 window.addEventListener('touchstart', function(e){
   touchY = e.touches[0].clientY;
-  /* on mobile only advance slides when swipe starts on the image area */
-  touchFromImg = isMobile ? !!e.target.closest('.slide-right') : true;
 }, {passive:true});
 window.addEventListener('touchend', function(e){
   if(touchY === null) return;
   var dy = touchY - e.changedTouches[0].clientY;
   var hero = document.getElementById('hero-section');
   var rect = hero.getBoundingClientRect();
-  if(rect.top > -10 && Math.abs(dy) > 40 && touchFromImg){
+  var heroFullyInView = rect.top >= -20 && rect.top <= 20;
+  if(heroFullyInView && Math.abs(dy) > 40){
     go(dy > 0 ? 1 : -1);
   }
   touchY = null;
