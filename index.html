@@ -643,13 +643,13 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
             r.json().then(function(d){
               console.error('Formspree error:', d);
               var detail = d && d.errors && d.errors[0] && (d.errors[0].message || d.errors[0].code);
-              showCfError(detail);
-            }).catch(function(){ showCfError(null); });
+              showCfError(detail || ('HTTP ' + r.status + (r.statusText ? ' ' + r.statusText : '')));
+            }).catch(function(){ showCfError('HTTP ' + r.status); });
           }
         })
         .catch(function(err){
           console.error('Submit failed:', err);
-          showCfError(null);
+          showCfError((err && err.message) ? err.message : 'network error');
         });
     });
   }
