@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Collection — Once Custom Sound</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Once Custom Sound">
+<meta property="og:title" content="The Collection — Once Custom Sound">
+<meta property="og:description" content="Different forms, one philosophy — handcrafted speakers by Once Custom Sound.">
+<meta property="og:url" content="https://www.oncecustom.com/products.html">
+<meta property="og:image" content="https://www.oncecustom.com/photos/Har_2026.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Collection — Once Custom Sound">
+<meta name="twitter:description" content="Different forms, one philosophy — handcrafted speakers by Once Custom Sound.">
+<meta name="twitter:image" content="https://www.oncecustom.com/photos/Har_2026.jpg">
 <style>
 @font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
 @font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
@@ -476,26 +486,21 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .menu-close{top:16px;left:20px;}
   .menu-nav ul li a{font-size:clamp(28px,8vw,44px);}
 
-  /* coverflow section — exact screen fill */
-  #coverflow-section{margin-top:56px;height:calc(100svh - 56px);min-height:unset;overflow:hidden;justify-content:space-between;}
-  .cf-header{padding:16px 24px 0;flex-shrink:0;}
+  /* coverflow section — single vertical grid instead of a 3D carousel */
+  #coverflow-section{margin-top:56px;height:auto;min-height:unset;overflow:visible;display:block;}
+  .cf-header{padding:24px 20px 0;flex-shrink:0;}
   .cf-title{font-size:clamp(20px,6vw,28px);}
   .cf-sub{font-size:10px;}
 
-  /* 3d scene — grows to fill remaining space */
-  .cf-scene{flex:1;height:auto;min-height:0;overflow:hidden;}
-  .cf-info{margin-top:0;padding:0 20px;flex-shrink:0;}
-  .cf-nav{margin-top:12px;margin-bottom:16px;flex-shrink:0;}
+  /* hide the desktop 3D carousel + its controls on mobile */
+  .cf-scene, .cf-nav, .cf-info, .cf-floor{display:none !important;}
 
-  /* carousel items */
-  .cf-item{width:200px;height:300px;left:-100px;top:-150px;}
-
-  /* carousel nav arrows */
-  .cf-btn{width:36px;height:36px;font-size:16px;}
-
-  /* product name + tag below carousel */
-  .cf-info{padding:0 20px;}
-  .cf-info-name{font-size:clamp(28px,8vw,44px);}
+  /* simple vertical grid of products, tap to open the detail slide */
+  .cf-mobile-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:20px 20px 32px;}
+  .cf-mgrid-item{position:relative;background:rgba(255,255,255,0.03);cursor:pointer;padding:18px 12px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .cf-mgrid-item img{width:100%;height:130px;object-fit:contain;display:block;}
+  .cf-mgrid-name{font-family:'FH Oscar Pro',sans-serif;font-size:16px;letter-spacing:.08em;color:var(--cream);margin-top:12px;}
+  .cf-mgrid-badge{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--bronze);margin-top:6px;}
 
   /* ── DETAIL: scroll-snap, full viewport ── */
   #hero-section{
@@ -907,6 +912,24 @@ products.forEach(function(p, i){
   cfItems.push(item);
 });
 
+/* ── mobile: simple vertical grid instead of the 3D carousel ── */
+if(isMobile){
+  var cfMobileGrid = document.createElement('div');
+  cfMobileGrid.className = 'cf-mobile-grid';
+  cfMobileGrid.id = 'cfMobileGrid';
+  products.forEach(function(p, i){
+    var gEl = document.createElement('div');
+    gEl.className = 'cf-mgrid-item';
+    gEl.innerHTML =
+      '<img src="' + (p.gallery ? p.gallery[0] : p.img) + '" alt="' + p.name + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '">' +
+      '<span class="cf-mgrid-name">' + p.name + '</span>' +
+      (p.comingSoon ? '<span class="cf-mgrid-badge" data-lang="en">Coming Soon</span><span class="cf-mgrid-badge" data-lang="tr">Yakında</span>' : '');
+    gEl.addEventListener('click', function(){ goToDetail(i); });
+    cfMobileGrid.appendChild(gEl);
+  });
+  document.getElementById('coverflow-section').appendChild(cfMobileGrid);
+}
+
 function cfRenderFlat(dragOffsetPx){
   var isDragging = (dragOffsetPx !== 0);
   cfRing.style.transform = 'none';
@@ -1247,14 +1270,29 @@ function applyLang(){
     el.style.display = el.dataset.lang === lang ? 'inline' : 'none';
   });
 }
-function toggleMenu(){
-  document.getElementById('menuOverlay').classList.toggle('open');
-  document.getElementById('hamBtn').classList.toggle('open');
-}
-function closeMenu(){
+function actuallyCloseMenu(){
   document.getElementById('menuOverlay').classList.remove('open');
   document.getElementById('hamBtn').classList.remove('open');
+  document.body.style.overflow='';
 }
+function toggleMenu(){
+  if(document.getElementById('menuOverlay').classList.contains('open')){
+    closeMenu();
+  } else {
+    document.getElementById('menuOverlay').classList.add('open');
+    document.getElementById('hamBtn').classList.add('open');
+    document.body.style.overflow='hidden';
+    history.pushState({onceOverlay:true},'');
+  }
+}
+function closeMenu(){
+  if(!document.getElementById('menuOverlay').classList.contains('open'))return;
+  if(history.state && history.state.onceOverlay) history.back();
+  else actuallyCloseMenu();
+}
+window.addEventListener('popstate',function(){
+  if(document.getElementById('menuOverlay').classList.contains('open')) actuallyCloseMenu();
+});
 function fixTurkishCase(){
   document.querySelectorAll('[data-lang="tr"],[data-inline-lang="tr"]').forEach(function(el){
     if(getComputedStyle(el).textTransform==='uppercase'){

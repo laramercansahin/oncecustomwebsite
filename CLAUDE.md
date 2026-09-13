@@ -118,7 +118,7 @@ news.html'deki linkler:
 
 1. Fotoğrafı `photos/` klasörüne at
 2. `news/news-TEMPLATE.html`'i kopyala → `news/news-yeni-isim.html`
-3. Şablondaki 5 ADIM yorumunu doldur (title, fotoğraf, tag, başlık, body)
+3. Şablondaki ADIM yorumlarını doldur (title, fotoğraf, tag, başlık, body, ve ADIM 6: og:title/og:description/og:url/og:image — WhatsApp önizlemesi için bunlar TAM URL olmalı, `../photos/...` gibi göreceli yol çalışmaz)
 4. `news.html`'e kart bloğu ekle (<!-- NEWS LIST --> bölümüne)
 5. `sitemap.xml`'e URL ekle
 6. Push et

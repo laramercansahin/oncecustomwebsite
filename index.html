@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Once Custom Sound</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Once Custom Sound">
+<meta property="og:title" content="Once Custom Sound — Handcrafted Speakers">
+<meta property="og:description" content="Handcrafted speakers that breathe life into music. Once Custom Sound, Bursa, Türkiye.">
+<meta property="og:url" content="https://www.oncecustom.com/">
+<meta property="og:image" content="https://www.oncecustom.com/photos/Once_web_Har_1920x1080.jpg.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Once Custom Sound — Handcrafted Speakers">
+<meta name="twitter:description" content="Handcrafted speakers that breathe life into music. Once Custom Sound, Bursa, Türkiye.">
+<meta name="twitter:image" content="https://www.oncecustom.com/photos/Once_web_Har_1920x1080.jpg.jpeg">
 <style>
 @font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-Thin.woff') format('woff'); font-weight: 100; font-style: normal; }
 @font-face { font-family: 'FH Oscar Pro'; src: url('fonts/FHOscarPro-ThinItalic.woff') format('woff'); font-weight: 100; font-style: italic; }
@@ -145,7 +155,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 .pgrid { display: flex; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); gap: 2px; }
 @media(max-width:768px){
   .pgrid-outer { overflow: visible; }
-  .pgrid-wrap { overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; touch-action: pan-x pinch-zoom; }
+  .pgrid-wrap { overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; touch-action: pan-x pan-y pinch-zoom; }
   .pgrid-wrap::-webkit-scrollbar { display: none; }
   .pgrid { transition: none; }
   .pcard { scroll-snap-align: start; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
@@ -247,6 +257,8 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 .cf-submit { margin-top: 8px; font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,255,255,0.2); padding: 14px 32px; background: none; cursor: pointer; transition: border-color 0.4s, background 0.4s; font-family: 'FH Oscar Pro',sans-serif; }
 .cf-submit:hover { border-color: var(--bronze); background: rgba(200,121,65,0.05); }
 .cf-success { display: none; font-family: var(--serif); font-size: 17px; font-style: italic; color: var(--bronze); margin-top: 16px; }
+.cf-error { display: none; font-size: 13px; font-weight: 300; letter-spacing: 0.02em; line-height: 1.7; color: #E0A090; margin-top: 16px; }
+.cf-error a { color: inherit; }
 .c-item-label { font-size: 9px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ghost); margin-bottom: 8px; }
 .c-item-val { font-family: var(--serif); font-size: 16px; font-weight: 300; letter-spacing: 0.03em; color: var(--mid); }
 .c-item-val a { color: var(--mid); text-decoration: none; transition: color 0.35s; }
@@ -314,6 +326,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   .contact-left { padding: 60px 24px 32px; }
   .contact-right { padding: 0 24px 60px; }
   .cf-row { grid-template-columns: 1fr; }
+  /* 16px prevents iOS Safari from auto-zooming the page on focus */
+  .cf-field input, .cf-field textarea { font-size: 16px; }
 
   /* footer */
   footer { padding: 28px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -501,6 +515,10 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         <span data-inline-lang="en">Thank you we'll be in touch soon.</span>
         <span data-inline-lang="tr">Teşekkürler en kısa sürede döneceğiz.</span>
       </div>
+      <div class="cf-error" id="cfError">
+        <span data-inline-lang="en">Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:info@oncecustom.com">info@oncecustom.com</a>.</span>
+        <span data-inline-lang="tr">Mesajınız gönderilirken bir sorun oluştu. Lütfen tekrar deneyin veya doğrudan <a href="mailto:info@oncecustom.com">info@oncecustom.com</a> adresine yazın.</span>
+      </div>
     </form>
   </div>
 </section>
@@ -538,14 +556,29 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   revealEls.forEach(function(el) { revealObs.observe(el); });
 
   // ── hamburger ──
-  function toggleMenu() {
-    document.getElementById('menuOverlay').classList.toggle('open');
-    document.getElementById('hamBtn').classList.toggle('open');
-  }
-  function closeMenu() {
+  function actuallyCloseMenu() {
     document.getElementById('menuOverlay').classList.remove('open');
     document.getElementById('hamBtn').classList.remove('open');
+    document.body.style.overflow = '';
   }
+  function toggleMenu() {
+    if (document.getElementById('menuOverlay').classList.contains('open')) {
+      closeMenu();
+    } else {
+      document.getElementById('menuOverlay').classList.add('open');
+      document.getElementById('hamBtn').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      history.pushState({ onceOverlay: true }, '');
+    }
+  }
+  function closeMenu() {
+    if (!document.getElementById('menuOverlay').classList.contains('open')) return;
+    if (history.state && history.state.onceOverlay) history.back();
+    else actuallyCloseMenu();
+  }
+  window.addEventListener('popstate', function () {
+    if (document.getElementById('menuOverlay').classList.contains('open')) actuallyCloseMenu();
+  });
   function fixTurkishCase() {
     document.querySelectorAll('[data-lang="tr"],[data-inline-lang="tr"]').forEach(function(el) {
       if (getComputedStyle(el).textTransform === 'uppercase') {
@@ -565,9 +598,27 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 
   // ── contact form ──
   var cfForm = document.getElementById('contactForm');
+  var cfValidityMsgs = {
+    en: { valueMissing: 'Please fill out this field.', typeMismatch: 'Please enter a valid email address.' },
+    tr: { valueMissing: 'Lütfen bu alanı doldurun.', typeMismatch: 'Lütfen geçerli bir e-posta adresi girin.' }
+  };
+  function cfApplyCustomValidity(field) {
+    var lang = document.body.className === 'tr' ? 'tr' : 'en';
+    var msgs = cfValidityMsgs[lang];
+    if (field.validity.valueMissing) field.setCustomValidity(msgs.valueMissing);
+    else if (field.validity.typeMismatch) field.setCustomValidity(msgs.typeMismatch);
+    else field.setCustomValidity('');
+  }
   if (cfForm) {
+    var cfFields = cfForm.querySelectorAll('input, textarea');
+    cfFields.forEach(function(field) {
+      field.addEventListener('invalid', function() { cfApplyCustomValidity(field); });
+      field.addEventListener('input', function() { field.setCustomValidity(''); });
+    });
     cfForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      document.getElementById('cfSuccess').style.display = 'none';
+      document.getElementById('cfError').style.display = 'none';
       var data = new FormData(cfForm);
       fetch(cfForm.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
         .then(function(r) {
@@ -575,10 +626,14 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
             cfForm.reset();
             document.getElementById('cfSuccess').style.display = 'block';
           } else {
-            r.json().then(function(d){ console.error('Formspree error:', d); });
+            r.json().then(function(d){ console.error('Formspree error:', d); }).catch(function(){});
+            document.getElementById('cfError').style.display = 'block';
           }
         })
-        .catch(function(err){ console.error('Submit failed:', err); });
+        .catch(function(err){
+          console.error('Submit failed:', err);
+          document.getElementById('cfError').style.display = 'block';
+        });
     });
   }
 
