@@ -203,8 +203,6 @@ body.tr [data-lang="tr"]{display:inline;}
   .news-item{
     grid-template-columns:1fr;
   }
-  /* the featured article above already shows this story — don't repeat it in the list */
-  .news-item.is-featured-dup{display:none;}
   .ni-img{height:200px;}
   .ni-body{padding:16px 0 24px;}
   .ni-excerpt{display:none;}
@@ -273,7 +271,7 @@ body.tr [data-lang="tr"]{display:inline;}
 <!-- NEWS LIST -->
 <div class="news-list">
 
-  <div class="news-item reveal is-featured-dup" onclick="location.href='news/news-odyofil.html'">
+  <div class="news-item reveal" onclick="location.href='news/news-odyofil.html'">
     <div class="ni-img"><img src="https://img.youtube.com/vi/HCu_vk3KXI0/maxresdefault.jpg" alt="The Odyofil"></div>
     <div class="ni-body">
       <span class="ni-tag"><span data-lang="en">Interview · The Odyofil · 2026</span><span data-lang="tr">Röportaj · The Odyofil · 2026</span></span>
