@@ -14,7 +14,7 @@
 ```
 oncecustomwebsite/
 ├── index.html              → Ana sayfa
-├── products.html           → Ürünler (3D carousel + slide detail)
+├── thecollection.html      → Ürünler (3D carousel + slide detail)
 ├── our_story.html          → Hikayemiz
 ├── news.html               → Haberler listesi
 ├── distributors.html       → Distribütörler
@@ -63,7 +63,7 @@ oncecustomwebsite/
 
 - **Serif (başlıklar):** Cormorant Garamond — italic, weight 300/400
 - **Sans (body/nav):** Jost — weight 200/300/400
-- **Ürün adları (products.html):** Bebas Neue
+- **Ürün adları (thecollection.html):** Bebas Neue
 
 ---
 
@@ -92,7 +92,7 @@ IntersectionObserver ile JS'de tetiklenir.
 
 ---
 
-## products.html — 3D Carousel
+## thecollection.html — 3D Carousel
 
 - Ürünler JS veri dizisinde tanımlı: `name`, `img`, `gallery`, `tagline`, `desc`, `comingSoon`
 - `comingSoon: true` olan ürünler: **NAR A+, DAL A+, SU 2, ALİ**
