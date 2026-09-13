@@ -259,7 +259,8 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 .cf-country-btn span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cf-country-caret { flex-shrink: 0; opacity: 0.5; font-size: 10px; }
 .cf-country-list { position: absolute; top: calc(100% + 4px); left: 0; z-index: 50; width: max-content; min-width: 100%; max-width: 280px; max-height: 260px; overflow-y: auto; background: #14110d; border: 1px solid var(--border); list-style: none; padding: 4px 0; margin: 0; box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
-.cf-country-opt { padding: 9px 14px; font-size: 13px; font-weight: 300; color: var(--cream); cursor: pointer; white-space: nowrap; }
+.cf-country-opt { display: flex; align-items: center; gap: 8px; padding: 9px 14px; font-size: 13px; font-weight: 300; color: var(--cream); cursor: pointer; white-space: nowrap; }
+.cf-flag { flex-shrink: 0; display: block; border-radius: 2px; }
 .cf-country-opt:hover, .cf-country-opt.active { background: rgba(200,121,65,0.14); }
       .cf-field textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; resize: vertical; min-height: 120px; }
       .cf-field textarea:focus { border-color: var(--bronze); }
@@ -512,207 +513,208 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
           <div class="cf-phone-row">
             <div class="cf-country-select" id="countrySelect">
               <button type="button" class="cf-country-btn" id="countryBtn" aria-haspopup="listbox" aria-expanded="false">
-                <span id="countryBtnText">🇹🇷 +90</span>
+                <img class="cf-flag" id="countryBtnFlag" src="https://flagcdn.com/20x15/tr.png" srcset="https://flagcdn.com/40x30/tr.png 2x" width="20" height="15" alt="">
+                <span id="countryBtnText">+90</span>
                 <span class="cf-country-caret">▾</span>
               </button>
               <ul class="cf-country-list" id="countryList" role="listbox" hidden>
-              <li class="cf-country-opt" data-code="+93" role="option">🇦🇫 Afghanistan (+93)</li>
-              <li class="cf-country-opt" data-code="+355" role="option">🇦🇱 Albania (+355)</li>
-              <li class="cf-country-opt" data-code="+213" role="option">🇩🇿 Algeria (+213)</li>
-              <li class="cf-country-opt" data-code="+376" role="option">🇦🇩 Andorra (+376)</li>
-              <li class="cf-country-opt" data-code="+244" role="option">🇦🇴 Angola (+244)</li>
-              <li class="cf-country-opt" data-code="+1268" role="option">🇦🇬 Antigua and Barbuda (+1268)</li>
-              <li class="cf-country-opt" data-code="+54" role="option">🇦🇷 Argentina (+54)</li>
-              <li class="cf-country-opt" data-code="+374" role="option">🇦🇲 Armenia (+374)</li>
-              <li class="cf-country-opt" data-code="+61" role="option">🇦🇺 Australia (+61)</li>
-              <li class="cf-country-opt" data-code="+43" role="option">🇦🇹 Austria (+43)</li>
-              <li class="cf-country-opt" data-code="+994" role="option">🇦🇿 Azerbaijan (+994)</li>
-              <li class="cf-country-opt" data-code="+1242" role="option">🇧🇸 Bahamas (+1242)</li>
-              <li class="cf-country-opt" data-code="+973" role="option">🇧🇭 Bahrain (+973)</li>
-              <li class="cf-country-opt" data-code="+880" role="option">🇧🇩 Bangladesh (+880)</li>
-              <li class="cf-country-opt" data-code="+1246" role="option">🇧🇧 Barbados (+1246)</li>
-              <li class="cf-country-opt" data-code="+375" role="option">🇧🇾 Belarus (+375)</li>
-              <li class="cf-country-opt" data-code="+32" role="option">🇧🇪 Belgium (+32)</li>
-              <li class="cf-country-opt" data-code="+501" role="option">🇧🇿 Belize (+501)</li>
-              <li class="cf-country-opt" data-code="+229" role="option">🇧🇯 Benin (+229)</li>
-              <li class="cf-country-opt" data-code="+975" role="option">🇧🇹 Bhutan (+975)</li>
-              <li class="cf-country-opt" data-code="+591" role="option">🇧🇴 Bolivia (+591)</li>
-              <li class="cf-country-opt" data-code="+387" role="option">🇧🇦 Bosnia and Herzegovina (+387)</li>
-              <li class="cf-country-opt" data-code="+267" role="option">🇧🇼 Botswana (+267)</li>
-              <li class="cf-country-opt" data-code="+55" role="option">🇧🇷 Brazil (+55)</li>
-              <li class="cf-country-opt" data-code="+673" role="option">🇧🇳 Brunei (+673)</li>
-              <li class="cf-country-opt" data-code="+359" role="option">🇧🇬 Bulgaria (+359)</li>
-              <li class="cf-country-opt" data-code="+226" role="option">🇧🇫 Burkina Faso (+226)</li>
-              <li class="cf-country-opt" data-code="+257" role="option">🇧🇮 Burundi (+257)</li>
-              <li class="cf-country-opt" data-code="+238" role="option">🇨🇻 Cabo Verde (+238)</li>
-              <li class="cf-country-opt" data-code="+855" role="option">🇰🇭 Cambodia (+855)</li>
-              <li class="cf-country-opt" data-code="+237" role="option">🇨🇲 Cameroon (+237)</li>
-              <li class="cf-country-opt" data-code="+1" role="option">🇨🇦 Canada (+1)</li>
-              <li class="cf-country-opt" data-code="+236" role="option">🇨🇫 Central African Republic (+236)</li>
-              <li class="cf-country-opt" data-code="+235" role="option">🇹🇩 Chad (+235)</li>
-              <li class="cf-country-opt" data-code="+56" role="option">🇨🇱 Chile (+56)</li>
-              <li class="cf-country-opt" data-code="+86" role="option">🇨🇳 China (+86)</li>
-              <li class="cf-country-opt" data-code="+57" role="option">🇨🇴 Colombia (+57)</li>
-              <li class="cf-country-opt" data-code="+269" role="option">🇰🇲 Comoros (+269)</li>
-              <li class="cf-country-opt" data-code="+242" role="option">🇨🇬 Congo Brazzaville (+242)</li>
-              <li class="cf-country-opt" data-code="+243" role="option">🇨🇩 Congo DRC (+243)</li>
-              <li class="cf-country-opt" data-code="+506" role="option">🇨🇷 Costa Rica (+506)</li>
-              <li class="cf-country-opt" data-code="+385" role="option">🇭🇷 Croatia (+385)</li>
-              <li class="cf-country-opt" data-code="+53" role="option">🇨🇺 Cuba (+53)</li>
-              <li class="cf-country-opt" data-code="+357" role="option">🇨🇾 Cyprus (+357)</li>
-              <li class="cf-country-opt" data-code="+420" role="option">🇨🇿 Czech Republic (+420)</li>
-              <li class="cf-country-opt" data-code="+45" role="option">🇩🇰 Denmark (+45)</li>
-              <li class="cf-country-opt" data-code="+253" role="option">🇩🇯 Djibouti (+253)</li>
-              <li class="cf-country-opt" data-code="+1767" role="option">🇩🇲 Dominica (+1767)</li>
-              <li class="cf-country-opt" data-code="+1" role="option">🇩🇴 Dominican Republic (+1)</li>
-              <li class="cf-country-opt" data-code="+593" role="option">🇪🇨 Ecuador (+593)</li>
-              <li class="cf-country-opt" data-code="+20" role="option">🇪🇬 Egypt (+20)</li>
-              <li class="cf-country-opt" data-code="+503" role="option">🇸🇻 El Salvador (+503)</li>
-              <li class="cf-country-opt" data-code="+240" role="option">🇬🇶 Equatorial Guinea (+240)</li>
-              <li class="cf-country-opt" data-code="+291" role="option">🇪🇷 Eritrea (+291)</li>
-              <li class="cf-country-opt" data-code="+372" role="option">🇪🇪 Estonia (+372)</li>
-              <li class="cf-country-opt" data-code="+268" role="option">🇸🇿 Eswatini (+268)</li>
-              <li class="cf-country-opt" data-code="+251" role="option">🇪🇹 Ethiopia (+251)</li>
-              <li class="cf-country-opt" data-code="+679" role="option">🇫🇯 Fiji (+679)</li>
-              <li class="cf-country-opt" data-code="+358" role="option">🇫🇮 Finland (+358)</li>
-              <li class="cf-country-opt" data-code="+33" role="option">🇫🇷 France (+33)</li>
-              <li class="cf-country-opt" data-code="+241" role="option">🇬🇦 Gabon (+241)</li>
-              <li class="cf-country-opt" data-code="+220" role="option">🇬🇲 Gambia (+220)</li>
-              <li class="cf-country-opt" data-code="+995" role="option">🇬🇪 Georgia (+995)</li>
-              <li class="cf-country-opt" data-code="+49" role="option">🇩🇪 Germany (+49)</li>
-              <li class="cf-country-opt" data-code="+233" role="option">🇬🇭 Ghana (+233)</li>
-              <li class="cf-country-opt" data-code="+30" role="option">🇬🇷 Greece (+30)</li>
-              <li class="cf-country-opt" data-code="+1473" role="option">🇬🇩 Grenada (+1473)</li>
-              <li class="cf-country-opt" data-code="+502" role="option">🇬🇹 Guatemala (+502)</li>
-              <li class="cf-country-opt" data-code="+224" role="option">🇬🇳 Guinea (+224)</li>
-              <li class="cf-country-opt" data-code="+245" role="option">🇬🇼 Guinea-Bissau (+245)</li>
-              <li class="cf-country-opt" data-code="+592" role="option">🇬🇾 Guyana (+592)</li>
-              <li class="cf-country-opt" data-code="+509" role="option">🇭🇹 Haiti (+509)</li>
-              <li class="cf-country-opt" data-code="+504" role="option">🇭🇳 Honduras (+504)</li>
-              <li class="cf-country-opt" data-code="+36" role="option">🇭🇺 Hungary (+36)</li>
-              <li class="cf-country-opt" data-code="+354" role="option">🇮🇸 Iceland (+354)</li>
-              <li class="cf-country-opt" data-code="+91" role="option">🇮🇳 India (+91)</li>
-              <li class="cf-country-opt" data-code="+62" role="option">🇮🇩 Indonesia (+62)</li>
-              <li class="cf-country-opt" data-code="+98" role="option">🇮🇷 Iran (+98)</li>
-              <li class="cf-country-opt" data-code="+964" role="option">🇮🇶 Iraq (+964)</li>
-              <li class="cf-country-opt" data-code="+353" role="option">🇮🇪 Ireland (+353)</li>
-              <li class="cf-country-opt" data-code="+972" role="option">🇮🇱 Israel (+972)</li>
-              <li class="cf-country-opt" data-code="+39" role="option">🇮🇹 Italy (+39)</li>
-              <li class="cf-country-opt" data-code="+225" role="option">🇨🇮 Ivory Coast (+225)</li>
-              <li class="cf-country-opt" data-code="+1876" role="option">🇯🇲 Jamaica (+1876)</li>
-              <li class="cf-country-opt" data-code="+81" role="option">🇯🇵 Japan (+81)</li>
-              <li class="cf-country-opt" data-code="+962" role="option">🇯🇴 Jordan (+962)</li>
-              <li class="cf-country-opt" data-code="+7" role="option">🇰🇿 Kazakhstan (+7)</li>
-              <li class="cf-country-opt" data-code="+254" role="option">🇰🇪 Kenya (+254)</li>
-              <li class="cf-country-opt" data-code="+686" role="option">🇰🇮 Kiribati (+686)</li>
-              <li class="cf-country-opt" data-code="+383" role="option">🇽🇰 Kosovo (+383)</li>
-              <li class="cf-country-opt" data-code="+965" role="option">🇰🇼 Kuwait (+965)</li>
-              <li class="cf-country-opt" data-code="+996" role="option">🇰🇬 Kyrgyzstan (+996)</li>
-              <li class="cf-country-opt" data-code="+856" role="option">🇱🇦 Laos (+856)</li>
-              <li class="cf-country-opt" data-code="+371" role="option">🇱🇻 Latvia (+371)</li>
-              <li class="cf-country-opt" data-code="+961" role="option">🇱🇧 Lebanon (+961)</li>
-              <li class="cf-country-opt" data-code="+266" role="option">🇱🇸 Lesotho (+266)</li>
-              <li class="cf-country-opt" data-code="+231" role="option">🇱🇷 Liberia (+231)</li>
-              <li class="cf-country-opt" data-code="+218" role="option">🇱🇾 Libya (+218)</li>
-              <li class="cf-country-opt" data-code="+423" role="option">🇱🇮 Liechtenstein (+423)</li>
-              <li class="cf-country-opt" data-code="+370" role="option">🇱🇹 Lithuania (+370)</li>
-              <li class="cf-country-opt" data-code="+352" role="option">🇱🇺 Luxembourg (+352)</li>
-              <li class="cf-country-opt" data-code="+261" role="option">🇲🇬 Madagascar (+261)</li>
-              <li class="cf-country-opt" data-code="+265" role="option">🇲🇼 Malawi (+265)</li>
-              <li class="cf-country-opt" data-code="+60" role="option">🇲🇾 Malaysia (+60)</li>
-              <li class="cf-country-opt" data-code="+960" role="option">🇲🇻 Maldives (+960)</li>
-              <li class="cf-country-opt" data-code="+223" role="option">🇲🇱 Mali (+223)</li>
-              <li class="cf-country-opt" data-code="+356" role="option">🇲🇹 Malta (+356)</li>
-              <li class="cf-country-opt" data-code="+692" role="option">🇲🇭 Marshall Islands (+692)</li>
-              <li class="cf-country-opt" data-code="+222" role="option">🇲🇷 Mauritania (+222)</li>
-              <li class="cf-country-opt" data-code="+230" role="option">🇲🇺 Mauritius (+230)</li>
-              <li class="cf-country-opt" data-code="+52" role="option">🇲🇽 Mexico (+52)</li>
-              <li class="cf-country-opt" data-code="+691" role="option">🇫🇲 Micronesia (+691)</li>
-              <li class="cf-country-opt" data-code="+373" role="option">🇲🇩 Moldova (+373)</li>
-              <li class="cf-country-opt" data-code="+377" role="option">🇲🇨 Monaco (+377)</li>
-              <li class="cf-country-opt" data-code="+976" role="option">🇲🇳 Mongolia (+976)</li>
-              <li class="cf-country-opt" data-code="+382" role="option">🇲🇪 Montenegro (+382)</li>
-              <li class="cf-country-opt" data-code="+212" role="option">🇲🇦 Morocco (+212)</li>
-              <li class="cf-country-opt" data-code="+258" role="option">🇲🇿 Mozambique (+258)</li>
-              <li class="cf-country-opt" data-code="+95" role="option">🇲🇲 Myanmar (+95)</li>
-              <li class="cf-country-opt" data-code="+264" role="option">🇳🇦 Namibia (+264)</li>
-              <li class="cf-country-opt" data-code="+674" role="option">🇳🇷 Nauru (+674)</li>
-              <li class="cf-country-opt" data-code="+977" role="option">🇳🇵 Nepal (+977)</li>
-              <li class="cf-country-opt" data-code="+31" role="option">🇳🇱 Netherlands (+31)</li>
-              <li class="cf-country-opt" data-code="+64" role="option">🇳🇿 New Zealand (+64)</li>
-              <li class="cf-country-opt" data-code="+505" role="option">🇳🇮 Nicaragua (+505)</li>
-              <li class="cf-country-opt" data-code="+227" role="option">🇳🇪 Niger (+227)</li>
-              <li class="cf-country-opt" data-code="+234" role="option">🇳🇬 Nigeria (+234)</li>
-              <li class="cf-country-opt" data-code="+850" role="option">🇰🇵 North Korea (+850)</li>
-              <li class="cf-country-opt" data-code="+389" role="option">🇲🇰 North Macedonia (+389)</li>
-              <li class="cf-country-opt" data-code="+47" role="option">🇳🇴 Norway (+47)</li>
-              <li class="cf-country-opt" data-code="+968" role="option">🇴🇲 Oman (+968)</li>
-              <li class="cf-country-opt" data-code="+92" role="option">🇵🇰 Pakistan (+92)</li>
-              <li class="cf-country-opt" data-code="+680" role="option">🇵🇼 Palau (+680)</li>
-              <li class="cf-country-opt" data-code="+970" role="option">🇵🇸 Palestine (+970)</li>
-              <li class="cf-country-opt" data-code="+507" role="option">🇵🇦 Panama (+507)</li>
-              <li class="cf-country-opt" data-code="+675" role="option">🇵🇬 Papua New Guinea (+675)</li>
-              <li class="cf-country-opt" data-code="+595" role="option">🇵🇾 Paraguay (+595)</li>
-              <li class="cf-country-opt" data-code="+51" role="option">🇵🇪 Peru (+51)</li>
-              <li class="cf-country-opt" data-code="+63" role="option">🇵🇭 Philippines (+63)</li>
-              <li class="cf-country-opt" data-code="+48" role="option">🇵🇱 Poland (+48)</li>
-              <li class="cf-country-opt" data-code="+351" role="option">🇵🇹 Portugal (+351)</li>
-              <li class="cf-country-opt" data-code="+974" role="option">🇶🇦 Qatar (+974)</li>
-              <li class="cf-country-opt" data-code="+40" role="option">🇷🇴 Romania (+40)</li>
-              <li class="cf-country-opt" data-code="+7" role="option">🇷🇺 Russia (+7)</li>
-              <li class="cf-country-opt" data-code="+250" role="option">🇷🇼 Rwanda (+250)</li>
-              <li class="cf-country-opt" data-code="+1869" role="option">🇰🇳 Saint Kitts and Nevis (+1869)</li>
-              <li class="cf-country-opt" data-code="+1758" role="option">🇱🇨 Saint Lucia (+1758)</li>
-              <li class="cf-country-opt" data-code="+1784" role="option">🇻🇨 Saint Vincent and the Grenadines (+1784)</li>
-              <li class="cf-country-opt" data-code="+685" role="option">🇼🇸 Samoa (+685)</li>
-              <li class="cf-country-opt" data-code="+378" role="option">🇸🇲 San Marino (+378)</li>
-              <li class="cf-country-opt" data-code="+239" role="option">🇸🇹 Sao Tome and Principe (+239)</li>
-              <li class="cf-country-opt" data-code="+966" role="option">🇸🇦 Saudi Arabia (+966)</li>
-              <li class="cf-country-opt" data-code="+221" role="option">🇸🇳 Senegal (+221)</li>
-              <li class="cf-country-opt" data-code="+381" role="option">🇷🇸 Serbia (+381)</li>
-              <li class="cf-country-opt" data-code="+248" role="option">🇸🇨 Seychelles (+248)</li>
-              <li class="cf-country-opt" data-code="+232" role="option">🇸🇱 Sierra Leone (+232)</li>
-              <li class="cf-country-opt" data-code="+65" role="option">🇸🇬 Singapore (+65)</li>
-              <li class="cf-country-opt" data-code="+421" role="option">🇸🇰 Slovakia (+421)</li>
-              <li class="cf-country-opt" data-code="+386" role="option">🇸🇮 Slovenia (+386)</li>
-              <li class="cf-country-opt" data-code="+677" role="option">🇸🇧 Solomon Islands (+677)</li>
-              <li class="cf-country-opt" data-code="+252" role="option">🇸🇴 Somalia (+252)</li>
-              <li class="cf-country-opt" data-code="+27" role="option">🇿🇦 South Africa (+27)</li>
-              <li class="cf-country-opt" data-code="+82" role="option">🇰🇷 South Korea (+82)</li>
-              <li class="cf-country-opt" data-code="+211" role="option">🇸🇸 South Sudan (+211)</li>
-              <li class="cf-country-opt" data-code="+34" role="option">🇪🇸 Spain (+34)</li>
-              <li class="cf-country-opt" data-code="+94" role="option">🇱🇰 Sri Lanka (+94)</li>
-              <li class="cf-country-opt" data-code="+249" role="option">🇸🇩 Sudan (+249)</li>
-              <li class="cf-country-opt" data-code="+597" role="option">🇸🇷 Suriname (+597)</li>
-              <li class="cf-country-opt" data-code="+46" role="option">🇸🇪 Sweden (+46)</li>
-              <li class="cf-country-opt" data-code="+41" role="option">🇨🇭 Switzerland (+41)</li>
-              <li class="cf-country-opt" data-code="+963" role="option">🇸🇾 Syria (+963)</li>
-              <li class="cf-country-opt" data-code="+886" role="option">🇹🇼 Taiwan (+886)</li>
-              <li class="cf-country-opt" data-code="+992" role="option">🇹🇯 Tajikistan (+992)</li>
-              <li class="cf-country-opt" data-code="+255" role="option">🇹🇿 Tanzania (+255)</li>
-              <li class="cf-country-opt" data-code="+66" role="option">🇹🇭 Thailand (+66)</li>
-              <li class="cf-country-opt" data-code="+670" role="option">🇹🇱 Timor-Leste (+670)</li>
-              <li class="cf-country-opt" data-code="+228" role="option">🇹🇬 Togo (+228)</li>
-              <li class="cf-country-opt" data-code="+676" role="option">🇹🇴 Tonga (+676)</li>
-              <li class="cf-country-opt" data-code="+1868" role="option">🇹🇹 Trinidad and Tobago (+1868)</li>
-              <li class="cf-country-opt" data-code="+216" role="option">🇹🇳 Tunisia (+216)</li>
-              <li class="cf-country-opt active" data-code="+90" role="option" aria-selected="true">🇹🇷 Turkey (+90)</li>
-              <li class="cf-country-opt" data-code="+993" role="option">🇹🇲 Turkmenistan (+993)</li>
-              <li class="cf-country-opt" data-code="+688" role="option">🇹🇻 Tuvalu (+688)</li>
-              <li class="cf-country-opt" data-code="+256" role="option">🇺🇬 Uganda (+256)</li>
-              <li class="cf-country-opt" data-code="+380" role="option">🇺🇦 Ukraine (+380)</li>
-              <li class="cf-country-opt" data-code="+971" role="option">🇦🇪 United Arab Emirates (+971)</li>
-              <li class="cf-country-opt" data-code="+44" role="option">🇬🇧 United Kingdom (+44)</li>
-              <li class="cf-country-opt" data-code="+1" role="option">🇺🇸 United States (+1)</li>
-              <li class="cf-country-opt" data-code="+598" role="option">🇺🇾 Uruguay (+598)</li>
-              <li class="cf-country-opt" data-code="+998" role="option">🇺🇿 Uzbekistan (+998)</li>
-              <li class="cf-country-opt" data-code="+678" role="option">🇻🇺 Vanuatu (+678)</li>
-              <li class="cf-country-opt" data-code="+379" role="option">🇻🇦 Vatican City (+379)</li>
-              <li class="cf-country-opt" data-code="+58" role="option">🇻🇪 Venezuela (+58)</li>
-              <li class="cf-country-opt" data-code="+84" role="option">🇻🇳 Vietnam (+84)</li>
-              <li class="cf-country-opt" data-code="+967" role="option">🇾🇪 Yemen (+967)</li>
-              <li class="cf-country-opt" data-code="+260" role="option">🇿🇲 Zambia (+260)</li>
-              <li class="cf-country-opt" data-code="+263" role="option">🇿🇼 Zimbabwe (+263)</li>
+              <li class="cf-country-opt" data-code="+93" data-iso2="af" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/af.png" srcset="https://flagcdn.com/40x30/af.png 2x" width="20" height="15" alt=""> Afghanistan (+93)</li>
+              <li class="cf-country-opt" data-code="+355" data-iso2="al" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/al.png" srcset="https://flagcdn.com/40x30/al.png 2x" width="20" height="15" alt=""> Albania (+355)</li>
+              <li class="cf-country-opt" data-code="+213" data-iso2="dz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/dz.png" srcset="https://flagcdn.com/40x30/dz.png 2x" width="20" height="15" alt=""> Algeria (+213)</li>
+              <li class="cf-country-opt" data-code="+376" data-iso2="ad" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ad.png" srcset="https://flagcdn.com/40x30/ad.png 2x" width="20" height="15" alt=""> Andorra (+376)</li>
+              <li class="cf-country-opt" data-code="+244" data-iso2="ao" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ao.png" srcset="https://flagcdn.com/40x30/ao.png 2x" width="20" height="15" alt=""> Angola (+244)</li>
+              <li class="cf-country-opt" data-code="+1268" data-iso2="ag" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ag.png" srcset="https://flagcdn.com/40x30/ag.png 2x" width="20" height="15" alt=""> Antigua and Barbuda (+1268)</li>
+              <li class="cf-country-opt" data-code="+54" data-iso2="ar" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ar.png" srcset="https://flagcdn.com/40x30/ar.png 2x" width="20" height="15" alt=""> Argentina (+54)</li>
+              <li class="cf-country-opt" data-code="+374" data-iso2="am" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/am.png" srcset="https://flagcdn.com/40x30/am.png 2x" width="20" height="15" alt=""> Armenia (+374)</li>
+              <li class="cf-country-opt" data-code="+61" data-iso2="au" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/au.png" srcset="https://flagcdn.com/40x30/au.png 2x" width="20" height="15" alt=""> Australia (+61)</li>
+              <li class="cf-country-opt" data-code="+43" data-iso2="at" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/at.png" srcset="https://flagcdn.com/40x30/at.png 2x" width="20" height="15" alt=""> Austria (+43)</li>
+              <li class="cf-country-opt" data-code="+994" data-iso2="az" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/az.png" srcset="https://flagcdn.com/40x30/az.png 2x" width="20" height="15" alt=""> Azerbaijan (+994)</li>
+              <li class="cf-country-opt" data-code="+1242" data-iso2="bs" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bs.png" srcset="https://flagcdn.com/40x30/bs.png 2x" width="20" height="15" alt=""> Bahamas (+1242)</li>
+              <li class="cf-country-opt" data-code="+973" data-iso2="bh" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bh.png" srcset="https://flagcdn.com/40x30/bh.png 2x" width="20" height="15" alt=""> Bahrain (+973)</li>
+              <li class="cf-country-opt" data-code="+880" data-iso2="bd" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bd.png" srcset="https://flagcdn.com/40x30/bd.png 2x" width="20" height="15" alt=""> Bangladesh (+880)</li>
+              <li class="cf-country-opt" data-code="+1246" data-iso2="bb" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bb.png" srcset="https://flagcdn.com/40x30/bb.png 2x" width="20" height="15" alt=""> Barbados (+1246)</li>
+              <li class="cf-country-opt" data-code="+375" data-iso2="by" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/by.png" srcset="https://flagcdn.com/40x30/by.png 2x" width="20" height="15" alt=""> Belarus (+375)</li>
+              <li class="cf-country-opt" data-code="+32" data-iso2="be" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/be.png" srcset="https://flagcdn.com/40x30/be.png 2x" width="20" height="15" alt=""> Belgium (+32)</li>
+              <li class="cf-country-opt" data-code="+501" data-iso2="bz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bz.png" srcset="https://flagcdn.com/40x30/bz.png 2x" width="20" height="15" alt=""> Belize (+501)</li>
+              <li class="cf-country-opt" data-code="+229" data-iso2="bj" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bj.png" srcset="https://flagcdn.com/40x30/bj.png 2x" width="20" height="15" alt=""> Benin (+229)</li>
+              <li class="cf-country-opt" data-code="+975" data-iso2="bt" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bt.png" srcset="https://flagcdn.com/40x30/bt.png 2x" width="20" height="15" alt=""> Bhutan (+975)</li>
+              <li class="cf-country-opt" data-code="+591" data-iso2="bo" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bo.png" srcset="https://flagcdn.com/40x30/bo.png 2x" width="20" height="15" alt=""> Bolivia (+591)</li>
+              <li class="cf-country-opt" data-code="+387" data-iso2="ba" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ba.png" srcset="https://flagcdn.com/40x30/ba.png 2x" width="20" height="15" alt=""> Bosnia and Herzegovina (+387)</li>
+              <li class="cf-country-opt" data-code="+267" data-iso2="bw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bw.png" srcset="https://flagcdn.com/40x30/bw.png 2x" width="20" height="15" alt=""> Botswana (+267)</li>
+              <li class="cf-country-opt" data-code="+55" data-iso2="br" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/br.png" srcset="https://flagcdn.com/40x30/br.png 2x" width="20" height="15" alt=""> Brazil (+55)</li>
+              <li class="cf-country-opt" data-code="+673" data-iso2="bn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bn.png" srcset="https://flagcdn.com/40x30/bn.png 2x" width="20" height="15" alt=""> Brunei (+673)</li>
+              <li class="cf-country-opt" data-code="+359" data-iso2="bg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bg.png" srcset="https://flagcdn.com/40x30/bg.png 2x" width="20" height="15" alt=""> Bulgaria (+359)</li>
+              <li class="cf-country-opt" data-code="+226" data-iso2="bf" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bf.png" srcset="https://flagcdn.com/40x30/bf.png 2x" width="20" height="15" alt=""> Burkina Faso (+226)</li>
+              <li class="cf-country-opt" data-code="+257" data-iso2="bi" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/bi.png" srcset="https://flagcdn.com/40x30/bi.png 2x" width="20" height="15" alt=""> Burundi (+257)</li>
+              <li class="cf-country-opt" data-code="+238" data-iso2="cv" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cv.png" srcset="https://flagcdn.com/40x30/cv.png 2x" width="20" height="15" alt=""> Cabo Verde (+238)</li>
+              <li class="cf-country-opt" data-code="+855" data-iso2="kh" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kh.png" srcset="https://flagcdn.com/40x30/kh.png 2x" width="20" height="15" alt=""> Cambodia (+855)</li>
+              <li class="cf-country-opt" data-code="+237" data-iso2="cm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cm.png" srcset="https://flagcdn.com/40x30/cm.png 2x" width="20" height="15" alt=""> Cameroon (+237)</li>
+              <li class="cf-country-opt" data-code="+1" data-iso2="ca" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ca.png" srcset="https://flagcdn.com/40x30/ca.png 2x" width="20" height="15" alt=""> Canada (+1)</li>
+              <li class="cf-country-opt" data-code="+236" data-iso2="cf" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cf.png" srcset="https://flagcdn.com/40x30/cf.png 2x" width="20" height="15" alt=""> Central African Republic (+236)</li>
+              <li class="cf-country-opt" data-code="+235" data-iso2="td" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/td.png" srcset="https://flagcdn.com/40x30/td.png 2x" width="20" height="15" alt=""> Chad (+235)</li>
+              <li class="cf-country-opt" data-code="+56" data-iso2="cl" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cl.png" srcset="https://flagcdn.com/40x30/cl.png 2x" width="20" height="15" alt=""> Chile (+56)</li>
+              <li class="cf-country-opt" data-code="+86" data-iso2="cn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cn.png" srcset="https://flagcdn.com/40x30/cn.png 2x" width="20" height="15" alt=""> China (+86)</li>
+              <li class="cf-country-opt" data-code="+57" data-iso2="co" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/co.png" srcset="https://flagcdn.com/40x30/co.png 2x" width="20" height="15" alt=""> Colombia (+57)</li>
+              <li class="cf-country-opt" data-code="+269" data-iso2="km" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/km.png" srcset="https://flagcdn.com/40x30/km.png 2x" width="20" height="15" alt=""> Comoros (+269)</li>
+              <li class="cf-country-opt" data-code="+242" data-iso2="cg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cg.png" srcset="https://flagcdn.com/40x30/cg.png 2x" width="20" height="15" alt=""> Congo Brazzaville (+242)</li>
+              <li class="cf-country-opt" data-code="+243" data-iso2="cd" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cd.png" srcset="https://flagcdn.com/40x30/cd.png 2x" width="20" height="15" alt=""> Congo DRC (+243)</li>
+              <li class="cf-country-opt" data-code="+506" data-iso2="cr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cr.png" srcset="https://flagcdn.com/40x30/cr.png 2x" width="20" height="15" alt=""> Costa Rica (+506)</li>
+              <li class="cf-country-opt" data-code="+385" data-iso2="hr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/hr.png" srcset="https://flagcdn.com/40x30/hr.png 2x" width="20" height="15" alt=""> Croatia (+385)</li>
+              <li class="cf-country-opt" data-code="+53" data-iso2="cu" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cu.png" srcset="https://flagcdn.com/40x30/cu.png 2x" width="20" height="15" alt=""> Cuba (+53)</li>
+              <li class="cf-country-opt" data-code="+357" data-iso2="cy" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cy.png" srcset="https://flagcdn.com/40x30/cy.png 2x" width="20" height="15" alt=""> Cyprus (+357)</li>
+              <li class="cf-country-opt" data-code="+420" data-iso2="cz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/cz.png" srcset="https://flagcdn.com/40x30/cz.png 2x" width="20" height="15" alt=""> Czech Republic (+420)</li>
+              <li class="cf-country-opt" data-code="+45" data-iso2="dk" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/dk.png" srcset="https://flagcdn.com/40x30/dk.png 2x" width="20" height="15" alt=""> Denmark (+45)</li>
+              <li class="cf-country-opt" data-code="+253" data-iso2="dj" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/dj.png" srcset="https://flagcdn.com/40x30/dj.png 2x" width="20" height="15" alt=""> Djibouti (+253)</li>
+              <li class="cf-country-opt" data-code="+1767" data-iso2="dm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/dm.png" srcset="https://flagcdn.com/40x30/dm.png 2x" width="20" height="15" alt=""> Dominica (+1767)</li>
+              <li class="cf-country-opt" data-code="+1" data-iso2="do" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/do.png" srcset="https://flagcdn.com/40x30/do.png 2x" width="20" height="15" alt=""> Dominican Republic (+1)</li>
+              <li class="cf-country-opt" data-code="+593" data-iso2="ec" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ec.png" srcset="https://flagcdn.com/40x30/ec.png 2x" width="20" height="15" alt=""> Ecuador (+593)</li>
+              <li class="cf-country-opt" data-code="+20" data-iso2="eg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/eg.png" srcset="https://flagcdn.com/40x30/eg.png 2x" width="20" height="15" alt=""> Egypt (+20)</li>
+              <li class="cf-country-opt" data-code="+503" data-iso2="sv" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sv.png" srcset="https://flagcdn.com/40x30/sv.png 2x" width="20" height="15" alt=""> El Salvador (+503)</li>
+              <li class="cf-country-opt" data-code="+240" data-iso2="gq" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gq.png" srcset="https://flagcdn.com/40x30/gq.png 2x" width="20" height="15" alt=""> Equatorial Guinea (+240)</li>
+              <li class="cf-country-opt" data-code="+291" data-iso2="er" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/er.png" srcset="https://flagcdn.com/40x30/er.png 2x" width="20" height="15" alt=""> Eritrea (+291)</li>
+              <li class="cf-country-opt" data-code="+372" data-iso2="ee" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ee.png" srcset="https://flagcdn.com/40x30/ee.png 2x" width="20" height="15" alt=""> Estonia (+372)</li>
+              <li class="cf-country-opt" data-code="+268" data-iso2="sz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sz.png" srcset="https://flagcdn.com/40x30/sz.png 2x" width="20" height="15" alt=""> Eswatini (+268)</li>
+              <li class="cf-country-opt" data-code="+251" data-iso2="et" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/et.png" srcset="https://flagcdn.com/40x30/et.png 2x" width="20" height="15" alt=""> Ethiopia (+251)</li>
+              <li class="cf-country-opt" data-code="+679" data-iso2="fj" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/fj.png" srcset="https://flagcdn.com/40x30/fj.png 2x" width="20" height="15" alt=""> Fiji (+679)</li>
+              <li class="cf-country-opt" data-code="+358" data-iso2="fi" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/fi.png" srcset="https://flagcdn.com/40x30/fi.png 2x" width="20" height="15" alt=""> Finland (+358)</li>
+              <li class="cf-country-opt" data-code="+33" data-iso2="fr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/fr.png" srcset="https://flagcdn.com/40x30/fr.png 2x" width="20" height="15" alt=""> France (+33)</li>
+              <li class="cf-country-opt" data-code="+241" data-iso2="ga" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ga.png" srcset="https://flagcdn.com/40x30/ga.png 2x" width="20" height="15" alt=""> Gabon (+241)</li>
+              <li class="cf-country-opt" data-code="+220" data-iso2="gm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gm.png" srcset="https://flagcdn.com/40x30/gm.png 2x" width="20" height="15" alt=""> Gambia (+220)</li>
+              <li class="cf-country-opt" data-code="+995" data-iso2="ge" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ge.png" srcset="https://flagcdn.com/40x30/ge.png 2x" width="20" height="15" alt=""> Georgia (+995)</li>
+              <li class="cf-country-opt" data-code="+49" data-iso2="de" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/de.png" srcset="https://flagcdn.com/40x30/de.png 2x" width="20" height="15" alt=""> Germany (+49)</li>
+              <li class="cf-country-opt" data-code="+233" data-iso2="gh" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gh.png" srcset="https://flagcdn.com/40x30/gh.png 2x" width="20" height="15" alt=""> Ghana (+233)</li>
+              <li class="cf-country-opt" data-code="+30" data-iso2="gr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gr.png" srcset="https://flagcdn.com/40x30/gr.png 2x" width="20" height="15" alt=""> Greece (+30)</li>
+              <li class="cf-country-opt" data-code="+1473" data-iso2="gd" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gd.png" srcset="https://flagcdn.com/40x30/gd.png 2x" width="20" height="15" alt=""> Grenada (+1473)</li>
+              <li class="cf-country-opt" data-code="+502" data-iso2="gt" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gt.png" srcset="https://flagcdn.com/40x30/gt.png 2x" width="20" height="15" alt=""> Guatemala (+502)</li>
+              <li class="cf-country-opt" data-code="+224" data-iso2="gn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gn.png" srcset="https://flagcdn.com/40x30/gn.png 2x" width="20" height="15" alt=""> Guinea (+224)</li>
+              <li class="cf-country-opt" data-code="+245" data-iso2="gw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gw.png" srcset="https://flagcdn.com/40x30/gw.png 2x" width="20" height="15" alt=""> Guinea-Bissau (+245)</li>
+              <li class="cf-country-opt" data-code="+592" data-iso2="gy" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gy.png" srcset="https://flagcdn.com/40x30/gy.png 2x" width="20" height="15" alt=""> Guyana (+592)</li>
+              <li class="cf-country-opt" data-code="+509" data-iso2="ht" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ht.png" srcset="https://flagcdn.com/40x30/ht.png 2x" width="20" height="15" alt=""> Haiti (+509)</li>
+              <li class="cf-country-opt" data-code="+504" data-iso2="hn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/hn.png" srcset="https://flagcdn.com/40x30/hn.png 2x" width="20" height="15" alt=""> Honduras (+504)</li>
+              <li class="cf-country-opt" data-code="+36" data-iso2="hu" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/hu.png" srcset="https://flagcdn.com/40x30/hu.png 2x" width="20" height="15" alt=""> Hungary (+36)</li>
+              <li class="cf-country-opt" data-code="+354" data-iso2="is" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/is.png" srcset="https://flagcdn.com/40x30/is.png 2x" width="20" height="15" alt=""> Iceland (+354)</li>
+              <li class="cf-country-opt" data-code="+91" data-iso2="in" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/in.png" srcset="https://flagcdn.com/40x30/in.png 2x" width="20" height="15" alt=""> India (+91)</li>
+              <li class="cf-country-opt" data-code="+62" data-iso2="id" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/id.png" srcset="https://flagcdn.com/40x30/id.png 2x" width="20" height="15" alt=""> Indonesia (+62)</li>
+              <li class="cf-country-opt" data-code="+98" data-iso2="ir" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ir.png" srcset="https://flagcdn.com/40x30/ir.png 2x" width="20" height="15" alt=""> Iran (+98)</li>
+              <li class="cf-country-opt" data-code="+964" data-iso2="iq" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/iq.png" srcset="https://flagcdn.com/40x30/iq.png 2x" width="20" height="15" alt=""> Iraq (+964)</li>
+              <li class="cf-country-opt" data-code="+353" data-iso2="ie" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ie.png" srcset="https://flagcdn.com/40x30/ie.png 2x" width="20" height="15" alt=""> Ireland (+353)</li>
+              <li class="cf-country-opt" data-code="+972" data-iso2="il" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/il.png" srcset="https://flagcdn.com/40x30/il.png 2x" width="20" height="15" alt=""> Israel (+972)</li>
+              <li class="cf-country-opt" data-code="+39" data-iso2="it" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/it.png" srcset="https://flagcdn.com/40x30/it.png 2x" width="20" height="15" alt=""> Italy (+39)</li>
+              <li class="cf-country-opt" data-code="+225" data-iso2="ci" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ci.png" srcset="https://flagcdn.com/40x30/ci.png 2x" width="20" height="15" alt=""> Ivory Coast (+225)</li>
+              <li class="cf-country-opt" data-code="+1876" data-iso2="jm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/jm.png" srcset="https://flagcdn.com/40x30/jm.png 2x" width="20" height="15" alt=""> Jamaica (+1876)</li>
+              <li class="cf-country-opt" data-code="+81" data-iso2="jp" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/jp.png" srcset="https://flagcdn.com/40x30/jp.png 2x" width="20" height="15" alt=""> Japan (+81)</li>
+              <li class="cf-country-opt" data-code="+962" data-iso2="jo" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/jo.png" srcset="https://flagcdn.com/40x30/jo.png 2x" width="20" height="15" alt=""> Jordan (+962)</li>
+              <li class="cf-country-opt" data-code="+7" data-iso2="kz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kz.png" srcset="https://flagcdn.com/40x30/kz.png 2x" width="20" height="15" alt=""> Kazakhstan (+7)</li>
+              <li class="cf-country-opt" data-code="+254" data-iso2="ke" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ke.png" srcset="https://flagcdn.com/40x30/ke.png 2x" width="20" height="15" alt=""> Kenya (+254)</li>
+              <li class="cf-country-opt" data-code="+686" data-iso2="ki" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ki.png" srcset="https://flagcdn.com/40x30/ki.png 2x" width="20" height="15" alt=""> Kiribati (+686)</li>
+              <li class="cf-country-opt" data-code="+383" data-iso2="xk" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/xk.png" srcset="https://flagcdn.com/40x30/xk.png 2x" width="20" height="15" alt=""> Kosovo (+383)</li>
+              <li class="cf-country-opt" data-code="+965" data-iso2="kw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kw.png" srcset="https://flagcdn.com/40x30/kw.png 2x" width="20" height="15" alt=""> Kuwait (+965)</li>
+              <li class="cf-country-opt" data-code="+996" data-iso2="kg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kg.png" srcset="https://flagcdn.com/40x30/kg.png 2x" width="20" height="15" alt=""> Kyrgyzstan (+996)</li>
+              <li class="cf-country-opt" data-code="+856" data-iso2="la" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/la.png" srcset="https://flagcdn.com/40x30/la.png 2x" width="20" height="15" alt=""> Laos (+856)</li>
+              <li class="cf-country-opt" data-code="+371" data-iso2="lv" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lv.png" srcset="https://flagcdn.com/40x30/lv.png 2x" width="20" height="15" alt=""> Latvia (+371)</li>
+              <li class="cf-country-opt" data-code="+961" data-iso2="lb" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lb.png" srcset="https://flagcdn.com/40x30/lb.png 2x" width="20" height="15" alt=""> Lebanon (+961)</li>
+              <li class="cf-country-opt" data-code="+266" data-iso2="ls" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ls.png" srcset="https://flagcdn.com/40x30/ls.png 2x" width="20" height="15" alt=""> Lesotho (+266)</li>
+              <li class="cf-country-opt" data-code="+231" data-iso2="lr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lr.png" srcset="https://flagcdn.com/40x30/lr.png 2x" width="20" height="15" alt=""> Liberia (+231)</li>
+              <li class="cf-country-opt" data-code="+218" data-iso2="ly" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ly.png" srcset="https://flagcdn.com/40x30/ly.png 2x" width="20" height="15" alt=""> Libya (+218)</li>
+              <li class="cf-country-opt" data-code="+423" data-iso2="li" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/li.png" srcset="https://flagcdn.com/40x30/li.png 2x" width="20" height="15" alt=""> Liechtenstein (+423)</li>
+              <li class="cf-country-opt" data-code="+370" data-iso2="lt" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lt.png" srcset="https://flagcdn.com/40x30/lt.png 2x" width="20" height="15" alt=""> Lithuania (+370)</li>
+              <li class="cf-country-opt" data-code="+352" data-iso2="lu" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lu.png" srcset="https://flagcdn.com/40x30/lu.png 2x" width="20" height="15" alt=""> Luxembourg (+352)</li>
+              <li class="cf-country-opt" data-code="+261" data-iso2="mg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mg.png" srcset="https://flagcdn.com/40x30/mg.png 2x" width="20" height="15" alt=""> Madagascar (+261)</li>
+              <li class="cf-country-opt" data-code="+265" data-iso2="mw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mw.png" srcset="https://flagcdn.com/40x30/mw.png 2x" width="20" height="15" alt=""> Malawi (+265)</li>
+              <li class="cf-country-opt" data-code="+60" data-iso2="my" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/my.png" srcset="https://flagcdn.com/40x30/my.png 2x" width="20" height="15" alt=""> Malaysia (+60)</li>
+              <li class="cf-country-opt" data-code="+960" data-iso2="mv" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mv.png" srcset="https://flagcdn.com/40x30/mv.png 2x" width="20" height="15" alt=""> Maldives (+960)</li>
+              <li class="cf-country-opt" data-code="+223" data-iso2="ml" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ml.png" srcset="https://flagcdn.com/40x30/ml.png 2x" width="20" height="15" alt=""> Mali (+223)</li>
+              <li class="cf-country-opt" data-code="+356" data-iso2="mt" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mt.png" srcset="https://flagcdn.com/40x30/mt.png 2x" width="20" height="15" alt=""> Malta (+356)</li>
+              <li class="cf-country-opt" data-code="+692" data-iso2="mh" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mh.png" srcset="https://flagcdn.com/40x30/mh.png 2x" width="20" height="15" alt=""> Marshall Islands (+692)</li>
+              <li class="cf-country-opt" data-code="+222" data-iso2="mr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mr.png" srcset="https://flagcdn.com/40x30/mr.png 2x" width="20" height="15" alt=""> Mauritania (+222)</li>
+              <li class="cf-country-opt" data-code="+230" data-iso2="mu" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mu.png" srcset="https://flagcdn.com/40x30/mu.png 2x" width="20" height="15" alt=""> Mauritius (+230)</li>
+              <li class="cf-country-opt" data-code="+52" data-iso2="mx" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mx.png" srcset="https://flagcdn.com/40x30/mx.png 2x" width="20" height="15" alt=""> Mexico (+52)</li>
+              <li class="cf-country-opt" data-code="+691" data-iso2="fm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/fm.png" srcset="https://flagcdn.com/40x30/fm.png 2x" width="20" height="15" alt=""> Micronesia (+691)</li>
+              <li class="cf-country-opt" data-code="+373" data-iso2="md" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/md.png" srcset="https://flagcdn.com/40x30/md.png 2x" width="20" height="15" alt=""> Moldova (+373)</li>
+              <li class="cf-country-opt" data-code="+377" data-iso2="mc" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mc.png" srcset="https://flagcdn.com/40x30/mc.png 2x" width="20" height="15" alt=""> Monaco (+377)</li>
+              <li class="cf-country-opt" data-code="+976" data-iso2="mn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mn.png" srcset="https://flagcdn.com/40x30/mn.png 2x" width="20" height="15" alt=""> Mongolia (+976)</li>
+              <li class="cf-country-opt" data-code="+382" data-iso2="me" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/me.png" srcset="https://flagcdn.com/40x30/me.png 2x" width="20" height="15" alt=""> Montenegro (+382)</li>
+              <li class="cf-country-opt" data-code="+212" data-iso2="ma" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ma.png" srcset="https://flagcdn.com/40x30/ma.png 2x" width="20" height="15" alt=""> Morocco (+212)</li>
+              <li class="cf-country-opt" data-code="+258" data-iso2="mz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mz.png" srcset="https://flagcdn.com/40x30/mz.png 2x" width="20" height="15" alt=""> Mozambique (+258)</li>
+              <li class="cf-country-opt" data-code="+95" data-iso2="mm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mm.png" srcset="https://flagcdn.com/40x30/mm.png 2x" width="20" height="15" alt=""> Myanmar (+95)</li>
+              <li class="cf-country-opt" data-code="+264" data-iso2="na" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/na.png" srcset="https://flagcdn.com/40x30/na.png 2x" width="20" height="15" alt=""> Namibia (+264)</li>
+              <li class="cf-country-opt" data-code="+674" data-iso2="nr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/nr.png" srcset="https://flagcdn.com/40x30/nr.png 2x" width="20" height="15" alt=""> Nauru (+674)</li>
+              <li class="cf-country-opt" data-code="+977" data-iso2="np" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/np.png" srcset="https://flagcdn.com/40x30/np.png 2x" width="20" height="15" alt=""> Nepal (+977)</li>
+              <li class="cf-country-opt" data-code="+31" data-iso2="nl" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/nl.png" srcset="https://flagcdn.com/40x30/nl.png 2x" width="20" height="15" alt=""> Netherlands (+31)</li>
+              <li class="cf-country-opt" data-code="+64" data-iso2="nz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/nz.png" srcset="https://flagcdn.com/40x30/nz.png 2x" width="20" height="15" alt=""> New Zealand (+64)</li>
+              <li class="cf-country-opt" data-code="+505" data-iso2="ni" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ni.png" srcset="https://flagcdn.com/40x30/ni.png 2x" width="20" height="15" alt=""> Nicaragua (+505)</li>
+              <li class="cf-country-opt" data-code="+227" data-iso2="ne" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ne.png" srcset="https://flagcdn.com/40x30/ne.png 2x" width="20" height="15" alt=""> Niger (+227)</li>
+              <li class="cf-country-opt" data-code="+234" data-iso2="ng" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ng.png" srcset="https://flagcdn.com/40x30/ng.png 2x" width="20" height="15" alt=""> Nigeria (+234)</li>
+              <li class="cf-country-opt" data-code="+850" data-iso2="kp" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kp.png" srcset="https://flagcdn.com/40x30/kp.png 2x" width="20" height="15" alt=""> North Korea (+850)</li>
+              <li class="cf-country-opt" data-code="+389" data-iso2="mk" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/mk.png" srcset="https://flagcdn.com/40x30/mk.png 2x" width="20" height="15" alt=""> North Macedonia (+389)</li>
+              <li class="cf-country-opt" data-code="+47" data-iso2="no" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/no.png" srcset="https://flagcdn.com/40x30/no.png 2x" width="20" height="15" alt=""> Norway (+47)</li>
+              <li class="cf-country-opt" data-code="+968" data-iso2="om" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/om.png" srcset="https://flagcdn.com/40x30/om.png 2x" width="20" height="15" alt=""> Oman (+968)</li>
+              <li class="cf-country-opt" data-code="+92" data-iso2="pk" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pk.png" srcset="https://flagcdn.com/40x30/pk.png 2x" width="20" height="15" alt=""> Pakistan (+92)</li>
+              <li class="cf-country-opt" data-code="+680" data-iso2="pw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pw.png" srcset="https://flagcdn.com/40x30/pw.png 2x" width="20" height="15" alt=""> Palau (+680)</li>
+              <li class="cf-country-opt" data-code="+970" data-iso2="ps" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ps.png" srcset="https://flagcdn.com/40x30/ps.png 2x" width="20" height="15" alt=""> Palestine (+970)</li>
+              <li class="cf-country-opt" data-code="+507" data-iso2="pa" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pa.png" srcset="https://flagcdn.com/40x30/pa.png 2x" width="20" height="15" alt=""> Panama (+507)</li>
+              <li class="cf-country-opt" data-code="+675" data-iso2="pg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pg.png" srcset="https://flagcdn.com/40x30/pg.png 2x" width="20" height="15" alt=""> Papua New Guinea (+675)</li>
+              <li class="cf-country-opt" data-code="+595" data-iso2="py" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/py.png" srcset="https://flagcdn.com/40x30/py.png 2x" width="20" height="15" alt=""> Paraguay (+595)</li>
+              <li class="cf-country-opt" data-code="+51" data-iso2="pe" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pe.png" srcset="https://flagcdn.com/40x30/pe.png 2x" width="20" height="15" alt=""> Peru (+51)</li>
+              <li class="cf-country-opt" data-code="+63" data-iso2="ph" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ph.png" srcset="https://flagcdn.com/40x30/ph.png 2x" width="20" height="15" alt=""> Philippines (+63)</li>
+              <li class="cf-country-opt" data-code="+48" data-iso2="pl" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pl.png" srcset="https://flagcdn.com/40x30/pl.png 2x" width="20" height="15" alt=""> Poland (+48)</li>
+              <li class="cf-country-opt" data-code="+351" data-iso2="pt" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/pt.png" srcset="https://flagcdn.com/40x30/pt.png 2x" width="20" height="15" alt=""> Portugal (+351)</li>
+              <li class="cf-country-opt" data-code="+974" data-iso2="qa" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/qa.png" srcset="https://flagcdn.com/40x30/qa.png 2x" width="20" height="15" alt=""> Qatar (+974)</li>
+              <li class="cf-country-opt" data-code="+40" data-iso2="ro" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ro.png" srcset="https://flagcdn.com/40x30/ro.png 2x" width="20" height="15" alt=""> Romania (+40)</li>
+              <li class="cf-country-opt" data-code="+7" data-iso2="ru" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ru.png" srcset="https://flagcdn.com/40x30/ru.png 2x" width="20" height="15" alt=""> Russia (+7)</li>
+              <li class="cf-country-opt" data-code="+250" data-iso2="rw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/rw.png" srcset="https://flagcdn.com/40x30/rw.png 2x" width="20" height="15" alt=""> Rwanda (+250)</li>
+              <li class="cf-country-opt" data-code="+1869" data-iso2="kn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kn.png" srcset="https://flagcdn.com/40x30/kn.png 2x" width="20" height="15" alt=""> Saint Kitts and Nevis (+1869)</li>
+              <li class="cf-country-opt" data-code="+1758" data-iso2="lc" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lc.png" srcset="https://flagcdn.com/40x30/lc.png 2x" width="20" height="15" alt=""> Saint Lucia (+1758)</li>
+              <li class="cf-country-opt" data-code="+1784" data-iso2="vc" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/vc.png" srcset="https://flagcdn.com/40x30/vc.png 2x" width="20" height="15" alt=""> Saint Vincent and the Grenadines (+1784)</li>
+              <li class="cf-country-opt" data-code="+685" data-iso2="ws" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ws.png" srcset="https://flagcdn.com/40x30/ws.png 2x" width="20" height="15" alt=""> Samoa (+685)</li>
+              <li class="cf-country-opt" data-code="+378" data-iso2="sm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sm.png" srcset="https://flagcdn.com/40x30/sm.png 2x" width="20" height="15" alt=""> San Marino (+378)</li>
+              <li class="cf-country-opt" data-code="+239" data-iso2="st" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/st.png" srcset="https://flagcdn.com/40x30/st.png 2x" width="20" height="15" alt=""> Sao Tome and Principe (+239)</li>
+              <li class="cf-country-opt" data-code="+966" data-iso2="sa" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sa.png" srcset="https://flagcdn.com/40x30/sa.png 2x" width="20" height="15" alt=""> Saudi Arabia (+966)</li>
+              <li class="cf-country-opt" data-code="+221" data-iso2="sn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sn.png" srcset="https://flagcdn.com/40x30/sn.png 2x" width="20" height="15" alt=""> Senegal (+221)</li>
+              <li class="cf-country-opt" data-code="+381" data-iso2="rs" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/rs.png" srcset="https://flagcdn.com/40x30/rs.png 2x" width="20" height="15" alt=""> Serbia (+381)</li>
+              <li class="cf-country-opt" data-code="+248" data-iso2="sc" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sc.png" srcset="https://flagcdn.com/40x30/sc.png 2x" width="20" height="15" alt=""> Seychelles (+248)</li>
+              <li class="cf-country-opt" data-code="+232" data-iso2="sl" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sl.png" srcset="https://flagcdn.com/40x30/sl.png 2x" width="20" height="15" alt=""> Sierra Leone (+232)</li>
+              <li class="cf-country-opt" data-code="+65" data-iso2="sg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sg.png" srcset="https://flagcdn.com/40x30/sg.png 2x" width="20" height="15" alt=""> Singapore (+65)</li>
+              <li class="cf-country-opt" data-code="+421" data-iso2="sk" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sk.png" srcset="https://flagcdn.com/40x30/sk.png 2x" width="20" height="15" alt=""> Slovakia (+421)</li>
+              <li class="cf-country-opt" data-code="+386" data-iso2="si" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/si.png" srcset="https://flagcdn.com/40x30/si.png 2x" width="20" height="15" alt=""> Slovenia (+386)</li>
+              <li class="cf-country-opt" data-code="+677" data-iso2="sb" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sb.png" srcset="https://flagcdn.com/40x30/sb.png 2x" width="20" height="15" alt=""> Solomon Islands (+677)</li>
+              <li class="cf-country-opt" data-code="+252" data-iso2="so" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/so.png" srcset="https://flagcdn.com/40x30/so.png 2x" width="20" height="15" alt=""> Somalia (+252)</li>
+              <li class="cf-country-opt" data-code="+27" data-iso2="za" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/za.png" srcset="https://flagcdn.com/40x30/za.png 2x" width="20" height="15" alt=""> South Africa (+27)</li>
+              <li class="cf-country-opt" data-code="+82" data-iso2="kr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/kr.png" srcset="https://flagcdn.com/40x30/kr.png 2x" width="20" height="15" alt=""> South Korea (+82)</li>
+              <li class="cf-country-opt" data-code="+211" data-iso2="ss" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ss.png" srcset="https://flagcdn.com/40x30/ss.png 2x" width="20" height="15" alt=""> South Sudan (+211)</li>
+              <li class="cf-country-opt" data-code="+34" data-iso2="es" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/es.png" srcset="https://flagcdn.com/40x30/es.png 2x" width="20" height="15" alt=""> Spain (+34)</li>
+              <li class="cf-country-opt" data-code="+94" data-iso2="lk" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/lk.png" srcset="https://flagcdn.com/40x30/lk.png 2x" width="20" height="15" alt=""> Sri Lanka (+94)</li>
+              <li class="cf-country-opt" data-code="+249" data-iso2="sd" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sd.png" srcset="https://flagcdn.com/40x30/sd.png 2x" width="20" height="15" alt=""> Sudan (+249)</li>
+              <li class="cf-country-opt" data-code="+597" data-iso2="sr" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sr.png" srcset="https://flagcdn.com/40x30/sr.png 2x" width="20" height="15" alt=""> Suriname (+597)</li>
+              <li class="cf-country-opt" data-code="+46" data-iso2="se" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/se.png" srcset="https://flagcdn.com/40x30/se.png 2x" width="20" height="15" alt=""> Sweden (+46)</li>
+              <li class="cf-country-opt" data-code="+41" data-iso2="ch" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ch.png" srcset="https://flagcdn.com/40x30/ch.png 2x" width="20" height="15" alt=""> Switzerland (+41)</li>
+              <li class="cf-country-opt" data-code="+963" data-iso2="sy" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/sy.png" srcset="https://flagcdn.com/40x30/sy.png 2x" width="20" height="15" alt=""> Syria (+963)</li>
+              <li class="cf-country-opt" data-code="+886" data-iso2="tw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tw.png" srcset="https://flagcdn.com/40x30/tw.png 2x" width="20" height="15" alt=""> Taiwan (+886)</li>
+              <li class="cf-country-opt" data-code="+992" data-iso2="tj" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tj.png" srcset="https://flagcdn.com/40x30/tj.png 2x" width="20" height="15" alt=""> Tajikistan (+992)</li>
+              <li class="cf-country-opt" data-code="+255" data-iso2="tz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tz.png" srcset="https://flagcdn.com/40x30/tz.png 2x" width="20" height="15" alt=""> Tanzania (+255)</li>
+              <li class="cf-country-opt" data-code="+66" data-iso2="th" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/th.png" srcset="https://flagcdn.com/40x30/th.png 2x" width="20" height="15" alt=""> Thailand (+66)</li>
+              <li class="cf-country-opt" data-code="+670" data-iso2="tl" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tl.png" srcset="https://flagcdn.com/40x30/tl.png 2x" width="20" height="15" alt=""> Timor-Leste (+670)</li>
+              <li class="cf-country-opt" data-code="+228" data-iso2="tg" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tg.png" srcset="https://flagcdn.com/40x30/tg.png 2x" width="20" height="15" alt=""> Togo (+228)</li>
+              <li class="cf-country-opt" data-code="+676" data-iso2="to" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/to.png" srcset="https://flagcdn.com/40x30/to.png 2x" width="20" height="15" alt=""> Tonga (+676)</li>
+              <li class="cf-country-opt" data-code="+1868" data-iso2="tt" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tt.png" srcset="https://flagcdn.com/40x30/tt.png 2x" width="20" height="15" alt=""> Trinidad and Tobago (+1868)</li>
+              <li class="cf-country-opt" data-code="+216" data-iso2="tn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tn.png" srcset="https://flagcdn.com/40x30/tn.png 2x" width="20" height="15" alt=""> Tunisia (+216)</li>
+              <li class="cf-country-opt active" data-code="+90" data-iso2="tr" role="option" aria-selected="true"><img class="cf-flag" src="https://flagcdn.com/20x15/tr.png" srcset="https://flagcdn.com/40x30/tr.png 2x" width="20" height="15" alt=""> Turkey (+90)</li>
+              <li class="cf-country-opt" data-code="+993" data-iso2="tm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tm.png" srcset="https://flagcdn.com/40x30/tm.png 2x" width="20" height="15" alt=""> Turkmenistan (+993)</li>
+              <li class="cf-country-opt" data-code="+688" data-iso2="tv" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/tv.png" srcset="https://flagcdn.com/40x30/tv.png 2x" width="20" height="15" alt=""> Tuvalu (+688)</li>
+              <li class="cf-country-opt" data-code="+256" data-iso2="ug" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ug.png" srcset="https://flagcdn.com/40x30/ug.png 2x" width="20" height="15" alt=""> Uganda (+256)</li>
+              <li class="cf-country-opt" data-code="+380" data-iso2="ua" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ua.png" srcset="https://flagcdn.com/40x30/ua.png 2x" width="20" height="15" alt=""> Ukraine (+380)</li>
+              <li class="cf-country-opt" data-code="+971" data-iso2="ae" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ae.png" srcset="https://flagcdn.com/40x30/ae.png 2x" width="20" height="15" alt=""> United Arab Emirates (+971)</li>
+              <li class="cf-country-opt" data-code="+44" data-iso2="gb" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/gb.png" srcset="https://flagcdn.com/40x30/gb.png 2x" width="20" height="15" alt=""> United Kingdom (+44)</li>
+              <li class="cf-country-opt" data-code="+1" data-iso2="us" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/us.png" srcset="https://flagcdn.com/40x30/us.png 2x" width="20" height="15" alt=""> United States (+1)</li>
+              <li class="cf-country-opt" data-code="+598" data-iso2="uy" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/uy.png" srcset="https://flagcdn.com/40x30/uy.png 2x" width="20" height="15" alt=""> Uruguay (+598)</li>
+              <li class="cf-country-opt" data-code="+998" data-iso2="uz" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/uz.png" srcset="https://flagcdn.com/40x30/uz.png 2x" width="20" height="15" alt=""> Uzbekistan (+998)</li>
+              <li class="cf-country-opt" data-code="+678" data-iso2="vu" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/vu.png" srcset="https://flagcdn.com/40x30/vu.png 2x" width="20" height="15" alt=""> Vanuatu (+678)</li>
+              <li class="cf-country-opt" data-code="+379" data-iso2="va" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/va.png" srcset="https://flagcdn.com/40x30/va.png 2x" width="20" height="15" alt=""> Vatican City (+379)</li>
+              <li class="cf-country-opt" data-code="+58" data-iso2="ve" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ve.png" srcset="https://flagcdn.com/40x30/ve.png 2x" width="20" height="15" alt=""> Venezuela (+58)</li>
+              <li class="cf-country-opt" data-code="+84" data-iso2="vn" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/vn.png" srcset="https://flagcdn.com/40x30/vn.png 2x" width="20" height="15" alt=""> Vietnam (+84)</li>
+              <li class="cf-country-opt" data-code="+967" data-iso2="ye" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/ye.png" srcset="https://flagcdn.com/40x30/ye.png 2x" width="20" height="15" alt=""> Yemen (+967)</li>
+              <li class="cf-country-opt" data-code="+260" data-iso2="zm" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/zm.png" srcset="https://flagcdn.com/40x30/zm.png 2x" width="20" height="15" alt=""> Zambia (+260)</li>
+              <li class="cf-country-opt" data-code="+263" data-iso2="zw" role="option"><img class="cf-flag" src="https://flagcdn.com/20x15/zw.png" srcset="https://flagcdn.com/40x30/zw.png 2x" width="20" height="15" alt=""> Zimbabwe (+263)</li>
               </ul>
             </div>
             <input type="hidden" id="phoneCode" value="+90">
@@ -819,14 +821,16 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   }
   setLang(localStorage.getItem('once_lang') || 'en');
 
-  // ── country code dropdown (custom, not a native <select>, so flag emoji render
-  //    consistently — Windows shows flag emoji as plain two-letter tiles inside
-  //    native <select>/<option> elements) ──
+  // ── country code dropdown (custom, not a native <select>, so flags render as real
+  //    images — Windows has no color flag glyphs in its system font at all, so emoji
+  //    flags never render there regardless of native vs custom markup) ──
   var countryWrap = document.getElementById('countrySelect');
   function resetCountrySelect() {
     if (!countryWrap) return;
     document.getElementById('phoneCode').value = '+90';
-    document.getElementById('countryBtnText').textContent = '🇹🇷 +90';
+    document.getElementById('countryBtnText').textContent = '+90';
+    document.getElementById('countryBtnFlag').src = 'https://flagcdn.com/20x15/tr.png';
+    document.getElementById('countryBtnFlag').srcset = 'https://flagcdn.com/40x30/tr.png 2x';
     countryList.querySelectorAll('.cf-country-opt.active').forEach(function (o) { o.classList.remove('active'); });
     var defaultLi = countryList.querySelector('[data-code="+90"]');
     if (defaultLi) defaultLi.classList.add('active');
@@ -835,6 +839,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   if (countryWrap) {
     var countryBtn = document.getElementById('countryBtn');
     var countryBtnText = document.getElementById('countryBtnText');
+    var countryBtnFlag = document.getElementById('countryBtnFlag');
     var countryHiddenCode = document.getElementById('phoneCode');
     function closeCountryList() { countryList.hidden = true; countryWrap.classList.remove('open'); countryBtn.setAttribute('aria-expanded', 'false'); }
     function openCountryList() { countryList.hidden = false; countryWrap.classList.add('open'); countryBtn.setAttribute('aria-expanded', 'true'); }
@@ -846,8 +851,9 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       var li = e.target.closest('.cf-country-opt');
       if (!li) return;
       countryHiddenCode.value = li.dataset.code;
-      var flagChar = li.textContent.trim().split(' ')[0];
-      countryBtnText.textContent = flagChar + ' ' + li.dataset.code;
+      countryBtnText.textContent = li.dataset.code;
+      countryBtnFlag.src = 'https://flagcdn.com/20x15/' + li.dataset.iso2 + '.png';
+      countryBtnFlag.srcset = 'https://flagcdn.com/40x30/' + li.dataset.iso2 + '.png 2x';
       countryList.querySelectorAll('.cf-country-opt.active').forEach(function (o) { o.classList.remove('active'); });
       li.classList.add('active');
       closeCountryList();
