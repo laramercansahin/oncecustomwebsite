@@ -359,7 +359,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   <button class="menu-close" onclick="closeMenu()"><span></span><span></span></button>
   <div class="menu-nav">
     <ul>
-      <li><a href="index.html" onclick="closeMenu()"><span data-inline-lang="en">Home</span><span data-inline-lang="tr">Ana Sayfa</span></a></li>
+      <li><a href="./" onclick="closeMenu()"><span data-inline-lang="en">Home</span><span data-inline-lang="tr">Ana Sayfa</span></a></li>
       <li><a href="our_story.html" onclick="closeMenu()"><span data-inline-lang="en">Our Story</span><span data-inline-lang="tr">Hikayemiz</span></a></li>
       <li><a href="products.html" onclick="closeMenu()"><span data-inline-lang="en">The Collection</span><span data-inline-lang="tr">Koleksiyon</span></a></li>
       <li><a href="distributors.html" onclick="closeMenu()"><span data-inline-lang="en">Distributors</span><span data-inline-lang="tr">Distribütörler</span></a></li>
@@ -890,6 +890,16 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     cfFields.forEach(function(field) {
       field.addEventListener('invalid', function() { cfApplyCustomValidity(field); });
       field.addEventListener('input', function() { field.setCustomValidity(''); });
+    });
+    // On mobile the on-screen keyboard can cover the submit button while a field
+    // is focused; nudge it into view once the keyboard has finished animating in.
+    var cfSubmitBtn = cfForm.querySelector('.cf-submit');
+    cfFields.forEach(function(field) {
+      field.addEventListener('focus', function() {
+        setTimeout(function() {
+          cfSubmitBtn.scrollIntoView({ block: 'end', behavior: 'smooth' });
+        }, 350);
+      });
     });
     cfForm.addEventListener('submit', function(e) {
       e.preventDefault();
