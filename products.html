@@ -520,8 +520,6 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .slide,.slide.prev,.slide.next,.slide.active{
     position:relative !important;
     height:100svh !important;
-    transform:none !important;
-    opacity:1 !important;
     pointer-events:auto !important;
     display:flex !important;
     flex-direction:column;
@@ -530,13 +528,15 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     scroll-snap-stop:always;
     scroll-margin-top:56px;
   }
-  /* entrance animation */
-  .slide-enter{
+  /* entrance movement as each product scrolls into view — same specificity as
+     the .slide.prev/.next/.active rules above (and declared after them) so it
+     wins the cascade instead of the desktop show/hide transform */
+  .slide.slide-enter{
     opacity:0;
     transform:translateY(24px);
     transition:opacity .6s cubic-bezier(0.22,1,0.36,1), transform .6s cubic-bezier(0.22,1,0.36,1);
   }
-  .slide-enter.in-view{
+  .slide.slide-enter.in-view{
     opacity:1;
     transform:translateY(0);
   }
@@ -1149,7 +1149,8 @@ function goToDetail(idx){
 
 function sliderRender(){
   document.querySelectorAll('.slide').forEach(function(s, i){
-    s.className = 'slide ' + (i < sliderCurrent ? 'prev' : i === sliderCurrent ? 'active' : 'next');
+    s.classList.remove('prev','active','next');
+    s.classList.add(i < sliderCurrent ? 'prev' : i === sliderCurrent ? 'active' : 'next');
   });
   document.querySelectorAll('.dot').forEach(function(d, i){ d.classList.toggle('active', i === sliderCurrent); });
   /* cCur removed from HTML */
