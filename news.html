@@ -193,9 +193,8 @@ body.tr [data-lang="tr"]{display:inline;}
   .ph-right{max-width:100%;padding:0;}
   .ph-title{font-size:clamp(28px,8vw,44px);white-space:normal;}
 
-  /* featured */
-  .featured{height:320px;}
-  .featured img{object-fit:contain;background:var(--black);}
+  /* featured — match the 16:9 thumbnail's own ratio so cover doesn't need to crop it */
+  .featured{height:auto;aspect-ratio:16/9;}
   .feat-overlay{padding:28px 20px;}
   .feat-meta{flex-direction:column;align-items:flex-start;gap:8px;}
   .feat-title{font-size:clamp(18px,5vw,26px);}
