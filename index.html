@@ -251,6 +251,10 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 .cf-field input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; }
 .cf-field input:focus { border-color: var(--bronze); }
 .cf-field input::placeholder { color: var(--ghost); opacity: 0.6; }
+.cf-phone-row { display: flex; gap: 8px; }
+.cf-phone-code { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 8px; outline: none; transition: border-color 0.3s; width: 92px; flex-shrink: 0; }
+.cf-phone-code:focus { border-color: var(--bronze); }
+.cf-phone-row input { flex: 1; min-width: 0; }
       .cf-field textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; resize: vertical; min-height: 120px; }
       .cf-field textarea:focus { border-color: var(--bronze); }
       .cf-field textarea::placeholder { color: var(--ghost); opacity: 0.6; }
@@ -328,7 +332,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   .contact-right { padding: 0 24px 60px; }
   .cf-row { grid-template-columns: 1fr; }
   /* 16px prevents iOS Safari from auto-zooming the page on focus */
-  .cf-field input, .cf-field textarea { font-size: 16px; }
+  .cf-field input, .cf-field textarea, .cf-phone-code { font-size: 16px; }
 
   /* footer */
   footer { padding: 28px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -498,7 +502,22 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         </div>
         <div class="cf-field">
           <label><span data-inline-lang="en">Phone</span><span data-inline-lang="tr">Telefon</span></label>
-          <input type="tel" name="phone" placeholder="+90 555 000 00 00" pattern="[0-9+\-\s\(\)]{7,20}">
+          <div class="cf-phone-row">
+            <select id="phoneCode" class="cf-phone-code">
+              <option value="+90" selected>🇹🇷 +90</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+82">🇰🇷 +82</option>
+              <option value="+86">🇨🇳 +86</option>
+            </select>
+            <input type="tel" id="phoneNumber" placeholder="555 000 00 00" pattern="[0-9\s\-]{5,14}">
+          </div>
+          <input type="hidden" name="phone" id="phoneCombined">
         </div>
       </div>
       <div class="cf-row" style="display:block;">
@@ -605,20 +624,21 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
     en: {
       valueMissing: 'Please fill out this field.',
       typeMismatch: 'Please enter a valid email address.',
-      patternMismatch_phone: 'Please enter a valid phone number.'
+      patternMismatch_phoneNumber: 'Please enter a valid phone number.'
     },
     tr: {
       valueMissing: 'Lütfen bu alanı doldurun.',
       typeMismatch: 'Lütfen geçerli bir e-posta adresi girin.',
-      patternMismatch_phone: 'Lütfen geçerli bir telefon numarası girin.'
+      patternMismatch_phoneNumber: 'Lütfen geçerli bir telefon numarası girin.'
     }
   };
   function cfApplyCustomValidity(field) {
     var lang = document.body.className === 'tr' ? 'tr' : 'en';
     var msgs = cfValidityMsgs[lang];
+    var key = field.name || field.id;
     if (field.validity.valueMissing) field.setCustomValidity(msgs.valueMissing);
     else if (field.validity.typeMismatch) field.setCustomValidity(msgs.typeMismatch);
-    else if (field.validity.patternMismatch) field.setCustomValidity(msgs['patternMismatch_' + field.name] || msgs.typeMismatch);
+    else if (field.validity.patternMismatch) field.setCustomValidity(msgs['patternMismatch_' + key] || msgs.typeMismatch);
     else field.setCustomValidity('');
   }
   if (cfForm) {
@@ -631,6 +651,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       e.preventDefault();
       document.getElementById('cfSuccess').style.display = 'none';
       document.getElementById('cfError').style.display = 'none';
+      var phoneNumber = document.getElementById('phoneNumber').value.trim();
+      document.getElementById('phoneCombined').value = phoneNumber ? (document.getElementById('phoneCode').value + ' ' + phoneNumber) : '';
       var data = new FormData(cfForm);
       function showCfError(detail) {
         document.getElementById('cfErrorDetailEn').textContent = detail ? ' (' + detail + ')' : '';
