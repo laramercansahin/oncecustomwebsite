@@ -497,7 +497,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         </div>
         <div class="cf-field">
           <label><span data-inline-lang="en">Phone</span><span data-inline-lang="tr">Telefon</span></label>
-          <input type="tel" name="phone" placeholder="+90 555 000 00 00">
+          <input type="tel" name="phone" placeholder="+90 555 000 00 00" pattern="[0-9+\-\s\(\)]{7,20}">
         </div>
       </div>
       <div class="cf-row" style="display:block;">
@@ -516,8 +516,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         <span data-inline-lang="tr">Teşekkürler en kısa sürede döneceğiz.</span>
       </div>
       <div class="cf-error" id="cfError">
-        <span data-inline-lang="en">Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:info@oncecustom.com">info@oncecustom.com</a>.</span>
-        <span data-inline-lang="tr">Mesajınız gönderilirken bir sorun oluştu. Lütfen tekrar deneyin veya doğrudan <a href="mailto:info@oncecustom.com">info@oncecustom.com</a> adresine yazın.</span>
+        <span data-inline-lang="en">Something went wrong sending your message<span id="cfErrorDetailEn"></span>. Please try again, or email us directly at <a href="mailto:info@oncecustom.com">info@oncecustom.com</a>.</span>
+        <span data-inline-lang="tr">Mesajınız gönderilirken bir sorun oluştu<span id="cfErrorDetailTr"></span>. Lütfen tekrar deneyin veya doğrudan <a href="mailto:info@oncecustom.com">info@oncecustom.com</a> adresine yazın.</span>
       </div>
     </form>
   </div>
@@ -599,14 +599,23 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   // ── contact form ──
   var cfForm = document.getElementById('contactForm');
   var cfValidityMsgs = {
-    en: { valueMissing: 'Please fill out this field.', typeMismatch: 'Please enter a valid email address.' },
-    tr: { valueMissing: 'Lütfen bu alanı doldurun.', typeMismatch: 'Lütfen geçerli bir e-posta adresi girin.' }
+    en: {
+      valueMissing: 'Please fill out this field.',
+      typeMismatch: 'Please enter a valid email address.',
+      patternMismatch_phone: 'Please enter a valid phone number.'
+    },
+    tr: {
+      valueMissing: 'Lütfen bu alanı doldurun.',
+      typeMismatch: 'Lütfen geçerli bir e-posta adresi girin.',
+      patternMismatch_phone: 'Lütfen geçerli bir telefon numarası girin.'
+    }
   };
   function cfApplyCustomValidity(field) {
     var lang = document.body.className === 'tr' ? 'tr' : 'en';
     var msgs = cfValidityMsgs[lang];
     if (field.validity.valueMissing) field.setCustomValidity(msgs.valueMissing);
     else if (field.validity.typeMismatch) field.setCustomValidity(msgs.typeMismatch);
+    else if (field.validity.patternMismatch) field.setCustomValidity(msgs['patternMismatch_' + field.name] || msgs.typeMismatch);
     else field.setCustomValidity('');
   }
   if (cfForm) {
@@ -620,19 +629,27 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       document.getElementById('cfSuccess').style.display = 'none';
       document.getElementById('cfError').style.display = 'none';
       var data = new FormData(cfForm);
+      function showCfError(detail) {
+        document.getElementById('cfErrorDetailEn').textContent = detail ? ' (' + detail + ')' : '';
+        document.getElementById('cfErrorDetailTr').textContent = detail ? ' (' + detail + ')' : '';
+        document.getElementById('cfError').style.display = 'block';
+      }
       fetch(cfForm.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
         .then(function(r) {
           if (r.ok) {
             cfForm.reset();
             document.getElementById('cfSuccess').style.display = 'block';
           } else {
-            r.json().then(function(d){ console.error('Formspree error:', d); }).catch(function(){});
-            document.getElementById('cfError').style.display = 'block';
+            r.json().then(function(d){
+              console.error('Formspree error:', d);
+              var detail = d && d.errors && d.errors[0] && (d.errors[0].message || d.errors[0].code);
+              showCfError(detail);
+            }).catch(function(){ showCfError(null); });
           }
         })
         .catch(function(err){
           console.error('Submit failed:', err);
-          document.getElementById('cfError').style.display = 'block';
+          showCfError(null);
         });
     });
   }
