@@ -507,38 +507,14 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* ── DETAIL: scroll-snap, full viewport ── */
+  /* ── DETAIL: same slide mechanism as desktop (transform-based prev/active/next), just stacked layout for narrow screens ── */
   #hero-section{
     height:100svh;
-    overflow-y:scroll;
-    overflow-x:hidden;
-    scroll-snap-type:y mandatory;
-    -webkit-overflow-scrolling:touch;
-    scroll-margin-top:56px;
     min-height:unset;
   }
-  #slides{position:relative;inset:auto;}
-  .slide,.slide.prev,.slide.next,.slide.active{
-    position:relative !important;
-    height:100svh !important;
-    transform:none !important;
-    opacity:1 !important;
-    pointer-events:auto !important;
-    display:flex !important;
+  .slide{
     flex-direction:column;
     overflow:hidden;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-  }
-  /* entrance animation */
-  .slide-enter{
-    opacity:0;
-    transform:translateY(24px);
-    transition:opacity .6s cubic-bezier(0.22,1,0.36,1), transform .6s cubic-bezier(0.22,1,0.36,1);
-  }
-  .slide-enter.in-view{
-    opacity:1;
-    transform:translateY(0);
   }
 
   /* ── image: top 42svh ── */
@@ -571,9 +547,7 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .gallery-main-img{
     width:auto;height:100%;max-width:84%;
     object-fit:contain;
-    animation:none !important;
   }
-  .slide.active .gallery-main-img{ transform:none;opacity:1; }
   .gallery-thumbs{
     position:absolute;bottom:6px;left:0;right:0;gap:5px;
   }
@@ -594,18 +568,6 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .slide-left{display:flex;flex-direction:column;flex:1;justify-content:space-between;}
   .slide-specs{flex:1;align-content:start;}
   .slide-cta{margin-top:0;}
-  /* override entry animations — all content visible on mobile */
-  .slide .slide-name,
-  .slide .slide-maker,
-  .slide .slide-tagline,
-  .slide .slide-divider,
-  .slide .slide-specs,
-  .slide .slide-cta,
-  .slide .gallery-main-img{
-    opacity:1 !important;
-    transform:none !important;
-    animation:none !important;
-  }
 
   .slide-left{
     border-left:none;
@@ -629,21 +591,9 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   /* back button */
   .back-to-orbit{display:none;}
 
-  /* hide nav arrows, progress */
+  /* hide nav arrows, progress — swipe on the image to change products instead */
   .nav-arr{ display:none !important; }
   .progress{display:none;}
-
-  /* smooth fade between products */
-  .slide::after{
-    content:'';
-    position:absolute;
-    bottom:0;left:0;right:0;
-    height:64px;
-    background:linear-gradient(to bottom, transparent, var(--black));
-    pointer-events:none;
-    z-index:5;
-  }
-  .slide + .slide{ border-top:1px solid rgba(42,37,32,.5); }
 
   /* floor glow — hide on mobile */
   .cf-floor{display:none;}
@@ -1138,16 +1088,8 @@ function goToDetail(idx){
   sliderCurrent = idx;
   sliderRender();
   setTimeout(function(){
-    if(isMobile){
-      var heroEl2 = document.getElementById('hero-section');
-      heroEl2.scrollTo({top: idx * heroEl2.clientHeight, behavior:'instant'});
-      /* scroll window so hero-section top lands just below fixed topbar */
-      var heroTop = heroEl2.getBoundingClientRect().top + window.scrollY - 56;
-      window.scrollTo({top: heroTop, behavior:'smooth'});
-    } else {
-      var el = document.getElementById('hero-section');
-      window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
-    }
+    var el = document.getElementById('hero-section');
+    window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
   }, 50);
 }
 
@@ -1205,16 +1147,6 @@ window.addEventListener('wheel', function(e){
     setTimeout(function(){ cfWheelLock = false; }, 900);
   }
 }, {passive:true});
-
-/* mobile: entrance animations via IntersectionObserver on scroll-snap container */
-if(isMobile){
-  var heroScroll = document.getElementById('hero-section');
-  document.querySelectorAll('.slide').forEach(function(s){ s.classList.add('slide-enter'); });
-  var slideObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in-view'); });
-  }, {root: heroScroll, threshold: 0.2});
-  document.querySelectorAll('.slide').forEach(function(s){ slideObs.observe(s); });
-}
 
 /* touch slide in hero */
 var touchY = null, touchFromImg = false;
