@@ -254,6 +254,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
       .cf-field textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; resize: vertical; min-height: 120px; }
       .cf-field textarea:focus { border-color: var(--bronze); }
       .cf-field textarea::placeholder { color: var(--ghost); opacity: 0.6; }
+.cf-turnstile { margin-top: 4px; }
 .cf-submit { margin-top: 8px; font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,255,255,0.2); padding: 14px 32px; background: none; cursor: pointer; transition: border-color 0.4s, background 0.4s; font-family: 'FH Oscar Pro',sans-serif; }
 .cf-submit:hover { border-color: var(--bronze); background: rgba(200,121,65,0.05); }
 .cf-success { display: none; font-family: var(--serif); font-size: 17px; font-style: italic; color: var(--bronze); margin-top: 16px; }
@@ -507,6 +508,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         </div>
       </div>
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAEyxOppKHtV_C4VH" data-theme="dark"></div>
       <button type="submit" class="cf-submit">
         <span data-inline-lang="en">Send Message</span>
         <span data-inline-lang="tr">Gönder</span>
@@ -534,6 +536,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
   // ── topbar scroll ──
   window.addEventListener('scroll', function() {
@@ -650,6 +653,10 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
         .catch(function(err){
           console.error('Submit failed:', err);
           showCfError((err && err.message) ? err.message : 'network error');
+        })
+        .finally(function(){
+          // Turnstile tokens are single-use — reset the widget so the form can be submitted again
+          if (window.turnstile) window.turnstile.reset();
         });
     });
   }
