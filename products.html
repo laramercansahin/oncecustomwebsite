@@ -507,14 +507,13 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
   .cf-info{padding:0 20px;}
   .cf-info-name{font-size:clamp(28px,8vw,44px);}
 
-  /* ── DETAIL: scroll-snap, full viewport ── */
+  /* ── DETAIL: scroll-snap on the real page scroll, not a nested scrollable box
+     (nested overflow:scroll containers are unreliable for touch scrolling on
+     iOS Safari — snapping on the page itself works everywhere) ── */
+  html{ scroll-snap-type:y mandatory; }
   #hero-section{
-    height:100svh;
-    overflow-y:scroll;
-    overflow-x:hidden;
-    scroll-snap-type:y mandatory;
-    -webkit-overflow-scrolling:touch;
-    scroll-margin-top:56px;
+    height:auto;
+    overflow:visible;
     min-height:unset;
   }
   #slides{position:relative;inset:auto;}
@@ -529,6 +528,7 @@ body.en [data-lang="en"],body.tr [data-lang="tr"]{display:inline;}
     overflow:hidden;
     scroll-snap-align:start;
     scroll-snap-stop:always;
+    scroll-margin-top:56px;
   }
   /* entrance animation */
   .slide-enter{
@@ -1139,11 +1139,7 @@ function goToDetail(idx){
   sliderRender();
   setTimeout(function(){
     if(isMobile){
-      var heroEl2 = document.getElementById('hero-section');
-      heroEl2.scrollTo({top: idx * heroEl2.clientHeight, behavior:'instant'});
-      /* scroll window so hero-section top lands just below fixed topbar */
-      var heroTop = heroEl2.getBoundingClientRect().top + window.scrollY - 56;
-      window.scrollTo({top: heroTop, behavior:'smooth'});
+      document.querySelectorAll('.slide')[idx].scrollIntoView({behavior:'smooth', block:'start'});
     } else {
       var el = document.getElementById('hero-section');
       window.scrollTo({top: el.offsetTop, behavior: 'smooth'});
@@ -1206,13 +1202,12 @@ window.addEventListener('wheel', function(e){
   }
 }, {passive:true});
 
-/* mobile: entrance animations via IntersectionObserver on scroll-snap container */
+/* mobile: entrance animations as each product scrolls into view on the page */
 if(isMobile){
-  var heroScroll = document.getElementById('hero-section');
   document.querySelectorAll('.slide').forEach(function(s){ s.classList.add('slide-enter'); });
   var slideObs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in-view'); });
-  }, {root: heroScroll, threshold: 0.2});
+  }, {root: null, threshold: 0.2});
   document.querySelectorAll('.slide').forEach(function(s){ slideObs.observe(s); });
 }
 
