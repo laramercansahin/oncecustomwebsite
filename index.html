@@ -253,7 +253,7 @@ body { background: var(--black); color: var(--cream); font-family: 'FH Oscar Pro
 .cf-field input::placeholder { color: var(--ghost); opacity: 0.6; }
 .cf-phone-row { display: flex; gap: 8px; }
 .cf-phone-row input { flex: 1; min-width: 0; }
-.cf-country-select { position: relative; flex-shrink: 0; width: 158px; }
+.cf-country-select { position: relative; flex-shrink: 0; width: 104px; }
 .cf-country-btn { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'FH Oscar Pro',sans-serif; font-size: 14px; font-weight: 300; padding: 12px 8px; outline: none; transition: border-color 0.3s; display: flex; align-items: center; justify-content: space-between; gap: 6px; cursor: pointer; text-align: left; }
 .cf-country-btn:focus, .cf-country-select.open .cf-country-btn { border-color: var(--bronze); }
 .cf-country-btn span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -339,7 +339,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   .cf-row { grid-template-columns: 1fr; }
   /* 16px prevents iOS Safari from auto-zooming the page on focus */
   .cf-field input, .cf-field textarea, .cf-country-btn { font-size: 16px; }
-  .cf-country-select { width: 130px; }
+  .cf-country-select { width: 96px; }
 
   /* footer */
   footer { padding: 28px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -512,7 +512,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
           <div class="cf-phone-row">
             <div class="cf-country-select" id="countrySelect">
               <button type="button" class="cf-country-btn" id="countryBtn" aria-haspopup="listbox" aria-expanded="false">
-                <span id="countryBtnText">🇹🇷 Turkey (+90)</span>
+                <span id="countryBtnText">🇹🇷 +90</span>
                 <span class="cf-country-caret">▾</span>
               </button>
               <ul class="cf-country-list" id="countryList" role="listbox" hidden>
@@ -826,7 +826,7 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
   function resetCountrySelect() {
     if (!countryWrap) return;
     document.getElementById('phoneCode').value = '+90';
-    document.getElementById('countryBtnText').textContent = '🇹🇷 Turkey (+90)';
+    document.getElementById('countryBtnText').textContent = '🇹🇷 +90';
     countryList.querySelectorAll('.cf-country-opt.active').forEach(function (o) { o.classList.remove('active'); });
     var defaultLi = countryList.querySelector('[data-code="+90"]');
     if (defaultLi) defaultLi.classList.add('active');
@@ -846,7 +846,8 @@ body.en [data-inline-lang="en"], body.tr [data-inline-lang="tr"] { display: inli
       var li = e.target.closest('.cf-country-opt');
       if (!li) return;
       countryHiddenCode.value = li.dataset.code;
-      countryBtnText.textContent = li.textContent;
+      var flagChar = li.textContent.trim().split(' ')[0];
+      countryBtnText.textContent = flagChar + ' ' + li.dataset.code;
       countryList.querySelectorAll('.cf-country-opt.active').forEach(function (o) { o.classList.remove('active'); });
       li.classList.add('active');
       closeCountryList();
